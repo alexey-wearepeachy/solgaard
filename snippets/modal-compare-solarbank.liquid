@@ -1,0 +1,94 @@
+<!-- /snippets/modal-compare-solarbank.liquid -->
+{%- assign show_compare_modal = true -%}
+{%- assign popup_toggle_text = 'Compare Solarbanks' -%}
+
+{%- assign modal_heading = 'What solarbank should I get?' -%}
+{%- assign modal_footer_text = '* Base on a full solarbank battery.' -%}
+
+{%- assign solarbank_options = 'with Solarbank, with Solarbank Boombox' | split: ', ' -%}
+{%- capture modal_content -%}
+  {% for solarbank_option in solarbank_options %}
+    <div class="grid__item medium--one-half large--one-half">
+      <div class="compare__body">
+        <p class="compare__img">
+          {%- case solarbank_option -%}
+            {%- when 'with Solarbank' -%}
+              <img src="{{ 'compare-solarbank.jpg' | asset_img_url: '800x' }}" />
+            {%- when 'with Solarbank Boombox' -%}
+              <img src="{{ 'compare-solarbank-boombox.jpg' | asset_img_url: '800x' }}" />
+          {%- endcase -%}
+        </p>
+
+        <h4 class="compare__variant-title h3">
+          {%- case solarbank_option -%}
+            {%- when 'with Solarbank' -%}
+              Solarbank
+            {%- when 'with Solarbank Boombox' -%}
+              Solarbank Boombox
+          {%- endcase -%}
+        </h4>
+
+        <p class="compare__variant-price hide">
+          <span
+           data-value="{{ solarbank_option | escape }}">{PRICE}</span>
+        </p>
+
+        <ul class="compare__features">
+          {%- case solarbank_option -%}
+            {%- when 'with Solarbank' -%}
+              <li>10,000 mAh battery</li>
+              <li>Up to 5 phone charges*</li>
+              <li>4 hrs of sun = 1 phone charge</li>
+              <li>Can charge phone / Macbook with USB-C</li>
+            {%- when 'with Solarbank Boombox' -%}
+              <li>10,000 mAh battery</li>
+              <li>5 phone charges or 90 hours of music*</li>
+              <li>4 hrs of sun = 1 phone charge</li>
+              <li>1 hr of sun = 2hrs of music</li>
+          {%- endcase -%}
+        </ul>
+
+        <p class="compare__icons">
+          {%- case solarbank_option -%}
+            {%- when 'with Solarbank' -%}
+              <img src="{{ 'compare-solarbank-icons.png' | asset_img_url: '800x' }}" />
+            {%- when 'with Solarbank Boombox' -%}
+              <img src="{{ 'compare-solarbank-boombox-icons.png' | asset_img_url: '800x' }}" />
+          {%- endcase -%}
+        </p>
+
+        <p>
+          <a
+           href="#"
+           class="btn btn--black btn--large btn--full"
+           data-value="{{ value | escape }}"
+           compare-modal-shop>Shop Now</a>
+        </p>
+      </div>
+    </div>
+  {% endfor %}
+{%- endcapture -%}
+
+<a
+ class="product__popup-toggle"
+ data-mfp-src="#CompareModal-{{ option.name | handle }}-{{ section.id }}"
+ compare-modal-toggle>
+  <span class="product__popup-toggle__icon" style="width:18px;">{% include 'icon-compare-plus' %}</span>
+  <span class="product__popup-toggle__text">{{ popup_toggle_text }}</span>
+</a>
+
+<div
+ id="CompareModal-{{ option.name | handle }}-{{ section.id }}"
+ class="modal modal--product modal--compare mfp-hide">
+  {%- unless modal_heading == blank -%}
+    <h2 class="compare__heading text-center h1">{{ modal_heading }}</h2>
+  {%- endunless -%}
+
+  <div class="grid">
+    {{ modal_content }}
+  </div>
+
+  {%- unless modal_footer_text == blank -%}
+    <p class="text-center">{{ modal_footer_text }}</p>
+  {%- endunless -%}
+</div>

@@ -1,0 +1,94 @@
+{%- assign product_tags = 'With Closet, Classics' | split: ', ' -%}
+{%- assign product_tags = 'With Closet' | split: ', ' -%}
+
+{%- for product_tag in product_tags -%}
+<div class="collection__body">
+  <div class="wrapper">
+    <div class="section-body">
+      
+      <h2 class="text-center h1">
+        <!-- <span style="display:inline-block;vertical-align:middle;">{{ product_tag }}</span> -->
+
+        <span style="display:inline-block;vertical-align:middle;">
+          {%- if product_tag == 'With Closet' -%}
+            <img src="{{ 'Collection_Suitcases_With-closet.gif' | asset_img_url: '150x' }}" alt="{{ product_tag | append: ' image' }}"/>
+          {%- endif -%}
+          {%- if product_tag == 'Classics' -%}
+            <img src="{{ 'Collection_Suitcases_Classic.gif' | asset_img_url: '100x' }}" alt="{{ product_tag | append: ' image' }}"/>
+          {%- endif -%}
+        </span>
+      </h2>
+
+      {%- if product_tag == 'With Closet' -%}
+        <div class="grid">
+          <div class="grid__item large--two-thirds push--large--one-sixth">
+            <p class="text-center">Unpack in seconds with our patented shelving system suitcases. This award-winning collection comes in three sizes for however you travel.</p>
+          </div>
+        </div>
+      {%- endif -%}
+
+      {%- if product_tag == 'Classics' -%}
+        <div class="grid">
+          <div class="grid__item large--two-thirds push--large--one-sixth">
+            <p class="text-center">Everyone loves a classic. Our classic suitcases come in two expandable sizes, and a classic trunk for long trips.</p>
+          </div>
+        </div>
+      {%- endif -%}
+
+      <div class="grid-uniform grid--condensed page-margin">
+        {% unless display_all_variants %}
+          {% for product in collection.products %}
+            {%- unless product.tags contains product_tag -%}
+              {%- continue -%}
+            {%- endunless -%}
+
+
+            {%- if product.handle == 'carry-on-closet' -%}
+
+              {% include 'product-grid-item' with
+                product_url: '/products/carry-on-closet?variant=341234581508' %}
+
+              {% include 'product-grid-item' with
+                product_title: 'Carry-On Closet Plus',
+                product_url: '/products/carry-on-closet?variant=11503410118703',
+                outfits: '6-9 outfits',
+                days: '5-7 days' %}
+
+            {%- else -%}
+
+              {% include 'product-grid-item' %}
+
+            {%- endif -%}
+
+
+          {% else %}
+            <div class="grid__item">
+              <p>{{ 'collections.general.no_matches' | t }}</p>
+            </div>
+          {% endfor %}
+        {% else %}
+          {% for product in collection.products %}
+            {% for variant in product.variants %}
+              {% include 'variant-grid-item' with variant %}
+            {% endfor %}
+          {% endfor %}
+        {% endunless %}
+
+        {%- comment -%}
+          {%- if show_ads -%}
+            {%- include 'product-grid-item-ads' -%}
+          {%- endif -%}
+        {%- endcomment -%}
+      </div>
+
+      {% if paginate.pages > 1 %}
+        <hr>
+
+        <div class="text-center">
+          {% include 'pagination-custom' %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{%- endfor -%}

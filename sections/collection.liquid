@@ -1,0 +1,201 @@
+<!-- /sections/collection.liquid -->
+{%- assign display_all_variants = false -%}
+{%- assign show_ads = true -%}
+
+{%- assign grid_offset = '' -%}
+{%- assign products_count = collection.products_count -%}
+{%- if display_all_variants -%}
+  {%- assign products_count = 0 -%}
+  {%- for product in collection.products -%}
+    {%- for variant in product.variants -%}
+      {%- assign products_count = products_count | plus: 1 -%}
+    {%- endfor -%}
+  {%- endfor -%}
+{%- endif -%}
+
+{%- if show_ads -%}
+  {%- assign products_count = products_count | plus: 1 -%}
+{%- endif -%}
+
+{%- case section.settings.grid_setting_large -%}
+  {%- when 1 -%}
+    {%- assign grid_width_large = 'large--one-whole' -%}
+  {%- when 2 -%}
+    {%- assign grid_width_large = 'large--one-half' -%}
+    {%- if products_count == 1 -%}
+      {%- assign grid_offset = 'push--large--one-quarter' -%}
+    {%- endif -%}
+  {%- when 3 -%}
+    {%- assign grid_width_large = 'large--one-third' -%}
+    {%- if products_count == 1 -%}
+      {%- assign grid_offset = 'push--large--one-third' -%}
+    {%- elsif products_count == 2 -%}
+      {%- assign grid_offset = 'push--large--one-sixth' -%}
+    {%- endif -%}
+  {%- when 4 -%}
+    {%- assign grid_width_large = 'large--one-quarter' -%}
+    {%- if products_count == 1 -%}
+      {%- assign grid_offset = 'push--large--three-eighths' -%}
+    {%- elsif products_count == 2 -%}
+      {%- assign grid_offset = 'push--large--one-quarter' -%}
+    {%- elsif products_count == 3 -%}
+      {%- assign grid_offset = 'push--large--one-eighth' -%}
+    {%- endif -%}
+  {%- when 5 -%}
+    {%- assign grid_width_large = 'large--one-fifth' -%}
+    {%- if products_count == 1 -%}
+      {%- assign grid_offset = 'push--large--two-fifths' -%}
+    {%- elsif products_count == 2 -%}
+      {%- assign grid_offset = 'push--large--three-tenths' -%}
+    {%- elsif products_count == 3 -%}
+      {%- assign grid_offset = 'push--large--one-fifth' -%}
+    {%- elsif products_count == 4 -%}
+      {%- assign grid_offset = 'push--large--one-tenth' -%}
+    {%- endif -%}
+  {%- when 6 -%}
+    {%- assign grid_width_large = 'large--one-sixth' -%}
+    {%- if products_count == 1 -%}
+      {%- assign grid_offset = 'push--large--five-twelfths' -%}
+    {%- elsif products_count == 2 -%}
+      {%- assign grid_offset = 'push--large--two-sixths' -%}
+    {%- elsif products_count == 3 -%}
+      {%- assign grid_offset = 'push--large--three-twelfths' -%}
+    {%- elsif products_count == 4 -%}
+      {%- assign grid_offset = 'push--large--one-sixth' -%}
+    {%- elsif products_count == 5 -%}
+      {%- assign grid_offset = 'push--large--one-twelfth' -%}
+    {%- endif -%}
+{%- endcase -%}
+{%- case section.settings.grid_setting_medium -%}
+  {%- when 1 -%}
+    {%- assign grid_width_medium = 'medium--one-whole' -%}
+  {%- when 2 -%}
+    {%- assign grid_width_medium = 'medium--one-half' -%}
+  {%- when 3 -%}
+    {%- assign grid_width_medium = 'medium--one-third' -%}
+  {%- when 4 -%}
+    {%- assign grid_width_medium = 'medium--one-quarter' -%}
+{%- endcase -%}
+{%- case section.settings.grid_setting_small -%}
+  {%- when 1 -%}
+    {%- assign grid_width_small = 'small--one-whole' -%}
+  {%- when 2 -%}
+    {%- assign grid_width_small = 'small--one-half' -%}
+  {%- when 3 -%}
+    {%- assign grid_width_small = 'small--one-third' -%}
+{%- endcase -%}
+
+{%- assign product_count = 48 -%}
+{%- if grid_width_large == 'large--one-whole' -%}
+  {%- assign product_count = 20 -%}
+{%- elsif grid_width_large == 'large--one-half' -%}
+  {%- assign product_count = 50 -%}
+{%- elsif grid_width_large == 'large--one-third' -%}
+  {%- assign product_count = 48 -%}
+{%- elsif grid_width_large == 'large--one-quarter' -%}
+  {%- assign product_count = 48 -%}
+{%- elsif grid_width_large == 'large--one-fifth' -%}
+  {%- assign product_count = 50 -%}
+{%- endif -%}
+
+{%- paginate collection.products by product_count -%}
+
+{%- if collection.image -%}
+  {%- include 'collection-banner' -%}
+{%- endif -%}
+
+<section class="collection">
+  {% include 'collection-header' %}
+
+  {%- if template.suffix == 'suitcases' -%}
+    {% include 'collection-body-suitcases' %}
+  {%- else -%}
+    {% include 'collection-body' %}
+  {%- endif -%}
+</section>
+
+{% endpaginate %}
+
+{% schema %}
+  {
+    "name": "Collection page",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Products per row"
+      },
+      {
+        "type":    "range",
+        "id":      "grid_setting_large",
+        "min":     1,
+        "max":     6,
+        "step":    1,
+        "label":   "Desktop",
+        "default": 4
+      },
+      {
+        "type":    "range",
+        "id":      "grid_setting_medium",
+        "min":     1,
+        "max":     4,
+        "step":    1,
+        "label":   "Tablet",
+        "default": 2
+      },
+      {
+        "type":    "range",
+        "id":      "grid_setting_small",
+        "min":     1,
+        "max":     3,
+        "step":    1,
+        "label":   "Mobile",
+        "default": 2
+      },
+      {
+        "type": "header",
+        "content": "Feature image"
+      },
+      {
+        "type": "select",
+        "id": "image_height",
+        "label": "Image height",
+        "options": [
+          { "value": "use_image", "label": "Image height"},
+          { "value": "use_screen_two_thirds", "label": "Tall"},
+          { "value": "use_screen_one_half", "label": "Medium"},
+          { "value": "use_screen_one_third", "label": "Short"},
+          { "value": "use_screen_one_fifth", "label": "Tiny"}
+        ],
+        "default": "use_screen_one_third"
+      },
+      {
+        "type":    "range",
+        "id":      "overlay_opacity",
+        "min":     0,
+        "max":     100,
+        "step":    5,
+        "label":   "Image overlay opacity",
+        "info":    "Increase contrast for legible text.",
+        "default": 20
+      },
+      {
+        "type": "select",
+        "id": "text_color",
+        "default": "homepage--white",
+        "label": "Text color",
+        "options": [
+          { "value": "homepage--white", "label": "White"},
+          { "value": "homepage--light", "label": "Light"},
+          { "value": "homepage--splash", "label": "Accent"},
+          { "value": "homepage--dark", "label": "Dark"}
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "parallax",
+        "default": false,
+        "label": "Enable parallax scroll"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,52 @@
+<style>
+    {% for block in section.blocks %}
+        {% if block.settings.bg_img_hl != blank %}
+            #new-lp--product-listing .product-listing__container .product-listing__items #card-product--{{ block.id }} .high-box {
+                background-image: url("{{ block.settings.bg_img_hl | img_url: 'master' }}");
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+        {% else %}
+            #new-lp--product-listing .product-listing__container .product-listing__items #card-product--{{ block.id }} .high-box {
+                background-color: {{ block.settings.bg_color_hl }};
+            }
+        {% endif %}
+
+        #new-lp--product-listing .product-listing__container .product-listing__items #card-product--{{ block.id }} .low-box {
+            background-color: {{ block.settings.bg_color_ll }};
+        }
+
+        #new-lp--product-listing .product-listing__container .product-listing__items #card-product--{{ block.id }} .low-box .product-title__link .product-title {
+            color: {{ block.settings.prd_title_color }};
+        }
+
+        #new-lp--product-listing .product-listing__container .product-listing__items #card-product--{{ block.id }} .low-box .product-subtitle {
+            color: {{ block.settings.prd_subtitle_color }};
+        }
+    {% endfor %}
+    
+</style>
+
+<div id="card-product--{{ block.id }}" class="product-listing__item">
+    <div class="high-box">
+        <a href="{{ block.settings.product_url }}" class="product-listing__item-img-link">
+            <div class="product-listing__item-img">
+                <img src="{{ block.settings.first_prd_img | img_url: 'master' }}" class="first-image" alt="{{ image.alt }}">
+                <img src="{{ block.settings.second_prd_img | img_url: 'master' }}" class="second-image" alt="{{ image.alt }}">
+            </div>
+        </a>
+    </div>
+
+    <div class="low-box">
+        <a href="{{ block.settings.product_url }}" class="product-title__link">
+            <h5 class="product-title">
+                {{ block.settings.product_title }}
+            </h5>
+        </a>
+
+        <div class="product-subtitle">
+            {{ block.settings.product_subtitle }}
+        </div>
+    </div>
+</div>

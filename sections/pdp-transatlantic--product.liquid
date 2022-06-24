@@ -1,0 +1,49 @@
+{% assign main_color = section.settings.main_color %}
+{% assign btn_class = 'btn--blue' %}
+
+<section
+    class="product-section"
+    id="ProductSection-{{ section.id }}"
+    data-section-id="{{ section.id }}"
+    data-section-type="product"
+    data-image-zoom-enable="{{ settings.product_zoom_enable }}">
+    {% include 'product'  %}
+</section>
+
+{% if main_color != blank %}
+    <style>
+        .add-to-cart-wrapper button[type=submit] {
+            border: 2px solid {{ main_color }} !important;
+        }
+
+        [header-product-buy-now] {
+            background-color: {{ main_color }} !important;
+        }
+
+        .info-bar {
+            background-color: {{ main_color }};
+            color: #FFFFFF;
+        }
+    </style>
+    <script>
+        let intervalID = setInterval(() => {
+            if ($('i').length) {
+                $('i').css('color', `{{ main_color }}`);
+                clearInterval(intervalID);
+            }
+        }, 200);
+    </script>
+{% endif %}
+
+{% schema %}
+{
+    "name": "Product section",
+    "settings": [
+        {
+            "type": "text",
+            "id": "main_color",
+            "label": "Main color"
+        }
+    ]
+}
+{% endschema %}

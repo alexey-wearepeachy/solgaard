@@ -1,0 +1,68 @@
+{%- assign article_link = article.url -%}
+
+{%- unless blog.handle == 'press' -%}
+  {%- for tag in article.tags -%}
+    {%- if tag contains 'Link: ' -%}
+      {%- assign article_link = tag | remove: 'Link: ' -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endunless -%}
+
+<div class="grid__item {{ blog_grid }} article-grid-item article-grid-item--{{ blog.handle }}">
+  <div class="grid__body">
+    <a
+     class="grid__link"
+     href="{{ article_link }}"
+     aria-label="{{ article.title }}"
+     {% if article.url != article_link %} target="_blank"{% endif %}>
+      <div class="grid__header">
+        {%- if article.image -%}
+          {%- assign img_object = article.image -%}
+          <div class="grid__image lazyload" data-bgset="{% include 'bgset', image: img_object %}"></div>
+        {%- else -%}
+          <div class="grid__image grid__image--placeholder"></div>
+        {%- endif -%}
+      </div>
+    </a>
+
+    <div class="grid__meta">
+      <div class="grid__tags">
+        {% include 'tags-article' %}
+      </div>
+
+      <a
+       class="grid__link"
+       href="{{ article_link }}"
+       {% if article.url != article_link %} target="_blank"{% endif %}>
+        <div{% if equal_height_meta %} class="equalHeightColumn"{% endif %}>
+          {%- capture date_html -%}
+            <time
+             class="grid__date"
+             itemprop="datePublished"
+             datetime="{{ article.published_at | date: '%Y-%m-%d' }}">
+              {{ article.published_at | date: format: 'month_day_year' }}
+            </time>
+          {%- endcapture -%}
+
+          {%- if blog.title == 'Latest Coverage' -%}
+            {{ date_html }}
+          {%- endif -%}
+
+          <h4 class="grid__title">{{ article.title | escape }}</h4>
+
+          <div class="grid__content rte hide">
+            {{ article.excerpt | strip_html | truncate: 200 }}
+          </div>
+
+          {%- if blog.title == 'Press' -%}
+            {{ date_html }}
+          {%- endif -%}
+        </div>
+
+        <p class="grid__author">
+          By {{ article.author | escape }}
+        </p>
+      </a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,103 @@
+{%- if section.blocks.size > 0 -%}
+  <div class="page-margin">
+    <div class="wrapper text-center">
+      <h2>Frequently Asked Questions</h2>
+    </div>
+  </div>
+
+  <div class="page-margin">
+    <div class="faq__accordion">
+      <div class="accordion-wrapper" data-section-type="accordion">
+        <div class="accordion">
+
+          {%- assign categories = 'Orders, Shipping, Warranty, General' | split: ', ' -%}
+          {%- for category in categories -%}
+            <div class="accordion__item" data-title="{{ block.settings.title | escape }}">
+              <div class="accordion__toggle" data-block-id="{{ block.id }}">
+                <div class="wrapper">
+                  <i class="icon icon-plus"></i>
+                  <h4 class="accordion__heading">{{ category }}</h4>
+                </div>
+              </div>
+              <div class="accordion__content">
+                <div class="wrapper">
+
+                  {%- for block in section.blocks -%}
+                    {%- if block.settings.category == category -%}
+                      <div class="accordion__item" {{ block.shopify_attributes }} data-title="{{ block.settings.title | escape }}">
+                        <div class="accordion__toggle" data-block-id="{{ block.id }}">
+                          <div class="wrapper">
+                            <i class="icon icon-plus"></i>
+                            <h4 class="accordion__heading">{{ block.settings.title }}</h4>
+                          </div>
+                        </div>
+                        <div class="accordion__content">
+                          <div class="wrapper">
+                            <div class="rte">
+                              {{ block.settings.answer }}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    {%- endif -%}
+                  {%- endfor -%}
+
+                </div>
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+  {
+    "name": "FAQs",
+    "settings": [
+    ],
+    "blocks": [
+      {
+        "type": "Block",
+        "name": "FAQ",
+        "settings": [
+          {
+            "id": "category",
+            "type": "select",
+            "label": "Category",
+            "default": "General",
+            "options": [
+              {
+                "value": "Orders",
+                "label": "Orders"
+              },
+              {
+                "value": "Shipping",
+                "label": "Shipping"
+              },
+              {
+                "value": "Warranty",
+                "label": "Warranty"
+              },
+              {
+                "value": "General",
+                "label": "General"
+              }
+            ]
+          },
+          {
+            "id": "title",
+            "type": "textarea",
+            "label": "Question"
+          },
+          {
+            "id": "answer",
+            "type": "textarea",
+            "label": "Answer"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,400 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if IE 9 ]><html class="ie9 no-js"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="{{ request.locale.iso_code }}" class="no-js"> <!--<![endif]-->
+
+{% render 'spurit_uac_meta_snippet' %}
+{% render 'spurit_uac_meta_snippet' %}
+<head>
+{% render 'spurit_uac_open_graph_snippet' %}
+{% render 'spurit_uac_open_graph_snippet' %}
+
+  <!-- ======================= Pipeline Theme V4.2 ========================= -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  {% if settings.favicon != blank %}
+    <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
+  {% endif %}
+
+  <!-- Title and description ================================================ -->
+  <title>
+  {{ page_title }}{% if current_tags %}{% assign meta_tags = current_tags | join: ', ' %} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags }}{% endif %}{% if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
+  </title>
+  
+  <!-- begin Convert Experiences code--> <script type="text/javascript" src="https://cdn-3.convertexperiments.com/js/10005876-10006284.js"></script> <!-- end Convert Experiences code -->
+  
+  <!-- Pinterest -->
+  <meta name=“p:domain_verify” content=“3f12ffdf1a10cdb0cb86d140158abaab”/>
+
+  {% if page_description %}
+  <meta name="description" content="{{ page_description | escape }}">
+  {% endif %}
+
+  <!-- Product meta ========================================================= -->
+  {% include 'social-meta-tags' %}
+
+  <!-- Helpers ============================================================== -->
+  <link rel="canonical" href="{{ canonical_url }}">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="{{ settings.color_primary }}">
+
+  <!-- CSS ================================================================== -->
+  {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
+
+{%- assign yotpo_offload_content = shop.metafields.yotpo.yotpo_offload_content %}
+{%- assign time_now = 'now' | date: '%s' %}
+{%- assign yotpo_live_time = shop.metafields.yotpo.yotpo_live | date: '%s' %}
+{%- assign diffSeconds = time_now | minus: yotpo_live_time %}
+{%- if yotpo_offload_content == 'yes' and diffSeconds < 86400 -%}
+{{ 'yotpo-full-css.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
+
+  <!-- Vendor JS ============================================================ -->
+  {{ 'vendor.js' | asset_url | script_tag }}
+
+  {% include 'oldIE-js' %}
+
+  <script>
+    var theme = {
+      strings: {
+        addToCart: {{ 'products.product.add_to_cart' | t | json }},
+        soldOut: {{ 'products.product.sold_out' | t | json }},
+        unavailable: {{ 'products.product.unavailable' | t | json }},
+        join: {{ 'products.product.join_membership' | t | json }}
+      },
+      moneyFormat: {{ shop.money_format | json }},
+      freeSolarSling: {
+        enable: {{ settings.enable_free_product | json }},
+        variantId: {{ settings.free_product_variant_id | times: 1 | json }}
+      }
+    }
+  </script>
+
+  {% comment %}
+    If you store has customer accounts disabled, you can remove the following JS file
+  {% endcomment %}
+  {% if template contains 'customers' %}
+    {{ 'shopify_common.js' | shopify_asset_url | script_tag }}
+  {% endif %}
+
+  {% include 'fonts' %}
+
+
+  <!-- Header hook for plugins ============================================== -->
+  {{ content_for_header }}
+
+  <!-- Start of solgaard Zendesk Widget script -->
+  <script>
+    /*<![CDATA[*/
+    window.zEmbed||function(e,t){var n,o,d,i,s,a=[],r=document.createElement("iframe");window.zEmbed=function(){a.push(arguments)},window.zE=window.zE||window.zEmbed,r.src="javascript:false",r.title="",r.role="presentation",(r.frameElement||r).style.cssText="display: none",d=document.getElementsByTagName("script"),d=d[d.length-1],d.parentNode.insertBefore(r,d),i=r.contentWindow,s=i.document;try{o=s}catch(e){n=document.domain,r.src='javascript:var d=document.open();d.domain="'+n+'";void(0);',o=s}o.open()._l=function(){var o=this.createElement("script");n&&(this.domain=n),o.id="js-iframe-async",o.src=e,this.t=+new Date,this.zendeskHost=t,this.zEQueue=a,this.body.appendChild(o)},o.write('<body onload="document._l();">'),o.close()}("https://assets.zendesk.com/embeddable_framework/main.js","solgaard.zendesk.com");
+    /*]]>*/
+  </script>
+
+  {% comment %}zendesk widget config{% endcomment %}
+  <script type="text/javascript">
+    window.zESettings = {
+      webWidget: {
+        // position: { horizontal: 'left', vertical: 'top' },
+        launcher: { label: { 'en-US': 'Need help?', 'fr': 'Besoin d\'aide?' }
+        }
+      }
+    };
+  </script>
+  <!-- End of solgaard Zendesk Widget script -->
+  
+  <!-- Taboola Pixel Code -->
+  <script type='text/javascript'>
+    window._tfa = window._tfa || [];
+    window._tfa.push({notify: 'event', name: 'page_view', id: 1428062});
+    !function (t, f, a, x) {
+           if (!document.getElementById(x)) {
+              t.async = 1;t.src = a;t.id=x;f.parentNode.insertBefore(t, f);
+           }
+    }(document.createElement('script'),
+    document.getElementsByTagName('script')[0],
+    '//cdn.taboola.com/libtrc/unip/1428062/tfa.js',
+    'tb_tfa_script');
+  </script>
+  <!-- End of Taboola Pixel Code -->
+
+  <!-- Start of Solgaard Outbrain Pixel -->
+  <script data-obct type="text/javascript">
+    /** DO NOT MODIFY THIS CODE**/
+    !function(_window, _document) {
+      var OB_ADV_ID='00306bd27f65e941a492c4a04546ac2122';
+      if (_window.obApi) {var toArray = function(object) {return Object.prototype.toString.call(object) === '[object Array]' ? object : [object];};_window.obApi.marketerId = toArray(_window.obApi.marketerId).concat(toArray(OB_ADV_ID));return;}
+      var api = _window.obApi = function() {api.dispatch ? api.dispatch.apply(api, arguments) : api.queue.push(arguments);};api.version = '1.1';api.loaded = true;api.marketerId = OB_ADV_ID;api.queue = [];var tag = _document.createElement('script');tag.async = true;tag.src = '//amplify.outbrain.com/cp/obtp.js';tag.type = 'text/javascript';var script = _document.getElementsByTagName('script')[0];script.parentNode.insertBefore(tag, script);}(window, document);
+    obApi('track', 'PAGE_VIEW');
+  </script>
+  <!-- End of Solgaard Outbrain Pixel -->
+
+  <!-- Start of Solgaard Tik Tok Pixel -->
+  <script>
+    (function() {
+      var ta = document.createElement('script'); ta.type = 'text/javascript'; ta.async = true;
+      ta.src = 'https://analytics.tiktok.com/i18n/pixel/sdk.js?sdkid=BROCOA7SS6ILD2DUC750';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(ta, s);
+    })();
+  </script>
+  <!-- End of Solgaard Tik Tok Pixel -->
+
+
+  <!-- Hotjar Tracking Code for https://solgaard.co/ -->
+  <script>
+      (function(h,o,t,j,a,r){
+          h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+          h._hjSettings={hjid:2558134,hjsv:6};
+          a=o.getElementsByTagName('head')[0];
+          r=o.createElement('script');r.async=1;
+          r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+          a.appendChild(r);
+      })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+  </script>
+
+  <!--Gem_Page_Header_Script-->
+  {% include 'gem-app-header-scripts' %}
+  <!--End_Gem_Page_Header_Script-->
+
+  <!--Snapchat ATC Pixel-->
+  <script>
+
+window.onload = function() {var button = document.getElementsByClassName('product__add-to-cart-button btn btn--large btn--full btn--green addToCart')[0]; if (button) { button.addEventListener('click', fnAddCart) }function fnAddCart() {
+snaptr('track', 'ADD_CART', {
+'item_ids': ShopifyAnalytics.meta.selectedVariantId });
+}}
+
+</script>
+  <!--End_Snapchat ATC Pixel-->
+  
+  <!-- Quantcast Tag -->
+<script type="text/javascript">
+window._qevents = window._qevents || [];
+(function() {
+var elem = document.createElement('script');
+elem.src = (document.location.protocol == "https:" ? "https://secure" : "http://edge") + ".quantserve.com/quant.js";
+elem.async = true;
+elem.type = "text/javascript";
+var scpt = document.getElementsByTagName('script')[0];
+scpt.parentNode.insertBefore(elem, scpt);
+})();
+window._qevents.push({
+qacct:"p-b-LFCPAbhPa7S",
+uid:"__INSERT_EMAIL_HERE__"
+});
+</script>
+<noscript>
+<div style="display:none;">
+<img src="//pixel.quantserve.com/pixel/p-b-LFCPAbhPa7S.gif" border="0" height="1" width="1" alt="Quantcast"/>
+</div>
+</noscript>
+<!-- End Quantcast tag -->
+
+  <!--Swiper-->
+  <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+  <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+  <!--Swiper End-->
+
+{% render 'minmaxify-head' %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.1/js.cookie.min.js" integrity="sha512-Meww2sXqNHxI1+5Dyh/9KAtvI9RZSA4c1K2k5iL02oiPO/RH3Q30L3M1albtqMg50u4gRTYdV4EXOQqXEI336A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body id="{{ page_title | handle }}" class="{% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }} template-{{ template | handle }}" >
+
+  {% section 'header' %}
+
+  <main class="main-content" role="main">
+    {{ content_for_layout }}
+  </main>
+
+  <!--  template : {{ template }}  -->
+  {%- if template == 'collection.fundlify-boxed-1col' -%}
+    {% section 'funded-campaigns' %}
+  {%- endif -%}
+
+  {%- section 'index-popup-modal' -%}
+
+  {% section 'footer' %}
+
+  <script id="JsQty" type="text/template">
+  {% raw %}
+    <div class="js-qty">
+      <button type="button" class="js-qty__adjust js-qty__adjust--minus" data-id="{{id}}" data-qty="{{itemMinus}}">&minus;</button>
+      <input type="text" class="js-qty__num QuantityInput" value="{{itemQty}}" min="1" data-id="{{id}}" aria-label="quantity" pattern="[0-9]*" name="{{inputName}}" id="{{inputId}}" data-submit="{{submit}}">
+      <button type="button" class="js-qty__adjust js-qty__adjust--plus" data-id="{{id}}" data-qty="{{itemAdd}}">+</button>
+    </div>
+  {% endraw %}
+  </script>
+  <script id="JsQty--cart" type="text/template">
+  {% raw %}
+    <div class="js-qty">
+      <button type="button" class="js-qty__adjust js-qty__adjust--minus" data-id="{{id}}" data-qty="{{itemMinus}}">&minus;</button>
+      <input type="text" value="{{itemQty}}" class="js-qty__num QuantityInput"  min="1" data-id="{{id}}" aria-label="quantity" pattern="[0-9]*" name="updates[]" id="updates_{{id}}" data-submit="{{submit}}">
+      <button type="button" class="js-qty__adjust js-qty__adjust--plus" data-id="{{id}}" data-qty="{{itemAdd}}">+</button>
+    </div>
+  {% endraw %}
+  </script>
+
+  <!-- Theme Javascript ============================================================== -->
+  {{ 'theme.js' | asset_url | script_tag }}
+  {% include 'linked-options' %}
+
+  {% unless settings.cart_type == 'page' %}
+  <!-- Ajaxify Cart Plugin ================================================== -->
+    {{ 'ajaxify.scss.css' | asset_url | stylesheet_tag }}
+    {% include 'ajax-cart-template' %}
+    {{ 'ajaxify.js' | asset_url | script_tag }}
+    <script>
+      jQuery(document).ready(function(){
+       ajaxifyShopify.init({
+         method: 'modal',
+         wrapperClass: 'wrapper',
+         formSelector: '.product-form',
+         addToCartSelector: '.addToCart',
+         cartCountSelector: '.cartCount',
+         cartCostSelector: '.cartCost',
+         toggleCartButton: '.CartToggle',
+         useCartTemplate: true,
+         btnClass: 'btn',
+         moneyFormat: {{ shop.money_format | json }},
+         disableAjaxCart: false,
+         enableQtySelectors: true,
+         prependDrawerTo: 'body',
+         onToggleCallback: function(){
+           jQuery('body').trigger('ajaxCart.afterCartLoad')
+         },
+         redirectToCart: true
+       });
+      });
+    </script>
+  {% endunless %}
+
+  <script>
+    {% if newHash %}
+      $(function() {
+        timber.updateHash('{{ newHash }}');
+      });
+    {% endif %}
+    {% if resetPassword %}
+      $(function() {
+        timber.resetPasswordSuccess();
+      });
+    {% endif %}
+  </script>
+
+
+  <!-- With the custom widget tag name -->
+<script src="https://cdn.us.zip.co/v1/quadpay.js?tagname=quadpay-widget"></script>
+  
+  <script>var shareasaleShopifySSCID=shareasaleShopifyGetParameterByName("sscid");function shareasaleShopifySetCookie(e,a,o,i,r){if(e&&a){var s,S=i?"; path="+i:"",h=r?"; domain="+r:"",t="";o&&((s=new Date).setTime(s.getTime()+o),t="; expires="+s.toUTCString()),document.cookie=e+"="+a+t+S+h}}function shareasaleShopifyGetParameterByName(e,a){a||(a=window.location.href),e=e.replace(/[\[\]]/g,"\\$&");var o=new RegExp("[?&]"+e+"(=([^&#]*)|&|#|$)").exec(a);return o?o[2]?decodeURIComponent(o[2].replace(/\+/g," ")):"":null}shareasaleShopifySSCID&&shareasaleShopifySetCookie("shareasaleShopifySSCID",shareasaleShopifySSCID,94670778e4,"/");</script>
+
+  {% render 'banana-stand-footer' %}
+
+  <!--Gem_Page_Footer_Script-->
+  {% include 'gem-app-footer-scripts' %}
+  <!--End_Gem_Page_Footer_Script-->
+
+   <style>
+    html.gemapp.video{
+    -webkit-overflow-scrolling: inherit !important;
+      overflow-y: initial !important;
+      overflow-x:initial !important;
+    }
+  </style>
+
+  <!-- Enable LDU mode using geolocation -->
+  <script>
+    (function(){
+      if( typeof( fbq ) === 'function') {
+        fbq('dataProcessingOptions', ['LDU'], 0, 0);
+      } else {
+        console.error('fbq function not found');
+      }
+    }());
+  </script>
+
+  <script src="https://a.klaviyo.com/media/js/onsite/onsite.js"></script>
+  <script>
+      var klaviyo = klaviyo || [];
+      klaviyo.init({
+        account: "VsR68k",
+        platform: "shopify"
+      });
+      klaviyo.enable("backinstock",{
+      trigger: {
+        product_page_text: "Notify Me When Available",
+        product_page_class: "btn",
+        product_page_text_align: "center",
+        product_page_margin: "0px",
+        replace_anchor: false
+      },
+      modal: {
+       headline: "{product_name}",
+       body_content: "Register to receive a notification when this item comes back in stock.",
+       email_field_label: "Email",
+       button_label: "Notify me when available",
+       subscription_success_label: "You're in! We'll let you know when it's back.",
+       footer_content: '',
+       additional_styles: `
+        @import url('https://fonts.googleapis.com/css?family=Helvetica+Neue');
+      `,
+       drop_background_color: "#000",
+       background_color: "#fff",
+       text_color: "#222",
+       button_text_color: "#fff",
+       button_background_color: "#40c1ac",
+       close_button_color: "#ccc",
+       error_background_color: "#fcd6d7",
+       error_text_color: "#C72E2F",
+       success_background_color: "#d3efcd",
+       success_text_color: "#1B9500"
+      }
+    });
+  </script>
+
+
+  <script async type="text/javascript" data-api-key="" id="stamped-script-widget" src="https://cdn-stamped-io.azureedge.net/files/widget.min.js"></script>
+<!----- YOU MUST INCLUDE THIS STATMENT WHEN USING A NEW THEME OR CRITEO TAGS WILL BREAK ---------->
+
+  {% include 'criteo-tracking' %}
+
+<!----- YOU MUST INCLUDE THIS STATMENT WHEN USING A NEW THEME OR CRITEO TAGS WILL BREAK ---------->
+
+    <!-- LinkedIn -->
+  <script type="text/javascript">
+_linkedin_partner_id = "3709209";
+window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
+window._linkedin_data_partner_ids.push(_linkedin_partner_id);
+</script><script type="text/javascript">
+(function(l) {
+if (!l){window.lintrk = function(a,b){window.lintrk.q.push([a,b])};
+window.lintrk.q=[]}
+var s = document.getElementsByTagName("script")[0];
+var b = document.createElement("script");
+b.type = "text/javascript";b.async = true;
+b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js";
+s.parentNode.insertBefore(b, s);})(window.lintrk);
+</script>
+<noscript>
+<img height="1" width="1" style="display:none;" alt="" src="https://px.ads.linkedin.com/collect/?pid=3709209&fmt=gif" />
+</noscript>
+  <!-- End LinkedIn -->
+  
+  <!-- Hivewyre -->
+<script src="https://js.b1js.com/tagcontainer.js?id=cfad8849cb014c51801d654524a1ffb3&type=1&onload=false"></script>
+  <!-- End Hivewyre -->
+
+  <style>
+    body.gempage .gf_icon-wrap .gf_icon {
+      color: inherit;
+    }
+  </style>
+
+  
+  {% render 'cf-implements' %}
+   
+{% render 'globo.preorder.script' %}</body>
+</html>

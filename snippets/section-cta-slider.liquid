@@ -1,0 +1,85 @@
+{%- liquid
+  assign text_block_first = block.settings.text_block_first
+  assign image_block_size = block.settings.image_block_size
+  assign text_align = block.settings.text_align | default: "text-center"
+  assign bg_color = block.settings.bg_color
+  assign color = block.settings.color
+
+  assign title = block.settings.title
+  assign content = block.settings.content
+  assign feature_list = block.settings.feature_list
+
+  assign gird_class_content = 'large--one-half'
+  assign gird_class_image = 'large--one-half'
+-%}
+
+<section class="section-cta-slider">
+  <div class="wrapper">
+    <div
+     data-section-type="grid-slider"
+     data-section-id="{{ section_id }}"
+     data-slide-selector=".cta-item">
+      <div
+       class="grid grid--uniform product-features__itemr"
+       data-slider
+       data-slick='{
+         "arrows": false,
+         "dots": false,
+         "slidesToShow": 1,
+         "slidesToScroll": 1,
+         "swipeToSlide": true,
+         "responsive": [
+           { "breakpoint": 480, "settings":  { "slidesToShow": 1, "slidesToScroll": 1 } }
+         ]
+       }'>
+        {%- for i in (1..2) -%}
+          {%- capture bg_image_key -%}bg_image_{{ i }}{%- endcapture -%}
+          {%- capture bg_image_mobile_key -%}bg_image_mobile_{{ i }}{%- endcapture -%}
+          {%- capture icon_key -%}icon_{{ i }}{%- endcapture -%}
+          {%- capture richtext_key -%}richtext_{{ i }}{%- endcapture -%}
+
+          {%- liquid
+            assign bg_image = block.settings[bg_image_key]
+            assign bg_image_mobile = block.settings[bg_image_mobile_key]
+            assign icon = block.settings[icon_key]
+            assign richtext = block.settings[richtext_key]
+          %}
+
+          {%- unless richtext == blank -%}
+            <div class="cta-item">
+              <div
+               class="section-bg lazyload medium--hide large--hide"
+               data-bgset="{% include 'bgset', image: bg_image_mobile %}">
+              </div>
+
+              <div
+               class="section-bg lazyload small--hide"
+               data-bgset="{% include 'bgset', image: bg_image %}">
+              </div>
+
+              <div class="section-body {{ text_align }}">
+                {%- unless icon == blank -%}
+                  <div class="cta-item__icon">
+                    {% render "lazy-image" with image: icon %}
+                  </div>
+                {%- endunless -%}
+
+                {%- unless title == blank -%}
+                  <h2
+                   class="section-title text-left"
+                   {% unless color == blank %}
+                     style="color:{{color}};"
+                   {% endunless %}>{{ title | newline_to_br }}</h2>
+                {%- endunless -%}
+
+                {%- unless richtext == blank -%}
+                  <div class="rte rte--large">{{ richtext }}</div>
+                {%- endunless -%}
+              </div>
+            </div>
+          {%- endunless -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>

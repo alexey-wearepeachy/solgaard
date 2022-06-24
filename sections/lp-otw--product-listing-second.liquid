@@ -1,0 +1,210 @@
+{% assign cards    = section.blocks | where: 'type', 'cards' %}
+{% assign medias   = section.blocks | where: 'type', 'medias' %}
+
+<style>
+    #new-lp--product-listing {
+        background-color: {{ section.settings.bg_color }};
+    }
+
+    #new-lp--product-listing .product-listing__container .product-listing__subtitle {
+        color: {{ section.settings.subtitle_color }};
+    }
+
+    #new-lp--product-listing .product-listing__container .product-listing__title {
+        color: {{ section.settings.title_color }};
+    }
+</style>
+
+<section class="lp-otw--product-listing" data-section-id="{{ section.id }}" {% if section.settings.hide_section %}style="display: none;"{% endif %}>
+    <div id="new-lp--product-listing">
+        <div class="product-listing__container">
+            {% if section.settings.subtitle != blank %}
+                <h5 class="product-listing__subtitle">{{ section.settings.subtitle }}</h5>
+            {% endif %}
+            {% if section.settings.title != blank %}
+                <h3 class="product-listing__title">{{ section.settings.title }}</h3>
+            {% endif %}
+
+            <div class="product-listing__items">
+                {% for block in section.blocks %}
+                    {% if block.type == 'cards' %}
+                        {% include 'new-lp--product-card' %}
+                {% elsif block.type == 'medias' %}
+                        <div class="product-listing__media-block {% if block.settings.size_pos_block == "full_width" %}full-width{% endif %} {% if block.settings.size_pos_block == "half_left" %}half-left{% endif %} {% if block.settings.size_pos_block == "half_right" %}half-right{% endif %}">
+                            {% if block.settings.video_link != blank %}
+                                <video autoplay loop muted playsinline src="{{ block.settings.video_link }}" class="video__desk"></video>
+                                <video autoplay loop muted playsinline src="{{ block.settings.video_link_mob }}" class="video__mob"></video>
+                            {% else %}
+                                {% if block.settings.image != blank %}
+                                    <picture>
+                                        <source srcset="{{ block.settings.image | img_url: 'master' }}" media="(min-width: 600px)">
+                                        <source srcset="{{ block.settings.image_mob | img_url: 'master' }}" media="(max-width: 600px)">
+                                        <img src="{{ block.settings.image | img_url: 'master' }}" alt="{{ image.alt }}">
+                                    </picture>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% schema %}
+{
+    "name": "Products Listing №2",
+    "settings": [
+        {
+            "type": "checkbox",
+            "id": "hide_section",
+            "label": "Hide section?",
+            "default": false
+        },
+        {
+            "type": "color",
+            "id": "bg_color",
+            "label": "Background color of section",
+            "default": "#000000"
+        },
+        {
+            "type": "text",
+            "id": "subtitle",
+            "label": "Section subtitle"
+        },
+        {
+            "type": "color",
+            "id": "subtitle_color",
+            "label": "Color of subtitle",
+            "default": "#FFFFFF"
+        },
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Section title"
+        },
+        {
+            "type": "color",
+            "id": "title_color",
+            "label": "Color of title",
+            "default": "#FFFFFF"
+        }
+    ],
+    "blocks": [
+        {
+            "type": "cards",
+            "name": "Product card",
+            "settings": [
+                {
+                    "type": "url",
+                    "id": "product_url",
+                    "label": "Product link"
+                },
+                {
+                    "type": "header",
+                    "content": "High line of card"
+                },
+                {
+                    "type": "color",
+                    "id": "bg_color_hl",
+                    "label": "Background-color",
+                    "default": "#F5F5F5"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "bg_img_hl",
+                    "label": "Background-image"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "first_prd_img",
+                    "label": "Product image"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "second_prd_img",
+                    "label": "Product image on hover"
+                },
+                {
+                    "type": "header",
+                    "content": "Low line of card"
+                },
+                {
+                    "type": "color",
+                    "id": "bg_color_ll",
+                    "label": "Background-color",
+                    "default": "#FFFFFF"
+                },
+                {
+                    "type": "text",
+                    "id": "product_title",
+                    "label": "Product title"
+                },
+                {
+                    "type": "color",
+                    "id": "prd_title_color",
+                    "label": "Color of product title",
+                    "default": "#181818"
+                },
+                {
+                    "type": "text",
+                    "id": "product_subtitle",
+                    "label": "Product subtitle"
+                },
+                {
+                    "type": "color",
+                    "id": "prd_subtitle_color",
+                    "label": "Color of product subtitle",
+                    "default": "#D95F67"
+                }
+            ]
+        },
+        {
+            "type": "medias",
+            "name": "Media block",
+            "settings": [
+                {
+                    "type": "select",
+                    "id": "size_pos_block",
+                    "label": "Size and position of block",
+                    "options": [
+                        {
+                            "value": "full_width",
+                            "label": "3 product cards (full-width)"
+                        },
+                        {
+                            "value": "half_right",
+                            "label": "2 product cards (right)"
+                        },
+                        {
+                            "value": "half_left",
+                            "label": "2 product cards (left)"
+                        }
+                    ],
+                    "default": "full_width"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Image"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "image_mob",
+                    "label": "Mobile image"
+                },
+                {
+                    "type": "text",
+                    "id": "video_link",
+                    "label": "Video link"
+                },
+                {
+                    "type": "text",
+                    "id": "video_link_mob",
+                    "label": "Mobile video link"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

@@ -1,0 +1,169 @@
+<!-- /sections/index-popup-modal.liquid -->
+{%- assign image = section.settings.image -%}
+{%- assign image_mobile = section.settings.image_mobile -%}
+{%- assign heading = section.settings.title -%}
+{%- assign subheading = section.settings.subheading -%}
+{%- assign content = section.settings.content -%}
+{%- assign promo_code = section.settings.promo_code -%}
+{%- assign small_text = section.settings.small_text -%}
+{%- assign cookie_key = section.settings.cookie_key -%}
+{%- assign cookie_expires = section.settings.cookie_expires -%}
+{%- assign auto_popup_delay = section.settings.auto_popup_delay -%}
+{%- assign enable_signup_form = section.settings.enable_signup_form -%}
+
+{%- if image_mobile == blank -%}
+  {%- assign image_mobile = image -%}
+{%- endif -%}
+
+{%- if section.settings.enable_modal -%}
+  <div
+   data-section-type="popup-modal"
+   data-cookie-key="{{ cookie_key  }}"
+   data-cookie-expires="{{ cookie_expires }}"
+   data-modal-auto-popup-delay="{{ auto_popup_delay }}">
+    <a
+     id="toggleModal-{{ section.id }}"
+     class="modal__toggle uppercase hide"
+     data-mfp-src="#Modal-{{ section.id }}">
+      open popup
+    </a>
+
+    {%- capture model_body_html -%}
+      <div class="modal__body">
+        {%- unless heading == blank -%}
+          <h2 class="modal__heading">{{ heading | escape }}</h2>
+        {%- endunless -%}
+
+        {%- unless subheading == blank -%}
+          <h3 class="modal__subheading">{{ subheading | escape }}</h3>
+        {%- endunless -%}
+
+        {%- unless content == blank -%}
+          <p class="modal__content">{{ content | escape }}</p>
+        {%- endunless -%}
+
+        {%- unless promo_code == blank -%}
+          <a class="modal__promo-code" data-promo-code="{{ promo_code | escape }}">{{ promo_code }}</a>
+        {%- endunless -%}
+
+        {%- unless enable_signup_form == false -%}
+          <div class="modal__form">
+            {% include 'form-mailchimp' %}
+          </div>
+        {%- endunless -%}
+
+        {%- unless small_text == blank -%}
+          <p class="modal__small-text">{{ small_text | escape }}</p>
+        {%- endunless -%}
+      </div>
+    {%- endcapture -%}
+
+    <div id="Modal-{{ section.id }}" class="modal modal--promo mfp-hide">
+      {%- unless image == blank -%}
+
+        <div class="modal__right">
+          <div class="modal__image small--hide"{%- unless image == blank -%} style="background-image: url(&quot;{{ image | img_url: '1200x' }}&quot;)"{%- endunless -%}></div>
+
+          <div class="modal__image small--hide medium--hide large--hide"{%- unless image_mobile == blank -%} style="background-image: url(&quot;{{ image_mobile | img_url: '1200x' }}&quot;)"{%- endunless -%}></div>
+        </div>
+
+        <div class="modal__left">
+          {{ model_body_html }}
+        </div>
+
+      {%- else -%}
+
+        {{ model_body_html }}
+
+      {%- endunless -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Popup Modal",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_modal",
+      "label": "Enable modal?",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Image (mobile)"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "$30 OFF"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Your entire order."
+    },
+    {
+      "type": "textarea",
+      "id": "content",
+      "label": "Content",
+      "default": "Use Promo code at checkout. Offer valid from Black Friday until Tuesday 25th November 2018."
+    },
+    {
+      "type": "text",
+      "id": "promo_code",
+      "label": "Promo code:",
+      "default": "blackfriday"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_signup_form",
+      "label": "Enable signup form?",
+      "default": true
+    },
+    {
+      "type": "textarea",
+      "id": "small_text",
+      "label": "Small text",
+      "default": "Use Promo code at checkout. Offer valid from Black Friday until Tuesday 25th November 2018."
+    },
+    {
+      "type": "text",
+      "id": "cookie_key",
+      "label": "Cookie key",
+      "default": "BlackFriday2018",
+      "info": "Update this field so that all users will see the popup"
+    },
+    {
+      "type":    "range",
+      "id":      "cookie_expires",
+      "min":     0,
+      "max":     30,
+      "step":    1,
+      "unit":   "day",
+      "label":   "Cookie expires",
+      "info":    "Define when the cookie will be removed, in days.",
+      "default": 1
+    },
+    {
+      "type":    "range",
+      "id":      "auto_popup_delay",
+      "min":     0,
+      "max":     30,
+      "step":    1,
+      "unit":   "sec",
+      "label":   "Auto popup delay",
+      "default": 2
+    }
+  ]
+}
+{% endschema %}

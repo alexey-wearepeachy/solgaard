@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "lp-shoreline--hero-section",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

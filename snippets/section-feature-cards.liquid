@@ -1,0 +1,82 @@
+{%- liquid
+  assign section_id = block.id
+  assign title = block.settings.title
+  assign slider_layout = false
+  assign footer_text = block.settings.footer_text
+-%}
+
+<section
+ class="section-feature-cards" {{ block.shopify_attributes }}
+ {% if slider_layout %}
+   data-section-type="grid-slider"
+   data-section-id="{{ section_id }}"
+   data-slide-selector=".feature__card"
+ {% endif %}>
+  <div class="section-body">
+    <div class="wrapper">
+      <div class="feature__card">
+        {%- unless title == blank -%}
+          <h2 class="section-title medium-up--text-center">{{ title | escape }}</h2>
+        {%- endunless -%}
+
+        <div
+         data-aos="fade-up"
+         data-aos-easing="linear"
+         data-aos-duration="400"
+         data-aos-delay="0">
+          <div
+           class="grid grid--uniform product-feature__card"
+           {% if slider_layout %}
+             data-slider
+             data-slick='{
+               "arrows": true,
+               "slidesToShow": 3,
+               "slidesToScroll": 3,
+               "swipeToSlide": true,
+               "responsive": [
+                 { "breakpoint": 2000, "settings": { "slidesToShow": 3, "slidesToScroll": 3 } },
+                 { "breakpoint": 992, "settings":  { "slidesToShow": 2, "slidesToScroll": 2 } },
+                 { "breakpoint": 768, "settings":  { "slidesToShow": 2, "slidesToScroll": 2, "arrows": false } },
+                 { "breakpoint": 480, "settings":  { "slidesToShow": 1, "slidesToScroll": 1, "arrows": false } }
+               ]
+             }'
+           {% endif %}>
+            {%- for i in (1..5) -%}
+              {%- capture image_key -%}image_{{ i }}{%- endcapture -%}
+              {%- capture title_key -%}title_{{ i }}{%- endcapture -%}
+              {%- capture content_key -%}content_{{ i }}{%- endcapture -%}
+              {%- capture video_url_key -%}video_url_{{ i }}{%- endcapture -%}
+
+              {%- assign image = block.settings[image_key] -%}
+              {%- assign title = block.settings[title_key] -%}
+              {%- assign content = block.settings[content_key] -%}
+              {%- assign video_url = block.settings[video_url_key] -%}
+
+              {%- unless image == blank and title == blank and content == blank -%}
+                <div class="grid__item small--one-full medium--one-third large--one-third feature__card__item text-center">
+                  {%- unless image == blank -%}
+                    <div class="feature__card__image">{%- include 'lazy-image' with image: image -%}</div>
+                  {%- endunless -%}
+
+                  <div class="feature__card__body">
+                    {%- unless title == blank -%}
+                      <h4 class="feature__card__title">{{ title | escape }}</h4>
+                    {%- endunless -%}
+
+                    {%- unless content == blank -%}
+                      <div class="feature__card__content rte">{{ content }}</div>
+                    {%- endunless -%}
+                  </div>
+                </div>
+              {%- endunless -%}
+            {%- endfor -%}
+          </div>
+        </div>
+
+        {%- unless footer_text == blank -%}
+          <div class="rte rte--small text-center">{{ footer_text  }}</div>
+        {%- endunless -%}
+      </div>
+    </div>
+  </div>
+</section>

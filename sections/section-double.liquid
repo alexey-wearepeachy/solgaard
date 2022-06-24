@@ -1,0 +1,302 @@
+{%- liquid
+  assign image_block_size = section.settings.image_block_size
+  assign text_align = section.settings.text_align
+  assign bg_color = section.settings.bg_color
+  assign color = section.settings.color
+
+  assign section_blocks = section.blocks
+  if section.blocks[0].type == 'text_block' and section.blocks[1].type != 'text_block'
+    assign text_block_first = true
+    assign section_blocks = section.blocks | reverse
+  endif
+
+
+  assign gird_class_content = 'large--one-half'
+  assign gird_class_image = 'large--one-half'
+
+  if template.name == 'product'
+    case image_block_size
+      when 'Large'
+        assign gird_class_image = 'large--seven-twelfths'
+        assign gird_class_content = 'large--five-twelfths'
+    endcase
+  endif
+-%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+   {%- unless bg_color == blank -%}
+     background-color:{{ bg_color  }};
+   {%- endunless -%}
+   {%- unless color == blank -%}
+     color:{{ color }};
+   {%- endunless -%}
+  }
+</style>
+
+<div class="section-body {{ text_align }}">
+  <div class="wrapper">
+    <div class="grid--full{% if text_block_first %} grid--rev{% endif %} large--align-items-center">
+      {%- for block in section_blocks -%}
+        {%- case block.type -%}
+          {%- when 'image_block' -%}
+            {%- liquid
+              assign image = block.settings.image
+            -%}
+            <div class="grid__item {{ gird_class_image }}">
+              {%- unless video == blank -%}
+                {% capture video_mp4 %}{{ video }}.mp4{% endcapture %}
+                {% capture video_webm %}{{ video }}.webm{% endcapture %}
+                {% capture video_ogv %}{{ video }}.ogv{% endcapture %}
+                <div class="video-wrapper">
+                  <video autoplay loop muted playsinline
+                  {% unless image == blank %}
+                    poster="{{ image | img_url: '2000x' }}"
+                  {% endunless %}>
+                    <source src="{{ video_mp4 | file_url }}" type="video/mp4">
+                    <source src="{{ video_webm | file_url }}" type="video/webm">
+                    <source src="{{ video_ogv | file_url }}" type="video/ogg">
+                  </video>
+                </div>
+              {%- else -%}
+                {%- unless image == blank -%}
+                  {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                  {%- capture image_html -%}
+                    <div
+                     class="lazy-image"
+                     style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;">
+                      <img class="lazyload fade-in"
+                        data-src="{{ img_url }}"
+                        data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                        data-aspectratio="{{  image.aspect_ratio }}"
+                        data-parent-fit="cover"
+                        data-sizes="auto"/>
+                    </div>
+                    <noscript>
+                      <img src="{{ image | img_url: '1296x' }}" alt="{{ image.alt | default: title }}"/>
+                    </noscript>
+                  {%- endcapture -%}
+                  <div class="image-wrapper">
+                    {%- if link -%}
+                      <a href="{{ link }}">{{ image_html }}</a>
+                    {%- else -%}
+                      {{ image_html }}
+                    {%- endif -%}
+                  </div>
+                {%- else -%}
+                  <div class="video-wrapper">
+                    <div class="video--placeholder"></div>
+                  </div>
+                {%- endunless -%}
+              {%- endunless -%}
+            </div>
+
+          {%- when 'video_block' -%}
+            {%- liquid
+              assign image = block.settings.image
+              assign video = block.settings.video
+            -%}
+            <div class="grid__item {{ gird_class_image }}">
+              {%- unless video == blank -%}
+                {% capture video_mp4 %}{{ video }}.mp4{% endcapture %}
+                {% capture video_webm %}{{ video }}.webm{% endcapture %}
+                {% capture video_ogv %}{{ video }}.ogv{% endcapture %}
+                <div class="video-wrapper">
+                  <video autoplay loop muted playsinline
+                  {% unless image == blank %}
+                    poster="{{ image | img_url: '2000x' }}"
+                  {% endunless %}>
+                    <source src="{{ video_mp4 | file_url }}" type="video/mp4">
+                    <source src="{{ video_webm | file_url }}" type="video/webm">
+                    <source src="{{ video_ogv | file_url }}" type="video/ogg">
+                  </video>
+                </div>
+              {%- else -%}
+                {%- unless image == blank -%}
+                  {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                  {%- capture image_html -%}
+                    <div
+                     class="lazy-image"
+                     style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;">
+                      <img class="lazyload fade-in"
+                        data-src="{{ img_url }}"
+                        data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                        data-aspectratio="{{  image.aspect_ratio }}"
+                        data-parent-fit="cover"
+                        data-sizes="auto"/>
+                    </div>
+                    <noscript>
+                      <img src="{{ image | img_url: '1296x' }}" alt="{{ image.alt | default: title }}"/>
+                    </noscript>
+                  {%- endcapture -%}
+                  <div class="image-wrapper">
+                    {%- if link -%}
+                      <a href="{{ link }}">{{ image_html }}</a>
+                    {%- else -%}
+                      {{ image_html }}
+                    {%- endif -%}
+                  </div>
+                {%- else -%}
+                  <div class="video-wrapper">
+                    <div class="video--placeholder"></div>
+                  </div>
+                {%- endunless -%}
+              {%- endunless -%}
+            </div>
+
+          {%- when 'text_block' -%}
+            {%- liquid
+              assign title = block.settings.title
+              assign richtext = block.settings.richtext
+              assign btn_link = block.settings.btn_link
+              assign btn_text = block.settings.btn_text
+              assign btn_style = block.settings.btn_style
+            -%}
+            <div class="grid__item {{ gird_class_content }}">
+              <div class="content">
+                <div class="preventOverflowContent">
+                  {%- unless section_title == blank -%}
+                    <h3 class="section-title small-down--hide">{{ section_title | escape }}</h3>
+                  {%- endunless -%}
+
+                  {%- unless title == blank -%}
+                    <h2>{{ title | escape }}</h2>
+                  {%- endunless -%}
+
+                  {%- unless richtext == blank -%}
+                    <div class="rte rte--homepage">{{ richtext }}</div>
+                  {%- endunless -%}
+
+                  {%- unless btn_link == blank or btn_text == blank -%}
+                    <a
+                     class="{{ btn_style }}{% if btn_link contains 'vimeo.com' %} popupVideo{% endif %}"
+                     href="{{ btn_link }}"
+                     {% if btn_link contains 'https:' or btn_link contains 'http:' %}
+                       target="_blank"
+                     {% endif %}>
+                      {{ btn_text | escape }}
+                      {% if btn_link contains 'vimeo.com' %}
+                        <svg x="0px" y="0px" viewBox="0 0 12 16" style="enable-background:new 0 0 12 16;" xml:space="preserve">
+                          <polygon points="11.7,8 0.3,0.4 0.3,15.6 "></polygon>
+                        </svg>
+                      {% endif %}
+                    </a>
+                  {%- endunless -%}
+                </div>
+              </div>
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Double",
+    "max_blocks": 2,
+    "tag": "section",
+    "class": "section-double",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Layout"
+      },
+      {
+        "type": "select",
+        "id": "image_block_size",
+        "label": "Image block size",
+        "default": "Large",
+        "options": [
+          { "value": "", "label": "Normal"},
+          { "value": "Large", "label": "Large"}
+        ]
+      },
+      {
+        "type": "select",
+        "id": "text_align",
+        "label": "Alignment",
+        "default": "text-left",
+        "options": [
+          { "value": "text-left", "label": "Align Left"},
+          { "value": "text-center", "label": "Align Center"},
+          { "value": "text-right", "label": "Align Right"}
+        ]
+      },
+      {
+        "type": "color",
+        "id": "bg_color",
+        "label": "Background color"
+      },
+      {
+        "type": "color",
+        "id": "color",
+        "label": "Text color"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "image_block",
+        "name": "Image block",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image",
+            "info": "1024 x 1024px .jpg recommended"
+          }
+        ]
+      },
+      {
+        "type": "video_block",
+        "name": "Video block",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image",
+            "info": "1024 x 1024px .jpg recommended"
+          },
+          {
+            "type": "text",
+            "id": "video",
+            "label": "Video",
+            "info": "Enter video name without extension. Please ensure all .mp4, .ogv, .webm are uploaded to Files."
+          }
+        ]
+      },
+      {
+        "type": "text_block",
+        "name": "Text block",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Image and text"
+          },
+          {
+            "type": "richtext",
+            "id": "richtext",
+            "label": "Text",
+            "default": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Double",
+        "category": "Image",
+        "blocks": [
+          {
+            "type": "image_block"
+          },
+          {
+            "type": "text_block"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,97 @@
+{%- assign parent = false -%}
+{%- if link.levels == 1 -%}
+  {%- assign parent = true -%}
+{%- endif -%}
+{%- assign grandparent = false -%}
+{%- if link.levels == 2 -%}
+  {%- assign grandparent = true -%}
+{%- endif -%}
+{%- assign child_count = 0 -%}
+
+{%- if parent or grandparent -%}
+  {%- assign child_count = link.links.size -%}
+  {%- if child_count > 10 -%}
+    {%- assign child_count = 10 -%}
+  {%- endif -%}
+{%- endif -%}
+
+{%- assign nav_image_obj = false -%}
+{%- assign nav_text = false -%}
+{%- if link.type == 'product_link' -%}
+  {%- unless link.object.featured_image == blank -%}
+    {%- assign nav_image_obj = link.object.featured_image -%}
+    {%- assign nav_text = link.object.title -%}
+  {%- endunless -%}
+{%- elsif link.type == 'collection_link' -%}
+  {%- unless link.object.image == blank -%}
+    {%- assign nav_image_obj = link.object.image -%}
+    {%- assign nav_text = link.object.title -%}
+  {%- endunless -%}
+{%- endif -%}
+
+{%- unless link.object.metafields.nav.image == blank or images[link.object.metafields.nav.image] == blank -%}
+  {%- assign nav_image_obj = images[link.object.metafields.nav.image] -%}
+{%- endunless -%}
+
+{%- unless link.object.metafields.nav.text == blank -%}
+  {%- assign nav_text = link.object.metafields.nav.text -%}
+{%- endunless -%}
+
+{%- liquid
+  if link.title == 'Start A Return'
+    assign nav_image_obj = images['Menu-startareturn2.png']
+  endif
+-%}
+<li class="nav__item nav__item--block{% if link.title == 'View all' %} nav__item--view-all{% endif %}{% if grandparent %} grandparent kids-{{child_count}}{% elsif parent %} parent grandparent kids-{{ child_count }}{% else %} child{% endif %}{% if link.active %} main-menu--active{% endif %}">
+  <a
+   href="{{ link.url }}"
+   class="nav__link{% unless parent or grandparent %} nav__link--child{% endunless %}"
+   {% if parent or grandparent %}
+     aria-haspopup="true"
+     aria-expanded="false"
+   {% else %}
+     {% unless nav_image_obj == false %}
+       data-nav-image="{{ nav_image_obj | img_url: '600x' }}"
+     {% endunless %}
+     {% unless nav_text == false %}
+       data-nav-text="{{ nav_text | escape }}"
+     {% endunless %}
+   {% endif %}>
+    {%- unless nav_image_obj == blank -%}
+      <div class="nav__link__bg" style="background-image:url(&quot;{{ nav_image_obj | img_url: '600x' }}&quot;)"></div>
+    {%- endunless -%}
+    <div class="nav__link__text">{{ link.title | escape }}</div>
+  </a>
+
+  {%- if parent or grandparent -%}
+    <a href="#" class="nav__caret" aria-haspopup="true" aria-expanded="false">
+      <span class="plus">+</span><span class="minus">-</span>
+    </a>
+
+    <div class="nav__dropdown">
+      <ul>
+        {%- if grandparent -%}
+          <li class="nav__item--image kids-{{ child_count }}">
+            <a
+             href="{{ link.url }}"
+             class="nav__image-wrap"
+             data-nav-image="{{ nav_image_obj }}"
+             data-nav-text="{% unless nav_image_obj == blank %}{{ nav_text }}{% endunless %}"
+             {% unless nav_image_obj == blank %}
+               style="background-image:url(&quot;{{ nav_image_obj }}&quot;)"
+             {% endunless %}>
+            </a>
+            <p
+             class="nav__text">
+              <a href="{{ link.url }}">{% unless nav_text == blank %}{{ nav_text }}{% endunless %}</a>
+            </p>
+          </li>
+        {%- endif -%}
+
+        {%- for link in link.links -%}
+          {% include 'nav-item--block' %}
+        {%- endfor -%}
+      </ul>
+    </div>
+  {%- endif -%}
+</li>

@@ -1,0 +1,68 @@
+{%- assign grid_link = '/pages/our-mission' -%}
+{%- assign grid_title = 'Great things that do good.' -%}
+{%- assign grid_image = product.featured_image -%}
+{%- assign grid_image = images['great-things-that-do-good.jpg'] -%}
+{%- assign grid_img_url = grid_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+
+{%- if settings.image_autoheight_enable -%}
+  {%- assign top_offset =  1 | divided_by: grid_image.aspect_ratio | times: 100 | divided_by: 2 -%}
+  {%- capture auto_height -%}
+    {%- if grid_image.aspect_ratio < 1 -%}
+      style="width:{{ grid_image.aspect_ratio | times: 100 }}%; margin: 0 auto;"
+    {%- else -%}
+      style="padding:{{ 50 | minus: top_offset }}% 0;"
+    {%- endif -%}
+  {%- endcapture -%}
+{%- endif -%}
+
+
+
+<div
+ class="grid__item {{ grid_offset }} {{ grid_width_small }} {{ grid_width_medium }} {{ grid_width_large }} product-grid-item product-grid-item--ads">
+  <div class="grid__body">
+    <div class="grid__image" style="background-image:url(&quot;{{ grid_image | img_url: '600x' }}&quot;);">
+      <div {{ auto_height }}>
+        <a
+         href="{{ grid_link }}"
+         class="grid__link">
+          <div class="lazy-image" style="padding-top:{{ 1 | divided_by: grid_image.aspect_ratio | times: 100}}%;background-image:  url('{{ grid_image | img_url: '1x1' }}');">
+            <img
+             class="grid__image lazyload fade-in"
+             alt="{{ grid_image.alt | default: grid_title | escape }}"
+             data-src="{{ grid_img_url }}"
+             data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048, 2450, 2700, 3000, 3350, 3750, 4100, 4480]"
+             data-aspectratio="{{ grid_image.aspect_ratio }}"
+             data-sizes="auto"/>
+
+            <span class="grid__image__content">
+              <p class="grid__image__icon" style="width:50px;">{% include 'icon-plastic-recycled' %}</p>
+
+              <h4>Each product sold Pulls 5lbs of plastic From the ocean</h4>
+
+              <span class="grid__image__learn">Learn more</span>
+            </span>
+          </div>
+        </a>
+      </div>
+      <noscript>
+        <a href="{{ grid_link }}">
+          <img src="{{ grid_image | img_url: '360x' }}" alt="{{ grid_image.alt | default: grid_title | escape }}">
+        </a>
+      </noscript>
+    </div>
+
+    <div class="grid__meta">
+      <div class="text-center">
+        <div
+         class="grid__link"
+         href="{{ grid_link }}">
+          <h4 class="grid__title">
+            {{ grid_title | escape }}
+          </h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

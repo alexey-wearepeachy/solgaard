@@ -1,0 +1,68 @@
+<section class="lp-otw--promo-icons" data-section-id="{{ section.id }}" {% if section.settings.hide_section %}style="display: none;"{% endif %}>
+    {% include 'new-lp--promo-icons' %}
+</section>
+
+{% schema %}
+{
+    "name": "Product intro",
+    "settings": [
+        {
+            "type": "checkbox",
+            "id": "hide_section",
+            "label": "Hide section?",
+            "default": false
+        },
+        {
+            "type": "color",
+            "id": "bg_color",
+            "label": "Background color of section",
+            "default": "#000000"
+        },
+        {
+            "type": "text",
+            "id": "subtitle",
+            "label": "Section subtitle"
+        },
+        {
+            "type": "color",
+            "id": "subtitle_color",
+            "label": "Color of subtitle",
+            "default": "#FF876C"
+        },
+        {
+            "type": "textarea",
+            "id": "title",
+            "label": "Section title"
+        },
+        {
+            "type": "text",
+            "id": "font_url",
+            "label": "Title font link"
+        },
+        {
+            "type": "text",
+            "id": "font_weight",
+            "label": "Title font weight"
+        },
+        {
+            "type": "color",
+            "id": "title_color",
+            "label": "Color of title",
+            "default": "#FFFFFF"
+        }
+    ],
+    "blocks": [
+        {
+            "type": "block",
+            "name": "Icon",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "block_icon",
+                    "label": "Block icon"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

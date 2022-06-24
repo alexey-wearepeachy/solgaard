@@ -1,0 +1,52 @@
+{%- liquid
+  assign color = block.settings.color
+  assign bg_color = block.settings.bg_color
+  assign title = block.settings.title
+  assign richtext = block.settings.richtext
+  assign subtext = block.settings.subtext
+  assign progress_bar_label = block.settings.progress_bar_label
+  assign progress_bar_value = block.settings.progress_bar_value
+-%}
+
+<section class="section-progress-bar">
+  <div
+   class="section-body text-center"
+   style="
+   {%- unless bg_color == blank -%}
+     background-color:{{bg_color}};
+   {%- endunless -%}
+   {%- unless color == blank -%}
+     color:{{color}};
+   {%- endunless -%}
+   ">
+    <div class="wrapper">
+      <div class="grid">
+        <div class="grid__item grid__item large--eight-twelfths push--large--two-twelfths">
+
+          {%- unless title == blank -%}
+            <h2
+             class="section-title h1"
+             {% unless color == blank %}
+               style="color:{{color}};"
+             {% endunless %}>{{ title | newline_to_br }}</h2>
+          {%- endunless -%}
+
+          {%- unless richtext == blank -%}
+            <div class="rte">{{ richtext }}</h3>
+          {%- endunless -%}
+
+          {%- unless subtext == blank -%}
+            <p class="accent strong">{{ subtext | escape }}</p>
+          {%- endunless -%}
+
+          <div
+           {% unless color == blank %}
+             style="color:{{color}};"
+           {% endunless %}>
+            {%- render 'progress-bar' with label: progress_bar_label, value: progress_bar_value -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

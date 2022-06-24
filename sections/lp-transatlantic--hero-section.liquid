@@ -1,0 +1,122 @@
+<section class="lp-transatlantic--hero-section" data-section-id="{{ section.id }}" {% if section.settings.hide_section %}style="display: none;"{% endif %}>
+    {% include 'new-lp--hero-section' %}
+</section>
+
+{% schema %}
+{
+    "name": "Hero Section",
+    "settings": [
+        {
+            "type": "checkbox",
+            "id": "hide_section",
+            "label": "Hide section?",
+            "default": false
+        },
+        {
+            "type": "text",
+            "id": "video_bg_link",
+            "label": "Background video link"
+        },
+        {
+            "type": "text",
+            "id": "video_bg_link_mob",
+            "label": "Background video mobile link"
+        },
+        {
+            "type": "image_picker",
+            "id": "bg_image",
+            "label": "Background image"
+        },
+        {
+            "type": "image_picker",
+            "id": "bg_image_mob",
+            "label": "Background image mobile"
+        },
+        {
+            "type": "color",
+            "id": "bg_color",
+            "label": "Background color"
+        },
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Section title"
+        },
+        {
+            "type": "color",
+            "id": "title_color",
+            "label": "Color of title",
+            "default": "#FFFFFF"
+        },
+        {
+            "type": "text",
+            "id": "font_url",
+            "label": "Title font link"
+        },
+        {
+            "type": "text",
+            "id": "font_weight",
+            "label": "Title font weight"
+        },
+        {
+            "type": "textarea",
+            "id": "subtitle",
+            "label": "Section subtitle"
+        },
+        {
+            "type": "color",
+            "id": "subtitle_color",
+            "label": "Color of description",
+            "default": "#FFFFFF"
+        },
+        {
+            "type": "text",
+            "id": "btn_text",
+            "label": "Button text"
+        },
+        {
+            "type": "color",
+            "id": "btn_bg_color",
+            "label": "Color of button background",
+            "default": "#1E54E0"
+        },
+        {
+            "type": "color",
+            "id": "btn_bg_color_hover",
+            "label": "Color of button background on hover",
+            "default": "#0A3AAF"
+        },
+        {
+            "type": "color",
+            "id": "btn_text_color",
+            "label": "Color of button text",
+            "default": "#FFFFFF"
+        },
+        {
+            "type": "color",
+            "id": "btn_text_color_hover",
+            "label": "Color of button text on hover",
+            "default": "#FFFFFF"
+        },
+        {
+            "type": "header",
+            "content": "Image block"
+        },
+        {
+            "type": "color",
+            "id": "image_block_color",
+            "label": "Background color of image block"
+        },
+        {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Section image"
+        },
+        {
+            "type": "image_picker",
+            "id": "image_mob",
+            "label": "Section mobile image"
+        }
+    ]
+}
+{% endschema %}

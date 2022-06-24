@@ -1,0 +1,148 @@
+<div class="section-body">
+  <div class="wrapper">
+    {% if section.settings.title != blank %}
+      <h2 class="section-title h1">{{ section.settings.title | escape }}</h2>
+    {% endif %}
+
+    <div class="grid {% unless section.blocks.size == 5 %}grid-uniform{% endunless %}">
+      {%- assign grid_item_width = 'large--one-third medium--one-third' -%}
+      {% case section.blocks.size %}
+        {% when 1 %}
+          {%- assign grid_item_width = 'large--one-half medium--one-half' -%}
+        {% when 2 %}
+          {%- assign grid_item_width = 'large--one-half medium--one-half' -%}
+        {% when 4 %}
+          {%- assign grid_item_width = 'large--one-quarter medium--one-half' -%}
+      {% endcase %}
+      {% for block in section.blocks %}
+        {% if section.blocks.size == 5 and forloop.index < 3 %}
+          {%- assign column_width = 'large--one-half medium--one-half' -%}
+        {% else %}
+          {%- assign column_width = grid_item_width -%}
+        {% endif %}
+        {% if section.blocks.size == 5 and forloop.index == 3 %}<div class="clearfix"></div>{% endif %}
+
+        <div class="features-with-icons grid__item {{ column_width }} {{ section.settings.align_text }}" {{ block.shopify_attributes }}>
+          <div class="features-with-icons__body">
+
+            {% unless block.settings.image == blank %}
+              {% assign img_url = block.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+              <div class="features-with-icons__image">
+                <div class="lazy-image" style="padding-top:{{ 1 | divided_by: block.settings.image.aspect_ratio | times: 100}}%; background-image:  url('{{ block.settings.image | img_url: '1x1' }}');">
+                  <img class="lazyload fade-in"
+                    data-src="{{ img_url }}"
+                    data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048, 2450, 2700, 3000, 3350, 3750, 4100, 4480]"
+                    data-aspectratio="{{  block.settings.image.aspect_ratio }}"
+                    data-parent-fit="cover"
+                    data-sizes="auto"
+                    alt="{{ block.settings.title | default: "Feature image" }}"/>
+                </div>
+                <noscript>
+                  <img src="{{ block.settings.image | img_url: '540x' }}" alt="{{ block.settings.image.alt | default: block.settings.title }}"/>
+                </noscript>
+              </div>
+            {% endunless %}
+
+            {% if block.settings.title != blank %}
+              <h4 class="features-with-icons__heading">{{ block.settings.title | escape }}</h4>
+            {% endif %}
+
+            {% if block.settings.text != blank %}
+              <div class="features-with-icons__content rte">{{ block.settings.text }}</div>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    {% if section.blocks.size == 0 %}
+      {% include 'no-blocks' %}
+    {% endif %}
+  </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "Features with icons",
+    "class": "index-section section-features-with-icons",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Text features with images"
+      },
+      {
+        "type": "select",
+        "id": "align_text",
+        "label": "Text alignment",
+        "default": "text-center",
+        "options": [
+          {
+            "value": "text-left",
+            "label": "Left"
+          },
+          {
+            "value": "text-center",
+            "label": "Centered"
+          }
+        ]
+      }
+    ],
+    "blocks": [
+      {
+        "type": "text_block",
+        "name": "Column",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "select",
+            "id": "icon",
+            "label": "Icon",
+            "default": "",
+            "options": [
+              { "value": "", "label": "None"},
+              { "value": "icon-guaranteed", "label": "Guaranteed"},
+              { "value": "icon-shipping", "label": "Shipping"},
+              { "value": "icon-100-days", "label": "100 Days"}
+            ]
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Add a title or tagline"
+          },
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "Text",
+            "default": "<p>Share blog posts, products, or promotions with your customers. Use this text to describe products, share details on availability and style, or as a space to display recent reviews or FAQs.</p>"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Features with icons",
+        "category": "Text",
+        "blocks": [
+          {
+            "type": "text_block"
+          },
+          {
+            "type": "text_block"
+          },
+          {
+            "type": "text_block"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

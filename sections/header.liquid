@@ -1,0 +1,136 @@
+<div
+ class="header__wrapper"
+ data-fixed="true"
+ data-section-id="{{ section.id }}"
+ data-section-type="header">
+  {%- assign header_message_1 = section.settings.header_message_1 -%}
+  {%- assign header_message_2 = section.settings.header_message_2 -%}
+  {%- assign header_message_3 = section.settings.header_message_3 -%}
+  {% if header_message_1 != '' or header_message_2 != '' or header_message_3 != '' %}
+
+  <div class="header__overlay"></div>
+
+  <div class="info-bar showMobile" data-section-type="info-bar">
+    <div class="wrapper wrapper--full text-center">
+      {%- if header_message_1 != '' or header_message_2 != '' or header_message_3 != '' -%}
+        <div class="header-message uppercase">
+          <div class="info-bar__slider">
+            {%- if header_message_1 != '' -%}
+              <div class="info-bar__slide">
+                {{ header_message_1 }}
+              </div>
+            {%- endif -%}
+            {%- if header_message_2 != '' -%}
+              <div class="info-bar__slide info-bar__slide--additional">
+                {{ header_message_2 }}
+              </div>
+            {%- endif -%}
+            {%- if header_message_3 != '' %}
+              <div class="info-bar__slide info-bar__slide--additional">
+                {{ header_message_3 }}
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+  {% endif %}
+
+  <header class="site-header" role="banner">
+    <div class="wrapper wrapper--full">
+      <div class="nav--desktop">
+        {% include 'nav-contents' with 'desktop' %}
+      </div>
+      <div class="nav--mobile">
+        {% include 'nav-contents' with 'mobile' %}
+      </div>
+    </div>
+  </header>
+
+  {%- if template.name == 'product' -%}
+    <header
+     class="header--product fixed"
+     role="banner"
+     data-section-type="header-product">
+     <div class="wrapper">
+      <div class="grid">
+        <div class="grid__item two-thirds">
+          <h2 class="header__product-title h4">{{ product.title }}</h2>
+
+          <p class="header__variant-title small--hide" header-product-variant-title>{{ product.selected_or_first_available_variant.title }}</p>
+
+          <div class="header__product-rating-summary">
+            <span
+             class="stamped-product-reviews-badge stamped-main-badge"
+             data-id="{{ product.id }}"
+             data-product-sku="{{ product.handle }}"
+             data-product-type="{{product.type}}"
+             data-product-title="{{product.title}}"
+             style="display: inline-block;">{{ product.metafields.stamped.badge }}</span>
+          </div>
+        </div>
+        <div class="grid__item one-third text-right">
+          <a href="#" class="btn btn--green" header-product-buy-now>Back to Top</a>
+        </div>
+      </div>
+     </div>
+    </header>
+  {%- endif -%}
+</div>
+
+{% schema %}
+  {
+    "name": "Header",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo image"
+      },
+      {
+        "type":    "range",
+        "id":      "logo_max_limit",
+        "min":     5,
+        "max":     495,
+        "step":    5,
+        "unit":    "px",
+        "label":   "Custom logo width",
+        "default": 250
+      },
+      {
+        "type": "link_list",
+        "label": "Menu",
+        "id": "main_menu_linklist"
+      },
+      {
+        "type": "link_list",
+        "label": "Most Popular Menu",
+        "id": "most_popular_linklist",
+        "info": "Display on mobile only"
+      },
+      {
+        "type": "header",
+        "content": "Top Bar"
+      },
+      {
+        "type": "richtext",
+        "id": "header_message_1",
+        "label": "Announcement text #1",
+        "info": "45 characters or less recommended"
+      },
+      {
+        "type": "richtext",
+        "id": "header_message_2",
+        "label": "Announcement text #2",
+        "info": "45 characters or less recommended"
+      },
+      {
+        "type": "richtext",
+        "id": "header_message_3",
+        "label": "Announcement text #3",
+        "info": "45 characters or less recommended"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,108 @@
+<h2 class="section-title h1">Our Team</h2>
+
+<div class="section-double section-double-our-team">
+  {% include 'section-double' %}
+</div>
+
+<div class="section-body">
+  <div class="wrapper">
+    {%- unless block.settings.heading == blank -%}
+      <h2 class="section-title">{{ block.settings.heading | escape }}</h2>
+    {%- endunless -%}
+
+    <div class="grid">
+      <div class="grid__item large--ten-twelfths push--large--one-twelfth">
+        <div class="grid-uniform">
+          {%- assign team_blog = blogs.our-team -%}
+
+          {%- for article in team_blog.articles reversed -%}
+            {%- assign image = article.image -%}
+            {%- assign name = article.title -%}
+            {%- assign title = false -%}
+
+            {%- assign linkedin = false -%}
+            {%- assign instagram = false -%}
+            {%- assign linkedin = false -%}
+            {%- assign email = false -%}
+            {%- for tag in article.tags -%}
+              {%- if tag contains 'Title: ' -%}
+                {%- assign title = tag | remove: 'Title: ' -%}
+              {%- endif -%}
+              {%- if tag contains 'Instagram: ' -%}
+                {%- assign instagram = tag | remove: 'Instagram: ' -%}
+              {%- endif -%}
+              {%- if tag contains 'Linkedin: ' -%}
+                {%- assign linkedin = tag | remove: 'Linkedin: ' -%}
+              {%- endif -%}
+              {%- if tag contains 'Email: ' -%}
+                {%- assign email = tag | remove: 'Email: ' -%}
+              {%- endif -%}
+            {%- endfor -%}
+
+            {%- capture team_member_content -%}
+              {%- unless article.content == blank -%}
+                <div class="rte">{{ article.content }}</div>
+              {%- endunless -%}
+
+              {%- capture social_content -%}
+                {%- unless instagram == blank -%}
+                  <li class="social-icons__list">
+                    <a class="social-icons__link" href="//instagram.com/{{ instagram }}" target="_blank" aria-label="{{ name | escape }}">
+                      <span class="social-icons__icon icon icon-instagram" aria-hidden="true"></span>
+                    </a>
+                  </li>
+                {%- endunless -%}
+                {%- unless linkedin == blank -%}
+                  <li class="social-icons__list">
+                    <a class="social-icons__link" href="{{ linkedin }}" target="_blank" aria-label="{{ name | escape }}">
+                      <span class="social-icons__icon icon icon-linkedin" aria-hidden="true"></span>
+                    </a>
+                  </li>
+                {%- endunless -%}
+                {%- unless email == blank -%}
+                  <li class="social-icons__list hide">
+                    <a class="social-icons__link" href="mailto:{{ email }}" aria-label="{{ name | escape }}">
+                      <span class="social-icons__icon icon icon-email" aria-hidden="true"></span>
+                    </a>
+                  </li>
+                {%- endunless -%}
+              {%- endcapture -%}
+
+              {%- unless social_content == blank -%}
+                <ul class="team-member__social social-icons">{{ social_content }}</ul>
+              {%- endunless -%}
+            {%- endcapture -%}
+
+            <div class="team-member__item grid__item large--one-third medium--one-third text-center">
+
+              {%- if image == blank -%}
+                {%- assign image = 'blank.svg' | asset_url -%}
+              {%- endif -%}
+              <div class="team-member__box">
+                <div class="team-member__image lazyload" data-bgset="{% include 'bgset', image: image %}">
+                </div>
+                <noscript>
+                  <div class="team-member__image" style="background-image: url('{{ image | img_url: '300x' }}');">
+                </noscript>
+
+                {%- unless team_member_content == blank -%}
+                  <div class="team-member__overlay"></div>
+
+                  <div class="team-member__content">{{ team_member_content }}</div>
+                {%- endunless -%}
+              </div>
+
+              {%- unless name == blank -%}
+                <h4 class="team-member__name h3">{{ name | escape }}</h4>
+              {%- endunless -%}
+
+              {%- unless title == blank -%}
+                <p class="team-member__title section-subtitle">{{ title | escape }}</p>
+              {%- endunless -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

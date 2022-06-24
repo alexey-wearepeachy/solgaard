@@ -1,0 +1,66 @@
+{%- for block in section.blocks -%}
+  <section class="{{ block.type }} {{ block.type }}-{{ block.id }}" {{ block.shopify_attributes }}>
+    {%- case block.type -%}
+      {% when 'section-shore-tex-banner' %}
+        {%- assign image = block.settings.image -%}
+        {%- assign image_mobile = block.settings.image_mobile -%}
+        {%- assign logo = block.settings.logo -%}
+        {%- assign title = block.settings.title -%}
+        {%- assign subtitle = block.settings.subtitle -%}
+        {%- assign content = block.settings.content -%}
+
+        {%- assign btn_text = block.settings.btn_text -%}
+        {%- assign btn_link = block.settings.btn_link -%}
+        {%- assign btn_style = block.settings.btn_style -%}
+
+        {%- unless image -%}
+          {%- assign image = 'blank.svg' | asset_url -%}
+        {%- endunless -%}
+
+        {%- if image_mobile == blank -%}
+          {%- assign image_mobile = image -%}
+        {%- endif -%}
+
+        <div class="small--hide">
+          {%- include 'lazy-image' with image: image -%}
+        </div>
+
+        <div class="medium--hide large--hide">
+          {%- include 'lazy-image' with image: image_mobile -%}
+        </div>
+
+        <div class="section-body{% if inverse %} section-inverse{% endif %} text-center">
+          <div class="wrapper">
+            <div class="grid">
+              <div class="grid__item grid__item large--eight-twelfths push--large--two-twelfths">
+                {%- unless title == blank -%}
+                  <h2 class="section-title">{{ title | escape }}</h2>
+                {%- endunless -%}
+
+                {%- unless subtitle == blank -%}
+                  <h3>{{ subtitle | escape }}</h3>
+                {%- endunless -%}
+
+                {%- if content != blank -%}
+                  <div class="section-content rte">{{ content }}</div>
+                {%- endif -%}
+
+                {%- unless btn_text == blank or btn_link == blank -%}
+                  <a href="{{ btn_link }}" class="{{ btn_style }}">{{ btn_text }}</a>
+                {%- endunless -%}
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      {% when 'section-newsletter' %}
+        {%- assign title = block.settings.title -%}
+        {%- assign content = block.settings.content -%}
+        {%- include 'section-newsletter' with title: title, content: content -%}
+
+      {%- else -%}
+        {% include block.type %}
+    {%- endcase -%}
+  </section>
+{%- endfor -%}

@@ -1,0 +1,58 @@
+<style>
+    #only-btn-section-block.only-btn-section-block--{{ block.id }} {
+        background-color: {{ block.settings.bg_color }};
+        padding: 25px 23px;
+    }
+
+    #only-btn-section-block.only-btn-section-block--{{ block.id }} .only-btn-section__container {
+        max-width: 1440px;
+        width: 100%;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #only-btn-section-block.only-btn-section-block--{{ block.id }} .only-btn-section__container .btn-wrapper {
+        max-width: 400px;
+        width: 100%;
+    }
+
+    #only-btn-section-block.only-btn-section-block--{{ block.id }} .only-btn-section__container .btn-wrapper a {
+        display: block;
+        width: 100%;
+        padding: 16px 10px;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 26px;
+        text-align: center;
+        letter-spacing: 0.1em;
+        text-decoration: none;
+        border: none;
+        border-radius: 2px;
+        transition: all .2s ease-in-out;
+        color: {{ block.settings.btn_text_color }};
+        background-color: {{ block.settings.btn_bg_color }};
+    }
+
+    @media (max-width: 600px) {
+        #only-btn-section-block.only-btn-section-block--{{ block.id }} {
+            background-color: {{ block.settings.bg_color }};
+            padding: 25px 23px;
+        }
+        #only-btn-section-block.only-btn-section-block--{{ block.id }} .only-btn-section__container .btn-wrapper {
+            max-width: 100%;
+        }
+    }
+</style>
+
+
+<div id="only-btn-section-block" class="only-btn-section-block--{{ block.id }}">
+    <div class="only-btn-section__container">
+        {% if block.settings.btn_text != blank %}
+            <div class="btn-wrapper">
+                <a href="{{ block.settings.btn_url }}">{{ block.settings.btn_text }}</a>
+            </div>
+        {% endif %}
+    </div>
+</div>

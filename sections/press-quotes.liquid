@@ -1,0 +1,82 @@
+<div class="press-quote" data-section-id="{{ section.id }}" data-section-type="press-quotes">
+  <div class="press-quotes__top">
+    <div class="wrapper text-center">
+      {% unless section.settings.title  == blank %}
+        <h2 class="press-quotes__heading">{{ section.settings.title }}</h2>
+      {% endunless %}
+
+      <div class="press-quotes__slider">
+        <div class="press-quotes__slide">
+          <p class="press-quotes__content">
+            "This is the high-tech backpack<br> you never knew you needed"
+          </p>
+        </div>
+        <div class="press-quotes__slide">
+          <p class="press-quotes__content">
+            <span>“A backpack that will help you travel </span><span>without losing touch with your everyday tech life.”</span>
+          </p>
+        </div>
+        <div class="press-quotes__slide">
+          <p class="press-quotes__content">
+            "The Swiss Army Knife of Rucksacks."
+          </p>
+        </div>
+        <div class="press-quotes__slide">
+          <p class="press-quotes__content">
+            "Designed for the frequent traveller."
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="press-quotes__bottom">
+    <div class="wrapper text-center">
+      <ul class="press-quotes__nav">
+        {% assign logos = 'Inc., GadgetFlow, GADGETTE, USA TODAY' | split: ', ' %}
+        {% for logo in logos %}
+          <li class="press-quotes__nav__item{% if forloop.index == 1 %} active{% endif %}">
+            <a href="#" class="press-quotes__nav__link" data-index="{{ forloop.index | minus: 1 }}">
+              <span class="press-quotes__nav__logos logos--press-quote">
+                <span class="press-quotes__nav__logo logo logo--{{ logo | handle }}" title="{{ logo }}"></span>
+                <span class="press-quotes__nav__logo--grey logo logo--{{ logo | handle }}--grey" title="{{ logo }}"></span>
+              </span>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+{% schema %}
+{
+  "name": "Press Quotes",
+  "class": "section-press-quotes",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "See what the press is saying about Solgaard"
+    }
+	],
+	"blocks": [
+  ],
+	"presets": [
+    {
+      "name": "Press Quotes",
+      "category": "Text"
+    }
+  ]
+}
+{% endschema %}
+
+
+{% stylesheet 'scss' %}
+{% endstylesheet %}
+
+
+{% javascript %}
+{% endjavascript %}

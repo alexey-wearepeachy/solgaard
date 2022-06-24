@@ -1,0 +1,74 @@
+{%- assign image_height = 'use_screen_one_third' -%}
+{%- assign text_color = 'homepage--white' -%}
+{%- assign overlay_opacity = 0 -%}
+
+{%- if section_id == blank -%}
+  {%- assign section_id = section.id -%}
+{%- endif -%}
+
+{%- if parallax == blank -%}
+  {%- assign parallax = true -%}
+{%- endif -%}
+
+{%- if collection_image == blank -%}
+  {%- assign collection_image = collection.image -%}
+{%- endif -%}
+
+{%- if collection_title == blank -%}
+  {%- assign collection_title = collection.title -%}
+{%- endif -%}
+
+{%- assign img_url = collection_image.src | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+<section
+ class="section-collection-banner"
+ data-section-id="{{ section_id }}"
+ data-section-type="parallax">
+  <div
+   class="homepage-image-js homepage-image fade-in-child preventOverflow {{ text_color }} {{ image_height }}"
+   id="FeaturedImage-{{ section_id }}"
+   {% if parallax %}
+     data-parallax-src="{{ collection_image | img_url: '18x' }}"
+     data-src="{{ img_url }}"
+     data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048, 2450, 2700, 3000, 3350, 3750, 4100, 4480]"
+     data-aspectratio="{{ collection_image.aspect_ratio }}"
+     data-sizes="auto"
+     style="background-image: url('{{ collection_image | img_url: '1x1' }}');"
+   {% endif %}>
+
+    <div class="content--centered">
+      <div class="text-center preventOverflowContent">
+        {%- unless collection.handle == 'climate-combat' -%}
+          <h1 class="title--flex">{{ collection_title }}</h1>
+        {%- endunless -%}
+      </div>
+    </div>
+
+    <div class="image-overlay image-overlay-{{ overlay_opacity }}"></div>
+    {% if image_height == 'use_image' %}
+      <div class="homepage-image-js lazy-image" style="padding-top:{{ 1 | divided_by: collection_image.aspect_ratio | times: 100}}%; background-image: url('{{ collection_image | img_url: '1x1' }}');">
+        <img class="lazyload fade-in" {% if parallax %} style="opacity: 0;"{% endif %}
+          alt="{{ collection_image.alt | default: collection_title }}"
+          data-src="{{ img_url }}"
+          data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048, 2450, 2700, 3000, 3350, 3750, 4100, 4480]"
+          data-aspectratio="{{ collection_image.aspect_ratio }}"
+          data-parent-fit="cover"
+          data-sizes="auto"/>
+      </div>
+    {% endif %}
+
+    {% if parallax == false and image_height != 'use_image' %}
+      <div class="background-size-cover lazyload" data-bgset="{% include 'bgset', image: collection_image %}"></div>
+    {% endif %}
+
+    <noscript>
+      <img src="{{ collection_image | img_url: '1440x' }}" alt="{{ collection_image.alt | default: collection_title }}" class="responsive-wide-image"/>
+    </noscript>
+  </div>
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", event => {
+    document.querySelectorAll('div.homepage-image-js img').forEach(el => el.setAttribute('alt', '{{ collection_image.alt | default: collection_title }}'))
+  });
+</script>

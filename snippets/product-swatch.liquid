@@ -1,0 +1,185 @@
+{%- liquid 
+  comment
+    https://solgaard-design.myshopify.com/admin/bulk?resource_name=Product&order=title+asc&edit=metafields.color.special,metafields.color.hidden
+  endcomment
+
+  assign option_key = 'option' | append: forloop.index
+  if option.name == 'Color'
+    assign special_colors = product.metafields.color.special | split: ', '
+    assign special_colors = ''
+    assign limited_colors = product.metafields.color.limited | split: ', '
+    assign hidden_colors = product.metafields.color.hidden | split: ', '
+  endif
+
+  assign suitcase_selector = false
+  if product.type == 'Suitcase' and option.name == 'Size'
+    assign suitcase_selector = true
+  endif
+  if product.tags contains 'Suitcase' and option.name == 'Size'
+    assign suitcase_selector = true
+  endif
+  assign backpack_selector = false
+  if product.type == 'backpack' and option.name == 'Size'
+    assign backpack_selector = true
+  endif
+-%}
+
+<div class="swatch-wrapper swatch-wrapper-{{ section_id }} swatch-wrapper--{{ option.name | handle }}{% if suitcase_selector %} swatch-wrapper--suitcase{% endif %}{% if option.name == 'Color' and special_colors != blank %} swatch-wrapper--color-multiple{% endif %}" {% if backpack_selector %}style="display: none"{% endif %}>
+  {% include 'modal-compare' with option: option %}
+
+  <div class="swatch__header">
+    <div class="swatch__label">Choose your {{ option.name }}:</div>
+
+    {%- if option.name == 'Color' -%}
+      <p class="swatch__item swatch__item--value">
+        <span data-swatch-value>{{ option.selected_value }}</span>
+      </p>
+    {%- endif -%}
+  </div>
+
+  <div class="swatch__body">
+    <div class="swatch">
+      <ul
+       class="swatch__list swatch__list--{{ option.name | handle }}"
+       data-index="option{{ forloop.index }}">
+        {%- liquid 
+          for value in option.values
+            assign show_swatch_item = true
+            if option.name == 'Color'
+              if special_colors != blank
+                for color in special_colors
+                  if color == value
+                    assign show_swatch_item = false
+                  endif
+                endfor
+              endif
+
+			  if limited_colors != blank
+                for color in limited_colors
+                  if color == value
+                    assign show_swatch_item = false
+                  endif
+                endfor
+              endif
+
+              for color in hidden_colors
+                if color == value
+                  assign show_swatch_item = false
+                endif
+              endfor
+            endif
+
+            if show_swatch_item
+              assign variant_avialable = true
+              if product.options.size == 1
+                unless product.variants[forloop.index0].available
+                  assign variant_avialable = false
+                endunless
+              endif
+
+              include 'product-swatch-item'
+            endif
+          endfor
+		-%}
+
+        {%- if option.name == 'Color' -%}
+          <!--
+          <li class="swatch__item swatch__item--value">
+            <span data-swatch-value>{{ option.selected_value }}</span>
+          </li>
+          -->
+        {%- endif -%}
+      </ul>
+    </div>
+
+    {%- if option.name == 'Color' and special_colors != blank -%}
+      {%- capture swatch_items_html -%}
+        {%- liquid
+          for value in option.values
+            assign show_swatch_item = false
+            if option.name == 'Color'
+              for color in special_colors
+                if color == value
+                  assign show_swatch_item = true
+                endif
+              endfor
+
+              for color in hidden_colors
+                if color == value
+                  assign show_swatch_item = false
+                endif
+              endfor
+            endif
+
+            if show_swatch_item
+              assign variant_avialable = true
+              if product.options.size == 1
+                unless product.variants[forloop.index0].available
+                  assign variant_avialable = false
+                endunless
+              endif
+
+              include 'product-swatch-item'
+            endif
+          endfor
+    	-%}
+      {%- endcapture -%}
+      {%- unless swatch_items_html == blank -%}
+        <div class="swatch swatch--special">
+          <div class="swatch__label hide">Shore-Tex Line</div>
+
+          <ul
+           class="swatch__list swatch__list--{{ option.name | handle }}"
+           data-index="option{{ forloop.index }}">
+            {{ swatch_items_html }}
+          </ul>
+        </div>
+      {%- endunless -%}
+    {%- endif -%}
+
+    {%- if option.name == 'Color' and limited_colors != blank -%}
+      {%- capture swatch_items_html -%}
+        {%- liquid
+          for value in option.values
+            assign show_swatch_item = false
+            if option.name == 'Color'
+              for color in limited_colors
+                if color == value
+                  assign show_swatch_item = true
+                endif
+              endfor
+
+              for color in hidden_colors
+                if color == value
+                  assign show_swatch_item = false
+                endif
+              endfor
+            endif
+
+            if show_swatch_item
+              assign variant_avialable = true
+              if product.options.size == 1
+                unless product.variants[forloop.index0].available
+                  assign variant_avialable = false
+                endunless
+              endif
+
+              include 'product-swatch-item'
+            endif
+          endfor
+        -%}
+      {%- endcapture -%}
+      {%- unless swatch_items_html == blank -%}
+        <div class="swatch swatch--special">
+          <div class="swatch__label" style="margin-bottom:0;">Limited Edition:</div>
+
+          <ul
+           class="swatch__list swatch__list--{{ option.name | handle }}"
+           data-index="option{{ forloop.index }}">
+            {{ swatch_items_html }}
+          </ul>
+        </div>
+      {%- endunless -%}
+    {%- endif -%}
+  </div>
+</div>

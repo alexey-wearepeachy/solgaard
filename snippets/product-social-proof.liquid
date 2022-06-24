@@ -1,0 +1,53 @@
+{%- assign heading = block.settings.heading -%}
+{%- assign footer_text = block.settings.footer_text -%}
+
+{%- assign image_count = 0 -%}
+{%- for i in (1..8) -%}
+  {%- capture image_key -%}image_{{ i }}{%- endcapture -%}
+  {%- assign image = block.settings[image_key] -%}
+  {%- unless image == blank -%}
+    {%- assign image_count = image_count | plus: 1 -%}
+  {%- endunless -%}
+{%- endfor -%}
+
+<div
+ class="section-social-proof social-proof inverse"
+ data-section-type="social-proof"
+ data-section-id="{{ block.id }}">
+  <div class="section-body">
+    <div class="wrapper">
+      {%- unless heading == blank -%}
+        <h2 class="section-title h1">{{ heading }}</h2>
+      {%- endunless -%}
+
+      <div class="social-proof__slider grid">
+        {%- for i in (1..8) -%}
+          {%- capture image_key -%}image_{{ i }}{%- endcapture -%}
+          {%- assign image = block.settings[image_key] -%}
+          {%- unless image == blank -%}
+            <div class="social-proof__slide grid__item medium--one-third large--one-quarter{% if forloop.index > 4 %} social-proof__slide--additional{% endif %}">
+              <div class="social-proof__box">
+                <div class="social-proof__image-wrap">
+                  {% if image != blank %}
+                    <div class="social-proof__image lazyload" data-bgset="{% include 'bgset', image: image %}"></div>
+                    <noscript>
+                      <div class="social-proof__image" style="background-image: url('{{ img_object | img_url: '300x' }}');"></div>
+                    </noscript>
+                  {% else %}
+                    <div class="social-proof__image"></div>
+                  {% endif %}
+                </div>
+
+                <span class="social-proof__icon icon icon-instagram" aria-hidden="true"></span>
+              </div>
+            </div>
+          {%- endunless -%}
+        {%- endfor -%}
+      </div>
+
+      {%- unless footer_text == blank -%}
+        <div class="social-proof__footer rte text-center">{{ footer_text }}</div>
+      {%- endunless -%}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+{%- assign bg_color = block.settings.bg_color -%}
+{%- assign video_html = block.settings.video_html -%}
+
+<section class="section-video">
+  <div
+   class="section-body text-center"
+   style="background-color:{{bg_color}};">
+    <div class="wrapper">
+      <div class="youtube-wrapper">{{ video_html }}</div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,16 @@
+<div
+ class="plastic-pulled{% unless size == blank %} plastic-pulled--{{ size }}{% endunless %}"
+ data-aos=""
+ data-aos-easing="linear"
+ data-aos-duration="400"
+ data-aos-delay="200">
+  <div class="plastic-pulled__bar">
+    <div class="plastic-pulled__bar__background"></div>
+    <div class="plastic-pulled__bar__foreground" style="width:75%"></div>
+
+    {%- unless size == 'small' -%}
+      <div class="plastic-pulled__bar__label plastic-pulled__bar__label--from">0</div>
+      <div class="plastic-pulled__bar__label plastic-pulled__bar__label--to">100,000</div>
+    {%- endunless -%}
+  </div>
+</div>

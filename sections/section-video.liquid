@@ -1,0 +1,114 @@
+{%- liquid
+  assign full_width = section.settings.full_width
+  assign bg_color = section.settings.bg_color
+  assign image = section.settings.image
+  assign video = section.settings.video
+-%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+   {%- unless bg_color == blank -%}
+     background-color:{{ bg_color  }};
+   {%- endunless -%}
+  }
+</style>
+
+{%- capture video_content -%}
+  {%- unless video == blank -%}
+    {% capture video_mp4 %}{{ video }}.mp4{% endcapture %}
+    {% capture video_webm %}{{ video }}.webm{% endcapture %}
+    {% capture video_ogv %}{{ video }}.ogv{% endcapture %}
+    <div class="video-wrapper">
+      <video autoplay loop muted playsinline
+      {% unless image == blank %}
+        poster="{{ image | img_url: '2000x' }}"
+      {% endunless %}>
+        <source src="{{ video_mp4 | file_url }}" type="video/mp4">
+        <source src="{{ video_webm | file_url }}" type="video/webm">
+        <source src="{{ video_ogv | file_url }}" type="video/ogg">
+      </video>
+    </div>
+  {%- else -%}
+    {%- unless image == blank -%}
+      {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+      {%- capture image_html -%}
+        <div
+         class="lazy-image"
+         style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;">
+          <img class="lazyload fade-in"
+            data-src="{{ img_url }}"
+            data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+            data-aspectratio="{{  image.aspect_ratio }}"
+            data-parent-fit="cover"
+            data-sizes="auto"/>
+        </div>
+        <noscript>
+          <img src="{{ image | img_url: '1296x' }}" alt="{{ image.alt | default: title }}"/>
+        </noscript>
+      {%- endcapture -%}
+      <div class="image-wrapper">
+        {{ image_html }}
+      </div>
+    {%- else -%}
+      <div class="video-wrapper">
+        <div class="video--placeholder"></div>
+      </div>
+    {%- endunless -%}
+  {%- endunless -%}
+{%- endcapture -%}
+
+{%- if full_width -%}
+  {{ video_content }}
+{%- else -%}
+  <div class="section-body text-center">
+    <div class="wrapper">
+      {{ video_content }}
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+  {
+    "name": "Video",
+    "tag": "section",
+    "class": "section-video",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Layout"
+      },
+      {
+        "type": "checkbox",
+        "id": "full_width",
+        "label": "Full width?"
+      },
+      {
+        "type": "color",
+        "id": "bg_color",
+        "label": "Background color"
+      },
+      {
+        "type": "header",
+        "content": "Content"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image (video placeholder)",
+        "info": "1024 x 1024px .jpg recommended"
+      },
+      {
+        "type": "text",
+        "id": "video",
+        "label": "Video",
+        "info": "Enter video name without extension. Please ensure all .mp4, .ogv, .webm are uploaded to Files."
+      }
+    ],
+    "presets": [
+      {
+        "name": "Video",
+        "category": "video"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,536 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Pipeline",
+    "theme_author": "Groupthought",
+    "theme_version": "4.2",
+    "theme_documentation_url": "http:\/\/help.groupthought.com\/",
+    "theme_support_email": "help@groupthought.com"
+  },
+  {
+    "name": "Color",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Top bar"
+      },
+      {
+        "type": "color",
+        "id": "color_account_bg",
+        "label": "Background",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "color_account_text",
+        "label": "Text",
+        "default": "#000000"
+      },
+      {
+        "type": "header",
+        "content": "Header"
+      },
+      {
+        "type": "color",
+        "id": "color_header_bg",
+        "label": "Background",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "color_header_text",
+        "label": "Text",
+        "default": "#333333"
+      },
+      {
+        "type": "header",
+        "content": "General"
+      },
+      {
+        "type": "color",
+        "id": "color_body_bg",
+        "label": "Body background",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "color_body_text",
+        "label": "Body text",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "id": "color_primary",
+        "label": "Link color",
+        "info": "For text links and primary buttons.",
+        "default": "#333333"
+      },
+      {
+        "type": "color",
+        "id": "color_splash",
+        "label": "Accent color",
+        "info": "A bright color for highlighting elements.",
+        "default": "#1f9bde"
+      },
+      {
+        "type": "color",
+        "id": "color_border",
+        "label": "Border color",
+        "default": "#cccccc"
+      },
+      {
+        "type": "header",
+        "content": "Home page"
+      },
+      {
+        "type": "color",
+        "id": "homepage_background_light",
+        "label": "Light background",
+        "default": "#f7f7f7"
+      },
+      {
+        "type": "color",
+        "id": "homepage_background_dark",
+        "label": "Dark background",
+        "default": "#2e3438"
+      },
+      {
+        "type": "header",
+        "content": "Product page"
+      },
+      {
+        "type": "color",
+        "id": "product_background_color",
+        "label": "Background color",
+        "default": "#FFFFFF",
+        "info": "Choose the background color used in isolated product photos, usually white."
+      },
+      {
+        "type": "color",
+        "id": "product_slideshow_arrows",
+        "label": "Product slideshow arrows",
+        "default": "#cccccc"
+      },
+      {
+        "type": "header",
+        "content": "Footer"
+      },
+      {
+        "type": "color",
+        "id": "color_footer_bg",
+        "label": "Background",
+        "default": "#f2f2f2"
+      },
+      {
+        "type": "color",
+        "id": "color_footer_text",
+        "label": "Text",
+        "default": "#333333"
+      },
+      {
+        "type": "color",
+        "id": "color_footer_social_link",
+        "label": "Icons",
+        "default": "#333333"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Headings"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_header_font",
+        "label": "Font",
+        "default": "rubik_n5"
+      },
+      {
+        "type": "range",
+        "id": "type_heading_size",
+        "min": 75,
+        "max": 125,
+        "step": 5,
+        "unit": "%",
+        "label": "Font size",
+        "default": 100
+      },
+      {
+        "type": "checkbox",
+        "id": "font_title_capitalize",
+        "label": "Capitalize headings"
+      },
+      {
+        "type": "header",
+        "content": "Subheadings and buttons"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_accent_font",
+        "label": "Font",
+        "default": "rubik_n5"
+      },
+      {
+        "type": "range",
+        "id": "type_accent_size",
+        "min": 75,
+        "max": 125,
+        "step": 5,
+        "unit": "%",
+        "label": "Font size",
+        "default": 100
+      },
+      {
+        "type": "header",
+        "content": "Body text"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_base_font",
+        "label": "Font",
+        "default": "rubik_n4"
+      },
+      {
+        "type": "range",
+        "id": "type_body_size",
+        "min": 75,
+        "max": 125,
+        "step": 5,
+        "unit": "%",
+        "label": "Font size",
+        "default": 100
+      }
+    ]
+  },
+  {
+    "name": "Product",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "product_breadcrumbs",
+        "label": "Show breadcrumbs",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "product_show_quantity",
+        "label": "Show quantity selection",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "product_enable_payment_button",
+        "label": "Show dynamic checkout button",
+        "info": "Lets customers check out directly using a familiar payment method. [Learn More](https:\/\/help.shopify.com\/manual\/using-themes\/change-the-layout\/dynamic-checkout)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "product_zoom_enable",
+        "label": "Enable image zoom",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Optional sizing popup"
+      },
+      {
+        "type": "page",
+        "id": "product_info_page",
+        "label": "Select page",
+        "info": "This popup will show on every product."
+      },
+      {
+        "type": "textarea",
+        "id": "topseller_products",
+        "label": "Topseller Product",
+        "info": "Enter product handle. One handle per line"
+      }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "select",
+        "id": "cart_type",
+        "label": "Cart type",
+        "options": [
+          {
+            "value": "modal",
+            "label": "Modal"
+          },
+          {
+            "value": "page",
+            "label": "Page"
+          }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_show_on_click",
+        "default": true,
+        "label": "Show modal when item is added"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_vendor_enable",
+        "label": "Show product vendor"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_notes_enable",
+        "label": "Show cart notes"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_quantity",
+        "label": "Show quantity selectors",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_show_additional_buttons",
+        "label": "Show additional checkout options",
+        "info": "Apple Pay, PayPal express, etc",
+        "default": false
+      },
+      {
+        "type": "url",
+        "id": "cart_continue_browsing",
+        "label": "Empty cart link",
+        "info": "Continue browsing link for the empty cart"
+      }
+    ]
+  },
+  {
+    "name": "Product grid",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Product layout"
+      },
+      {
+        "type": "paragraph",
+        "content": "Control how products look when displayed side-by-side in collections and groups of related products."
+      },
+      {
+        "type": "checkbox",
+        "label": "Show second image on hover",
+        "id": "image_hover_enable",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Image auto-height"
+      },
+      {
+        "type": "paragraph",
+        "content": "Fit unevenly sized images into square containers."
+      },
+      {
+        "type": "checkbox",
+        "label": "Enable image auto-height",
+        "id": "image_autoheight_enable",
+        "default": false
+      },
+      {
+        "type": "header",
+        "content": "Product tags"
+      },
+      {
+        "type": "checkbox",
+        "label": "Show sold out tags",
+        "id": "tag_sellout",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "label": "Show sale tags",
+        "id": "tag_sale",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "label": "Show new product tags",
+        "id": "tag_new",
+        "default": false
+      },
+      {
+        "type": "range",
+        "id": "tag_new_limit",
+        "min": 0,
+        "max": 90,
+        "step": 2,
+        "label": "Products show new tag for",
+        "default": 14,
+        "info": "Days"
+      }
+    ]
+  },
+  {
+    "name": "Social",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Accounts"
+      },
+      {
+        "type": "text",
+        "id": "social_twitter_link",
+        "label": "Twitter",
+        "info": "https:\/\/twitter.com\/shopify"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook_link",
+        "label": "Facebook",
+        "info": "https:\/\/facebook.com\/shopify"
+      },
+      {
+        "type": "text",
+        "id": "social_instagram_link",
+        "label": "Instagram",
+        "info": "https:\/\/instagram.com\/shopify"
+      },
+      {
+        "type": "text",
+        "id": "social_pinterest_link",
+        "label": "Pinterest",
+        "info": "https:\/\/pinterest.com\/shopify"
+      },
+      {
+        "type": "text",
+        "id": "social_google_link",
+        "label": "Google Plus",
+        "info": "https:\/\/plus.google.com\/+shopify"
+      },
+      {
+        "type": "text",
+        "id": "social_youtube_link",
+        "label": "Youtube",
+        "info": "https:\/\/www.youtube.com\/shopify"
+      },
+      {
+        "type": "text",
+        "id": "social_vimeo_link",
+        "label": "Vimeo",
+        "info": "https:\/\/vimeo.com\/shopify"
+      },
+      {
+        "type": "text",
+        "id": "social_tumblr_link",
+        "label": "Tumblr",
+        "info": "http:\/\/shopify.tumblr.com"
+      },
+      {
+        "type": "text",
+        "id": "social_fancy_link",
+        "label": "Fancy",
+        "info": "http:\/\/fancy.com\/shopify"
+      },
+      {
+        "type": "header",
+        "content": "Sharing"
+      },
+      {
+        "type": "checkbox",
+        "id": "product_social_enable",
+        "label": "Enable product sharing"
+      },
+      {
+        "type": "checkbox",
+        "id": "share_enable_facebook",
+        "label": "Share on Facebook"
+      },
+      {
+        "type": "checkbox",
+        "id": "share_enable_pinterest",
+        "label": "Pin on Pinterest"
+      },
+      {
+        "type": "checkbox",
+        "id": "share_enable_google",
+        "label": "+1 on Google Plus"
+      },
+      {
+        "type": "checkbox",
+        "id": "share_enable_twitter",
+        "label": "Tweet on Twitter"
+      },
+      {
+        "type": "text",
+        "id": "twittercard_handle",
+        "label": "Twitter handle",
+        "info": "E.g. @Shopify. Required for Twitter cards."
+      },
+      {
+        "type": "header",
+        "content": "Share Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "social_home_image",
+        "label": "Homepage share image"
+      }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon image",
+        "info": "Will be scaled down to 32 x 32px"
+      }
+    ]
+  },
+  {
+    "name": "Free Product",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable_free_product",
+        "label": "Enable free product?",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "free_product_variant_id",
+        "label": "Variant ID",
+        "default": "37591051501741"
+      }
+    ]
+  },
+  {
+    "name": "OTW BUNDLE SETTINGS",
+    "settings": [
+      {
+        "type": "text",
+        "id": "otw_bundle_discount",
+        "label": "Discount code",
+        "default": "OTWBUNDLENEW"
+      },
+      {
+        "type": "range",
+        "id": "otw_bundle_discount_value",
+        "min": 1,
+        "max": 100,
+        "step": 1,
+        "unit": "%",
+        "label": "Discount code value",
+        "default": 10
+      },
+      {
+        "type": "text",
+        "id": "otw_bundle_variants",
+        "label": "Product variants for discount",
+        "info": "Format: 1242142142141, 1242142142141, 12421421421421, ..."
+      }
+    ]
+  }
+]

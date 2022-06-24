@@ -1,0 +1,54 @@
+<div class="lp--section-video__inner _anim-items _anim-no-hide" style="background-color: {{ bg_color }}">
+    {% unless title == blank %}
+        <h3 class="lp--section-video__text">{{ title }}</h3>
+    {% endunless %}
+    <div class="lp--section-video__content">
+        {%- unless video == blank -%}
+            {% capture video_mob_mp4 %}{{ video_mob }}.mp4{% endcapture %}
+            {% capture video_mob_webm %}{{ video_mob }}.webm{% endcapture %}
+            {% capture video_mob_ogv %}{{ video_mob }}.ogv{% endcapture %}
+            <video class="lp--section-video__video lp--section-video__video-mob {% if full_width %}lp--section-video__video_full{% endif %}" autoplay loop muted playsinline
+            {% unless image == blank %}
+                poster="{{ image | img_url: 'master' }}"
+            {% endunless %}>
+                <source src="{{ video_mob_mp4 | file_url }}" type="video/mp4">
+                <source src="{{ video_mob_webm | file_url }}" type="video/webm">
+                <source src="{{ video_mob_ogv | file_url }}" type="video/ogg">
+            </video>
+            {%- else -%}
+            {%- unless image == blank -%}
+                <div class="lp--section-video__image-wrapper lp--section-video__video-mob">
+                    <picture>
+                        <source media="(max-width: 766px)" srcset="{{ image_mob | img_url: 'master' }}">
+                        <source media="(min-width: 767px)" srcset="{{ image | img_url: 'master' }}">
+                        <img src="{{ image | img_url: 'master' }}" alt="{{ image.alt | default: title }}"/>
+                    </picture>
+                </div>
+            {%- endunless -%}
+        {%- endunless -%}
+        {%- unless video == blank -%}
+            {% capture video_mp4 %}{{ video }}.mp4{% endcapture %}
+            {% capture video_webm %}{{ video }}.webm{% endcapture %}
+            {% capture video_ogv %}{{ video }}.ogv{% endcapture %}
+            <video class="lp--section-video__video lp--section-video__video-desktop {% if full_width %}lp--section-video__video_full{% endif %}" autoplay loop muted playsinline
+            {% unless image == blank %}
+                poster="{{ image | img_url: 'master' }}"
+            {% endunless %}>
+                <source src="{{ video_mp4 | file_url }}" type="video/mp4">
+                <source src="{{ video_webm | file_url }}" type="video/webm">
+                <source src="{{ video_ogv | file_url }}" type="video/ogg">
+            </video>
+            {%- else -%}
+            {%- unless image == blank -%}
+                <div class="lp--section-video__image-wrapper lp--section-video__video-desktop">
+                    <picture>
+                        <source media="(max-width: 766px)" srcset="{{ image_mob | img_url: 'master' }}">
+                        <source media="(min-width: 767px)" srcset="{{ image | img_url: 'master' }}">
+                        <img src="{{ image | img_url: 'master' }}" alt="{{ image.alt | default: title }}"/>
+                    </picture>
+                </div>
+            {%- endunless -%}
+        {%- endunless -%}
+   </div>
+</div>
+

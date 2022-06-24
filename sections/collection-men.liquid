@@ -1,0 +1,60 @@
+{% include 'collection-landing' %}
+
+{% schema %}
+{
+  "name": "Collection landing page",
+  "settings": [
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "default": "btn btn--large btn--ice uppercase",
+      "options": [
+        { "value": "btn btn--large btn--sky uppercase", "label": "Sky"},
+        { "value": "btn btn--large btn--sea uppercase", "label": "Sea"},
+        { "value": "btn btn--large btn--ice uppercase", "label": "Ice"},
+        { "value": "btn btn--large btn--cloud uppercase", "label": "Cloud"},
+        { "value": "btn btn--large btn--night uppercase", "label": "Night"},
+        { "value": "btn btn--large btn--sunset uppercase", "label": "Sunset"},
+        { "value": "btn btn--large btn--clear btn--square uppercase", "label": "Transparent square"}
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "block",
+      "name": "Block",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "1080 x 1229px .jpg recommended"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Headling"
+        },
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "Content"
+        },
+        {
+          "type": "text",
+          "id": "btn_label",
+          "label": "Button label",
+          "info": "Optional"
+        },
+        {
+          "type": "url",
+          "id": "btn_link",
+          "label": "Button link",
+          "info": "Optional"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

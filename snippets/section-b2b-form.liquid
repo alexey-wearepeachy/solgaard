@@ -1,0 +1,99 @@
+{%- liquid
+  assign form_html = block.settings.form_html
+  assign review_text = block.settings.review_text
+  assign review_image = block.settings.review_image
+  assign bottom_banner_bottle_amount = block.settings.bottom_banner_bottle_amount
+  assign bottom_banner_bottle_saved_text = block.settings.bottom_banner_bottle_saved_text
+  assign bottom_banner_link_url = block.settings.bottom_banner_link_url
+  assign bottom_banner_link_text = block.settings.bottom_banner_link_text
+-%}
+
+
+<div id="Section-b2b-form" class="section-b2b-form">
+  <div class="section-body">
+    <div class="wrapper">
+      <div class="grid grid--rev">
+        <div class="grid__item large--one-half">
+          {%- unless form_html == blank-%}
+            <div class="html-wrapper">{{ form_html }}</div>
+          {%- endunless -%}
+
+          <div class="b2b__review text-center">
+            {%- unless review_image == blank -%}
+              <div class="b2b__review__image" style="width:100px;">
+                {% include 'lazy-image' with image: review_image %}
+              </div>
+            {%- endunless -%}
+
+            {%- unless review_text == blank -%}
+              <p class="b2b__review__text">
+                <strong>{{ review_text }}</strong>
+              </p>
+            {%- endunless -%}
+          </div>
+        </div>
+
+        <div class="grid__item large--one-half">
+          <ul class="b2b__features">
+            {%- for i in (1..3) -%}
+              {%- capture feature_richtext_key -%}feature_richtext_{{ i }}{%- endcapture -%}
+              {%- capture feature_image_key -%}feature_image_{{ i }}{%- endcapture -%}
+
+              {%- liquid
+                assign feature_richtext = block.settings[feature_richtext_key]
+                assign feature_image = block.settings[feature_image_key]
+              -%}
+
+              {%- unless feature_richtext == blank -%}
+                <li
+                 class="b2b__features__item"
+                 data-aos="fade-up"
+                 data-aos-easing="linear"
+                 data-aos-duration="400"
+                 data-aos-delay="0">
+                  {%- unless feature_image == blank -%}
+                    <div class="b2b__features__image">
+                      {% include 'lazy-image' with image: feature_image %}
+                    </div>
+                  {%- endunless -%}
+                  <div class="b2b__features__text rte">{{ feature_richtext }}</div>
+                </li>
+              {%- endunless -%}
+            {%- endfor -%}
+          </ul>
+        </div>
+      </div>
+
+      <div
+       class="b2b__banner"
+       data-aos="fade-up"
+       data-aos-easing="linear"
+       data-aos-duration="400"
+       data-aos-delay="0">
+        <div class="b2b__banner__body text-center">
+          <p>
+            <span class="b2b__banner__bottle-amount h1">{{ bottom_banner_bottle_amount | escape }}</span>
+
+            {% comment %}
+            <span
+             data-aos="fade-up"
+             data-aos-easing="linear"
+             data-aos-duration="400"
+             data-aos-delay="0"
+             data-aos-id="count-up"
+             class="b2b__banner__bottle-amount h1"
+             data-count="{{ bottom_banner_bottle_amount | escape }}"
+             data-duration="2000">0</span>
+            {% endcomment %}
+
+            <span class="b2b__banner__bottle-saved-text h2--body">{{ bottom_banner_bottle_saved_text | escape }}</span>
+          </p>
+
+          <p>
+            <a href="{{ bottom_banner_link_url }}">{{ bottom_banner_link_text }}</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

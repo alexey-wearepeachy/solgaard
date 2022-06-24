@@ -1,0 +1,92 @@
+{% assign title      = section.settings.title %}
+{% assign video      = section.settings.video %}
+{% assign video_mob  = section.settings.video_mob %}
+{% assign image      = section.settings.image %}
+{% assign image_mob  = section.settings.image_mob %}
+{% assign aspect_mob = section.settings.aspect_mob %}
+{% assign aspect     = section.settings.aspect %}
+{% assign bg_color   = section.settings.bg_color %}
+{% assign full_width = section.settings.full_width %}
+
+<style>
+    #lp-third-video .lp--section-video__inner {
+        padding-bottom: {{ aspect_mob }}%;
+    }
+
+    @media (min-width: 767px) {
+        #lp-third-video .lp--section-video__inner {
+            padding-bottom: {{ aspect }}%;
+        }
+    }
+</style>
+
+<section id="lp-third-video">
+    {% render 'lp--section-video' title: title, video: video, video_mob: video_mob, image: image, image_mob: image_mob, bg_color: bg_color, full_width: full_width  %}
+</section>
+
+{% schema %}
+{
+    "name": "Third video",
+    "settings": [
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+        },
+        {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image for desktop"
+        },
+        {
+            "type": "image_picker",
+            "id": "image_mob",
+            "label": "Image for mobile"
+        },
+        {
+            "type": "text",
+            "id": "video",
+            "label": "Video for desktop",
+            "info": "Enter video name without extension. Please ensure all .mp4, .ogv, .webm are uploaded to Files."
+        },
+        {
+            "type": "text",
+            "id": "video_mob",
+            "label": "Video for mobile",
+            "info": "Enter video name without extension. Please ensure all .mp4, .ogv, .webm are uploaded to Files."
+        },
+        {
+            "type": "color",
+            "id": "bg_color",
+            "label": "Background color",
+            "default": "#181818"
+        },
+        {
+            "type": "checkbox",
+            "id": "full_width",
+            "label": "Full width?",
+            "default": true
+        },
+        {
+            "type": "number",
+            "id": "aspect_mob",
+            "label": "Height section for mobile",
+            "default": 199,
+            "info": "50 - ratio 16:9 | 100 - ratio 1:1"
+        },
+        {
+            "type": "number",
+            "id": "aspect",
+            "label": "Height section for desktop",
+            "default": 43,
+            "info": "50 - ratio 16:9 | 100 - ratio 1:1"
+        }
+    ],
+	"presets": [
+      {
+        "category": "Shoreline LP Third video",
+        "name": "Shoreline LP Third video"
+      }
+    ]
+}
+{% endschema %}

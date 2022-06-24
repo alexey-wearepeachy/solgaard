@@ -1,0 +1,285 @@
+{% assign section_icon              = section.settings.section_icon %}
+{% assign section_icon_bg_vector    = section.settings.section_icon_bg_vector %}
+{% assign section_title             = section.settings.section_title %}
+{% assign section_text              = section.settings.section_text %}
+{% assign slider_title              = section.settings.slider_title %}
+{% assign section_statistic_capture = section.settings.section_statistic_capture %}
+{% assign statistic_capture_color   = section.settings.statistic_capture_color %}
+{% assign statistic_capture_weight  = section.settings.statistic_capture_weight %}
+{% assign slider_blocks             = section.blocks | where: 'type', 'slider_blocks' %}
+{% assign statistic_blocks          = section.blocks | where: 'type', 'statistic_blocks' %}
+
+<section id="impact-materials">
+    <div class="impact-materials__container">
+        <div class="impact-materials__inner">
+            <div class="impact-materials__icon-block">
+                {% if section_icon != blank %}
+                    <div class="impact-materials__icon" {% if section_icon_bg_vector != blank %}style="background-image: url('{{ section_icon_bg_vector | img_url: 'master' }}')"{% endif %}>
+                        <img src="{{ section_icon | img_url: 'master' }}" alt="{{ section_icon.alt | escape }}">
+                    </div>
+                {% endif %}
+            </div>
+            <div class="impact-materials__main-block">
+                {% if section_title != blank %}
+                    <h3 class="impact-materials__main-title">{{ section_title }}</h3>
+                {% endif %}
+                {% if section_text != blank %}
+                    <p class="impact-materials__main-text">{{ section_text }}</p>
+                {% endif %}
+                <div class="impact-materials__main-slider">
+                    {% if slider_title != blank %}
+                        <p class="main-slider__title">{{ slider_title }}</p>
+                    {% endif %}
+                    <div class="swiper materials-main-slider">
+                        <div class="swiper-wrapper materials-main-slider__wrapper">
+                            {% for block in slider_blocks %}
+                                {% assign slide_img      = block.settings.slide_img %}
+                                {% assign slide_title    = block.settings.slide_title %}
+                                {% assign slide_subtitle = block.settings.slide_subtitle %}
+                                {% assign slide_text     = block.settings.slide_text %}
+
+                                <div class="swiper-slide materials-main-slider__slide">
+                                    <div class="slide__img">
+                                        {% if slide_img != blank %}
+                                            <img src="{{ slide_img | img_url: 'master' }}" alt="{{ slide_img.alt | escape }}">
+                                        {% endif %}
+                                    </div>
+                                    <div class="slide__info">
+                                        {% if slide_title != blank %}
+                                            <h4 class="slide__info-title">{{ slide_title }}</h4>
+                                        {% endif %}
+                                        {% if slide_subtitle != blank %}
+                                            <p class="slide__info-subtitle">{{ slide_subtitle }}</p>
+                                        {% endif %}
+
+                                        <button class="slide-more-info-trigger">
+                                            Learn More
+                                            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M9.66225 6.24014H6.01727V9.98779H4.46002V6.24014H0.832157V4.68289H4.46002V0.918126H6.01727V4.68289H9.66225V6.24014Z" fill="#EE7D30"/>
+                                            </svg>
+                                        </button>
+
+                                        <div class="slide__more-info-block">
+                                            {% if slide_title != blank %}
+                                                <h4 class="slide__more-info-block-title">{{ slide_title }}</h4>
+                                            {% endif %}
+                                            {% if slide_text != blank %}
+                                                <div class="slide__more-info-block-text">{{ slide_text }}</div>
+                                            {% endif %}
+
+                                            <button class="slide-more-info-close">
+                                                <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M0.234 9H2.502L3.834 6.948C4.032 6.624 4.212 6.318 4.392 5.994H4.446C4.59 6.264 4.752 6.57 4.968 6.93L6.336 9H8.676L5.544 4.572L8.514 0.377999H6.264L5.022 2.358C4.842 2.646 4.68 2.934 4.536 3.222H4.482C4.338 2.97 4.176 2.628 3.96 2.304L2.682 0.377999H0.414L3.384 4.626L0.234 9Z" fill="#EE7D30"/>
+                                                </svg>
+                                                Close
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="materials-main-slider-pagination"></div>
+                    </div>
+                </div>
+
+                <div class="impact-materials__main-statistic-blocks">
+                    {% for block in statistic_blocks %}
+                        {% assign block_bg_color    = block.settings.block_bg_color %}
+                        {% assign block_text_color  = block.settings.block_text_color %}
+                        {% assign block_title       = block.settings.block_title %}
+                        {% assign block_title_color = block.settings.block_title_color %}
+                        {% assign block_number      = block.settings.block_number %}
+                        {% assign block_text        = block.settings.block_text %}
+
+                        <div class="statistic-block _impact-anim-items _impact-anim-no-hide" {% if block_bg_color != blank %}style="background-color: {{ block_bg_color }}"{% endif %}>
+                            {% if block_title != blank %}
+                                <div class="statistic-block__title" {% if block_title_color != blank %}style="color: {{ block_title_color }}"{% endif %}>
+                                    {{ block_title }}
+                                </div>
+                            {% endif %}
+                            <div class="statistic-block__info">
+                                {% if block_number != blank %}
+                                    <div class="info-number" {% if block_text_color != blank %}style="color: {{ block_text_color }}"{% endif %}>{{ block_number }}</div>
+                                {% endif %}
+                                {% if block_text != blank %}
+                                    <div class="info-text" {% if block_text_color != blank %}style="color: {{ block_text_color }}"{% endif %}>{{ block_text }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                    {% if section_statistic_capture != blank %}
+                        <p class="statistic-blocks__capture {% if section.settings.statistic_capture_weight == "lighter" %}lighter{% endif %} {% if section.settings.statistic_capture_weight == "normal" %}normal{% endif %} {% if section.settings.statistic_capture_weight == "bold" %}bold{% endif %}" {% if statistic_capture_color != blank %}style="color: {{ statistic_capture_color }}"{% endif %}>{{ section_statistic_capture }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let swiper = new Swiper(".materials-main-slider", {
+            slidesPerView: 1.05,
+            spaceBetween: 16,
+            pagination: {
+                el: ".materials-main-slider-pagination",
+                clickable: true,
+            },
+            breakpoints: {
+                350: {
+                    slidesPerView: 1.2,
+                    spaceBetween: 16,
+                },
+                550: {
+                    slidesPerView: "auto",
+                    spaceBetween: 38,
+                }
+            }
+        });
+
+        $('.slide-more-info-trigger').click(function () {
+            $(this).next('.slide__more-info-block').fadeIn();
+        })
+
+        $('.slide-more-info-close').click(function () {
+            $(this).closest('.slide__more-info-block').fadeOut();
+        })
+    })
+</script>
+
+{% schema %}
+{
+    "name": "Materials Section",
+    "settings": [
+        {
+            "type": "image_picker",
+            "id": "section_icon",
+            "label": "Section icon"
+        },
+        {
+            "type": "image_picker",
+            "id": "section_icon_bg_vector",
+            "label": "Section icon background vector"
+        },
+        {
+            "type": "text",
+            "id": "section_title",
+            "label": "Section title",
+            "default": "Materials"
+        },
+        {
+            "type": "textarea",
+            "id": "section_text",
+            "label": "Section text"
+        },
+        {
+            "type": "text",
+            "id": "slider_title",
+            "label": "Slider title"
+        },
+        {
+            "type": "textarea",
+            "id": "section_statistic_capture",
+            "label": "Section statistic capture"
+        },
+        {
+            "type": "color",
+            "id": "statistic_capture_color",
+            "label": "Statistic capture color",
+            "default": "#6a6a6a"
+        },
+        {
+            "type": "select",
+            "id": "statistic_capture_weight",
+            "label": "Statistic capture font-weight",
+            "options": [
+                {
+                    "value": "lighter",
+                    "label": "lighter"
+                },
+                {
+                    "value": "normal",
+                    "label": "normal"
+                },
+                {
+                    "value": "bold",
+                    "label": "bold"
+                }
+            ],
+            "default": "normal"
+        }
+    ],
+    "blocks": [
+        {
+            "type": "statistic_blocks",
+            "name": "Statistic block",
+            "settings": [
+                {
+                    "type": "color",
+                    "id": "block_bg_color",
+                    "label": "Background color"
+                },
+                {
+                    "type": "color",
+                    "id": "block_text_color",
+                    "label": "Text color",
+                    "default": "#000000"
+                },
+                {
+                    "type": "text",
+                    "id": "block_title",
+                    "label": "Block title"
+                },
+                {
+                    "type": "color",
+                    "id": "block_title_color",
+                    "label": "Title color",
+                    "default": "#F19C62"
+                },
+                {
+                    "type": "text",
+                    "id": "block_number",
+                    "label": "Block statistic"
+                },
+                {
+                    "type": "textarea",
+                    "id": "block_text",
+                    "label": "Block text"
+                }
+            ]
+        },
+        {
+            "type": "slider_blocks",
+            "name": "Slide",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "slide_img",
+                    "label": "Slide image"
+                },
+                {
+                    "type": "text",
+                    "id": "slide_title",
+                    "label": "Slide title"
+                },
+                {
+                    "type": "textarea",
+                    "id": "slide_subtitle",
+                    "label": "Slide subtitle"
+                },
+                {
+                    "type": "textarea",
+                    "id": "slide_text",
+                    "label": "Slide text"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "category": "Impact LP Materials",
+            "name": "Impact LP Materials"
+        }
+    ]
+}
+{% endschema %}

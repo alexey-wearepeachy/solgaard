@@ -1,0 +1,103 @@
+{% assign bg_img   = section.settings.bg_img %}
+{% assign bg_video = section.settings.bg_video %}
+{% assign bg_color = section.settings.bg_color %}
+{% assign hide     = section.settings.hide %}
+{% assign blocks   = section.blocks %}
+
+<style>
+    #lp-otw--product-intro .lp-otw--product-intro__media {
+        display: block;
+    }
+
+    @media(min-width: 767px) {
+        #lp-otw--product-intro .lp-otw--product-intro__media {
+            display: none;
+        }
+    }
+    
+</style>
+
+{% unless hide %}
+    <section id="lp-otw--product-intro" style="background-color: {{ bg_color }}">
+        {% if bg_img != blank %}
+            <div class="lp-otw--product-intro__media"><img src="{{ bg_img | img_url: 'master' }}" alt="background"></div>
+        {% elsif bg_video != blank  %}
+        <div class="lp-otw--product-intro__media"><video src="{{ bg_video }}" autoplay></video></div>
+        {% endif %}
+        <div class="lp-otw--product-intro__container">
+            <div class="lp-otw--product-intro__inner swiper">
+                <div class="lp-otw--product-intro__wrapper swiper-wrapper">
+                    {% for block in blocks %}
+                    <div class="lp-otw--product-intro__slide swiper-slide _anim-items _anim-no-hide">
+                        <div class="lp-otw--product-intro__image">
+                            <img src="{{ block.settings.image | img_url: 'master' }}" alt="{{ image.alt }}">
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endunless %}
+
+<script>
+    if(window.innerWidth < 767) {        
+        const swiper = new Swiper('.lp-otw--product-intro__inner', {
+            slidesPerView: 1.6,
+            initialSlide: 1,
+            direction: 'horizontal',
+            freeMode: true,
+            centeredSlides: true,
+            loop: true,
+
+            breakpoints: {
+                767: {
+                    slidesPerView: 2.5,
+                }
+            }
+        });
+    }
+</script>
+
+{% schema %}
+{
+    "name": "OTW product intro",
+    "settings": [
+        {
+            "type": "checkbox",
+            "id": "hide",
+            "label": "Hide section?",
+            "default": false
+        },
+        {
+            "type": "image_picker",
+            "id": "bg_img",
+            "label": "Background image"
+        },
+        {
+            "type": "text",
+            "id": "bg_video",
+            "label": "Background video link"
+        },
+        {
+            "type": "color",
+            "id": "bg_color",
+            "label": "Background color",
+            "default": "#000"
+        }
+    ],
+    "blocks": [
+        {
+            "type": "block",
+            "name": "item",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Image"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

@@ -1,0 +1,88 @@
+<style>
+    {% if section.settings.bg_image != blank %}
+        #new-lp--hero-section {
+            background-image: url("{{ section.settings.bg_image_mob | img_url: 'master' }}");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        @media (min-width: 769px) {
+            #new-lp--hero-section {
+                background-image: url("{{ section.settings.bg_image | img_url: 'master' }}");
+            }
+        }
+    {% else %}
+        #new-lp--hero-section {
+            background-color: {{ section.settings.bg_color }};
+        }
+    {% endif %}
+
+    @font-face {
+        font-family: 'CustomFontTwo';
+        src: url("{{ section.settings.font_url }}");
+        /* IE9 Compat Modes */
+        font-weight: {{ section.settings.font_weight }};
+        font-stretch: normal;
+        font-style: normal;
+    }
+
+    #new-lp--hero-section .hero-section__container .hero-section__wrapper .hero__info-block .info-block__title {
+        color: {{ section.settings.title_color }};
+        font-family: 'CustomFontTwo', 'Harmonia Sans', sans-serif;
+        font-weight: {{ section.settings.font_weight }};
+    }
+
+    #new-lp--hero-section .hero-section__container .hero-section__wrapper .hero__info-block .info-block__text {
+        color: {{ section.settings.subtitle_color }};
+    }
+
+    #new-lp--hero-section .hero-section__container .hero-section__wrapper .info-block__btn {
+        color: {{ section.settings.btn_text_color }};
+        background-color: {{ section.settings.btn_bg_color }};
+    }
+
+    #new-lp--hero-section .hero-section__container .hero-section__wrapper .info-block__btn:hover {
+        color: {{ section.settings.btn_text_color_hover }};
+        background-color: {{ section.settings.btn_bg_color_hover }};
+    }
+</style>
+
+<div id="new-lp--hero-section">
+    {% if section.settings.video_bg_link != blank %}
+        <div class="hero-section__video-bg" aria-hidden="true">
+            <video autoplay loop muted playsinline src="{{ section.settings.video_bg_link }}" class="video-bg__desk"></video>
+            <video autoplay loop muted playsinline src="{{ section.settings.video_bg_link_mob }}" class="video-bg__mob"></video>
+        </div>
+    {% endif %}
+
+    <div class="hero-section__container">
+        <div class="hero-section__wrapper">
+            <div class="hero__info-block">
+                <h2 class="info-block__title">{{ section.settings.title }}</h2>
+                <div class="info-block__text">{{ section.settings.subtitle }}</div>
+                <button class="info-block__btn">{{ section.settings.btn_text }}</button>
+            </div>
+           {% if section.settings.image != blank and section.settings.image_mob != blank %}
+            <div class="hero__img-block">
+                <picture>
+                    <source srcset="{{ section.settings.image | img_url: 'master' }}" media="(min-width: 769px)">
+                    <source srcset="{{ section.settings.image_mob | img_url: 'master' }}" media="(max-width: 768px)">
+                    <img src="{{ section.settings.image | img_url: 'master' }}" alt="{{ image.alt }}">
+                </picture>
+            </div>
+          {% endif %}
+            <button class="info-block__btn info-block__btn-mob">{{ section.settings.btn_text }}</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function (){
+        $(".info-block__btn").click(function (){
+            $('html, body').animate({
+                scrollTop: $("#new-lp--product-listing").offset().top
+            }, 1500);
+        });
+    });
+</script>

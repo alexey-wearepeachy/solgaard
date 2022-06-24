@@ -1,0 +1,167 @@
+{% assign section_icon              = section.settings.section_icon %}
+{% assign section_icon_bg_vector    = section.settings.section_icon_bg_vector %}
+{% assign section_title             = section.settings.section_title %}
+{% assign section_text              = section.settings.section_text %}
+{% assign slider_title              = section.settings.slider_title %}
+{% assign section_statistic_capture = section.settings.section_statistic_capture %}
+{% assign statistic_capture_color   = section.settings.statistic_capture_color %}
+{% assign statistic_capture_weight  = section.settings.statistic_capture_weight %}
+{% assign statistic_blocks          = section.blocks | where: 'type', 'statistic_blocks' %}
+
+<section id="impact-supply-chain">
+    <div class="impact-supply-chain__container">
+        <div class="impact-supply-chain__inner">
+            <div class="impact-supply-chain__icon-block">
+                {% if section_icon != blank %}
+                    <div class="impact-supply-chain__icon" {% if section_icon_bg_vector != blank %}style="background-image: url('{{ section_icon_bg_vector | img_url: 'master' }}')"{% endif %}>
+                        <img src="{{ section_icon | img_url: 'master' }}" alt="{{ section_icon.alt | escape }}">
+                    </div>
+                {% endif %}
+            </div>
+            <div class="impact-supply-chain__main-block">
+                {% if section_title != blank %}
+                    <h3 class="impact-supply-chain__main-title">{{ section_title }}</h3>
+                {% endif %}
+                {% if section_text != blank %}
+                    <p class="impact-supply-chain__main-text">{{ section_text }}</p>
+                {% endif %}
+
+                <div class="impact-supply-chain__main-statistic-blocks">
+                    {% for block in statistic_blocks %}
+                        {% assign block_bg_color    = block.settings.block_bg_color %}
+                        {% assign block_text_color  = block.settings.block_text_color %}
+                        {% assign block_title       = block.settings.block_title %}
+                        {% assign block_title_color = block.settings.block_title_color %}
+                        {% assign block_number      = block.settings.block_number %}
+                        {% assign block_text        = block.settings.block_text %}
+
+                        <div class="statistic-block _impact-anim-items _impact-anim-no-hide" {% if block_bg_color != blank %}style="background-color: {{ block_bg_color }}"{% endif %}>
+                            {% if block_title != blank %}
+                                <div class="statistic-block__title" {% if block_title_color != blank %}style="color: {{ block_title_color }}"{% endif %}>
+                                    {{ block_title }}
+                                </div>
+                            {% endif %}
+                            <div class="statistic-block__info">
+                                {% if block_number != blank %}
+                                    <div class="info-number" {% if block_text_color != blank %}style="color: {{ block_text_color }}"{% endif %}>{{ block_number }}</div>
+                                {% endif %}
+                                {% if block_text != blank %}
+                                    <div class="info-text" {% if block_text_color != blank %}style="color: {{ block_text_color }}"{% endif %}>{{ block_text }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                    {% if section_statistic_capture != blank %}
+                        <p class="statistic-blocks__capture {% if section.settings.statistic_capture_weight == "lighter" %}lighter{% endif %} {% if section.settings.statistic_capture_weight == "normal" %}normal{% endif %} {% if section.settings.statistic_capture_weight == "bold" %}bold{% endif %}" {% if statistic_capture_color != blank %}style="color: {{ statistic_capture_color }}"{% endif %}>{{ section_statistic_capture }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% schema %}
+{
+    "name": "Supply Chain Section",
+    "settings": [
+        {
+            "type": "image_picker",
+            "id": "section_icon",
+            "label": "Section icon"
+        },
+        {
+            "type": "image_picker",
+            "id": "section_icon_bg_vector",
+            "label": "Section icon background vector"
+        },
+        {
+            "type": "text",
+            "id": "section_title",
+            "label": "Section title",
+            "default": "Supply Chain"
+        },
+        {
+            "type": "textarea",
+            "id": "section_text",
+            "label": "Section text"
+        },
+        {
+            "type": "textarea",
+            "id": "section_statistic_capture",
+            "label": "Section statistic capture"
+        },
+        {
+            "type": "color",
+            "id": "statistic_capture_color",
+            "label": "Statistic capture color",
+            "default": "#6a6a6a"
+        },
+        {
+            "type": "select",
+            "id": "statistic_capture_weight",
+            "label": "Statistic capture font-weight",
+            "options": [
+                {
+                    "value": "lighter",
+                    "label": "lighter"
+                },
+                {
+                    "value": "normal",
+                    "label": "normal"
+                },
+                {
+                    "value": "bold",
+                    "label": "bold"
+                }
+            ],
+            "default": "normal"
+        }
+    ],
+    "blocks": [
+        {
+            "type": "statistic_blocks",
+            "name": "Statistic block",
+            "settings": [
+                {
+                    "type": "color",
+                    "id": "block_bg_color",
+                    "label": "Background color"
+                },
+                {
+                    "type": "color",
+                    "id": "block_text_color",
+                    "label": "Text color",
+                    "default": "#000000"
+                },
+                {
+                    "type": "text",
+                    "id": "block_title",
+                    "label": "Block title"
+                },
+                {
+                    "type": "color",
+                    "id": "block_title_color",
+                    "label": "Title color",
+                    "default": "#F19C62"
+                },
+                {
+                    "type": "text",
+                    "id": "block_number",
+                    "label": "Block statistic"
+                },
+                {
+                    "type": "textarea",
+                    "id": "block_text",
+                    "label": "Block text"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "category": "Impact LP Supply Chain",
+            "name": "Impact LP Supply Chain"
+        }
+    ]
+}
+{% endschema %}

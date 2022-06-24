@@ -1,0 +1,268 @@
+<footer
+ class="footer"
+ role="contentinfo"
+ data-section-id="{{ section.id }}"
+ data-section-type="footer"
+ itemscope itemtype="http://schema.org/Organization">
+
+  <div class="footer__back-to-top" footer-back-to-top>Back to top</div>
+
+  <div class="footer__body">
+    <div class="wrapper">
+      <div class="footer__primary">
+        <div class="grid-uniform">
+          {% case section.blocks.size %}
+            {% when 0 %}
+            {% when 1 %}
+              {% assign footer_column_width = 'large--one-half push--large--one-quarter' %}
+            {% when 2 %}
+              {% assign footer_column_width = 'large--one-half' %}
+            {% when 3 %}
+              {% assign footer_column_width = 'large--one-third' %}
+            {% when 4 %}
+                {% assign footer_column_width = 'large--one-quarter' %}
+            {% when 5 %}
+                {% assign footer_column_width = 'large--one-fifth' %}
+          {% endcase %}
+
+          {% for block in section.blocks %}
+            {% case block.type %}
+
+              {% when 'linklist' %}
+                {% assign linklist = linklists[block.settings.linklist] %}
+                <div class="grid__item {{ footer_column_width }} footer__block" {{ block.shopify_attributes }}>
+                  <div class="footer__block__body">
+                    {%- assign title = block.settings.title -%}
+                    {%- if title == blank -%}
+                      {%- assign title = linklist.title -%}
+                    {%- endif -%}
+                    <h5 class="footer__heading footer__block__heading">
+                      <span>{{ title }}</span>
+                      <span class="caret" aria-expanded="false"></span>
+                    </h5>
+                    <ul class="footer__nav">
+                      {% for link in linklist.links %}
+                        <li class="footer__nav__item">
+                          <a href="{{ link.url }}" class="footer__nav__link">{{ link.title }}</a>
+                        </li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+                </div>
+
+              {% when 'page' %}
+                {% assign page = pages[block.settings.page] %}
+                {% if page == blank or page.empty? %}
+                  <div class="grid__item {{ footer_column_width }} footer__block" {{ block.shopify_attributes }}>
+                    <h5 class="footer__heading">{{ shop.name }}</h5>
+                    <div class="rte">{{ 'home_page.onboarding.no_content' | t }}</div>
+                </div>
+                {% else %}
+                  <div class="grid__item {{ footer_column_width }} footer__block" {{ block.shopify_attributes }}>
+                    <h5 class="footer__heading">{{ page.title | escape }}</h5>
+                    <div class="rte">{{ page.content }}</div>
+                  </div>
+                {% endif %}
+
+              {% when 'text' %}
+                <div class="grid__item {{ footer_column_width }} footer__block" {{ block.shopify_attributes }}>
+                  <h5 class="footer__heading">{{ block.settings.title | escape }}</h5>
+                  <div class="rte">{{ block.settings.text }}</div>
+                </div>
+
+              {% when 'newsletter' %}
+                <div class="grid__item {{ footer_column_width }} footer__block" {{ block.shopify_attributes }}>
+                  <h5 class="footer__heading">{{ 'layout.footer.newsletter_title' | t }}</h5>
+                  <div class="rte">
+                    {{ block.settings.richtext }}
+                  </div>
+                  {% include 'newsletter-form' %}
+                </div>
+
+              {% when 'social' %}
+                <div class="grid__item {{ footer_column_width }} footer__block footer__block--social" {{ block.shopify_attributes }}>
+                  <div class="footer__block__body">
+                    {%- assign title = block.settings.title -%}
+                    {%- if title == blank -%}
+                      {%- assign title = 'Connect' -%}
+                    {%- endif -%}
+                    <h5 class="footer__heading">{{ title }}</h5>
+                    <div class="footer__social">
+                      {%- include 'social-icons' -%}
+                    </div>
+                  </div>
+                </div>
+
+              {% else %}
+            {% endcase %}
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="footer__secondary small--text-center">
+        <div class="grid">
+          <div class="grid__item large--one-half">
+            <div class="footer__image">
+              <div class="svg-wrapper small--hide" style="width:380px;">
+                {% include 'logo-solgaard-GFGC' -%}
+              </div>
+
+              <div class="svg-wrapper medium--hide large--hide" style="width:200px; margin:0 auto;">
+                {% include 'logo-solgaard-GFGC-mobile' -%}
+              </div>
+            </div>
+          </div>
+
+          <div class="grid__item large--one-half large--text-right">
+            <div class="footer__plastic-pulled">
+              {%- include 'plastic-pulled' with size: 'small'  -%}
+
+              <p class="plastic-pulled__text">
+                <a href="/pages/our-mission">{{ section.settings.footer_plastic_pulled_text }}</a>
+                <span class="svg-wrapper" style="display:inline-block; width:12px; vertical-align:super;">{% include 'icon-link' %}</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer__copyright small--text-center">
+        <img src="{{ 'logo-climate-change.png' | asset_img_url: '300x' }}" width="100" />
+        
+        <ul class="footer__nav footer__nav--copyright list-inline">
+          <li class="footer__nav__item">
+            <span>Copyright &copy; {{ 'now' | date: "%Y" }} {{ shop.name }}  All Rights Reserved.</span>
+          </li>
+          {%- for link in linklists[section.settings.footer_secondary_linklist].links -%}
+            <li class="footer__nav__item">
+              <a href="{{ link.url }}" class="footer__nav__link">{{ link.title }}</a>
+            </li>
+          {%- endfor -%}
+        </ul>
+
+        {%- if section.settings.footer_payment_enable -%}
+          {%- unless shop.enabled_payment_types == empty -%}
+            <ul class="footer-payment payment-icons grid__item inline-list">
+              {% for type in shop.enabled_payment_types %}
+                <li>
+                  {{ type | payment_type_svg_tag: class:'payment-icon' }}
+                  <span class="visually-hidden">{{ type | capitalize | replace: '_', ' ' }}</span>
+                </li>
+              {% endfor %}
+            </ul>
+          {%- endunless -%}
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+  {
+    "name": "Footer",
+    "max_blocks": 5,
+    "settings": [
+      {
+        "type": "header",
+        "content": "Bottom bar"
+      },
+      {
+        "type": "text",
+        "id": "footer_plastic_pulled_text",
+        "label": "Plastic pulled text",
+        "default": "30,000 lbs plastic pulled"
+      },
+
+      {
+        "type": "link_list",
+        "id": "footer_secondary_linklist",
+        "label": "Link List",
+        "info": "This menu won't show dropdown items"
+      },
+      {
+        "type": "checkbox",
+        "id": "footer_payment_enable",
+        "label": "Show payment types"
+      }
+    ],
+    "blocks" : [
+      {
+        "type": "linklist",
+        "name": "Link list",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading"
+          },
+          {
+             "type": "link_list",
+             "id": "linklist",
+             "label": "Link list",
+             "default": "main-menu",
+             "info": "This menu won't show dropdown items"
+          }
+        ]
+      },
+      {
+        "type": "newsletter",
+        "name": "Newsletter",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "paragraph",
+            "content": "Subscribers are under 'Accepts Marketing' in your [customer admin](/admin/customers).  Sync to Mailchimp with the official [Mailchimp app](https://apps.shopify.com/mailchimp)."
+          },
+          {
+            "id": "richtext",
+            "type": "richtext",
+            "label": "Newsletter description",
+            "default": "<p>Subscribe to get special offers, free giveaways, and once-in-a-lifetime deals.</p>"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "name": "Text",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Text column"
+          },
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "Text",
+            "default": "<p>Share store details, promotions, or brand content with your customers.</p>"
+          }
+        ]
+      },
+      {
+        "type": "page",
+        "name": "Page",
+        "settings": [
+          {
+            "id": "page",
+            "type": "page",
+            "label": "Page"
+          }
+        ]
+      },
+      {
+        "type": "social",
+        "name": "Social Media",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Connect"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

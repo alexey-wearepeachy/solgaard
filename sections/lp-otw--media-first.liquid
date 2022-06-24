@@ -1,0 +1,58 @@
+{% if section.settings.is_show == false %}
+    <section class="media-section" style="background-color: {{ section.settings.bg_color }}">
+        <div class="media-section-wrapper">
+            {% if section.settings.video_link != blank %}
+                <video autoplay loop muted playsinline src="{{ section.settings.video_link }}" class="video__desk"></video>
+                <video autoplay loop muted playsinline src="{{ section.settings.video_link_mob }}" class="video__mob"></video>
+            {% else %}
+                {% if section.settings.image != blank %}
+                    <picture>
+                        <source srcset="{{ section.settings.image | img_url: 'master' }}" media="(min-width: 600px)">
+                        <source srcset="{{ section.settings.image_mob | img_url: 'master' }}" media="(max-width: 600px)">
+                        <img src="{{ section.settings.image | img_url: 'master' }}" alt="{{ image.alt }}">
+                    </picture>
+                {% endif %}
+            {% endif %}
+        </div>
+    </section>
+{% endif %}
+
+{% schema %}
+{
+    "name": "First media block",
+    "settings": [
+        {
+            "type": "checkbox",
+            "id": "is_show",
+            "label": "Hide section?",
+            "default": false
+        },
+        {
+            "type": "color",
+            "id": "bg_color",
+            "label": "Section bg color",
+            "default": "#000"
+        },
+        {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+        },
+        {
+            "type": "image_picker",
+            "id": "image_mob",
+            "label": "Mobile image"
+        },
+        {
+            "type": "text",
+            "id": "video_link",
+            "label": "Video link"
+        },
+        {
+            "type": "text",
+            "id": "video_link_mob",
+            "label": "Mobile video link"
+        }
+    ]
+}
+{% endschema %}

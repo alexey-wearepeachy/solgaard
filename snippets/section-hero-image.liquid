@@ -1,0 +1,61 @@
+{%- assign text_block_first = block.settings.text_block_first -%}
+{%- assign image_block_size = block.settings.image_block_size -%}
+{%- assign text_align = block.settings.text_align | default: 'text-center' -%}
+{%- assign bg_color = block.settings.bg_color -%}
+{%- assign color = block.settings.color -%}
+{%- assign video_link = block.settings.video_link -%}
+{%- assign image = block.settings.image -%}
+{%- assign image_mobile = block.settings.image_mobile | default: image -%}
+{%- assign title = block.settings.title -%}
+{%- assign content = block.settings.content -%}
+{%- assign content_small = block.settings.content_small -%}
+
+{%- unless bg_color == blank -%}
+  <div class="section-bg" style="background-color:{{bg_color}};"></div>
+{%- endunless -%}
+
+<div
+ class="section-body {{ text_align }}"
+ {% unless color == blank %}
+   style="color:{{color}};"
+ {% endunless %}>
+  <div class="wrapper">
+    <div class="grid">
+      <div class="grid__item large--ten-twelfths push--large--one-twelfth text-center">
+
+        {%- unless title == blank -%}
+          <h2
+           class="section-title"
+           {% unless color == blank %}
+             style="color:{{color}};"
+           {% endunless %}>{{ title | newline_to_br }}</h2>
+        {%- endunless -%}
+
+        {%- unless content == blank -%}
+          <div class="rte rte--large">{{ content }}</div>
+        {%- endunless -%}
+
+        {%- unless content_small == blank -%}
+          <div class="rte rte--small">{{ content_small }}</div>
+        {%- endunless -%}
+
+        {%- unless video_link == blank -%}
+          {%- if video_link.type == 'youtube' -%}
+            <div class="video-wrapper youtube-wrapper">
+              <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ video_link.id }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+          {%- endif -%}
+        {%- else -%}
+          {%- unless image == blank -%}
+        <div class="small--hide medium--hide">
+          {% include 'lazy-image' with image: image %}
+        </div>
+        <div class="large--hide">
+          {% include 'lazy-image' with image: image_mobile %}
+        </div>
+          {%- endunless -%}
+        {%- endunless -%}
+
+    </div>
+  </div>
+</div>

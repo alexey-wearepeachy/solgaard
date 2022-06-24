@@ -1,0 +1,20 @@
+{%- liquid
+  assign title = block.settings.title
+  assign content = block.settings.content
+-%}
+
+<div class="section-body">
+  <div class="wrapper">
+    <div class="grid">
+      <div class="grid__item large--one-half push--large--one-quarter">
+        {%- unless title == blank -%}
+          <h3 class="section-subtitle">{{ title }}</h3>
+        {%- endunless -%}
+
+        {%- unless content == blank -%}
+          <h2 class="section-title h1">{{ content }}</h2>
+        {%- endunless -%}
+      </div>
+    </div>
+  </div>
+</div>

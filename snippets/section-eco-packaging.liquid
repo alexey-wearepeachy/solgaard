@@ -1,0 +1,36 @@
+<style>
+    .section-eco-packaging__column:nth-child(1) {
+        background-color: {{ bg_color_first_mob }}
+    }
+    
+    .section-eco-packaging__column:nth-child(2) {
+        background-color: {{ bg_color_second_mob }}
+    }
+
+    @media(min-width: 992px) {
+        .section-eco-packaging__column:nth-child(1) {
+            background-color: {{ bg_color_first }}
+        }
+
+        .section-eco-packaging__column:nth-child(2) {
+            background-color: {{ bg_color_second }}
+        }
+    }
+</style>
+
+<div class="section-eco-packaging__container">
+    <div class="section-eco-packaging__inner">
+        <div class="section-eco-packaging__column">
+            <div class="section-eco-packaging__image">
+                <img src="{{ image | img_url: 'master' }}" alt="{{ image.alt | default: title }}">
+            </div>
+        </div>
+        <div class="section-eco-packaging__column">
+            <div class="section-eco-packaging__content {% if text_align_left %}section-eco-packaging__content_left{% endif %} {% if text_align_left_mob %}section-eco-packaging__content_left-mob{% endif %}">
+                <div class="section-eco-packaging__icon">{{ icon }}</div>
+                <h4 class="section-eco-packaging__title">{{ title }}</h4>
+                <div class="section-eco-packaging__description"><p>{{ description }}</p></div>
+            </div>
+        </div>
+    </div>
+</div>

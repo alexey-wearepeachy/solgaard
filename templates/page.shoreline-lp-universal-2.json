@@ -1,0 +1,136 @@
+{
+  "sections": {
+    "16487086565c08961b": {
+      "type": "lp-shoreline--hero-section",
+      "settings": {
+        "hide_section": false,
+        "video_bg_link": "",
+        "video_bg_link_mob": "",
+        "bg_image": "shopify:\/\/shop_images\/lupinsnewzealand.png",
+        "bg_image_mob": "shopify:\/\/shop_images\/lupinsnewzealand.png",
+        "bg_color": "",
+        "title": "Shoreline LP 3",
+        "title_color": "#ffffff",
+        "font_url": "",
+        "font_weight": "",
+        "subtitle": "",
+        "subtitle_color": "#ffffff",
+        "btn_text": "",
+        "btn_bg_color": "#ff7d1f",
+        "btn_bg_color_hover": "#ed6f14",
+        "btn_text_color": "#ffffff",
+        "btn_text_color_hover": "#ffffff",
+        "image_block_color": ""
+      }
+    },
+    "16487088828b159133": {
+      "type": "lp-shoreline--product-intro",
+      "settings": {
+        "overtitle": "SHORELINE 3",
+        "overtitle_color": "#f20e0e",
+        "title": "",
+        "font_url": "",
+        "font_weight": "600"
+      }
+    },
+    "16487088944dd1a661": {
+      "type": "lp-shoreline--first-video",
+      "settings": {
+        "title": "",
+        "video": "",
+        "video_mob": "",
+        "bg_color": "#181818",
+        "full_width": true,
+        "aspect_mob": 123,
+        "aspect": 39
+      }
+    },
+    "1648708904fc59a766": {
+      "type": "lp-shoreline--side-by-side",
+      "settings": {
+        "hide_section": false
+      }
+    },
+    "1648708922c2812e60": {
+      "type": "lp-shoreline--product-listing",
+      "settings": {
+        "hide_section": false,
+        "bg_color": "#ffffff",
+        "subtitle": "",
+        "subtitle_color": "#f2970e",
+        "title": "",
+        "title_color": "#000000"
+      }
+    },
+    "1648708944cecb7d5d": {
+      "type": "lp-shoreline--second-video",
+      "settings": {
+        "title": "",
+        "video": "",
+        "video_mob": "",
+        "bg_color": "#181818",
+        "full_width": true,
+        "aspect_mob": 145,
+        "aspect": 47
+      }
+    },
+    "1648708955e027037e": {
+      "type": "lp-shoreline--advantages",
+      "settings": {
+        "title": "",
+        "text": "",
+        "bg_color_first": "#000000",
+        "bg_color_second": "#000000",
+        "font_url": "",
+        "font_weight": "600"
+      }
+    },
+    "1648708968ce1a02e0": {
+      "type": "lp-shoreline--eco-packaging",
+      "settings": {
+        "title": "",
+        "description": "",
+        "icon": "",
+        "text_align_left": false,
+        "text_align_left_mob": false,
+        "bg_color_first": "#efefef",
+        "bg_color_second": "#e1e1e1",
+        "bg_color_first_mob": "#e1e1e1",
+        "bg_color_second_mob": "#e1e1e1"
+      }
+    },
+    "1648709025676e6eac": {
+      "type": "lp-shoreline--icon-listing",
+      "settings": {
+        "hide_section": false,
+        "bg_color": "#ffffff",
+        "title": "",
+        "title_color": "#000000"
+      }
+    },
+    "164870905024593a35": {
+      "type": "lp-shoreline--third-video",
+      "settings": {
+        "title": "",
+        "video": "",
+        "video_mob": "",
+        "bg_color": "#181818",
+        "full_width": true,
+        "aspect_mob": 199,
+        "aspect": 43
+      }
+    }
+  },
+  "order": [
+    "16487086565c08961b",
+    "16487088828b159133",
+    "16487088944dd1a661",
+    "1648708904fc59a766",
+    "1648708922c2812e60",
+    "1648708944cecb7d5d",
+    "1648708955e027037e",
+    "1648708968ce1a02e0",
+    "1648709025676e6eac",
+    "164870905024593a35"
+  ]
+}

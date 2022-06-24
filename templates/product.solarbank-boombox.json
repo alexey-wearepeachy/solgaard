@@ -1,0 +1,373 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {}
+    },
+    "image-1": {
+      "type": "section-image",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/at-a-glance-Desktop_c7c2296b-2dcb-4555-b99c-47fae0566e80.jpg",
+        "image_mobile": "shopify:\/\/shop_images\/at-a-glance-Mobile_ce6cd950-fae2-48b6-918d-757830365ecb.jpg"
+      }
+    },
+    "video-1": {
+      "type": "section-video",
+      "settings": {
+        "full_width": true,
+        "bg_color": "#000000",
+        "video": "boombox-lifestsyle"
+      }
+    },
+    "double-1": {
+      "type": "section-double",
+      "blocks": {
+        "block_1": {
+          "type": "text_block",
+          "settings": {
+            "title": "96 Hours Of Play Time",
+            "richtext": "<p>Two powerful 7 watt drivers plus active + passive bass radiators magnify an immersive audio experience.<\/p>"
+          }
+        },
+        "block_2": {
+          "type": "video_block",
+          "settings": {
+            "video": "USP-Audio"
+          }
+        }
+      },
+      "block_order": [
+        "block_1",
+        "block_2"
+      ],
+      "settings": {
+        "image_block_size": "Large",
+        "text_align": "text-left",
+        "bg_color": "",
+        "color": ""
+      }
+    },
+    "double-2": {
+      "type": "section-double",
+      "blocks": {
+        "block_1": {
+          "type": "image_block",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Screenshot_2021-09-28_at_20.47.34.png"
+          }
+        },
+        "block_2": {
+          "type": "text_block",
+          "settings": {
+            "title": "Powered Up",
+            "richtext": "<p>Holding up to 8 stored charges, never encounter a dead device again at the park, at the bbq, etc. With 10W wireless charging, keep your phone topped off while simutaneously playing dj.<br\/><\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "block_1",
+        "block_2"
+      ],
+      "settings": {
+        "image_block_size": "Large",
+        "text_align": "text-left",
+        "bg_color": "",
+        "color": ""
+      }
+    },
+    "video-2": {
+      "type": "section-video",
+      "settings": {
+        "full_width": true,
+        "bg_color": "#000000",
+        "image": "shopify:\/\/shop_images\/MASTER_-_Boombox_Charging.jpg",
+        "video": "MASTER_-_Boombox_Charging"
+      }
+    },
+    "163373222239a8d95a": {
+      "type": "section-logos",
+      "blocks": {
+        "163373222239a8d95a-0": {
+          "type": "logo_image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/digital-trends_copy.png",
+            "content": ""
+          }
+        },
+        "163373222239a8d95a-1": {
+          "type": "logo_image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/fastcologo_a869f319-03d5-44d7-92b8-7c659deb4008.png",
+            "content": ""
+          }
+        },
+        "163373222239a8d95a-2": {
+          "type": "logo_image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/GMA-logo_978b06e6-10b4-4817-b3e8-0f2dd88f611a.png",
+            "content": ""
+          }
+        },
+        "163373222239a8d95a-3": {
+          "type": "logo_image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/fastcologo_a869f319-03d5-44d7-92b8-7c659deb4008.png",
+            "content": ""
+          }
+        },
+        "163373222239a8d95a-4": {
+          "type": "logo_image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/forbes_86ba86b7-4bf2-499a-9e09-c397dfc6a114.png",
+            "content": ""
+          }
+        }
+      },
+      "block_order": [
+        "163373222239a8d95a-0",
+        "163373222239a8d95a-1",
+        "163373222239a8d95a-2",
+        "163373222239a8d95a-3",
+        "163373222239a8d95a-4"
+      ],
+      "settings": {
+        "title": "AS SEEN IN",
+        "homepage_logos_bg_color": "homepage--white",
+        "display": "both"
+      }
+    },
+    "double-3": {
+      "type": "section-double",
+      "blocks": {
+        "block_1": {
+          "type": "text_block",
+          "settings": {
+            "title": "Harness the sun",
+            "richtext": "<p>Charge your Solarbank boombox using Micro-USB, or let it bask in the sun to top it up using its solar panels. 1 hour of sun = 2 hours of music.<\/p>"
+          }
+        },
+        "block_2": {
+          "type": "video_block",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/boombox-2.jpg",
+            "video": "USP-Solar"
+          }
+        }
+      },
+      "block_order": [
+        "block_1",
+        "block_2"
+      ],
+      "settings": {
+        "image_block_size": "Large",
+        "text_align": "text-left",
+        "bg_color": "",
+        "color": ""
+      }
+    },
+    "video-3": {
+      "type": "section-video",
+      "settings": {
+        "full_width": true,
+        "bg_color": "#dbddcf",
+        "image": "shopify:\/\/shop_images\/MASTER_-Boombox_Material-IMG.jpg",
+        "video": "Banner-Material-Shore-Tex"
+      }
+    },
+    "double-4": {
+      "type": "section-double",
+      "blocks": {
+        "block_1": {
+          "type": "video_block",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/USP-Content-1080px-sun.jpg",
+            "video": "MASTER_Boombox_Pair"
+          }
+        },
+        "block_2": {
+          "type": "text_block",
+          "settings": {
+            "title": "Double Trouble",
+            "richtext": "<p>Easily pair your boombox with a friend's for double the boom and experience stellar stereo sound. With Bluetooth 5 your boomboxes will always remember each other.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "block_1",
+        "block_2"
+      ],
+      "settings": {
+        "image_block_size": "Large",
+        "text_align": "text-left",
+        "bg_color": "",
+        "color": ""
+      }
+    },
+    "product-features": {
+      "type": "section-product-features",
+      "blocks": {
+        "feature_1": {
+          "type": "feature",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Features-Boombox-LEDs.jpg",
+            "title": "LED Charge Indicator",
+            "richtext": "<p>Integrated four-light LED power indicator displays charging status and the current battery life.<\/p>"
+          }
+        },
+        "feature_2": {
+          "type": "feature",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Features-Boombox-Wireless-Charging.jpg",
+            "title": "Re-charge Wirelessly",
+            "richtext": "<p>No need to fumble around for a charging cable. Just sit your Boombox on our wireless charging  station <strong>HomeBase.<\/strong><\/p>"
+          }
+        },
+        "feature_3": {
+          "type": "feature",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Features-Boombox-Waterproof.jpg",
+            "title": "No More Buzzkills",
+            "richtext": "<p>Boombox can survive a meter of water for up to 30 minutes, dropped off a deck, or thrown in the sand.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "feature_1",
+        "feature_2",
+        "feature_3"
+      ],
+      "settings": {
+        "bg_color": "#1b2a4b",
+        "color": "#ffffff",
+        "title": "Design Detail"
+      }
+    },
+    "social-proof": {
+      "type": "section-social-proof",
+      "disabled": true,
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Social-1024px-11.jpg"
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Social-1024px-1_693ea2a3-c4cb-4c1f-b5f5-89768f20791a.jpg"
+          }
+        },
+        "card_3": {
+          "type": "card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Social-1024px-9_2654eb4e-602a-4766-9095-09edc1142ede.jpg"
+          }
+        },
+        "card_4": {
+          "type": "card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Social-1024px-6_022c4130-955c-43e6-bb29-460bdaf0187f.jpg"
+          }
+        },
+        "card_5": {
+          "type": "card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Social-1024px-10.jpg"
+          }
+        },
+        "card_6": {
+          "type": "card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Social-1024px-4_7dae81ce-c823-43f3-a3c1-5339ff989e22.jpg"
+          }
+        },
+        "card_7": {
+          "type": "card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Social-1024px-5_38f0cda1-0719-4af1-a92e-8a0b59eefbfa.jpg"
+          }
+        },
+        "card_8": {
+          "type": "card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Social-1024px-4_7dae81ce-c823-43f3-a3c1-5339ff989e22.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2",
+        "card_3",
+        "card_4",
+        "card_5",
+        "card_6",
+        "card_7",
+        "card_8"
+      ],
+      "settings": {
+        "inverse": true,
+        "title": "See the Solarbank Boombox around the globe",
+        "richtext": "<p>Already staying charged? Tag us, and use <strong>#solgaardsquad<\/strong> to be featured.<\/p>"
+      }
+    },
+    "reviews": {
+      "type": "main-product-reviews",
+      "settings": {
+        "title": "",
+        "subheading": "Don't take our word for it though..."
+      }
+    },
+    "product-faq": {
+      "type": "section-product-faq",
+      "blocks": {
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/FAQs-3_39b5fbd4-a6d3-40b4-9afa-bf93ec8d10b9.jpg",
+            "title": "Features",
+            "richtext": "<p><strong>What are the differences to between both Solarbanks?<br\/><br\/>Solarbank<br\/><\/strong>•  No speakers<br\/>• 2  Standard USB ports<\/p><p><br\/><br\/><br\/><\/p><p>•  2 Standard USB ports<\/p><p><br\/><\/p><p>•  1 Micro-USB port for charging<\/p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/FAQs-2_cd61cc59-f074-4585-bcd4-49d202a19037.jpg",
+            "title": "Charging Specs + Pairing",
+            "richtext": "<p><strong>Charging Specs<\/strong><\/p><p><br\/><br\/><br\/><br\/><br\/><br\/><br\/><\/p><p><strong>Pairing Your Solarbank Boombox<\/strong><\/p><p><br\/><\/p><p><a href=\"\/pages\/how-to-pair-your-solarbank-boombox\" title=\"How to Pair Your Solarbank Boombox\">Here's a little video tutorial. <\/a><\/p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/FAQs-1_bc380aa5-5431-4740-bb0a-f90f6b583124.jpg",
+            "title": "Dimensions - Size of the Solarbank Boombox",
+            "richtext": "<p><strong>What is the size of the Solarbank Boombox?<\/strong><\/p><p><br\/><\/p><p>• 6.2 x 3.5 x 2 in <br\/>• 16 x 9 x 5cm <\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_1",
+        "faq_2",
+        "faq_3"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "image-1",
+    "video-1",
+    "double-1",
+    "double-2",
+    "video-2",
+    "163373222239a8d95a",
+    "double-3",
+    "video-3",
+    "double-4",
+    "product-features",
+    "social-proof",
+    "reviews",
+    "product-faq"
+  ]
+}

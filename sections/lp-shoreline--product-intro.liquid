@@ -1,0 +1,78 @@
+{% assign overtitle       = section.settings.overtitle %}
+{% assign overtitle_color = section.settings.overtitle_color %}
+{% assign title           = section.settings.title %}
+{% assign font_url        = section.settings.font_url %}
+{% assign font_weight     = section.settings.font_weight %}
+
+<style>
+     @font-face {
+        font-family: 'lp-tr-prod-title';
+        src: url("{{ font_url }}");
+        /* IE9 Compat Modes */
+        font-weight: {{ font_weight }};
+        font-stretch: normal;
+        font-style: normal;
+    }
+
+    #lp-transatlantic--product-intro .lp-transatlantic--product-intro__title {
+        font-family: "lp-tr-prod-title", "Harmonia Sans";
+        font-weight: {{ font_weight }};
+    }
+</style>
+
+<section id="lp-transatlantic--product-intro" {% if section.settings.hide_section %}style="display: none;"{% endif %}>
+    <div class="lp-transatlantic--product-intro__container">
+        <div class="lp-transatlantic--product-intro__inner _anim-items _anim-no-hide">
+            <div class="lp-transatlantic--product-intro__overtitle" style="color:{{ overtitle_color }}">{{ overtitle }}</div>
+            <h2 class="lp-transatlantic--product-intro__title">{{ title }}</h2>
+        </div>
+    </div>
+</section>
+
+{% schema %}
+{
+    "name": "Product intro",
+    "settings": [
+		{
+            "type": "checkbox",
+            "id": "hide_section",
+            "label": "Hide section?",
+            "default": false
+        },
+        {
+            "type": "text",
+            "id": "overtitle",
+            "label": "Over title",
+            "default": "SHORELINE"
+        },
+        {
+            "type": "color",
+            "id": "overtitle_color",
+            "label": "Over title text color",
+            "default": "#F2970E"
+        },
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+        },
+        {
+            "type": "text",
+            "id": "font_url",
+            "label": "Font link"
+        },
+        {
+            "type": "text",
+            "id": "font_weight",
+            "label": "Font weight",
+            "default": "600"
+        }
+    ],
+	"presets": [
+      {
+        "category": "Shoreline LP Product intro",
+        "name": "Shoreline LP Product intro"
+      }
+     ]
+}
+{% endschema %}

@@ -1,0 +1,389 @@
+<!-- /templates/cart.liquid -->
+{% comment %}
+
+  This is your /cart template. If you are using the Ajaxify Cart plugin,
+  your form (with action="/cart") layout will be used in the drawer/modal.
+
+  For info on test orders:
+    - General http://docs.shopify.com/manual/your-store/orders/test-orders
+    - Shopify Payments - http://docs.shopify.com/manual/more/shopify-payments/testing-shopify-payments
+
+{% endcomment %}
+{% comment %}Check bundle product{% endcomment %}
+{% assign discount_query = '' %}
+{% if cart.item_count > 0 and cart.total_discount == 0  %}
+  {% for item in cart.items %}
+    {% for p in item.properties %}
+      {% if p.first == 'bundle' %}
+        {% assign value =  '?discount=' | append: settings.otw_bundle_discount %}
+        {% unless discount_query contains value %}
+          {% assign discount_query = value %}
+        {% endunless %}
+      {% endif %}
+    {% endfor %}
+  {% endfor %}
+{% endif %}
+{% include 'cross-sell' %}
+{% if cart.item_count > 0 %}
+  <div class="wrapper page-margin">
+    <form action="/cart{{ discount_query }}" method="post" novalidate class="cart cartForm">
+      <h3>{{ 'cart.general.title' | t }}</h3>
+      {% render 'banana-stand-cart-top-container' %}
+      <div class="cart__body">
+        <div class="cart__row medium-down--hide cart__header-labels">
+          <div class="grid--full">
+            <div class="grid__item large--one-half push--large--one-half">
+              <div class="grid--full">
+                {% if settings.cart_quantity %}
+                  <div class="grid__item one-third medium-down--one-third">
+                    {{ 'cart.label.price' | t }}
+                  </div>
+                  <div class="grid__item one-third medium-down--one-third text-center">
+                    {{ 'cart.label.quantity' | t }}
+                  </div>
+                {% else %}
+                  <div class="grid__item two-thirds medium-down--two-thirds"></div>
+                {% endif %}
+                <div class="grid__item one-third medium-down--one-third text-right">
+                  {{ 'cart.label.total' | t }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {% comment %}
+          Loop through products in the cart
+        {% endcomment %}
+        {% for item in cart.items %}
+          <div
+            class="cart__row"
+            data-id="{{ item.id }}"
+            data-price="{{ item.price | divided_by: 100 }}"
+            {% for p in item.properties %}
+              {% if p.first == 'bundle' %}
+                data-bundle-item="bundle"
+              {% endif %}
+            {% endfor %}
+            {% if item.variant.id == 31315051380783 %}
+              data-free-solar-sling
+            {% endif %}>
+            <div class="grid--full cart__row--table-large">
+
+              <div class="grid__item large--one-half">
+                <div class="grid--full cart__row--table-large">
+
+                  <div class="grid__item one-third">
+                    <a href="{{ item.url | within: collections.all }}" class="cart__image">
+                      <img src="{{ item | img_url: 'small' }}" alt="{{ item.title | escape }}">
+                    </a>
+                  </div>
+
+                  <div class="grid__item two-thirds cart__item__title">
+                    <a href="{{ item.url }}" class="h4--body">
+                      {{ item.product.title }}
+                    </a>
+
+                    <p>
+                      {% unless item.product.has_only_default_variant %}
+                        <small>{{ item.variant.title }}</small>
+                      {% endunless %}
+                    </p>
+
+                    {% if settings.cart_vendor_enable %}
+                      <p>{{ item.vendor }}</p>
+                    {% endif %}
+
+                    {% assign property_size = item.properties | size %}
+                    {% if property_size > 0 %}
+                      {% for p in item.properties %}
+                        {% unless p.last == blank %}
+                          {% unless p.first == '_is_preorder' %}
+                            {% unless p.first == 'hash' %}
+                              {% unless p.first == 'bundle' %}
+                                {% unless p.first == '_is_preorder' %}{% unless p.first == '_is_preorder' %}{% unless p.first == '_is_preorder' %}{% unless p.first contains '_is_preorder' %}{{ p.first }}:{% endunless %}{% endunless %}{% endunless %}{% endunless %}
+                              {% endunless %}
+                            {% endunless %}
+                          {% endunless %}
+
+                          {% comment %}
+                            Check if there was an uploaded file associated
+                          {% endcomment %}
+                          {% if p.last contains '/uploads/' %}
+                            <a href="{{ p.last }}">{{ p.last | split: '/' | last }}</a>
+                          {% else %}
+                            {% unless p.first == 'hash' %}
+                              {{ p.last }}
+                            {% endunless %}
+                          {% endif %}
+
+                          <br>
+                        {% endunless %}
+                      {% endfor %}
+                    {% endif %}
+
+                    <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0"
+                       class="cart__remove uppercase lighten"
+                       data-id="{{ item.id }}"
+                       data-key="{{ item.key }}"
+                            {% if property_size > 0 %}
+                              {% for p in item.properties %}
+                                {% if p.first == 'hash' %}
+                                  data-remove-btn-with-hash="{{ p.last }}"
+                                {% endif %}
+                              {% endfor %}
+                            {% endif %}
+                    >
+                      <small>{{ 'cart.general.remove' | t }}</small>
+                    </a>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="grid__item large--one-half">
+                <div class="grid--full cart__row--table-large">
+                  {% if settings.cart_quantity %}
+                    <div class="grid__item one-third text-left">
+                      <span class="cart__mini-labels">{{ 'cart.label.price' | t }}</span>
+                      <div class="flex-column">
+                        <span class="h5--body money line-price">{{ item.price | money }}</span>
+
+                          <span class="h5--body money compare-line-price">
+                            <s>
+                              {% if item.original_price > item.price %}
+                                {{ item.original_price | money }}
+                              {% endif %}
+                            </s>
+                          </span>
+                      </div>
+                    </div>
+
+                    <div class="grid__item one-third text-center">
+                      <span class="cart__mini-labels">{{ 'cart.label.quantity' | t }}</span>
+                      {% comment %}
+                        Added data-id for the ajax cart implementation only.
+                      {% endcomment %}
+                      <input type="number" name="updates[]" id="updates_{{ item.id }}" value="{{ item.quantity }}" min="0" data-id="{{ item.id }}" data-submit="true" class="ajaxcart--hide">
+                    </div>
+                  {% else %}
+                    <div class="grid__item two-thirds"></div>
+                  {% endif %}
+
+                  <div class="grid__item one-third text-right">
+                    <span class="cart__mini-labels">{{ 'cart.label.total' | t }}</span>
+                    <div class="flex-column">
+                      <span class="h5--body money total-line-price">{{ item.line_price | money }}</span>
+                        <span class="h5--body money total-compare-line-price">
+                            <s>
+                              {% if item.original_line_price > item.line_price %}
+                                {{ item.original_line_price | money }}
+                              {% endif %}
+                            </s>
+                        </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="ajaxcart__errors hidden errors text-center" id="ajaxcart__item__{{item.id}}__errors">
+                  {{ 'cart.general.stockout' | t }}
+                </div>
+              </div>
+
+            </div>
+          </div>
+        {% endfor %}
+
+        <input type="submit" name="update" class="btn--secondary update-cart btn--large uppercase" value="{{ 'cart.general.update' | t }}">
+      </div>
+
+      <div class="cart__row cart__footer">
+        <div class="grid">
+          {% comment %}
+            Optional, add a textarea for special notes
+              - Your theme settings can turn this on or off. Default is on.
+              - Make sure you have name="note" for the message to be submitted properly
+          {% endcomment %}
+          {% if settings.cart_notes_enable %}
+            <div class="grid__item large--one-half cart__instructions">
+              <label class="cart__instructions__label" for="CartSpecialInstructions">{{ 'cart.general.note' | t }}</label>
+              <textarea name="note" class="input-full" id="CartSpecialInstructions">{{ cart.note }}</textarea>
+            </div>
+          {% endif %}
+          <div class="grid__item {% if settings.cart_notes_enable %} large--one-half text-right{% endif %}">
+            <p class="cart__footer__text">
+              <span class="cart__subtotal-title uppercase">{{ 'cart.general.subtotal' | t }}</span>
+              <div class="flex-column">
+                  <span class="h3--body cart__subtotal cart__subtotal--compared money">
+                    <s>
+                      {% if cart.original_total_price > cart.total_price %}
+                        {{ cart.original_total_price | money }}
+                      {% endif %}
+                    </s>
+                  </span>
+                <span class="h3--body cart__subtotal cart__subtotal--original money">{{ cart.total_price | money }}</span>
+              </div>
+            </p>
+
+            <div class="cart__footer__quadpay">
+              {% comment %} <!-- Insert QuadPay Widget --> {% endcomment %}
+              <div style="display: inline-block; margin: 0 0 10px 0;min-height:20px;">
+                <quadpay-widget amount={{ cart.total_price | divided_by: 100.00 }} ></quadpay-widget>
+              </div>
+            </div>
+
+            <p class="cart__footer__text"><em>{{ 'cart.general.shipping_at_checkout' | t }}</em></p>
+            <span><input type="submit" name="checkout" class="btn uppercase btn--large checkout__button" value="{{ 'cart.general.checkout' | t }}"></span>
+          </div>
+        </div>
+      </div>
+      {% if additional_checkout_buttons and settings.cart_show_additional_buttons %}
+        <div class="grid__item additional-checkout-buttons">
+          {{ content_for_additional_checkout_buttons }}
+        </div>
+      {% endif %}
+    </form>
+  </div>
+{% else %}
+  {% comment %}
+    The cart is empty
+  {% endcomment %}
+  <div class="wrapper page-margin text-center">
+    <h3 class="uppercase h3">{{ 'cart.general.title' | t }}</h3>
+    <p>{{ 'cart.general.empty' | t }}</p>
+    <a href="{{ settings.cart_continue_browsing | default: '/collections/all' }}" class="btn btn--large uppercase">{{ 'cart.general.continue_browsing_html' | t }}</a>
+  </div>
+{% endif %}
+
+
+
+{% if cart.item_count > 0 %}
+<script>
+  const discountCoefficient = 1 - {{ settings.otw_bundle_discount_value }} / 100;
+  const cartJson = {{ cart | json }};
+  const shopifyAutoDiscount = cartJson['total_discount'] ? cartJson['total_discount'] : null;
+
+  const routes = {
+    updateCart: '/cart/update.js',
+    cart: '/cart'
+  };
+
+  const selectors = {
+    cartBody: '.cart__body',
+    bundleItem: '[data-bundle-item]',
+    linePrice: '.line-price',
+    compareLinePrice: '.compare-line-price',
+    totalLinePrice: '.total-line-price',
+    totalCompareLinePrice: '.total-compare-line-price',
+    lineItemQnt: '[name="updates[]"]',
+    removeBtn: '[data-remove-btn-with-hash]',
+    totalCartPrice: '.cart__subtotal--original',
+    totalCompareCartPrice: '.cart__subtotal--compared',
+    getRemoveBtnByHash: (hash) => `[data-remove-btn-with-hash="${hash}"]`
+  };
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll(selectors.removeBtn).forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.preventDefault();
+        const data = {
+          updates: {}
+        };
+        const hash = btn.dataset.removeBtnWithHash.trim();
+        const bundleProducts = btn.closest(selectors.cartBody).querySelectorAll(selectors.getRemoveBtnByHash(hash));
+
+        bundleProducts.forEach(item => {
+          data.updates[`${item.dataset.key}`] = 0;
+        });
+
+        $.ajax({
+          type: 'POST',
+          url: routes.updateCart,
+          data: data,
+          dataType: 'json',
+          async: false,
+        });
+
+        setTimeout(() => {
+          window.location = routes.cart;
+        }, 1000);
+
+      });
+    });
+
+    function drawTotalPrice() {
+      let totalPrice = 0;
+      let totalComparedPrice = 0;
+      let containsBundleProduct = false;
+
+      document.querySelectorAll('.cart__row[data-price]').forEach(item => {
+        const price = parseFloat(item.dataset.price);
+        const qnt = +item.querySelector(selectors.lineItemQnt).value;
+
+        totalComparedPrice += price * qnt;
+        if(item.hasAttribute('data-bundle-item')) {
+          containsBundleProduct = true;
+          totalPrice += (price * discountCoefficient) * qnt;
+        } else {
+          totalPrice += price * qnt;
+        }
+      });
+
+      document.querySelector(selectors.totalCartPrice).innerHTML = `$${totalPrice.toFixed(2)}`;
+      document.querySelector(selectors.totalCompareCartPrice).innerHTML = containsBundleProduct ? `<s>$${totalComparedPrice.toFixed(2)}</s>` : ''
+    }
+
+    function drawLineItemPrice(item) {
+      if(item.dataset.bundleItem) {
+        const price = parseFloat(item.dataset.price);
+        const qnt = +item.querySelector(selectors.lineItemQnt).value;
+
+        const $linePrice = item.querySelector(selectors.linePrice);
+        const $compareLinePrice = item.querySelector(selectors.compareLinePrice);
+        const $totalLinePrice = item.querySelector(selectors.totalLinePrice);
+        const $totalCompareLinePrice = item.querySelector(selectors.totalCompareLinePrice);
+
+
+        $linePrice.innerHTML = `$${(price * discountCoefficient).toFixed(2)}`
+        $compareLinePrice.innerHTML = `<s>$${(price).toFixed(2)}</s>`
+        $totalLinePrice.innerHTML = `$${((price * qnt) * discountCoefficient).toFixed(2)}`
+        $totalCompareLinePrice.innerHTML = `<s>$${((price * qnt)).toFixed(2)}</s>`
+      } else {
+        const price = parseFloat(item.dataset.price);
+        const qnt = +item.querySelector(selectors.lineItemQnt).value;
+
+        const $linePrice = item.querySelector(selectors.linePrice);
+        const $totalLinePrice = item.querySelector(selectors.totalLinePrice);
+
+
+        $linePrice.innerHTML = `$${(price).toFixed(2)}`
+        $totalLinePrice.innerHTML = `$${((price * qnt)).toFixed(2)}`
+      }
+    }
+
+
+    if (!shopifyAutoDiscount) {
+      drawTotalPrice();
+
+      document.querySelectorAll(selectors.bundleItem).forEach(item => {
+        drawLineItemPrice(item);
+      });
+
+      document.querySelectorAll('.js-qty__adjust').forEach(item => {
+        item.addEventListener('click', () => {
+          const parent = item.closest('.cart__row');
+          drawLineItemPrice(parent);
+          drawTotalPrice();
+        });
+      });
+    }
+  });
+</script>
+{% endif %}
+
+<style>
+  .flex-column {
+    display: flex;
+    flex-direction: column;
+  }
+</style>

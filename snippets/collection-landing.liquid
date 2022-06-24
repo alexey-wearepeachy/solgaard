@@ -1,0 +1,37 @@
+<!-- /snippets/collection-landing.liquid -->
+<div class="collection-landing" data-section-id="{{ section.id }}" data-section-type="collection-landing">
+
+  {%- assign button_style = section.settings.button_style -%}
+
+  <div class="collection-blocks">
+    {%- for block in section.blocks -%}
+      {%- assign image = block.settings.image -%}
+      {%- assign title = block.settings.title -%}
+      {%- assign content = block.settings.content -%}
+      {%- assign btn_label = block.settings.btn_label -%}
+      {%- assign btn_link = block.settings.btn_link -%}
+
+      {%- capture block_html -%}
+        <div class="collection-blocks__bg"{% unless image == blank %} style="background-image: url(&quot;{{ image | img_url:'1600x' }}&quot;)"{% endunless %}></div>
+        <div class="collection-blocks__body">
+          <h2 class="collection-blocks__heading">{{ title | escape }}</h2>
+          <p class="collection-blocks__content">{{ content }}</p>
+          {%- unless btn_label == blank -%}
+            <span class="collection-blocks__btn {{ button_style }}">{{ btn_label }}</span>
+          {%- endunless -%}
+        </div>
+      {%- endcapture -%}
+
+      <div class="collection-blocks__item">
+        {%- unless btn_link == blank -%}
+          <a class="collection-blocks__link" href="{{ btn_link }}">
+            {{ block_html }}
+          </a>
+        {%- else -%}
+          {{ block_html }}
+        {%- endunless -%}
+      </div>
+
+    {%- endfor -%}
+  </div>
+</div>

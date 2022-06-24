@@ -1,0 +1,193 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {}
+    },
+    "16363836047f60fc92": {
+      "type": "section-banner-image",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/Full-Width-Banner-Desert.jpg",
+        "height": "use_screen_two_thirds",
+        "overlay_opacity": 15,
+        "parallax": true,
+        "title": "Artemis",
+        "content": "SUIT UP FOR YOUR NEXT ADVENTURE",
+        "text_align": "text-center",
+        "color": "homepage--white",
+        "btn_text": "",
+        "btn_link": "",
+        "btn_style": "btn btn--large btn--black"
+      }
+    },
+    "163638498741d381b7": {
+      "type": "section-double",
+      "blocks": {
+        "163638498741d381b7-0": {
+          "type": "image_block",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/USP-Pockets-0.jpg"
+          }
+        },
+        "163638498741d381b7-1": {
+          "type": "text_block",
+          "settings": {
+            "title": "Space for Everything",
+            "richtext": "<p>Internal compartments<strong> <\/strong>feature<strong> cable organization, pen slots, wallet pocket, and powerbank pocket. <\/strong>Constellation interior will keep you star gazing.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "163638498741d381b7-0",
+        "163638498741d381b7-1"
+      ],
+      "settings": {
+        "image_block_size": "Large",
+        "text_align": "text-left",
+        "bg_color": "",
+        "color": ""
+      }
+    },
+    "1636385244a8c3f768": {
+      "type": "section-banner-image",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/Full-Width-Banner-2048px-suitcase-2.jpg",
+        "height": "use_screen_one_half",
+        "overlay_opacity": 15,
+        "parallax": true,
+        "title": "Suitcase Seatbelt",
+        "content": "Make sure you're strapped in, re-entry gets hot",
+        "text_align": "text-center",
+        "color": "homepage--white",
+        "btn_text": "",
+        "btn_link": "",
+        "btn_style": "btn btn--large btn--black"
+      }
+    },
+    "1636385374f36523b5": {
+      "type": "section-double",
+      "blocks": {
+        "1636385374f36523b5-1": {
+          "type": "text_block",
+          "settings": {
+            "title": "Drop-Proof Storage",
+            "richtext": "<p>Keep the center of your universe safe and your papers wrinkle free. Drop-proof storage fits laptops up to 16\"<\/p>"
+          }
+        },
+        "1636385374f36523b5-0": {
+          "type": "image_block",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/USP-Laptop-2.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "1636385374f36523b5-1",
+        "1636385374f36523b5-0"
+      ],
+      "settings": {
+        "image_block_size": "Large",
+        "text_align": "text-left",
+        "bg_color": "",
+        "color": ""
+      }
+    },
+    "163638553916108535": {
+      "type": "section-double",
+      "blocks": {
+        "163638553916108535-0": {
+          "type": "image_block",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/USP-Pockets-4-Front-vibrant.jpg"
+          }
+        },
+        "163638553916108535-1": {
+          "type": "text_block",
+          "settings": {
+            "title": "Internal Front Pocket",
+            "richtext": "<p>The convenience of a front pocket on a backpack, without the bulk. This minimalist design leaves plenty of room for your daily carry in the workzone.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "163638553916108535-0",
+        "163638553916108535-1"
+      ],
+      "settings": {
+        "image_block_size": "Large",
+        "text_align": "text-left",
+        "bg_color": "",
+        "color": ""
+      }
+    },
+    "16363856122ef059b7": {
+      "type": "section-banner-image",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/Full-Width-Banner-2048px-Remove-Before-Launch.jpg",
+        "height": "use_screen_two_thirds",
+        "overlay_opacity": 15,
+        "parallax": true,
+        "title": "Ready for Anything",
+        "content": "ARTEMIS AVAILABLE NOW",
+        "text_align": "text-center",
+        "color": "homepage--white",
+        "btn_text": "",
+        "btn_link": "",
+        "btn_style": "btn btn--large btn--black"
+      }
+    },
+    "16363859996e628a9c": {
+      "type": "section-product-faq",
+      "blocks": {
+        "2b835582-6449-4564-9378-de41c57ac0cd": {
+          "type": "faq",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/FAQs-Dimensions_849ff7fb-fb2b-4b89-9d9e-a8e90412c0a4.jpg",
+            "title": "Dimensions - Size and weight of the bag",
+            "richtext": "<p><strong>Q: What are the dimensions of the Artemis? <\/strong><\/p><p>A: 11.5W x 5H x 17.5L in (29.2W x 12.7H x 44.5L cm)<\/p><p><\/p><p><strong>Q: What is the weight of the Artemis?<\/strong><\/p><p>A: 2lbs or 0.9kg<\/p>"
+          }
+        },
+        "a88e1117-8e6e-411c-ae7c-90357b5a15ce": {
+          "type": "faq",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/FAQs-Front_abf8bded-e24a-4f26-81e1-3543d5db6ad9.jpg",
+            "title": "Features - Full bag features",
+            "richtext": "<p>• Deluxe drop-proof 16\" laptop storage<\/p><p>• Water resistant bottom<\/p><p>• Constellation interior lining made from Shore-Tex™<\/p><p>• Secret pockets<\/p><p>• Cable organization, pen slots, wallet pocket, and powerbank pocket<\/p><p>• Comfy shoulder straps + back support<br\/>• Suitcase Seatbelt<\/p><p>• Wrinkle Free Paper storage<\/p><p>• Ready To Launch Lanyard<\/p>"
+          }
+        },
+        "da505283-3d7c-4912-a65a-848a8dc985d4": {
+          "type": "faq",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/FAQs-Material_606e9db4-6949-4f55-bf55-f80e273b6ffc.jpg",
+            "title": "The materials - How we make the fabric",
+            "richtext": "<p><strong>What is made from ocean plastic?<\/strong><\/p><p>The interior fabric lining is made from 100% Shore-Tex™ material.<\/p><p><\/p><p><strong>What is Shore-Tex™?<\/strong><\/p><p>Shore-Tex™ is a textile made from upcycled ocean-bound plastic.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "2b835582-6449-4564-9378-de41c57ac0cd",
+        "a88e1117-8e6e-411c-ae7c-90357b5a15ce",
+        "da505283-3d7c-4912-a65a-848a8dc985d4"
+      ],
+      "settings": {}
+    },
+    "reviews": {
+      "type": "main-product-reviews",
+      "settings": {
+        "title": "",
+        "subheading": "Don't take our word for it though..."
+      }
+    }
+  },
+  "order": [
+    "main",
+    "16363836047f60fc92",
+    "163638498741d381b7",
+    "1636385244a8c3f768",
+    "1636385374f36523b5",
+    "163638553916108535",
+    "16363856122ef059b7",
+    "16363859996e628a9c",
+    "reviews"
+  ]
+}

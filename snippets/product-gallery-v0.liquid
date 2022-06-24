@@ -1,0 +1,39 @@
+<!-- /snippets/product.gallery.liquid -->
+
+{%- assign gallery_image_count = 0 -%}
+{%- for image in product.images -%}
+  {%- if image.alt == 'Lifestyle' -%}
+    {%- assign gallery_image_count = gallery_image_count | plus: 1 -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- unless gallery_image_count == 0 -%}
+  <div class="product__gallery">
+    <div
+     class="product__gallery__slider grid grid-uniform"
+     data-image-count="{{ gallery_image_count }}"
+     data-section-type="product-gallery-slider">
+      {%- assign image_index = 0 -%}
+      {%- for image in product.images -%}
+        {%- if image.alt == 'Lifestyle' -%}
+          {%- assign img_api = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+          <div class="product__gallery__slide grid__item small--one-half medium--one-half large--one-quarter{% if image_index > 3 %} hide{% endif %}">
+            <div class="lazy-image" style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%; background-image: url('{{ image | img_url: '1x1' }}');">
+              <img class="lazyload fade-in"
+                alt="{{ image.alt | default: product.title }}"
+                data-src="{{ img_api }}"
+                data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048, 2450, 2700, 3000, 3350, 3750, 4100, 4480]"
+                data-aspectratio="{{ image.aspect_ratio }}"
+                data-parent-fit="cover"
+                data-sizes="auto"/>
+            </div>
+            <noscript>
+              <img src="{{ image | img_url: '1440x' }}" alt="{{ image.alt | default: product.title }}" class="responsive-wide-image"/>
+            </noscript>
+          </div>
+          {%- assign image_index = image_index | plus: 1 -%}
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+{%- endunless -%}

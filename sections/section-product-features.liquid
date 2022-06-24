@@ -1,0 +1,175 @@
+{%- liquid
+  assign title = section.settings.title
+  assign bg_color = section.settings.bg_color
+  assign color = section.settings.color
+-%}
+<style>
+  {%- unless bg_color == blank or bg_color contains 'rgba(0,0,0,0)' -%}
+    #shopify-section-{{ section.id }} {
+      background-color:{{ bg_color  }};
+    }
+  {%- endunless -%}
+  {%- unless color == blank  or color contains 'rgba(0,0,0,0)' -%}
+    #shopify-section-{{ section.id }} .section-title {
+      color:{{ color }};
+    }
+  {%- endunless -%}
+</style>
+
+<div
+ data-section-type="grid-slider"
+ data-section-id="{{ section.id }}"
+ data-slide-selector=".product-features__item">
+  <div class="section-body">
+    <div class="wrapper">
+      <div class="product-features">
+        {%- unless title == blank -%}
+          <h2 class="section-title medium-up--text-center">{{ title | escape }}</h2>
+        {%- endunless -%}
+
+        <div
+         data-aos="fade-up"
+         data-aos-easing="linear"
+         data-aos-duration="400"
+         data-aos-delay="0">
+          <div
+           class="grid grid--uniform product-features__itemr"
+           data-slider
+           data-slick='{
+             "arrows": true,
+             "slidesToShow": 3,
+             "slidesToScroll": 3,
+             "swipeToSlide": true,
+             "responsive": [
+               { "breakpoint": 2000, "settings": { "slidesToShow": 3, "slidesToScroll": 3 } },
+               { "breakpoint": 992, "settings":  { "slidesToShow": 2, "slidesToScroll": 2 } },
+               { "breakpoint": 768, "settings":  { "slidesToShow": 2, "slidesToScroll": 2, "arrows": true } },
+               { "breakpoint": 480, "settings":  { "slidesToShow": 1, "slidesToScroll": 1, "arrows": true } }
+             ]
+           }'>
+            {%- for block in section.blocks -%}
+              {%- liquid
+                assign image = block.settings.image
+                assign title = block.settings.title
+                assign richtext = block.settings.richtext
+              -%}
+
+              <div class="grid__item small--one-half medium--one-half large--one-third product-features__item" {{ block.shopify_attributes }}>
+                <div class="product-features__header">
+                  {%- unless video_url == blank -%}
+                    <div class="video-wrapper">
+                      <video
+                       muted
+                       defaultmuted
+                       playsinline
+                       autoplay
+                       loop
+                       oncontextmenu="if (!window.__cfRLUnblockHandlers) return false; return false;"
+                       preload="auto"
+                       width="100%"
+                       height="100%"
+                       {% unless image == blank %}
+                         poster="{{ image | img_url: '1200x' }}"
+                       {% endunless %}>
+                        <source src="{{ video_url }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                      </video>
+                    </div>
+                  {%- else -%}
+                  {%- unless image == blank -%}
+                      <div class="product-features__image">{%- include 'lazy-image', image: image, alt_text: title -%}</div>
+                    {%- endunless -%}
+                  {%- endunless -%}
+                </div>
+
+                <div class="product-features__body text-center">
+                  {%- unless title == blank -%}
+                    <h4 class="product-features__title _h4--body">{{ title | escape }}</h4>
+                  {%- endunless -%}
+
+                  {%- unless richtext == blank -%}
+                    <div class="product-features__content rte">{{ richtext }}</div>
+                  {%- endunless -%}
+                </div>
+              </div>
+            {%- endfor -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "Product Features",
+    "max_blocks": 6,
+    "tag": "section",
+    "class": "section-product-features",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Layout"
+      },
+      {
+        "type": "color",
+        "id": "bg_color",
+        "label": "Background color"
+      },
+      {
+        "type": "color",
+        "id": "color",
+        "label": "Text color"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "feature",
+        "name": "Feature",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "richtext",
+            "id": "richtext",
+            "label": "Richtext"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Product features",
+        "category": "Product",
+        "blocks": [
+          {
+            "type": "feature"
+          },
+          {
+            "type": "feature"
+          },
+          {
+            "type": "feature"
+          },
+          {
+            "type": "feature"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

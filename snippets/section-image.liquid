@@ -1,0 +1,48 @@
+{%- assign image = block.settings.image -%}
+{%- assign image_mobile = block.settings.image_mobile -%}
+
+{%- if image_mobile == blank -%}
+  {%- assign image_mobile = block.settings.image -%}
+{%- endif -%}
+
+<div class="wrapper--full">
+  {%- unless image == blank -%}
+    {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+    <div class="image-wrapper small--hide">
+      <div
+       class="lazy-image"
+       style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;">
+        <img class="lazyload fade-in"
+          data-src="{{ img_url }}"
+          data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+          data-aspectratio="{{ image.aspect_ratio }}"
+          data-parent-fit="cover"
+          data-sizes="auto"
+          alt="{{ image.alt | default: 'Section image' }}"/>
+      </div>
+      <noscript>
+        <img src="{{ image | img_url: '1296x' }}" alt="{{ image.alt | default: 'Section image' }}"/>
+      </noscript>
+    </div>
+  {%- endunless -%}
+
+  {%- unless image_mobile == blank -%}
+    {%- assign img_url = image_mobile | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+    <div class="image-wrapper medium--hide large--hide">
+      <div
+       class="lazy-image"
+       style="padding-top:{{ 1 | divided_by: image_mobile.aspect_ratio | times: 100}}%;">
+        <img class="lazyload fade-in"
+          data-src="{{ img_url }}"
+          data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+          data-aspectratio="{{ image_mobile.aspect_ratio }}"
+          data-parent-fit="cover"
+          data-sizes="auto"
+          alt="{{ image_mobile.alt | default: 'Section image' }}"/>
+      </div>
+      <noscript>
+        <img src="{{ image_mobile | img_url: '1296x' }}" alt="{{ image_mobile.alt | default: 'Section image' }}"/>
+      </noscript>
+    </div>
+  {%- endunless -%}
+</div>

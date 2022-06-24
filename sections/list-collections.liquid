@@ -1,0 +1,244 @@
+<!-- /sections/list-collections.liquid -->
+
+{%- assign display_all_variants = false -%}
+{%- assign show_ads = true -%}
+
+{% case section.settings.grid %}
+  {% when 1 %}
+    {% assign grid_width_large = 'large--one-third push--large--one-third clear' %}
+    {% assign grid_width_medium = 'medium--one-half push--medium--one-quarter clear' %}
+    {% assign grid_width_small = 'small--one-whole' %}
+  {% when 2 %}
+    {% assign grid_width_large = 'large--one-half' %}
+    {% assign grid_width_medium = 'medium--one-half' %}
+    {% assign grid_width_small = 'small--one-half' %}
+  {% when 3 %}
+    {% assign grid_width_large = 'large--one-third' %}
+    {% assign grid_width_medium = 'medium--one-third' %}
+    {% assign grid_width_small = 'small--one-whole' %}
+  {% when 4 %}
+    {% assign grid_width_large = 'large--one-quarter' %}
+    {% assign grid_width_medium = 'medium--one-half' %}
+    {% assign grid_width_small = 'small--one-half' %}
+  {% when 5 %}
+    {% assign grid_width_large = 'large--one-fifth' %}
+    {% assign grid_width_medium = 'medium--one-third' %}
+    {% assign grid_width_small = 'small--one-half' %}
+  {% when 6 %}
+    {% assign grid_width_large = 'large--one-sixth' %}
+    {% assign grid_width_medium = 'medium--one-third' %}
+    {% assign grid_width_small = 'small--one-half' %}
+  {% else %}
+    {% assign grid_width_large = 'large--one-quarter' %}
+    {% assign grid_width_medium = 'medium--one-half' %}
+    {% assign grid_width_small = 'small--one-half' %}
+{% endcase %}
+
+{%- assign product_limit = section.settings.grid | times: section.settings.rows -%}
+
+
+{%- if section.settings.image -%}
+  {%- include 'collection-banner' with collection_title: 'All Products', collection_image: section.settings.image -%}
+{%- endif -%}
+
+<section class="collection__items">
+  <div class="collection__header">
+    <div class="section-body text-center">
+      <div class="wrapper">
+        <div class="grid">
+          <div class="grid__item large--six-twelfths push--large--three-twelfths">
+            <div class="collection__description rte h4--body">
+              What are you bringing on your next adventure?
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <nav class="sticky-nav collection__tags">
+    <ul class="collection__tags__list text-center">
+      <li class="collection__tags__item active">
+        <a href="#">
+          All
+        </a>
+      </li>
+      {% for block in section.blocks %}
+        {%- assign collection = collections[block.settings.collection] -%}
+        <li class="collection__tags__item">
+          <a href="{{ collection.url }}">{{ collection.title | escape }}</a>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </nav>
+
+  {% if section.settings.display_type == 'all' %}
+    {% for collection in collections %}
+      {% unless collection.handle == 'frontpage' %}
+        {%- if collection.image -%}
+          {%- include 'collection-banner' with section_id: collection.handle, collection_title: collection.title, collection_image: collection.image -%}
+        {%- endif -%}
+
+        <section class="collection">
+          <div class="collection__body">
+            <div class="section-body">
+              <div class="wrapper">
+                <div class="grid-uniform">
+                  {% unless display_all_variants %}
+                    {% for product in collection.products %}
+                      {% include 'product-grid-item' %}
+
+                      {%- if show_ads and forloop.index == 4 -%}
+                        {%- include 'product-grid-item-ads' -%}
+                        {%- assign show_ads = false -%}
+                      {%- endif -%}
+                    {% else %}
+                      <div class="grid__item">
+                        <p>{{ 'collections.general.no_matches' | t }}</p>
+                      </div>
+                    {% endfor %}
+                  {% else %}
+                    {% for product in collection.products %}
+                      {% for variant in product.variants %}
+                        {% include 'variant-grid-item' with variant %}
+
+                        {%- if show_ads and forloop.index == 4 -%}
+                          {%- include 'product-grid-item-ads' -%}
+                          {%- assign show_ads = false -%}
+                        {%- endif -%}
+                      {% endfor %}
+                    {% endfor %}
+                  {% endunless %}
+
+                  {%- if show_ads -%}
+                    {%- include 'product-grid-item-ads' -%}
+                    {%- assign show_ads = false -%}
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      {% endunless %}
+    {% endfor %}
+  {% else %}
+    {% for block in section.blocks %}
+      {%- assign show_ads = true -%}
+      {%- assign collection = collections[block.settings.collection] -%}
+
+      <section class="collection__item">
+        {%- if collection.image -%}
+          {%- include 'collection-banner' with section_id: collection.handle, collection_title: collection.title, collection_image: collection.image, parallax: false -%}
+        {%- endif -%}
+
+        <div class="collection__body">
+          <div class="section-body">
+            <div class="wrapper">
+              <div class="grid-uniform grid--condensed">
+                {% unless display_all_variants %}
+                  {% for product in collection.products %}
+                    {% include 'product-grid-item' %}
+
+                    {%- if show_ads and forloop.index == 4 -%}
+                      {%- include 'product-grid-item-ads' -%}
+                      {%- assign show_ads = false -%}
+                    {%- endif -%}
+                  {% else %}
+                    <div class="grid__item">
+                      <p>{{ 'collections.general.no_matches' | t }}</p>
+                    </div>
+                  {% endfor %}
+                {% else %}
+                  {% for product in collection.products %}
+                    {% for variant in product.variants %}
+                      {% include 'variant-grid-item' with variant %}
+
+                      {%- if show_ads and forloop.index == 4 -%}
+                        {%- include 'product-grid-item-ads' -%}
+                        {%- assign show_ads = false -%}
+                      {%- endif -%}
+                    {% endfor %}
+                  {% endfor %}
+                {% endunless %}
+
+                {%- if show_ads -%}
+                  {%- include 'product-grid-item-ads' -%}
+                  {%- assign show_ads = false -%}
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    {% endfor %}
+  {% endif %}
+</section>
+
+
+{% schema %}
+  {
+    "name": "Collections list",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "paragraph",
+        "content": "All of your collections are listed by default. To customize your list, choose 'Selected' and add collections."
+      },
+      {
+        "type": "radio",
+        "id": "display_type",
+        "label": "Select collections to show",
+        "default": "all",
+        "options": [
+          {
+            "value": "all",
+            "label": "All"
+          },
+          {
+            "value": "selected",
+            "label": "Selected"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Product grid"
+      },
+      {
+        "type":    "range",
+        "id":      "grid",
+        "min":     1,
+        "max":     6,
+        "step":    1,
+        "label":   "Products per row",
+        "default": 4
+      },
+      {
+        "type":    "range",
+        "id":      "rows",
+        "min":     1,
+        "max":     8,
+        "step":    1,
+        "label":   "Number of rows",
+        "default": 1
+      }
+    ],
+    "blocks": [
+      {
+        "type": "collection",
+        "name": "Collection",
+        "settings": [
+          {
+            "label": "Collection",
+            "id": "collection",
+            "type": "collection"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

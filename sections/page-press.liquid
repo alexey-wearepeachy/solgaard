@@ -1,0 +1,283 @@
+<!-- /sections/page-press.liquid -->
+
+<section
+ class="section-banner"
+ data-section-id="{{ section.id }}"
+ data-section-type="parallax">
+  {% if section.settings.image %}
+    {%- assign img_url = section.settings.image.src | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+    <div class="homepage-image fade-in-child preventOverflow {{ section.settings.text_color }} {{ section.settings.image_height }}" id="FeaturedImage-{{ section.id }}"
+      {% if section.settings.parallax %}
+        data-parallax-src="{{ section.settings.image | img_url: '18x' }}"
+        data-src="{{ img_url }}"
+        data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048, 2450, 2700, 3000, 3350, 3750, 4100, 4480]"
+        data-aspectratio="{{  section.settings.image.aspect_ratio }}"
+        data-sizes="auto"
+        style="background-image: url('{{ section.settings.image | img_url: '1x1' }}');"
+      {% endif %}>
+      <div class="content--centered">
+        <div class="text-center preventOverflowContent">
+          <p class="title--flex section-subtitle">Press + Media</p>
+
+          <h1 class="title--flex">
+            For press inquiries, please contact:<br />
+            press@solgaard.co
+          </h1>
+        </div>
+      </div>
+      <div class="image-overlay image-overlay-{{ section.settings.overlay_opacity }}"></div>
+      <div class="lazy-image" style="padding-top:{{ 1 | divided_by: section.settings.image.aspect_ratio | times: 100}}%; background-image: url('{{ section.settings.image | img_url: '1x1' }}');">
+        <img class="lazyload fade-in" {% if section.settings.parallax %} style="opacity: 0;"{% endif %}
+          alt="{{ section.settings.image.alt | default: page.title }}"
+          data-src="{{ img_url }}"
+          data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048, 2450, 2700, 3000, 3350, 3750, 4100, 4480]"
+          data-aspectratio="{{  section.settings.image.aspect_ratio }}"
+          data-parent-fit="cover"
+          data-sizes="auto"/>
+      </div>
+      <noscript>
+        <img src="{{ section.settings.image | img_url: '720x' }}" alt="{{ section.settings.image | default: page.title }}" class="responsive-wide-image"/>
+      </noscript>
+    </div>
+  {% endif %}
+</section>
+
+<nav class="sticky-nav blog__nav">
+  <ul class="blog__nav__list">
+    {%- assign section_names = 'Latest Coverage, Press Releases, Press Kit' | split: ', ' -%}
+    {%- for section_name in section_names -%}
+      <li class="blog__nav__item{% if forloop.first %} active{% endif %}">
+        <a class="blog__nav__link" href="#Section{{ section_name | camelcase }}">
+          {{ section_name | escape }}
+        </a>
+      </li>
+    {%- endfor -%}
+  </ul>
+</nav>
+
+<section class="section-press">
+  {%- assign blog = blogs.latest-coverage -%}
+  {%- assign blog_grid = 'large--one-third' -%}
+  {%- unless blog == blank or blog.empty? -%}
+    <section id="SectionLatestCoverage" class="section-blog section-blog--latest-coverage">
+      <div class="section-body">
+        <div class="wrapper">
+          <h2 class="text-center">Latest Coverage</h2>
+
+          <br />
+
+          <div class="grid-uniform">
+            {% for article in blog.articles limit:6 %}
+              {% include 'article-grid-item' %}
+            {% endfor %}
+          </div>
+
+          <div class="page-margin text-center">
+            <a href="{{ blog.url }}" class="btn btn--black btn--large">See more</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  {%- endunless -%}
+
+  <section id="SectionPressReleases" class="section-blog section-blog--press-releases">
+    <div class="section-body">
+      <div class="wrapper">
+
+        <h2 class="text-center">Press Releases</h2>
+
+        {%- assign blog = blogs.press -%}
+        {%- assign blog_grid = 'large--one-full' -%}
+        {%- unless blog == blank or blog.empty? -%}
+          <br />
+
+          <div class="grid-uniform">
+            {% for article in blog.articles limit:6 %}
+              {% include 'article-grid-item' %}
+            {% endfor %}
+          </div>
+        {%- endunless -%}
+      </div>
+    </div>
+  </section>
+
+  <section id="SectionPressKit" class="section-press-kit">
+    <div class="section-body">
+      <div class="wrapper">
+
+        <h2 class="text-center">Press Kit</h2>
+
+        <div class="page-margin grid-uniform">
+          {%- for i in (1..3) -%}
+            {%- capture press_kit_image_key -%}press_kit_image_{{ i }}{%- endcapture -%}
+            {%- capture press_kit_heading_key -%}press_kit_heading_{{ i }}{%- endcapture -%}
+            {%- capture press_kit_link_key -%}press_kit_link_{{ i }}{%- endcapture -%}
+
+            {%- assign press_kit_image = section.settings[press_kit_image_key] -%}
+            {%- assign press_kit_heading = section.settings[press_kit_heading_key] -%}
+            {%- assign press_kit_link = section.settings[press_kit_link_key] -%}
+            <div class="grid__item large--one-third">
+              <div class="press-kit__item">
+                {%- capture press_kit_content -%}
+                  <div class="press-kit__image">
+                    {%- include 'lazy-image' with image: press_kit_image -%}
+                  </div>
+
+                  <h4 class="press-kit__heading">{{ press_kit_heading }}</h4>
+                {%- endcapture -%}
+
+                {%- unless press_kit_link == blank -%}
+                  <a
+                   class="press-kit__link"
+                   href="{{ press_kit_link }}"
+                   target="_blank">
+                   {{ press_kit_content }}
+                  </a>
+                {%- else -%}
+                  <span class="press-kit__link press-kit__link--disabled">
+                    {{ press_kit_content }}
+                  </span>
+                {%- endunless -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+
+        <div class="page-margin">
+          <h4 class="text-center">
+            For press inquiries, please contact: <br />
+            <a href="mailto:press@solgaard.co" class="body">press@solgaard.co</a>
+          </h4>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+
+{% schema %}
+  {
+    "name": "Blog",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Banner image"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Banner image"
+      },
+      {
+        "type":    "range",
+        "id":      "overlay_opacity",
+        "min":     0,
+        "max":     100,
+        "step":    5,
+        "label":   "Image overlay opacity",
+        "info":    "Increase contrast for legible text.",
+        "default": 30
+      },
+      {
+        "type": "select",
+        "id": "image_height",
+        "label": "Section height",
+        "default": "use_screen_one_half",
+        "options": [
+          { "value": "use_screen_full", "label": "Full screen height"},
+          { "value": "use_screen_two_thirds", "label": "Tall"},
+          { "value": "use_screen_one_half", "label": "Medium"},
+          { "value": "use_screen_one_third", "label": "Short"},
+          { "value": "use_image", "label": "Image height"}
+        ]
+      },
+      {
+        "type": "select",
+        "id": "text_color",
+        "default": "homepage--white",
+        "label": "Text color",
+        "options": [
+          { "value": "homepage--white", "label": "White"},
+          { "value": "homepage--light", "label": "Light"},
+          { "value": "homepage--splash", "label": "Accent"},
+          { "value": "homepage--dark", "label": "Dark"}
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "parallax",
+        "default": true,
+        "label": "Enable parallax scroll"
+      },
+      {
+        "type": "header",
+        "content": "Sidebar"
+      },
+      {
+        "type": "checkbox",
+        "id": "tags",
+        "default": false,
+        "label": "Show tags"
+      },
+
+      {
+        "type": "header",
+        "content": "Press Kit #1"
+      },
+      {
+        "type": "image_picker",
+        "id": "press_kit_image_1",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "press_kit_heading_1",
+        "label": "Heading"
+      },
+      {
+        "type": "url",
+        "id": "press_kit_link_1",
+        "label": "Link"
+      },
+      {
+        "type": "header",
+        "content": "Press Kit #2"
+      },
+      {
+        "type": "image_picker",
+        "id": "press_kit_image_2",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "press_kit_heading_2",
+        "label": "Heading"
+      },
+      {
+        "type": "url",
+        "id": "press_kit_link_2",
+        "label": "Link"
+      },
+      {
+        "type": "header",
+        "content": "Press Kit #3"
+      },
+      {
+        "type": "image_picker",
+        "id": "press_kit_image_3",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "press_kit_heading_3",
+        "label": "Heading"
+      },
+      {
+        "type": "url",
+        "id": "press_kit_link_3",
+        "label": "Link"
+      }
+    ],
+    "blocks": [
+    ]
+  }
+{% endschema %}

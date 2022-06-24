@@ -1,0 +1,52 @@
+{%- liquid
+  assign image = section.settings.image
+  assign image_mobile = section.settings.image_mobile
+
+  if image_mobile == blank
+    assign image_mobile = block.settings.image
+endif
+-%}
+
+
+<div class="wrapper--full">
+  {%- unless image == blank -%}
+    <div class="small--hide">
+      {%- render 'lazy-image' with image: image -%}
+    </div>
+  {%- endunless -%}
+
+  {%- unless image_mobile == blank -%}
+    <div class="medium--hide large--hide">
+      {%- render 'lazy-image' with image: image_mobile -%}
+    </div>
+  {%- endunless -%}
+</div>
+
+
+{% schema %}
+  {
+    "name": "Image",
+    "tag": "section",
+    "class": "section-image",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image",
+        "info": "2048 x 2048px .jpg recommended"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_mobile",
+        "label": "Image (mobile)",
+        "info": "800 x 800px .jpg recommended"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Image",
+        "category": "Image"
+      }
+    ]
+  }
+{% endschema %}

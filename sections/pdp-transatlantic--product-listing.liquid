@@ -1,0 +1,38 @@
+{% assign section_title = product.metafields['product']['also_like'].title %}
+{% assign color_title = product.metafields['product']['also_like'].title_color %}
+{% assign product_cards = product.metafields['product']['also_like'].products %}
+
+<style>
+    #new-lp--product-listing .product-listing__container .product-listing__title {
+        color: {{ color_title }};
+    }
+</style>
+
+<section class="pdp-transatlantic--product-listing" data-section-id="{{ section.id }}" {% if section.settings.hide_section %}style="display: none;"{% endif %}>
+    <div id="new-lp--product-listing">
+        <div class="product-listing__container">
+            {% if section_title != blank %}
+                <h3 class="product-listing__title">{{ section_title }}</h3>
+            {% endif %}
+
+            <div class="product-listing__items">
+                {% for product_card in product_cards %}
+                    {% assign product_handle          = product_card.handle %}
+                    {% assign product_url             = all_products[product_handle].url %}
+                    {% assign bg_color_hb             = product_card.bg_color %}
+                    {% assign bg_img_hb               = product_card.bg_img %}
+                    {% assign product_img             = product_card.product_img %}
+                    {% assign product_img_hover       = product_card.product_img_hover %}
+                    {% assign product_title           = product_card.product_title %}
+                    {% assign product_title_color     = product_card.product_title_color %}
+                    {% assign product_subtitle        = product_card.product_subtitle %}
+                    {% assign product_subtitle_color  = product_card.product_subtitle_color %}
+                    {% assign low_box_bg              = product_card.low_box_bg %}
+                    {% assign label_text              = product_card.label_text %}
+
+                    {% include 'new-pdp--product-card' %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>

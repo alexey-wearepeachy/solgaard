@@ -1,0 +1,51 @@
+{%- liquid
+  assign title = block.settings.title | default: 'Featured In'
+  assign item_count = 0
+-%}
+
+{%- for i in (1..6) -%}
+  {%- capture image_key -%}image_{{ i }}{%- endcapture -%}
+  {%- liquid
+    assign image = block.settings[image_key]
+    unless image == blank
+      assign item_count = item_count | plus: 1
+    endunless
+  -%}
+{%- endfor -%}
+
+<div class="section-body">
+  <div class="wrapper">
+    <h2 class="section-title body">{{ title | escape }}</h2>
+
+    <div class="logo-bar grid" data-item-count="{{ item_count }}">
+      {%- for i in (1..6) -%}
+        {%- capture image_key -%}image_{{ i }}{%- endcapture -%}
+        {%- assign image = block.settings[image_key] -%}
+
+        {%- unless image == blank -%}
+        <div class="logo-bar__item" {{ block.shopify_attributes }}>
+            <div class="logo-bar__logo">
+              {% if image != blank %}
+                {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                <div class="lazy-image logo-bar__image" style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%; background-image:  url('{{ image | img_url: '1x1' }}');">
+                  <img class="lazyload fade-in"
+                    data-src="{{ img_url }}"
+                    data-widths="[110, 160, 220, 320, 480]"
+                    data-aspectratio="{{ image.aspect_ratio }}"
+                    data-parent-fit="cover"
+                    data-sizes="auto"
+                    alt="Logo image {{ forloop.index }}"/>
+                </div>
+                <noscript>
+                  <img src="{{ image | img_url: '160x' }}" alt="Logo image {{ forloop.index }}"/>
+                </noscript>
+              {% else %}
+                {{ 'logo' | placeholder_svg_tag: 'placeholder-svg' }}
+              {% endif %}
+            </div>
+          </div>
+        {%- endunless -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>

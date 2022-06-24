@@ -1,0 +1,363 @@
+{
+  "sections": {
+    "1651681626a097d6e7": {
+      "type": "page-impact--hero-section",
+      "settings": {
+        "section_bg_img": "shopify:\/\/shop_images\/impact-hero-img-v2.png",
+        "section_bg_img_mob": "shopify:\/\/shop_images\/hero-bg-img-mob.png",
+        "section_bg_color": "#334155",
+        "section_text_color": "#ffffff",
+        "section_title": "Our Impact",
+        "section_text": "Solgaard is independently and through partnerships working to reduce plastic waste on our planet. For every product sold, we save the equivalent of 229 plastic bottles from the ocean."
+      }
+    },
+    "16515611945ad59ee7": {
+      "type": "page-impact--preview-blocks",
+      "blocks": {
+        "839caff8-5c25-40cd-9fdd-dc1eaa38611a": {
+          "type": "block",
+          "settings": {
+            "block_bg_vector": "shopify:\/\/shop_images\/preview-block-bg-1.png",
+            "block_icon": "shopify:\/\/shop_images\/materials-icon.png",
+            "block_icon_bg_vector": "shopify:\/\/shop_images\/preview-block-icon-bg.png",
+            "block_text": "Our products are made with ocean-bound plastic.",
+            "block_btn_text": "Learn More",
+            "block_btn_link": "#impact-materials"
+          }
+        },
+        "bf6ecefb-5c97-41e6-8d9a-2f3fbe02d422": {
+          "type": "block",
+          "settings": {
+            "block_bg_vector": "shopify:\/\/shop_images\/preview-block-bg-2.png",
+            "block_icon": "shopify:\/\/shop_images\/packagine-icon.png",
+            "block_icon_bg_vector": "shopify:\/\/shop_images\/preview-block-icon-bg.png",
+            "block_text": "We have developed a network of partners to create a sustainable supply chain.",
+            "block_btn_text": "Learn More",
+            "block_btn_link": "#impact-supply-chain"
+          }
+        },
+        "57baa547-eb7f-4118-b8f0-86e0dd2a32c2": {
+          "type": "block",
+          "settings": {
+            "block_bg_vector": "shopify:\/\/shop_images\/preview-block-bg-1.png",
+            "block_icon": "shopify:\/\/shop_images\/recycling-icon.png",
+            "block_icon_bg_vector": "shopify:\/\/shop_images\/preview-block-icon-bg.png",
+            "block_text": "We aim to lengthen the lifecycle of our products by repairing and donating returned inventory.",
+            "block_btn_text": "Learn More",
+            "block_btn_link": "#impact-recycling"
+          }
+        },
+        "8e715052-af78-435c-b349-12bc5d090f6b": {
+          "type": "block",
+          "settings": {
+            "block_bg_vector": "shopify:\/\/shop_images\/preview-block-bg-2.png",
+            "block_icon": "shopify:\/\/shop_images\/partnerships-icon.png",
+            "block_icon_bg_vector": "shopify:\/\/shop_images\/preview-block-icon-bg.png",
+            "block_text": "Above and beyond: We are plastic negative and carbon neutral.",
+            "block_btn_text": "Learn More",
+            "block_btn_link": "#impact-projects"
+          }
+        }
+      },
+      "block_order": [
+        "839caff8-5c25-40cd-9fdd-dc1eaa38611a",
+        "bf6ecefb-5c97-41e6-8d9a-2f3fbe02d422",
+        "57baa547-eb7f-4118-b8f0-86e0dd2a32c2",
+        "8e715052-af78-435c-b349-12bc5d090f6b"
+      ],
+      "settings": {}
+    },
+    "1651578882d49f7299": {
+      "type": "page-impact--materials-section",
+      "blocks": {
+        "dc7116b3-d57a-4bec-ae45-6bf0d2bbd1cc": {
+          "type": "slider_blocks",
+          "settings": {
+            "slide_img": "shopify:\/\/shop_images\/shore-tex-slide-img.jpg",
+            "slide_title": "Shore-Tex®",
+            "slide_subtitle": "Our proprietary fabric made from ocean-bound plastic.",
+            "slide_text": "In 2017, we began working to build a supply chain for commercial scale plastic collection from beaches and riverways, using that to make fabric.  \n<br> <br>\nSolgaard unveiled its award-winning proprietary fabric made from ocean-\nbound plastic, Shore-Tex® in 2019. Acknowledged by Fast Company as \na ‘World Changing Ideas’ 2020 Award Finalist, Shore-Tex® is now used \nin all Solgaard bags and suitcases, including the Carry-On Closet, named \n‘Best Inventions’ Award Winner by TIME Magazine.\n<br> <br>"
+          }
+        },
+        "256dfe8f-eab1-4dfb-91f0-3a760c87c7b0": {
+          "type": "slider_blocks",
+          "settings": {
+            "slide_img": "shopify:\/\/shop_images\/shore-plast-slide-img.jpg",
+            "slide_title": "Shore-Plast™",
+            "slide_subtitle": "Durably made from ocean-bound plastic.",
+            "slide_text": "In 2019 we started researching ways to replace ABS plastic in our electronics with ocean-bound plastic collected from beaches and riverways.\n<br><br>\nIn 2020 we released the HomeBase, Solar Boombox, and Solar Juicepack all made with Shore-Plast as the primary material. In 2021, we launched the Shoreline watch, also made with Shore-Plast™"
+          }
+        },
+        "812f41fa-fd0b-4b89-be10-baa64db5251b": {
+          "type": "slider_blocks",
+          "settings": {
+            "slide_img": "shopify:\/\/shop_images\/recycled-slide-img.jpg",
+            "slide_title": "Recycled Polycarbonate",
+            "slide_subtitle": "Strength without compromising the durability of our suitcase shells.",
+            "slide_text": "Polycarbonate is a ridiculously strong material. We use up to 60% recycled polycarbonate - the maximum we're able to without compromising the strength and durability of our suitcase shells."
+          }
+        },
+        "77b09415-f1a2-4918-8da6-79be8e61adcc": {
+          "type": "statistic_blocks",
+          "settings": {
+            "block_bg_color": "",
+            "block_text_color": "#000000",
+            "block_title": "CURRENTLY",
+            "block_title_color": "#f19c62",
+            "block_number": "100<sup>% <\/sup>",
+            "block_text": "of our products are made with sustainable materials."
+          }
+        },
+        "82ded9b5-a966-4f57-9650-8d8d1fa2cf2a": {
+          "type": "statistic_blocks",
+          "disabled": true,
+          "settings": {
+            "block_bg_color": "#eae4e1",
+            "block_text_color": "#324154",
+            "block_title": "IN 2022",
+            "block_title_color": "#324154",
+            "block_number": "our first",
+            "block_text": "fully circular backpack will be released."
+          }
+        }
+      },
+      "block_order": [
+        "dc7116b3-d57a-4bec-ae45-6bf0d2bbd1cc",
+        "256dfe8f-eab1-4dfb-91f0-3a760c87c7b0",
+        "812f41fa-fd0b-4b89-be10-baa64db5251b",
+        "77b09415-f1a2-4918-8da6-79be8e61adcc",
+        "82ded9b5-a966-4f57-9650-8d8d1fa2cf2a"
+      ],
+      "settings": {
+        "section_icon": "shopify:\/\/shop_images\/materials-icon.png",
+        "section_icon_bg_vector": "shopify:\/\/shop_images\/preview-block-icon-bg.png",
+        "section_title": "Materials",
+        "section_text": "We are intentional when designing and manufacturing our products. We're working towards efficiency and circularity. As much of our material as possible is made from ocean bound plastic or biodegradeables. We're not perfect yet - but we're on a journey to do as much good as possible.",
+        "slider_title": "Our portfolio of sustainable materials includes:",
+        "section_statistic_capture": "",
+        "statistic_capture_color": "#324154",
+        "statistic_capture_weight": "bold"
+      }
+    },
+    "1651656277167e12f6": {
+      "type": "page-impact--supply-chain-section",
+      "blocks": {
+        "01a0aa8b-628d-475d-8141-ec820eef64d1": {
+          "type": "statistic_blocks",
+          "settings": {
+            "block_bg_color": "",
+            "block_text_color": "#000000",
+            "block_title": "CURRENTLY",
+            "block_title_color": "#f19c62",
+            "block_number": "100<sup>%<\/sup>",
+            "block_text": "of our travel gear factories have been audited within the last year."
+          }
+        },
+        "ab1063ff-2d2f-421c-8da5-014987483eb2": {
+          "type": "statistic_blocks",
+          "settings": {
+            "block_bg_color": "",
+            "block_text_color": "#000000",
+            "block_title": "CURRENTLY",
+            "block_title_color": "#f19c62",
+            "block_number": "85<sup>%<\/sup>",
+            "block_text": "of our partners use  reputable third party audits like ICAS and\/or WRAP. We're working towards 100%."
+          }
+        },
+        "6f016cc1-0b6e-4240-842d-ad313650fed4": {
+          "type": "statistic_blocks",
+          "settings": {
+            "block_bg_color": "#eae4e1",
+            "block_text_color": "#324154",
+            "block_title": "AS OF 2021",
+            "block_title_color": "#324154",
+            "block_number": "100<sup>%<\/sup>",
+            "block_text": "of our our freight shipments have had their carbon offset achieving neutrality."
+          }
+        }
+      },
+      "block_order": [
+        "01a0aa8b-628d-475d-8141-ec820eef64d1",
+        "ab1063ff-2d2f-421c-8da5-014987483eb2",
+        "6f016cc1-0b6e-4240-842d-ad313650fed4"
+      ],
+      "settings": {
+        "section_icon": "shopify:\/\/shop_images\/packagine-icon.png",
+        "section_icon_bg_vector": "shopify:\/\/shop_images\/preview-block-icon-bg.png",
+        "section_title": "Supply Chain",
+        "section_text": "Our supply chain is paramount at Solgaard. We ensure that our factory and supply chain partners pass the highest standard of audits. As we grow we maintain close attention to the experience of every person who contributes to our success.",
+        "section_statistic_capture": "",
+        "statistic_capture_color": "#324154",
+        "statistic_capture_weight": "bold"
+      }
+    },
+    "16516600346bb7f425": {
+      "type": "page-impact--recycling-section",
+      "blocks": {
+        "86a6a847-4bf7-424b-ab53-4c7618041aa3": {
+          "type": "statistic_blocks",
+          "settings": {
+            "block_bg_color": "",
+            "block_text_color": "#000000",
+            "block_title": "CURRENTLY",
+            "block_title_color": "#f19c62",
+            "block_number": "600K",
+            "block_text": "lbs of plastic have been diverted from our oceans with our current plastic removal partnerships."
+          }
+        },
+        "b2ddac19-250b-450e-9fdf-c9ebd3c66b30": {
+          "type": "statistic_blocks",
+          "settings": {
+            "block_bg_color": "#eae4e1",
+            "block_text_color": "#324154",
+            "block_title": "BY 2023",
+            "block_title_color": "#324154",
+            "block_number": "our first",
+            "block_text": "visitor friendly plastic reclamation site will be completed."
+          }
+        }
+      },
+      "block_order": [
+        "86a6a847-4bf7-424b-ab53-4c7618041aa3",
+        "b2ddac19-250b-450e-9fdf-c9ebd3c66b30"
+      ],
+      "settings": {
+        "section_icon": "shopify:\/\/shop_images\/recycling-icon.png",
+        "section_icon_bg_vector": "shopify:\/\/shop_images\/preview-block-icon-bg.png",
+        "section_title": "Recycling and Repurposing",
+        "section_text": "The circularity and durability of our luggage is of the highest concern to our team. In addition to preventing plastic from entering the ocean, our intention is to begin robust carbon capturing initiatives.",
+        "section_img": "shopify:\/\/shop_images\/recycling-block-img.png",
+        "section_img_mob": "shopify:\/\/shop_images\/recycling-block-img-mob.jpg",
+        "statistic_block_title": "Impact and Progression",
+        "section_statistic_capture": "",
+        "statistic_capture_color": "#324154",
+        "statistic_capture_weight": "bold"
+      }
+    },
+    "1651662422e7ce2a23": {
+      "type": "page-impact--projects-section",
+      "blocks": {
+        "32d85203-f9ba-4b56-975a-79bff9984f2a": {
+          "type": "slider_blocks",
+          "settings": {
+            "slide_img": "shopify:\/\/shop_images\/Sugai-Watch-img.png",
+            "slide_title": "Sungai Watch",
+            "slide_subtitle": "Our multi-year ocean-bound plastic collection and mangrove health restoration project in partnership\nwith community river cleanup organization, Sungai Watch, based in Indonesia.",
+            "slide_text": "As part of our flagship impact partnership with Sungai Watch, we’ve hired a team of 13 locals to collect\nover 1,000 kgs of plastic per day from rivers and mangroves in Indonesia. In addition to purchasing\nequipment to wash and shred the ocean-bound plastic waste collected, we’ve invested in the development\nof a plastic waste material sorting facility that will be open for public visitation later this year. \nThese efforts not only intercept ocean-bound plastic from polluting the ocean, but also revitalize the\nmangrove ecosystems and restore their natural ability to capture carbon."
+          }
+        },
+        "b62ad346-ff6b-4240-b085-d9d0aa9989a4": {
+          "type": "slider_blocks",
+          "settings": {
+            "slide_img": "shopify:\/\/shop_images\/Eco-Brick-Project-img.png",
+            "slide_title": "Eco-Brick Project",
+            "slide_subtitle": "In partnership with Greeneration in Indonesia, we support the infrastructure build out of an eco-brick facility.",
+            "slide_text": "Solgaard provided the funding for the infrastructure and equipment necessary to make eco bricks made from ocean plastic in Banuwangi, Indonesia.\n<br><br>\nThis project is managed by Greeneration and was done in partnership with Coralive and Eco-Ranger ID."
+          }
+        },
+        "5fdd828f-a927-4428-8cd3-36c15b498f88": {
+          "type": "slider_blocks",
+          "settings": {
+            "slide_img": "shopify:\/\/shop_images\/LW_NextWave_CaseStudies_ArtDirection_RD1_COVER-SLIDE_1_1.jpg",
+            "slide_title": "NextWave Plastics",
+            "slide_subtitle": "We are a proud member of the NextWave Plastics consortium of companies.",
+            "slide_text": "The NextWave   Plastics   is   an   open-source   initiative   convened   by   Lonely   Whale,   connecting   and   uniting\ntraditionally   competing   multinational   companies   to   develop   the   first   global   network   of   ocean-bound\nplastics supply chains. \nOur   fellow   NextWave   Plastics   member   companies   include;   Bureo   Inc,   CPI   Card   Group,   Dell\nTechnologies, Herman Miller, Humanscale, HP, IKEA, Interface, and more."
+          }
+        },
+        "2566dc8b-7710-43c3-bc49-6de5d5ef5737": {
+          "type": "second_slider_blocks",
+          "disabled": true,
+          "settings": {
+            "slide_img": "shopify:\/\/shop_images\/slide-nextwave-img.png"
+          }
+        },
+        "e5dde2c1-e25f-43dc-bd03-adbf4dc84482": {
+          "type": "third_slider_blocks",
+          "disabled": true,
+          "settings": {
+            "slide_text": "Plastic Negative (complete)"
+          }
+        },
+        "0ab65719-6d10-49e1-a9c6-e470352ee0b4": {
+          "type": "third_slider_blocks",
+          "settings": {
+            "slide_text": "B-Corp (in progress)"
+          }
+        },
+        "b9d062a6-26be-4f37-948f-8c8f0944c0fc": {
+          "type": "third_slider_blocks",
+          "settings": {
+            "slide_text": "Climate Positive  (in progress)"
+          }
+        }
+      },
+      "block_order": [
+        "32d85203-f9ba-4b56-975a-79bff9984f2a",
+        "b62ad346-ff6b-4240-b085-d9d0aa9989a4",
+        "5fdd828f-a927-4428-8cd3-36c15b498f88",
+        "2566dc8b-7710-43c3-bc49-6de5d5ef5737",
+        "e5dde2c1-e25f-43dc-bd03-adbf4dc84482",
+        "0ab65719-6d10-49e1-a9c6-e470352ee0b4",
+        "b9d062a6-26be-4f37-948f-8c8f0944c0fc"
+      ],
+      "settings": {
+        "section_icon": "shopify:\/\/shop_images\/partnerships-icon.png",
+        "section_icon_bg_vector": "shopify:\/\/shop_images\/preview-block-icon-bg.png",
+        "section_title": "Projects & Partnerships",
+        "section_text": "One of the most exciting parts of Solgaard is the impact we’re able to have while working with our network of impact partners. Through collaboration we’re able to have a greater impact.",
+        "first_slider_title": "Current Partnerships & Projects",
+        "second_slider_title": "",
+        "third_slider_title": "Company Goals"
+      }
+    },
+    "1651670881b8b7abc6": {
+      "type": "page-impact--highlights-section",
+      "blocks": {
+        "5c9896b3-1a4d-4ad2-9eac-6636b1f402f4": {
+          "type": "statistic_blocks",
+          "settings": {
+            "block_bg_color": "",
+            "block_text_color": "#000000",
+            "block_title": "EQUIVALENT OF",
+            "block_title_color": "#f19c62",
+            "block_number": "33 <sup>MILLION<\/sup>",
+            "block_text": "plastic bottles saved from the ocean - collected from rivers and beaches."
+          }
+        },
+        "2e739b58-7e4d-410c-a9cb-ad371e7ecb6e": {
+          "type": "statistic_blocks",
+          "settings": {
+            "block_bg_color": "",
+            "block_text_color": "#000000",
+            "block_title": "NOW",
+            "block_title_color": "#f19c62",
+            "block_number": "<sup>Plastic Negative<\/sup>",
+            "block_text": "5lbs of plastic removed for every item sold. The equivalent of 229 plastic bottles."
+          }
+        }
+      },
+      "block_order": [
+        "5c9896b3-1a4d-4ad2-9eac-6636b1f402f4",
+        "2e739b58-7e4d-410c-a9cb-ad371e7ecb6e"
+      ],
+      "settings": {
+        "section_icon": "shopify:\/\/shop_images\/highlights-icon.png",
+        "section_icon_bg_vector": "shopify:\/\/shop_images\/preview-block-icon-bg.png",
+        "section_title": "Solgaard Highlight Impacts",
+        "section_text": "",
+        "section_statistic_capture": "Join the movement, Make an impact.",
+        "statistic_capture_color": "#b8c3cc",
+        "statistic_capture_weight": "normal"
+      }
+    }
+  },
+  "order": [
+    "1651681626a097d6e7",
+    "16515611945ad59ee7",
+    "1651578882d49f7299",
+    "1651656277167e12f6",
+    "16516600346bb7f425",
+    "1651662422e7ce2a23",
+    "1651670881b8b7abc6"
+  ]
+}

@@ -1,0 +1,18 @@
+<li class="swatch__item{% if option.selected_value == value %} active{% endif %}{% unless variant_avialable %} sold-out{% endunless %}">
+  {% assign product_color = value %}
+  {% assign variant = false %}
+  {% for v in product.variants %}
+    {% if v[option_key] == value %}
+      {% assign variant = v %}
+    {% endif %}
+  {% endfor %}
+  <a
+   href="{{ variant.url | within: collection }}"
+   class="swatch__link"
+   data-value="{{ value | escape }}"
+   data-variant-image="{{ variant.image | img_url: '600x' }}"
+   data-variant-image-id="{{ variant.image.id }}"
+   title="{{ value | escape }}">
+    <span class="swatch__link__text{% if option.name == 'Color' %} hide{% endif %}">{{ value }}</span>
+  </a>
+</li>

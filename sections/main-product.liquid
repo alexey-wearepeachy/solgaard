@@ -1,0 +1,16 @@
+<section
+ class="product-section"
+ id="ProductSection-{{ section.id }}"
+ data-section-id="{{ section.id }}"
+ data-section-type="product"
+ data-image-zoom-enable="{{ settings.product_zoom_enable }}">
+  {% include 'product' %}
+</section>
+
+{% schema %}
+  {
+    "name": "Main Product Form",
+    "settings": [
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,160 @@
+<div class="fundlify-boxed fundlify-boxed-col1">
+  <h2 class="section-title text-center">Completed Campaigns</h2>
+
+  {%- for block in section.blocks -%}
+    {%- assign image = block.settings.image -%}
+    {%- assign image_mobile = block.settings.image_mobile | default: image -%}
+    {%- assign title = block.settings.title -%}
+    {%- assign content = block.settings.content -%}
+    {%- assign funded_by = block.settings.funded_by -%}
+    {%- assign raised = block.settings.raised -%}
+    {%- assign funded = block.settings.funded -%}
+    {%- assign btn_text = block.settings.btn_text -%}
+    {%- assign btn_link = block.settings.btn_link -%}
+
+    <div class="boxed-container">
+      <div class="fundlify_collection_wrapper boxed-wrapper column-1">
+        <div class="mix fundlify_product_itm  type-limited   commit ">
+          <a href="{{ btn_link }}">
+            <div class="fundlify_product_img">
+              {%- unless image == blank -%}
+                <div
+                 class="background-size-cover small--hide lazyload"
+                 data-bgset="{% include 'bgset', image: image %}"
+                 style="z-index: 0;"></div>
+
+                <div
+                 class="background-size-cover medium--hide large--hide lazyload"
+                 data-bgset="{% include 'bgset', image: image_mobile %}"
+                 style="z-index: 0;"></div>
+              {%- endunless -%}
+
+              <div class="campaign-heading boxed1-col">
+                {%- unless title == blank -%}
+                  <div class="fundlify_product_title">{{ title | escape }}</div>
+                {%- endunless -%}
+
+                {%- unless content == blank -%}
+                  <div class="fundlify_product_subtitle">{{ content | escape }}</div>
+                {%- endunless -%}
+              </div>
+            </div>
+
+            <div class="campaign_progressbar">
+              <div
+               class="bar"
+               style="max-width:100%; background-color:#42b874;"></div>
+            </div>
+          </a>
+
+          <div class="fundlify-productInfo">
+            {%- unless funded_by == blank -%}
+              <div class="funding-ends-col campaignInfo">
+                <span
+                 class="svg-wrapper"
+                 style="display:inline-block; width:24px; vertical-align:middle; margin-right:5px;">
+                  {% include 'icon-checkmark-green-bg' %}
+                </span>
+
+                Fully Funded By <span><strong>{{ funded_by | escape }}</strong></span>
+              </div>
+            {%- endunless -%}
+
+            {%- unless funded_by == blank -%}
+              <div class="preorder-col campaignInfo">Raised: <span><strong>{{ raised | escape }}</strong></span></div>
+            {%- endunless -%}
+
+            {%- unless funded == blank -%}
+              <div class="regular-col campaignInfo">Funded: <span><strong>{{ funded | escape }}</strong></span></div>
+            {%- endunless -%}
+
+            {%- comment -%}
+              <div class="funded-percent-col campaignInfo">Funded <span>0%</span></div>
+            {%- endcomment -%}
+
+            {%- unless btn_link == blank or btn_text == blank -%}
+              <div class="fundlify-action">
+                <a href="{{ btn_link }}" class="btn action_btn">{{ btn_text | escape }}</a>
+              </div>
+            {%- endunless -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  {%- endfor -%}
+</div>
+
+{% schema %}
+  {
+    "name": "Funded Campaigns",
+    "settings": [
+    ],
+    "blocks": [
+      {
+        "type": "funded-campaign",
+        "name": "Funded campaign",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image",
+            "info": "2000 x 1000px .jpg recommended"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_mobile",
+            "label": "Image (mobile)",
+            "info": "1080 x 1229px .jpg recommended"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Headling",
+            "placeholder": "Lifepack",
+            "default": "Lifepack"
+          },
+          {
+            "type": "textarea",
+            "id": "content",
+            "label": "Content",
+            "placeholder": "Our flagship product, the Lifepack solar powered, anti-theft backpack",
+            "default": "Our flagship product, the Lifepack solar powered, anti-theft backpack"
+          },
+          {
+            "type": "text",
+            "id": "funded_by",
+            "label": "Funded by",
+            "placeholder": "3,118 backers",
+            "default": "3,118 backers"
+          },
+          {
+            "type": "text",
+            "id": "raised",
+            "label": "Raised",
+            "placeholder": "$615,692USD",
+            "default": "$615,692USD"
+          },
+          {
+            "type": "text",
+            "id": "funded",
+            "label": "Funded",
+            "placeholder": "August 2020",
+            "default": "August 2020"
+          },
+
+          {
+            "type": "text",
+            "id": "btn_text",
+            "label": "Button text",
+            "default": "Shop Now"
+          },
+          {
+            "type": "url",
+            "id": "btn_link",
+            "label": "Button link"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

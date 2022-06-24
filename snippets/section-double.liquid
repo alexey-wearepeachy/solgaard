@@ -1,0 +1,110 @@
+{%- liquid
+  assign text_block_first = block.settings.text_block_first
+  assign image_block_size = block.settings.image_block_size
+  assign text_align = block.settings.text_align
+  assign bg_color = block.settings.bg_color
+  assign color = block.settings.color
+  assign video = block.settings.video
+  assign video_link = block.settings.video_link
+  assign image = block.settings.image
+  assign title = block.settings.title
+  assign content = block.settings.content
+  assign content_small = block.settings.content_small
+
+  assign gird_class_content = 'large--one-half'
+  assign gird_class_image = 'large--one-half'
+
+  if template.name == 'product'
+    case image_block_size
+      when 'Large'
+        assign gird_class_image = 'large--seven-twelfths'
+        assign gird_class_content = 'large--five-twelfths'
+    endcase
+  endif
+-%}
+
+<div
+ class="section-body {{ text_align }}"
+ style="
+ {%- unless bg_color == blank -%}
+   background-color:{{bg_color}};
+ {%- endunless -%}
+ {%- unless color == blank -%}
+   color:{{color}};
+ {%- endunless -%}
+ ">
+  <div class="wrapper">
+    <div class="grid">
+      <div class="grid__item{% comment %} large--ten-twelfths push--large--one-twelfth{% endcomment %}">
+
+        <div class="grid--full{% if text_block_first %} grid--rev{% endif %} large--align-items-center">
+          <div class="grid__item {{ gird_class_image }}">
+            {%- unless video == blank -%}
+              {% capture video_mp4 %}{{ video }}.mp4{% endcapture %}
+              {% capture video_webm %}{{ video }}.webm{% endcapture %}
+              {% capture video_ogv %}{{ video }}.ogv{% endcapture %}
+              <div class="video-wrapper">
+                <video autoplay loop muted playsinline
+                {% unless image == blank %}
+                  poster="{{ image | img_url: '2000x' }}"
+                {% endunless %}>
+                  <source src="{{ video_mp4 | file_url }}" type="video/mp4">
+                  <source src="{{ video_webm | file_url }}" type="video/webm">
+                  <source src="{{ video_ogv | file_url }}" type="video/ogg">
+                </video>
+              </div>
+            {%- else -%}
+              {%- unless video_link == blank -%}
+                {%- if video_link.type == 'youtube' -%}
+                  <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ video_link.id }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                {%- endif -%}
+              {%- else -%}
+                {%- unless image == blank -%}
+                  {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                  <div class="image-wrapper">
+                    <div
+                     class="lazy-image"
+                     style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;">
+                      <img class="lazyload fade-in"
+                        data-src="{{ img_url }}"
+                        data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                        data-aspectratio="{{  image.aspect_ratio }}"
+                        data-parent-fit="cover"
+                        data-sizes="auto"
+                        alt="{{ image.alt | default: title }}" />
+                    </div>
+                    <noscript>
+                      <img src="{{ image | img_url: '1296x' }}" alt="{{ image.alt | default: title }}" />
+                    </noscript>
+                  </div>
+                {%- endunless -%}
+              {%- endunless -%}
+            {%- endunless -%}
+          </div>
+
+          <div class="grid__item {{ gird_class_content }}">
+            <div class="content">
+              <div class="preventOverflowContent">
+                {%- unless title == blank -%}
+                  <h2
+                   class="section-title text-left"
+                   {% unless color == blank %}
+                     style="color:{{color}};"
+                   {% endunless %}>{{ title | newline_to_br }}</h2>
+                {%- endunless -%}
+
+                {%- unless content == blank -%}
+                  <div class="rte rte--large">{{ content }}</div>
+                {%- endunless -%}
+
+                {%- unless content_small == blank -%}
+                  <div class="rte rte--small">{{ content_small }}</div>
+                {%- endunless -%}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

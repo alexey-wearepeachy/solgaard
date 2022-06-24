@@ -1,0 +1,152 @@
+{%- assign block_size = section.blocks.size -%}
+
+{%- assign display = section.settings.display -%}
+{%- assign display_class = '' -%}
+{% if display == 'mobile_only' %}
+	{%- assign display_class = 'cf-mobile-only' -%}
+{% elsif display == 'desktop_only' %}
+	{%- assign display_class = 'cf-desktop-only' -%}
+{% endif %}
+
+<div
+ class="homepage-logos cf-display-section {{display_class}} {{ section.settings.homepage_logos_bg_color }}{% if section.settings.title != blank %} homepage-logos--tall{% endif %}"
+ data-section-id="{{ section.id }}"
+ data-section-type="homepage-logos"
+ data-block-size="{{ block_size }}">
+  <div class="wrapper">
+
+    {% if section.settings.title != blank %}
+      <h4 class="home__subtitle">{{ section.settings.title | escape }}</h4>
+    {% endif %}
+
+    {% if section.blocks.size > 0 %}
+      <div
+       id="HomepageLogos-{{ section.id }}"
+       class="logo-bar">
+        {% for block in section.blocks %}
+          <div class="logo-bar__item" {{ block.shopify_attributes }}>
+
+            <div class="logo-bar__logo">
+              {% if block.settings.image != blank %}
+                {%- assign img_url = block.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                <div class="lazy-image logo-bar__image" style="padding-top:{{ 1 | divided_by: block.settings.image.aspect_ratio | times: 100}}%; background-image:  url('{{ block.settings.image | img_url: '1x1' }}');">
+                  <img class="lazyload fade-in"
+                    data-src="{{ img_url }}"
+                    data-widths="[110, 160, 220, 320, 480]"
+                    data-aspectratio="{{  block.settings.image.aspect_ratio }}"
+                    data-parent-fit="cover"
+                    data-sizes="auto"
+                    alt="Logo image {{ forloop.index }}"/>
+                </div>
+                <noscript>
+                  <img src="{{ block.settings.image | img_url: '160x' }}" alt="Logo image {{ forloop.index }}"/>
+                </noscript>
+              {% else %}
+                {{ 'logo' | placeholder_svg_tag: 'placeholder-svg' }}
+              {% endif %}
+            </div>
+
+            {%- unless block.settings.content == blank -%}
+              <div class="logo-bar__content rte">{{ block.settings.content }}</div>
+            {%- endunless -%}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% if section.blocks.size == 0 %}
+      <div class="text-center">{{ 'home_page.onboarding.no_content' | t }}</div>
+    {% endif %}
+
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Logo list",
+    "class": "index-section",
+    "max_blocks": 20,
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Logo list"
+      },
+      {
+        "type": "select",
+        "id": "homepage_logos_bg_color",
+        "label": "Background color",
+        "default": "homepage--light",
+        "options": [
+          { "value": "homepage--white", "label": "White"},
+          { "value": "homepage--light", "label": "Light"},
+          { "value": "homepage--splash", "label": "Accent"},
+          { "value": "homepage--dark", "label": "Dark"}
+        ]
+      },
+      {
+        "type": "select",
+        "id": "display",
+        "label": "DIsplay",
+        "options": [
+          {
+            "value": "both",
+            "label": "Mobile & Desktop"
+          },
+          {
+            "value": "mobile_only",
+            "label": "Mobile Only"
+          },
+          {
+            "value": "desktop_only",
+            "label": "Desktop Only"
+          }
+        ],
+        "default": "both"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "logo_image",
+        "name": "Logo",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image",
+            "info": "640 x 640px .png recommended"
+          },
+          {
+            "type": "textarea",
+            "id": "content",
+            "label": "Content"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Logo list",
+        "category": "Image",
+        "blocks": [
+          {
+            "type": "logo_image"
+          },
+          {
+            "type": "logo_image"
+          },
+          {
+            "type": "logo_image"
+          },
+          {
+            "type": "logo_image"
+          },
+          {
+            "type": "logo_image"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,51 @@
+<section class="only-button-section" data-section-id="{{ section.id }}" {% if section.settings.hide_section %}style="display: none;"{% endif %}>
+    {% include 'only-btn-section' %}
+</section>
+
+{% schema %}
+{
+    "name": "Only Button Section",
+    "settings": [
+        {
+            "type": "checkbox",
+            "id": "hide_section",
+            "label": "Hide section?",
+            "default": false
+        },
+        {
+            "type": "color",
+            "id": "bg_color",
+            "label": "Background color of section",
+            "default": "#FFFFFF"
+        },
+        {
+            "type": "text",
+            "id": "btn_text",
+            "label": "Button text"
+        },
+        {
+            "type": "url",
+            "id": "btn_url",
+            "label": "Button link"
+        },
+        {
+            "type": "color",
+            "id": "btn_bg_color",
+            "label": "Background color of button",
+            "default": "#ff7d1f"
+        },
+        {
+            "type": "color",
+            "id": "btn_text_color",
+            "label": "text color of button",
+            "default": "#ffffff"
+        }
+    ],
+    "presets": [
+        {
+            "category": "Only Button Section",
+            "name": "Only Button Section"
+        }
+    ]
+}
+{% endschema %}

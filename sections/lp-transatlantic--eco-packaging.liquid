@@ -1,0 +1,78 @@
+{% assign image               = section.settings.image %}
+{% assign title               = section.settings.title %}
+{% assign description         = section.settings.description %}
+{% assign icon                = section.settings.icon %}
+{% assign text_align_left     = section.settings.text_align_left %}
+{% assign text_align_left_mob = section.settings.text_align_left_mob %}
+{% assign bg_color_first      = section.settings.bg_color_first %}
+{% assign bg_color_second     = section.settings.bg_color_second %}
+{% assign bg_color_first_mob  = section.settings.bg_color_first_mob %}
+{% assign bg_color_second_mob = section.settings.bg_color_second_mob %}
+
+<section id="lp-transatlantic--eco-packaging">
+    {% render 'section-eco-packaging' image: image, title: title, description: description, icon: icon, text_align_left: text_align_left, text_align_left_mob: text_align_left_mob, bg_color_first: bg_color_first, bg_color_second: bg_color_second, bg_color_first_mob: bg_color_first_mob, bg_color_second_mob: bg_color_second_mob %}
+</section>
+
+{% schema %}
+{
+    "name": "Transatlantic packaging",
+    "settings": [
+        {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+        },
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+        },
+        {
+            "type": "textarea",
+            "id": "description",
+            "label": "Description"
+        },
+        {
+            "type": "textarea",
+            "id": "icon",
+            "label": "Icon SVG"
+        },
+        {
+            "type": "checkbox",
+            "id": "text_align_left",
+            "label": "Text align left?(desktop)",
+            "default": false
+        },
+        {
+            "type": "checkbox",
+            "id": "text_align_left_mob",
+            "label": "Text align left?(mobile)",
+            "default": false
+        },
+        {
+            "type": "color",
+            "id": "bg_color_first",
+            "label": "First box color(desktop)",
+            "default": "#F9FBFC"
+        },
+        {
+            "type": "color",
+            "id": "bg_color_second",
+            "label": "Second box color(desktop)",
+            "default": "#DDEAEF"
+        },
+        {
+            "type": "color",
+            "id": "bg_color_first_mob",
+            "label": "First box color(mobile)",
+            "default": "#F9FBFC"
+        },
+        {
+            "type": "color",
+            "id": "bg_color_second_mob",
+            "label": "Second box color(mobile)",
+            "default": "#F9FBFC"
+        }
+    ]
+}
+{% endschema %}

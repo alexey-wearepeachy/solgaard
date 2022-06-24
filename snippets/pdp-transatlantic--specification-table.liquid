@@ -1,0 +1,52 @@
+{% assign specification_table   = product.metafields.product.specification_table %}
+{% assign table_title           = specification_table['table_title'] %}
+{% assign table_content         = specification_table['table_content'] %}
+{% assign is_show_section       = specification_table['is_show_section'] %}
+
+{% assign section_bg_color     = specification_table.section_bg_color %}
+{% assign text_color           = specification_table.text_color %}
+{% assign border_color         = specification_table.border_color %}
+
+{% if is_show_section == 'show' %}
+<style>
+    {% if section_bg_color.size > 0 %}
+        .specification-table {
+            background-color: {{ section_bg_color }};
+        }
+    {% endif %}
+
+    {% if text_color.size > 0 %}
+        .specification-table * {
+            color: {{ text_color }} !important;
+        }
+    {% endif %}
+
+    {% if border_color.size > 0 %}
+        .specification-table .specification-table__item:first-of-type {
+            border-top: 1px solid {{ border_color }};
+        }
+
+        .specification-table .specification-table__item {
+            border-bottom: 1px solid {{ border_color }};
+        }
+    {% endif %}
+</style>
+
+<section
+    class="specification-table"
+>
+    <div class="specification-table-wrapper">
+        <h3 class="specification-table__title">
+            {{ table_title }}
+        </h3>
+        {% for content in  table_content %}
+            <div class="specification-table__item">
+                <div class="key">{{ content.title }}</div>
+                <div class="value">{{ content.description }}</div>
+            </div>
+        {% endfor %}
+    </div>
+
+</section>
+{% endif %}
+

@@ -1,0 +1,67 @@
+{%- liquid
+  assign column_width = 'large--two-thirds push--large--one-sixth'
+  case section.blocks.size
+    when 2
+      assign column_width = 'large--one-half'
+    when 3
+      assign column_width = 'large--one-third'
+  endcase
+-%}
+
+<div class="section-body bg--light">
+  <div class="wrapper">
+    <div class="grid">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign title = block.settings.title
+          assign richtext = block.settings.richtext
+        -%}
+        <div class="grid__item {{ column_width }}">
+          {%- unless title == blank -%}
+            <h2 class="section-title text-left">{{ title | escape }}</h2>
+          {%- endunless -%}
+
+          {%- if richtext != blank -%}
+            <div class="rte">{{ richtext }}</div>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+
+
+{% schema %}
+  {
+    "name": "Richtext",
+    "tag": "section",
+    "class": "section-richtext",
+    "settings": [
+    ],
+    "blocks": [
+      {
+        "type": "block",
+        "name": "Block",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "richtext",
+            "id": "richtext",
+            "label": "Richtext"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Richtext",
+        "category": "richtext"
+      }
+    ]
+  }
+{% endschema %}

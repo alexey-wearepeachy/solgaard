@@ -1,0 +1,79 @@
+{% assign slides = product.metafields['product']['banner_slider'].slides %}
+
+<style>
+    {% for slide in slides %}
+        {% assign slide_id         = slide.slide_id %}
+        {% assign bg_color         = slide.bg_color %}
+        {% assign bg_image         = slide.bg_image %}
+        {% assign bg_image_mob     = slide.bg_image_mob %}
+        {% assign slide_text_color = slide.slide_text_color %}
+
+        {% if bg_image != blank %}
+            #pdp-transatlantic--banner-slider #banner-slide--{{ slide_id }} {
+                background-image: url("{{ bg_image_mob }}");
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+
+            @media (min-width: 650px) {
+                #pdp-transatlantic--banner-slider #banner-slide--{{ slide_id }} {
+                    background-image: url("{{ bg_image }}");
+                }
+            }
+        {% else %}
+            #pdp-transatlantic--banner-slider #banner-slide--{{ slide_id }} {
+                background-color: {{ bg_color }};
+            }
+        {% endif %}
+
+        #pdp-transatlantic--banner-slider #banner-slide--{{ slide_id }} .banner-slide__content {
+            color: {{ slide_text_color }};
+        }
+    {% endfor %}
+</style>
+
+<section id="pdp-transatlantic--banner-slider">
+    <div class="banner-slider__wrapper">
+        <div class="swiper banner-slider">
+            <div class="swiper-wrapper">
+                {% for slide in slides %}
+                    {% assign slide_id         = slide.slide_id %}
+                    {% assign bg_video         = slide.bg_video %}
+                    {% assign bg_video_mob     = slide.bg_video_mob %}
+                    {% assign slide_text       = slide.slide_text %}
+                    <div id="banner-slide--{{ slide_id }}" class="banner-slide swiper-slide">
+                        {% if bg_video contains '.mp4' %}
+                            <div class="banner-slide__video-bg" aria-hidden="true">
+                                <video autoplay loop muted playsinline src="{{ bg_video }}" class="video-bg__desk"></video>
+                                <video autoplay loop muted playsinline src="{{ bg_video_mob }}" class="video-bg__mob"></video>
+                            </div>
+                        {% endif %}
+
+                        <div class="banner-slide__content">
+                            {{ slide_text }}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="banner-slider-pagination"></div>
+        </div>
+    </div>
+</section>
+
+<script>
+    var swiper = new Swiper(".banner-slider", {
+        pagination: {
+            el: ".banner-slider-pagination",
+            clickable: true
+        },
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        let slides = document.querySelectorAll(".banner-slider .swiper-slide").length;
+
+        if(slides <= 1) {
+            document.querySelector(".banner-slider").classList.add("disabled");
+        }
+    });
+</script>

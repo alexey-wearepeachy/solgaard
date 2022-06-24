@@ -1,0 +1,99 @@
+{%- liquid
+  assign text_block_first = block.settings.text_block_first
+  assign image_block_size = block.settings.image_block_size
+  assign text_align = block.settings.text_align
+  assign bg_color = block.settings.bg_color
+  assign color = block.settings.color
+
+  assign title = block.settings.title
+  assign content = block.settings.content
+  assign feature_list = block.settings.feature_list
+
+  assign gird_class_content = 'large--one-half'
+  assign gird_class_image = 'large--one-half'
+-%}
+
+<section class="section-list-and-images">
+  <div
+   class="section-body {{ text_align }}"
+   style="
+   {%- unless bg_color == blank -%}
+     background-color:{{bg_color}};
+   {%- endunless -%}
+   {%- unless color == blank -%}
+     color:{{color}};
+   {%- endunless -%}
+   ">
+    <div class="wrapper">
+      <div class="grid">
+        <div class="grid__item{% comment %} large--ten-twelfths push--large--one-twelfth{% endcomment %}">
+
+          <div class="grid--full{% if text_block_first %} grid--rev{% endif %} large--align-items-center">
+            <div class="grid__item {{ gird_class_image }}">
+              <div
+               data-section-type="grid-slider"
+               data-section-id="{{ section_id }}"
+               data-slide-selector=".image-item">
+                <div
+                 class="grid grid--uniform product-features__itemr"
+                 data-slider
+                 data-slick='{
+                   "autoplay": true,
+                   "autoplaySpeed": 2000,
+                   "arrows": false,
+                   "dots": true,
+                   "slidesToShow": 1,
+                   "slidesToScroll": 1,
+                   "swipeToSlide": true,
+                   "responsive": [
+                     { "breakpoint": 480, "settings":  { "slidesToShow": 1, "slidesToScroll": 1 } }
+                   ]
+                 }'>
+                  {%- for i in (1..3) -%}
+                    {%- capture image_key -%}image_{{ i }}{%- endcapture -%}
+                    {%- assign image = block.settings[image_key] -%}
+                    {%- unless image == blank -%}
+                    <div class="image-item">
+                      {% render "lazy-image" with image: image %}
+                    </div>
+                    {%- endunless -%}
+                  {%- endfor -%}
+                </div>
+              </div>
+            </div>
+
+            <div class="grid__item {{ gird_class_content }}">
+              <div class="content">
+                <div class="preventOverflowContent">
+                  {%- unless title == blank -%}
+                    <h2
+                     class="section-title text-left"
+                     {% unless color == blank %}
+                       style="color:{{color}};"
+                     {% endunless %}>{{ title | newline_to_br }}</h2>
+                  {%- endunless -%}
+
+                  {%- unless content == blank -%}
+                    <div class="rte rte--large">{{ content }}</div>
+                  {%- endunless -%}
+
+                  {%- unless feature_list == blank -%}
+                    {%- assign feature_items = feature_list | newline_to_br | split: '<br />' -%}
+                    <ul>
+                      {%- for feature_item in feature_items -%}
+                        <li>
+                          <img src="{{ 'icon-bullet-tick.png' | asset_url }}"  width="24" />
+                          <span>{{ feature_item }}</span>
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  {%- endunless -%}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

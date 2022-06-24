@@ -1,0 +1,180 @@
+<!-- /sections/blog.liquid -->
+
+{% comment %}
+  This template is also used for listing out articles of a specific tag.
+  You can change layouts or styles by checking if current_tags is true.
+{% endcomment %}
+
+{%- assign blog_grid = 'large--one-third' -%}
+{%- if blog.title == 'Press' -%}
+  {%- assign blog_grid = 'large--one-full' -%}
+{%- endif -%}
+
+{%- if blog.title == 'Stories' -%}
+  <nav class="blog__nav sticky-nav">
+    <ul class="blog__nav__list">
+      {%- for block in section.blocks -%}
+        {%- assign title = block.settings.title -%}
+        {%- unless title == blank -%}
+          {%- if title == 'All' -%}
+            <li class="blog__nav__item{% if current_tags == blank %} active{% endif %}">
+              <a class="blog__nav__link" href="{{ blog.url }}">
+                {{ title | escape }}
+              </a>
+            </li>
+          {%- elsif blog.all_tags contains title -%}
+            <li class="blog__nav__item{% if current_tags.first == title %} active{% endif %}">
+              <a class="blog__nav__link" href="{{ blog.url }}/tagged/{{ title | handle }}">
+                {{ title | escape }}
+              </a>
+            </li>
+          {%- endif -%}
+        {%- endunless -%}
+      {%- endfor -%}
+    </ul>
+  </nav>
+{%- endif -%}
+
+{% assign blog_pagination = 7 %}
+{% paginate blog.articles by blog_pagination %}
+  <section class="section-blog blog">
+    <header class="blog__header">
+      <div class="section-body text-center">
+        <div class="wrapper">
+          {% if current_tags %}
+            <h1 class="blog__title text-center">{{ current_tags.first }}</h1>
+          {%- else -%}
+            <h1 class="blog__title text-center">{{ blog.title }}</h1>
+          {% endif %}
+
+          {%- if blog.title == 'Stories' -%}
+            {%- for block in section.blocks -%}
+              {%- assign title = block.settings.title -%}
+              {%- assign content = false -%}
+              {%- unless title == blank -%}
+                {%- if current_tags == blank and title == 'All' -%}
+                  {%- assign content = block.settings.content -%}
+                {%- else -%}
+                  {% if current_tags.first == title %}
+                    {%- assign content = block.settings.content -%}
+                  {% endif %}
+                {%- endif -%}
+              {%- endunless -%}
+
+              {%- unless content == blank -%}
+                <p class="blog__description">{{ content }}</p>
+              {%- endunless -%}
+            {%- endfor -%}
+          {%- endif -%}
+        </div>
+      </div>
+    </header>
+
+    <div class="blog__items">
+      <div class="section-body">
+        <div class="wrapper">
+
+          {%- if blog.title == 'Stories' -%}
+            {%- assign article = blog.articles.first -%}
+            <div class="grid blog__featured-article">
+              {% include 'article-grid-item' %}
+          </div>
+          {%- endif -%}
+
+          {%- assign offset = 0 -%}
+          {%- if blog.title == 'Stories' -%}
+            {%- assign offset = 1 -%}
+          {%- endif -%}
+          <div class="grid-uniform">
+            {% for article in blog.articles offset: offset %}
+              {% include 'article-grid-item' with equal_height_meta:true %}
+            {% endfor %}
+          </div>
+
+          {% if paginate.pages > 1 %}
+            <div class="text-center">
+              {% include 'pagination-custom' %}
+            </div>
+          {% endif %}
+
+        </div>
+      </div>
+    </div>
+
+    {%- if blog.title == 'Stories' and current_tags == blank -%}
+      <div class="blog__items blog__items--most-viewed">
+        <div class="section-body">
+          <div class="wrapper">
+            <h2 class="text-center">Most Viewed Articles</h2>
+
+            <div class="grid-uniform">
+              {% for i in (1..3) %}
+                {%- capture article_key -%}article_{{ i }}{%- endcapture -%}
+                {%- assign article_handle = section.settings[article_key] -%}
+                {%- assign article = articles[article_handle] -%}
+                {%- unless article == blank -%}
+                  {% include 'article-grid-item' with equal_height_meta:true %}
+                {%- endunless -%}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    {%- endif -%}
+  </section>
+{% endpaginate %}
+
+<div class="section-newsletter">
+  <div class="wrapper">
+    <div class="klaviyo-form-UrBB75"></div>
+  </div>
+</div>
+
+{% comment %}
+{%- include 'section-newsletter' with title: 'Love traveling? Us too.', content: 'Get notified when we discover new hidden gems, travel tips, and more.' -%}
+{% endcomment %}
+
+{% schema %}
+  {
+    "name": "Blog",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Most Viewed Articles"
+      },
+      {
+        "type": "article",
+        "id": "article_1",
+        "label": "Article #1"
+      },
+      {
+        "type": "article",
+        "id": "article_2",
+        "label": "Article #2"
+      },
+      {
+        "type": "article",
+        "id": "article_3",
+        "label": "Article #3"
+      }
+    ],
+    "blocks" : [
+      {
+        "type": "tag",
+        "name": "Tag",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading"
+          },
+          {
+            "type": "textarea",
+            "id": "content",
+            "label": "Content"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

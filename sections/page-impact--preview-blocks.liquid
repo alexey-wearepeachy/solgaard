@@ -1,0 +1,88 @@
+<section id="impact-preview-blocks">
+    <div class="impact-preview-blocks__container">
+        <div class="impact-preview-blocks__inner">
+            {% for block in section.blocks %}
+                {% assign block_bg_vector      = block.settings.block_bg_vector %}
+                {% assign block_icon           = block.settings.block_icon %}
+                {% assign block_icon_bg_vector = block.settings.block_icon_bg_vector %}
+                {% assign block_text           = block.settings.block_text %}
+                {% assign block_btn_text       = block.settings.block_btn_text %}
+                {% assign block_btn_link       = block.settings.block_btn_link %}
+
+                <div class="impact-preview-block" {% if block_bg_vector != blank %}style="background-image: url('{{ block_bg_vector | img_url: 'master' }}')"{% endif %}>
+                    {% if block_icon != blank %}
+                        <div class="impact-preview-block__img" {% if block_icon_bg_vector != blank %}style="background-image: url('{{ block_icon_bg_vector | img_url: 'master' }}')"{% endif %}>
+                            <img src="{{ block_icon | img_url: 'master' }}" alt="{{ block_icon.alt | escape }}">
+                        </div>
+                    {% endif %}
+                    <div class="impact-preview-block__content">
+                        {% if block_text != blank %}
+                            <p class="content-text">{{ block_text }}</p>
+                        {% endif %}
+                        {% if block_btn_text != blank %}
+                            <a href="{{ block_btn_link }}" class="content-btn">
+                                {{ block_btn_text }}
+                                <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M9.52735 13L16 7.28571M9.52735 1L16 7.28571M16 7.28571H0" stroke="#EE7D30" stroke-width="2"/>
+                                </svg>
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% schema %}
+{
+    "name": "Preview Blocks",
+    "settings": [
+    ],
+    "blocks": [
+        {
+            "type": "block",
+            "name": "block",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "block_bg_vector",
+                    "label": "Block background vector"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "block_icon",
+                    "label": "Block icon"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "block_icon_bg_vector",
+                    "label": "Block icon background vector"
+                },
+                {
+                    "type": "textarea",
+                    "id": "block_text",
+                    "label": "Block text"
+                },
+                {
+                    "type": "text",
+                    "id": "block_btn_text",
+                    "label": "Block button text",
+                    "default": "Learn More"
+                },
+                {
+                    "type": "url",
+                    "id": "block_btn_link",
+                    "label": "Block button link"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "category": "Impact LP Preview Blocks",
+            "name": "Impact LP Preview Blocks"
+        }
+    ]
+}
+{% endschema %}

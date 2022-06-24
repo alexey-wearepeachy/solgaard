@@ -1,0 +1,36 @@
+{%- assign title = block.settings.title -%}
+{%- assign collection = collections[block.settings.collection] -%}
+
+{%- assign grid_width_small = 'small--one-whole' -%}
+{%- assign grid_width_medium = 'medium--one-half' -%}
+{%- assign grid_width_large = 'large--one-third' -%}
+
+<div
+ data-section-type="collection-slider">
+  <div class="section-body">
+    <div class="wrapper">
+      {%- unless title == blank -%}
+        <h2 class="section-title">{{ title }}</h2>
+      {%- endunless -%}
+
+
+      {%- unless collection == blank -%}
+        <p class="section-content text-center"><a href="{{ collection.url }}">View all products</a></p>
+
+        <br />
+
+        <div class="collection__slider grid-uniform">
+          {%- unless collection == blank -%}
+            {%- for product in collection.products -%}
+              {%- include 'product-grid-item' -%}
+
+              {%- if template == 'page.solarbanks' and forloop.index == 1 -%}
+                {%- include 'product-grid-item-ads' -%}
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endunless -%}
+        </div>
+      {%- endunless -%}
+    </div>
+  </div>
+</div>

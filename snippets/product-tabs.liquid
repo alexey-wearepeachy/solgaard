@@ -1,0 +1,94 @@
+<!-- /snippets/product-tabs.liquid -->
+{%- assign product_description = product.description -%}
+
+{%- assign tab_headings = "" -%}
+{%- assign tab_contents = "" -%}
+{%- assign product_description_split = product_description | replace: '<p>[split]</p>', '[split]' | replace: '[split]', '' | replace: '<h6></h6>', '' -%}
+
+{%- for block in section.blocks -%}
+  {%- if block.type == "tab_description" -%}
+    {% comment %}
+      Replace the heading deliminator with a string that is highly unlikely to occur naturally [!ヽ(´ー｀)/!]
+    {% endcomment %}
+    {%- assign product_description_split = product_description_split | replace: '<h6>', '[!ヽ(´ー｀)/!]' |  replace: '</h6>', '[!ヽ(´ー｀)/!]' | split: '[!ヽ(´ー｀)/!]' -%}
+    {%- for item in product_description_split -%}
+      {% comment %}
+        The zero item is the product description, after that tab headings are odd and contents are even.
+      {% endcomment %}
+      {%- assign odd_mod = forloop.index0 | modulo:2 -%}
+      {%- if odd_mod == 0 -%}
+        {%- unless forloop.index0 == 0 -%}
+          {%- assign tab_contents = tab_contents | append: item | append: '[!ヽ(´ー｀)/!]' -%}
+        {%- endunless -%}
+      {%- endif -%}
+      {%- if odd_mod == 1 -%}
+        {%- assign tab_headings = tab_headings | append: item | append: '[!ヽ(´ー｀)/!]' -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- assign tab_headings = tab_headings | split: '[!ヽ(´ー｀)/!]' -%}
+{%- assign tab_contents = tab_contents | split: '[!ヽ(´ー｀)/!]' -%}
+
+{%- assign accordion_item_count = 0 -%}
+{% for block in section.blocks %}
+  {%- if block.type == "tab_description" -%}
+    {%- for item in tab_headings -%}
+      {%- assign accordion_item_count = accordion_item_count | plus: 1 -%}
+    {%- endfor -%}
+  {%- else -%}
+    {%- assign accordion_item_count = accordion_item_count | plus: 1 -%}
+  {%- endif -%}
+{% endfor %}
+
+{%- unless accordion_item_count == 0 -%}
+  <div class="product__accordion">
+    <div class="accordion-wrapper">
+      <div class="accordion">
+        {%- for block in section.blocks -%}
+          {%- if block.type == "tab_description" -%}
+            {%- for item in tab_headings -%}
+              <div class="accordion__item in" data-title="{{ item | escape }}"{% if forloop.index0 == 0 %} data-block-id="{{ block.id }}" {{ block.shopify_attributes }}{% endif %}>
+                <div class="accordion__toggle">
+                  <div class="wrapper">
+                    <i class="icon icon-plus"></i>
+                    <h4 class="accordion__heading">{{ item }}</h4>
+                  </div>
+                </div>
+                <div class="accordion__content" style="display:block;">
+                  <div class="wrapper">
+                    <div class="rte">
+                      {{ tab_contents[forloop.index0] }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {%- endfor -%}
+          {%- else -%}
+            <div class="accordion__item in" {{ block.shopify_attributes }} data-title="{{ block.settings.title | escape }}">
+              <div class="accordion__toggle" data-block-id="{{ block.id }}">
+                <div class="wrapper">
+                  <i class="icon icon-plus"></i>
+                  <h4 class="accordion__heading">{{ block.settings.title }}</h4>
+                </div>
+              </div>
+              <div class="accordion__content" style="display:block;">
+                <div class="wrapper">
+                  <div class="rte">
+                    {% assign tab_page = pages[block.settings.raw_content] %}
+                    {% if tab_page.content != blank %}
+                      {{ tab_page.content }}
+                    {% else %}
+                      {{ block.settings.raw_content }}
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+{%- endunless -%}

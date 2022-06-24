@@ -1,0 +1,1669 @@
+{% include 'page-landing' %}
+
+{% schema %}
+  {
+    "name": "Landing page",
+    "settings": [
+    ],
+    "blocks": [
+      {
+        "type": "section-shore-tex-banner",
+        "name": "Shore tex banner",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image",
+            "info": "2048 x 2048px .jpg recommended"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_mobile",
+            "label": "Image (mobile)",
+            "info": "800 x 800px .jpg recommended"
+          },
+          {
+            "type": "image_picker",
+            "id": "logo",
+            "label": "Logo"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "text",
+            "id": "subtitle",
+            "label": "Subtitle"
+          },
+          {
+            "type": "richtext",
+            "id": "content",
+            "label": "Content"
+          },
+          {
+            "type": "text",
+            "id": "btn_text",
+            "label": "Button Text"
+          },
+          {
+            "type": "url",
+            "id": "btn_link",
+            "label": "Button Link"
+          },
+          {
+            "type": "select",
+            "id": "btn_style",
+            "label": "Button style",
+            "default": "btn btn--large btn--black",
+            "options": [
+              { "value": "btn btn--large btn--black", "label": "Black"},
+              { "value": "btn btn--large btn--blue", "label": "Blue"},
+              { "value": "btn btn--large btn--green", "label": "Green"},
+              { "value": "btn btn--large btn--white-border", "label": "White Border"},
+              { "value": "btn btn--large btn--green-border", "label": "Green Border"}
+            ]
+          }
+        ]
+      },
+
+      {
+        "type": "section-banner",
+        "name": "Banner",
+        "settings": [
+          {
+            "type": "select",
+            "id": "banner_style",
+            "label": "Banner style",
+            "options": [
+              { "value": "",  "label": "Default" },
+              { "value": "section-banner--alternative",  "label": "Alternative" }
+            ]
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image",
+            "info": "2048 x 2048px .jpg recommended"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_mobile",
+            "label": "Image (mobile)",
+            "info": "1000 x 1000px .jpg recommended"
+          },
+          {
+            "type": "checkbox",
+            "id": "inverse",
+            "label": "White text",
+            "default": true
+          },
+          {
+            "type": "text",
+            "id": "subtitle",
+            "label": "Subtitle"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "richtext",
+            "id": "content",
+            "label": "Content"
+          },
+          {
+            "type": "text",
+            "id": "btn_text",
+            "label": "Button Text"
+          },
+          {
+            "type": "url",
+            "id": "btn_link",
+            "label": "Button Link"
+          },
+          {
+            "type": "select",
+            "id": "btn_style",
+            "label": "Button style",
+            "default": "btn btn--large btn--black",
+            "options": [
+              { "value": "btn btn--large btn--black", "label": "Black"},
+              { "value": "btn btn--large btn--blue", "label": "Blue"},
+              { "value": "btn btn--large btn--green", "label": "Green"},
+              { "value": "btn btn--large btn--white-border", "label": "White Border"},
+              { "value": "btn btn--large btn--green-border", "label": "Green Border"}
+            ]
+          }
+        ]
+      },
+
+      {
+        "type": "section-banner-slider",
+        "name": "Banner slider",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Slider #1"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_1",
+            "label": "Image",
+            "info": "2048 x 2048px .jpg recommended"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_mobile_1",
+            "label": "Image (mobile)",
+            "info": "1000 x 1000px .jpg recommended"
+          },
+          {
+            "type": "checkbox",
+            "id": "inverse_1",
+            "label": "White text",
+            "default": true
+          },
+          {
+            "type": "text",
+            "id": "title_1",
+            "label": "Title"
+          },
+          {
+            "type": "richtext",
+            "id": "content_1",
+            "label": "Content"
+          },
+          {
+            "type": "header",
+            "content": "Slider #2"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_2",
+            "label": "Image",
+            "info": "2048 x 2048px .jpg recommended"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_mobile_2",
+            "label": "Image (mobile)",
+            "info": "1000 x 1000px .jpg recommended"
+          },
+          {
+            "type": "checkbox",
+            "id": "inverse_2",
+            "label": "White text",
+            "default": true
+          },
+          {
+            "type": "text",
+            "id": "title_2",
+            "label": "Title"
+          },
+          {
+            "type": "richtext",
+            "id": "content_2",
+            "label": "Content"
+          },
+          {
+            "type": "header",
+            "content": "Slider #3"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_3",
+            "label": "Image",
+            "info": "2048 x 2048px .jpg recommended"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_mobile_3",
+            "label": "Image (mobile)",
+            "info": "1000 x 1000px .jpg recommended"
+          },
+          {
+            "type": "checkbox",
+            "id": "inverse_3",
+            "label": "White text",
+            "default": true
+          },
+          {
+            "type": "text",
+            "id": "title_3",
+            "label": "Title"
+          },
+          {
+            "type": "richtext",
+            "id": "content_3",
+            "label": "Content"
+          }
+        ]
+      },
+
+      {
+        "type": "section-richtext",
+        "name": "Richtext",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "richtext",
+            "id": "content",
+            "label": "Content"
+          }
+        ]
+      },
+
+      {
+        "type": "section-video",
+        "name": "Video",
+        "settings": [
+          {
+            "type": "color",
+            "id": "bg_color",
+            "label": "Background color"
+          },
+          {
+            "type": "html",
+            "id": "video_html",
+            "label": "Video html",
+            "info": "Enter embed video code here"
+          }
+        ]
+      },
+
+      {
+        "type": "section-double-richtext",
+        "name": "Double Richtext",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title_1",
+            "label": "Title #1"
+          },
+          {
+            "type": "richtext",
+            "id": "content_1",
+            "label": "Content #1"
+          },
+
+          {
+            "type": "text",
+            "id": "title_2",
+            "label": "Title #2"
+          },
+          {
+            "type": "richtext",
+            "id": "content_2",
+            "label": "Content #2"
+          }
+        ]
+      },
+
+      {
+        "type": "section-logos",
+        "name": "Logos",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Featured In"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_1",
+            "label": "Image",
+            "info": "640 x 640px .png recommended"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_2",
+            "label": "Image",
+            "info": "640 x 640px .png recommended"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_3",
+            "label": "Image",
+            "info": "640 x 640px .png recommended"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_4",
+            "label": "Image",
+            "info": "640 x 640px .png recommended"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_5",
+            "label": "Image",
+            "info": "640 x 640px .png recommended"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_6",
+            "label": "Image",
+            "info": "640 x 640px .png recommended"
+          }
+        ]
+      },
+
+      {
+        "type": "section-feature-cards",
+        "name": "Feature cards",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Here's how it works"
+          },
+
+          {
+            "type": "header",
+            "content": "Feature #1"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_1",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title_1",
+            "label": "Title",
+            "default": "Select Your Product"
+          },
+          {
+            "type": "richtext",
+            "id": "content_1",
+            "label": "Content",
+            "default": "<p>Use our catalog or website to choose the sustainable gifts you want to brand with your logo.</p>"
+          },
+
+          {
+            "type": "header",
+            "content": "Feature #2"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_2",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title_2",
+            "label": "Title",
+            "default": "Customization"
+          },
+          {
+            "type": "richtext",
+            "id": "content_2",
+            "label": "Content",
+            "default": "<p>We'll work with you to create tailor-made premium gear that best represents your brand.</p>"
+          },
+
+          {
+            "type": "header",
+            "content": "Feature #3"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_3",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title_3",
+            "label": "Title",
+            "default": "Shipping"
+          },
+          {
+            "type": "richtext",
+            "id": "content_3",
+            "label": "Content",
+            "default": "<p>We can ship your premium gear in bulk or just send us your list of recipients and we will dropship it for you.</p>"
+          },
+          {
+            "type": "richtext",
+            "id": "footer_text",
+            "label": "Footer text",
+            "default": "<p>Don't see something you like? Design from outside the catalog.</p>"
+          }
+        ]
+      },
+
+      {
+        "type": "section-feature-icons",
+        "name": "Features with Icons",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Feature #1"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "How is Shore-Tex™ made?"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_1",
+            "label": "Image Icon",
+            "info": "200 x 200px .png recommended"
+          },
+          {
+            "type": "text",
+            "id": "title_1",
+            "label": "Heading"
+          },
+          {
+            "type": "richtext",
+            "id": "text_1",
+            "label": "Text"
+          },
+
+          {
+            "type": "header",
+            "content": "Feature #2"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_2",
+            "label": "Image Icon",
+            "info": "200 x 200px .png recommended"
+          },
+          {
+            "type": "text",
+            "id": "title_2",
+            "label": "Heading"
+          },
+          {
+            "type": "richtext",
+            "id": "text_2",
+            "label": "Text"
+          },
+
+          {
+            "type": "header",
+            "content": "Feature #3"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_3",
+            "label": "Image Icon",
+            "info": "200 x 200px .png recommended"
+          },
+          {
+            "type": "text",
+            "id": "title_3",
+            "label": "Heading"
+          },
+          {
+            "type": "richtext",
+            "id": "text_3",
+            "label": "Text"
+          },
+
+          {
+            "type": "header",
+            "content": "Feature #4"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_4",
+            "label": "Image Icon",
+            "info": "200 x 200px .png recommended"
+          },
+          {
+            "type": "text",
+            "id": "title_4",
+            "label": "Heading"
+          },
+          {
+            "type": "richtext",
+            "id": "text_4",
+            "label": "Text"
+          },
+
+          {
+            "type": "header",
+            "content": "Feature #5"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_5",
+            "label": "Image Icon",
+            "info": "200 x 200px .png recommended"
+          },
+          {
+            "type": "text",
+            "id": "title_5",
+            "label": "Heading"
+          },
+          {
+            "type": "richtext",
+            "id": "text_5",
+            "label": "Text"
+          },
+          {
+            "type": "header",
+            "content": "Feature #6"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_6",
+            "label": "Image Icon",
+            "info": "200 x 200px .png recommended"
+          },
+          {
+            "type": "text",
+            "id": "title_6",
+            "label": "Heading"
+          },
+          {
+            "type": "richtext",
+            "id": "text_6",
+            "label": "Text"
+          }
+        ]
+      },
+
+      {
+        "type": "section-image",
+        "name": "Image",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image",
+            "info": "2048 x 2048px .jpg recommended"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_mobile",
+            "label": "Image (mobile)",
+            "info": "800 x 800px .jpg recommended"
+          }
+        ]
+      },
+
+      {
+        "type": "section-hero-image",
+        "name": "Hero image",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Layout"
+          },
+          {
+            "type": "color",
+            "id": "bg_color",
+            "label": "Background color"
+          },
+          {
+            "type": "color",
+            "id": "color",
+            "label": "Text color"
+          },
+
+          {
+            "type": "textarea",
+            "id": "title",
+            "label": "Heading",
+            "default": "Heading"
+          },
+          {
+            "type": "richtext",
+            "id": "content",
+            "label": "Text",
+            "default": "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, natus dolores eligendi assumenda repudiandae consectetur provident autem vitae harum quod.</p>"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image",
+            "info": "2048 x 2048px .jpg recommended"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_mobile",
+            "label": "Image (mobile)",
+            "info": "800 x 800px .jpg recommended"
+          },
+          {
+            "type": "video_url",
+            "id": "video_link",
+            "label": "Video link",
+            "accept": ["youtube", "vimeo"],
+            "info": "https://www.youtube.com/watch?v=GcVugm11x64"
+          }
+        ]
+      },
+
+      {
+        "type": "section-collection-slider",
+        "name": "Collection slider",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "collection",
+            "id": "collection",
+            "label": "Collection"
+          }
+        ]
+      },
+
+      {
+        "type": "product-gallery",
+        "name": "Product Gallery",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image_1",
+            "label": "Image #1",
+            "info": "1024 x 1024px .jpg recommended"
+          },
+          {
+            "type": "text",
+            "id": "caption_1",
+            "label": "Caption #1"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_2",
+            "label": "Image #2",
+            "info": "1024 x 1024px .jpg recommended"
+          },
+          {
+            "type": "text",
+            "id": "caption_2",
+            "label": "Caption #2"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_3",
+            "label": "Image #3",
+            "info": "1024 x 1024px .jpg recommended"
+          },
+          {
+            "type": "text",
+            "id": "caption_3",
+            "label": "Caption #3"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_4",
+            "label": "Image #4",
+            "info": "1024 x 1024px .jpg recommended"
+          },
+          {
+            "type": "text",
+            "id": "caption_4",
+            "label": "Caption #4"
+          }
+        ]
+      },
+
+      {
+        "type": "section-double",
+        "name": "Image + Text",
+        "settings": [
+          {
+            "type": "checkbox",
+            "id": "text_block_first",
+            "label": "Text block first",
+            "default": false
+          },
+          {
+            "type": "header",
+            "content": "Image Block"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image",
+            "info": "1024 x 1024px .jpg recommended"
+          },
+          {
+            "type": "header",
+            "content": "Video Block"
+          },
+          {
+            "type": "video_url",
+            "id": "video_link",
+            "label": "Video link",
+            "accept": ["youtube", "vimeo"],
+            "default": "https://www.youtube.com/watch?v=GcVugm11x64",
+            "info": "https://www.youtube.com/watch?v=GcVugm11x64"
+          },
+          {
+            "type": "header",
+            "content": "Text Block"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Heading"
+          },
+          {
+            "type": "richtext",
+            "id": "content",
+            "label": "Text",
+            "default": "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, natus dolores eligendi assumenda repudiandae consectetur provident autem vitae harum quod. Praesentium qui incidunt facilis eum delectus sunt amet voluptatum officiis.</p>"
+          }
+        ]
+      },
+
+      {
+        "type": "section-list-and-images",
+        "name": "Feature list and images",
+        "settings": [
+          {
+            "type": "checkbox",
+            "id": "text_block_first",
+            "label": "Text block first",
+            "default": false
+          },
+          {
+            "type": "header",
+            "content": "Image Block"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_1",
+            "label": "Image #1",
+            "info": "1024 x 1024px .jpg recommended"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_2",
+            "label": "Image #2",
+            "info": "1024 x 1024px .jpg recommended"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_3",
+            "label": "Image #3",
+            "info": "1024 x 1024px .jpg recommended"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_4",
+            "label": "Image #4",
+            "info": "1024 x 1024px .jpg recommended"
+          },
+          {
+            "type": "header",
+            "content": "Text Block"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Heading"
+          },
+          {
+            "type": "richtext",
+            "id": "content",
+            "label": "Text"
+          },
+          {
+            "type": "textarea",
+            "id": "feature_list",
+            "label": "Feature list"
+          }
+        ]
+      },
+
+      {
+        "type": "section-cta-slider",
+        "name": "CTA Slider",
+        "settings": [
+          {
+            "type": "header",
+            "content": "CTA #1"
+          },
+          {
+            "type": "image_picker",
+            "id": "bg_image_1",
+            "label": "Bg image"
+          },
+          {
+            "type": "image_picker",
+            "id": "bg_image_mobile_1",
+            "label": "Bg image (mobile)"
+          },
+          {
+            "type": "image_picker",
+            "id": "icon_1",
+            "label": "Icon"
+          },
+          {
+            "type": "richtext",
+            "id": "richtext_1",
+            "label": "Richtext"
+          },
+          {
+            "type": "header",
+            "content": "CTA #2"
+          },
+          {
+            "type": "image_picker",
+            "id": "bg_image_2",
+            "label": "Bg image"
+          },
+          {
+            "type": "image_picker",
+            "id": "bg_image_mobile_2",
+            "label": "Bg image (mobile)"
+          },
+          {
+            "type": "image_picker",
+            "id": "icon_2",
+            "label": "Icon"
+          },
+          {
+            "type": "richtext",
+            "id": "richtext_2",
+            "label": "Richtext"
+          }
+        ]
+      },
+
+      {
+        "type": "section-newsletter",
+        "name": "Newsletter",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Text Block"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Love doing good and looking good?"
+          },
+          {
+            "type": "textarea",
+            "id": "content",
+            "label": "Text",
+            "default": "We send the best travel tips, travel stories, and new product releases. Sign up now to join the #solgaardsquad"
+          }
+        ]
+      },
+
+      {
+        "type": "section-b2b-form",
+        "name": "B2b form",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Form"
+          },
+          {
+            "type": "html",
+            "id": "form_html",
+            "label": "Form html",
+            "default": "<div class=\"klaviyo-form-TYAnWu\"></div>"
+          },
+          {
+            "type": "image_picker",
+            "id": "review_image",
+            "label": "Review image"
+          },
+          {
+            "type": "text",
+            "id": "review_text",
+            "label": "Review text",
+            "default": "730+ product reviews on site"
+          },
+          {
+            "type": "header",
+            "content": "Feature #1"
+          },
+          {
+            "type": "richtext",
+            "id": "feature_richtext_1",
+            "label": "Richtext",
+            "default": "<p>Every gift given, <strong>removes 229 Plastic</strong> Bottles From Our Ocean</p>"
+          },
+          {
+            "type": "image_picker",
+            "id": "feature_image_1",
+            "label": "Image"
+          },
+          {
+            "type": "header",
+            "content": "Feature #2"
+          },
+          {
+            "type": "richtext",
+            "id": "feature_richtext_2",
+            "label": "Richtext",
+            "default": "<p>Every gift <strong>upcycles ocean-bound plastic</strong> to give them a second life-span.</p>"
+          },
+          {
+            "type": "image_picker",
+            "id": "feature_image_2",
+            "label": "Image"
+          },
+          {
+            "type": "header",
+            "content": "Feature #3"
+          },
+          {
+            "type": "richtext",
+            "id": "feature_richtext_3",
+            "label": "Richtext",
+            "default": "<p>Every gift arrives in eco-friendly packaging that is <strong>100% recyclable and uses 0% single-use plastic</strong></p>"
+          },
+          {
+            "type": "image_picker",
+            "id": "feature_image_3",
+            "label": "Image"
+          },
+          {
+            "type": "header",
+            "content": "Bottom Banner"
+          },
+          {
+            "type": "text",
+            "id": "bottom_banner_bottle_amount",
+            "label": "Bottle Amount",
+            "default": "3000000"
+          },
+          {
+            "type": "text",
+            "id": "bottom_banner_bottle_saved_text",
+            "label": "Bottle saved text",
+            "default": "Plastic bottles Saved from polluting our oceans."
+          },
+          {
+            "type": "text",
+            "id": "bottom_banner_link_text",
+            "label": "Link text",
+            "default": "Join the Mission"
+          },
+          {
+            "type": "url",
+            "id": "bottom_banner_link_url",
+            "label": "Link url"
+          }
+        ]
+      },
+
+      {
+        "type": "section-partner-map",
+        "name": "Partner Map",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Our Partners In Removing Ocrean Plastic"
+          },
+          {
+            "type": "header",
+            "content": "Partner #1"
+          },
+          {
+            "type": "range",
+            "id": "position_x_1",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "%",
+            "label": "Position X",
+            "default": 50
+          },
+          {
+            "type": "range",
+            "id": "position_y_1",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "%",
+            "label": "Position Y",
+            "default": 50
+          },
+          {
+            "type": "image_picker",
+            "id": "logo_1",
+            "label": "Logo"
+          },
+          {
+            "type": "text",
+            "id": "heading_1",
+            "label": "Heading"
+          },
+          {
+            "type": "text",
+            "id": "location_1",
+            "label": "Location"
+          },
+          {
+            "type": "richtext",
+            "id": "richtext_1",
+            "label": "Richtext"
+          },
+          {
+            "type": "header",
+            "content": "Partner #2"
+          },
+          {
+            "type": "range",
+            "id": "position_x_2",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "%",
+            "label": "Position X",
+            "default": 50
+          },
+          {
+            "type": "range",
+            "id": "position_y_2",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "%",
+            "label": "Position Y",
+            "default": 50
+          },
+          {
+            "type": "image_picker",
+            "id": "logo_2",
+            "label": "Logo"
+          },
+          {
+            "type": "text",
+            "id": "heading_2",
+            "label": "Heading"
+          },
+          {
+            "type": "text",
+            "id": "location_2",
+            "label": "Location"
+          },
+          {
+            "type": "richtext",
+            "id": "richtext_2",
+            "label": "Richtext"
+          },
+          {
+            "type": "header",
+            "content": "Partner #3"
+          },
+          {
+            "type": "range",
+            "id": "position_x_3",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "%",
+            "label": "Position X",
+            "default": 50
+          },
+          {
+            "type": "range",
+            "id": "position_y_3",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "%",
+            "label": "Position Y",
+            "default": 50
+          },
+          {
+            "type": "image_picker",
+            "id": "logo_3",
+            "label": "Logo"
+          },
+          {
+            "type": "text",
+            "id": "heading_3",
+            "label": "Heading"
+          },
+          {
+            "type": "text",
+            "id": "location_3",
+            "label": "Location"
+          },
+          {
+            "type": "richtext",
+            "id": "richtext_3",
+            "label": "Richtext"
+          },
+          {
+            "type": "header",
+            "content": "Partner #4"
+          },
+          {
+            "type": "range",
+            "id": "position_x_4",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "%",
+            "label": "Position X",
+            "default": 50
+          },
+          {
+            "type": "range",
+            "id": "position_y_4",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "%",
+            "label": "Position Y",
+            "default": 50
+          },
+          {
+            "type": "image_picker",
+            "id": "logo_4",
+            "label": "Logo"
+          },
+          {
+            "type": "text",
+            "id": "heading_4",
+            "label": "Heading"
+          },
+          {
+            "type": "text",
+            "id": "location_4",
+            "label": "Location"
+          },
+          {
+            "type": "richtext",
+            "id": "richtext_4",
+            "label": "Richtext"
+          },
+          {
+            "type": "header",
+            "content": "Partner #5"
+          },
+          {
+            "type": "range",
+            "id": "position_x_5",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "%",
+            "label": "Position X",
+            "default": 50
+          },
+          {
+            "type": "range",
+            "id": "position_y_5",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "%",
+            "label": "Position Y",
+            "default": 50
+          },
+          {
+            "type": "image_picker",
+            "id": "logo_5",
+            "label": "Logo"
+          },
+          {
+            "type": "text",
+            "id": "heading_5",
+            "label": "Heading"
+          },
+          {
+            "type": "text",
+            "id": "location_5",
+            "label": "Location"
+          },
+          {
+            "type": "richtext",
+            "id": "richtext_5",
+            "label": "Richtext"
+          },
+          {
+            "type": "header",
+            "content": "Partner #6"
+          },
+          {
+            "type": "range",
+            "id": "position_x_6",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "%",
+            "label": "Position X",
+            "default": 50
+          },
+          {
+            "type": "range",
+            "id": "position_y_6",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "%",
+            "label": "Position Y",
+            "default": 50
+          },
+          {
+            "type": "image_picker",
+            "id": "logo_6",
+            "label": "Logo"
+          },
+          {
+            "type": "text",
+            "id": "heading_6",
+            "label": "Heading"
+          },
+          {
+            "type": "text",
+            "id": "location_6",
+            "label": "Location"
+          },
+          {
+            "type": "richtext",
+            "id": "richtext_6",
+            "label": "Richtext"
+          }
+        ]
+      },
+
+      {
+        "type": "section-product-features",
+        "name": "Product features",
+        "settings": [
+          {
+            "type": "color",
+            "id": "bg_color",
+            "label": "Background color"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+
+          {
+            "type": "header",
+            "content": "Feature #1"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_1",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title_1",
+            "label": "Title"
+          },
+          {
+            "type": "richtext",
+            "id": "content_1",
+            "label": "Content"
+          },
+
+          {
+            "type": "header",
+            "content": "Feature #2"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_2",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title_2",
+            "label": "Title"
+          },
+          {
+            "type": "richtext",
+            "id": "content_2",
+            "label": "Content"
+          },
+
+          {
+            "type": "header",
+            "content": "Feature #3"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_3",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title_3",
+            "label": "Title"
+          },
+          {
+            "type": "richtext",
+            "id": "content_3",
+            "label": "Content"
+          },
+
+          {
+            "type": "header",
+            "content": "Feature #4"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_4",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title_4",
+            "label": "Title"
+          },
+          {
+            "type": "richtext",
+            "id": "content_4",
+            "label": "Content"
+          },
+
+          {
+            "type": "header",
+            "content": "Feature #5"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_5",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title_5",
+            "label": "Title"
+          },
+          {
+            "type": "richtext",
+            "id": "content_5",
+            "label": "Content"
+          },
+
+          {
+            "type": "header",
+            "content": "Feature #6"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_6",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title_6",
+            "label": "Title"
+          },
+          {
+            "type": "richtext",
+            "id": "content_6",
+            "label": "Content"
+          }
+        ]
+      },
+
+      {
+        "type": "section-related-products",
+        "name": "Related products",
+        "settings": [
+          {
+            "type": "color",
+            "id": "bg_color",
+            "label": "Background color"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "header",
+            "content": "Product #1"
+          },
+          {
+            "type": "product",
+            "id": "product_1",
+            "label": "Product"
+          },
+          {
+            "type": "text",
+            "id": "variant_id_1",
+            "label": "Variant ID"
+          },
+          {
+            "type": "header",
+            "content": "Product #2"
+          },
+          {
+            "type": "product",
+            "id": "product_2",
+            "label": "Product"
+          },
+          {
+            "type": "text",
+            "id": "variant_id_2",
+            "label": "Variant ID"
+          },
+          {
+            "type": "header",
+            "content": "Product #3"
+          },
+          {
+            "type": "product",
+            "id": "product3",
+            "label": "Product"
+          },
+          {
+            "type": "text",
+            "id": "variant_id_3",
+            "label": "Variant ID"
+          }
+        ]
+      },
+
+      {
+        "type": "product-faq",
+        "name": "Product FAQ",
+        "settings": [
+          {
+            "type": "header",
+            "content": "FAQ #1"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_1",
+            "label": "Image",
+            "info": "600 x 600px .jpg recommended"
+          },
+          {
+            "type": "text",
+            "id": "heading_1",
+            "label": "Heading"
+          },
+          {
+            "type": "richtext",
+            "id": "content_1",
+            "label": "Content"
+          },
+          {
+            "type": "header",
+            "content": "FAQ #2"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_2",
+            "label": "Image",
+            "info": "600 x 600px .jpg recommended"
+          },
+          {
+            "type": "text",
+            "id": "heading_2",
+            "label": "Heading"
+          },
+          {
+            "type": "richtext",
+            "id": "content_2",
+            "label": "Content"
+          },
+          {
+            "type": "header",
+            "content": "FAQ #3"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_3",
+            "label": "Image",
+            "info": "600 x 600px .jpg recommended"
+          },
+          {
+            "type": "text",
+            "id": "heading_3",
+            "label": "Heading"
+          },
+          {
+            "type": "richtext",
+            "id": "content_3",
+            "label": "Content"
+          }
+        ]
+      },
+
+      {
+        "type": "product-social-proof",
+        "name": "Product Social Proof",
+        "settings": [
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading",
+            "default": "See the Lifepack around the globe"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_1",
+            "label": "Image #1",
+            "info": "1024 x 1024px .jpg recommended"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_2",
+            "label": "Image #2",
+            "info": "1024 x 1024px .jpg recommended"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_3",
+            "label": "Image #3",
+            "info": "1024 x 1024px .jpg recommended"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_4",
+            "label": "Image #4",
+            "info": "1024 x 1024px .jpg recommended"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_5",
+            "label": "Image #5",
+            "info": "1024 x 1024px .jpg recommended"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_6",
+            "label": "Image #6",
+            "info": "1024 x 1024px .jpg recommended"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_7",
+            "label": "Image #7",
+            "info": "1024 x 1024px .jpg recommended"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_8",
+            "label": "Image #8",
+            "info": "1024 x 1024px .jpg recommended"
+          },
+          {
+            "type": "richtext",
+            "id": "footer_text",
+            "label": "Footer text",
+            "default": "<p>Already adventuring with Lifepack? Tag us, and use #solgaardsquad to be featured.</p>"
+          }
+        ]
+      },
+
+      {
+        "type": "section-progress-bar",
+        "name": "Progress bar",
+        "settings": [
+          {
+            "type": "color",
+            "id": "bg_color",
+            "label": "Background color"
+          },
+          {
+            "type": "color",
+            "id": "color",
+            "label": "Text color"
+          },
+          {
+            "type": "textarea",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "richtext",
+            "id": "richtext",
+            "label": "Richtext"
+          },
+          {
+            "type": "text",
+            "id": "subtext",
+            "label": "Subtext"
+          },
+          {
+            "type": "header",
+            "content": "Progress bar"
+          },
+          {
+            "type": "text",
+            "id": "progress_bar_label",
+            "label": "Progress bar label"
+          },
+          {
+            "type":    "range",
+            "id":      "progress_bar_value",
+            "min":     0,
+            "max":     100,
+            "step":    1,
+            "label":   "Progress bar value",
+            "unit":   "%",
+            "default": 65
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,63 @@
+{% assign content                  = product.metafields.product.main_banner.main_content %}
+{% assign additional_content       = product.metafields.product.main_banner.additional_content %}
+{% assign mob_media                = content.mobile_media %}
+{% assign desktop_media            = content.desktop_media %}
+{% assign mob_additional_media     = additional_content.mobile_media %}
+{% assign desktop_additional_media = additional_content.desktop_media %}
+
+<section id="pdp-transatlantic--main-banner">
+    <div class="pdp-transatlantic--main-banner__container">
+        <div class="pdp-transatlantic--main-banner__inner">
+            <div class="pdp-transatlantic--main-banner__main-media">
+                <div class="pdp-transatlantic--main-banner__main-media_mob">
+                    {% if mob_media contains '.mp4' %}
+                        <video autoplay loop muted playsinline>
+                            <source src="{{ mob_media }}" type='video/mp4'>
+                        </video>
+                    {% else %}
+                        <img src="{{ mob_media }}" alt="{{ content.model_name }}">
+                    {% endif %}
+                </div>
+                <div class="pdp-transatlantic--main-banner__main-media_desk">
+                    {% if desktop_media contains '.mp4' %}
+                        <video autoplay loop muted playsinline>
+                            <source src="{{ desktop_media }}" type='video/mp4'>
+                        </video>
+                    {% else %}
+                        <img src="{{ desktop_media }}" alt="{{ content.model_name }}">
+                    {% endif %}
+                </div>
+                <div class="pdp-transatlantic--main-banner__content">
+                    <div class="pdp-transatlantic--main-banner__label">{{ content.model_label }}</div>
+                    <h3 class="pdp-transatlantic--main-banner__title">{{ content.model_name }}</h3>
+                    <div class="pdp-transatlantic--main-banner__description"><p>{{ content.model_description }}</p></div>
+                </div>
+           </div>
+            <div class="pdp-transatlantic--main-banner__bottom-media">
+                <div class="pdp-transatlantic--main-banner__bottom-media_mob">
+                    {% if mob_additional_media contains '.mp4' %}
+                        <video autoplay loop muted playsinline>
+                            <source src="{{ mob_additional_media }}" type='video/mp4'>
+                        </video>
+                    {% else %}
+                        <img src="{{ mob_additional_media }}" alt="{{ content.model_name }}">
+                    {% endif %}
+                </div>
+                <div class="pdp-transatlantic--main-banner__bottom-media_desktop">
+                    {% if desktop_additional_media contains '.mp4' %}
+                        <video autoplay loop muted playsinline>
+                            <source src="{{ desktop_additional_media }}" type='video/mp4'>
+                        </video>
+                    {% else %}
+                        <img src="{{ desktop_additional_media }}" alt="{{ content.model_name }}">
+                    {% endif %}
+                </div>
+                {% if  additional_content.label != blank %}
+                    <div class="pdp-transatlantic--main-banner__bottom-media-content">
+                        {{ additional_content.label }}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>

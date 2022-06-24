@@ -1,0 +1,180 @@
+{%- liquid 
+  assign page_content = page.content
+
+  assign faq_headings = "" 
+  assign faq_contents = "" 
+  assign page_content_split = page_content | replace: '<h2></h2>', '' 
+
+  comment
+    Replace the heading deliminator with a string that is highly unlikely to occur naturally [!ヽ(´ー｀)/!]
+  endcomment
+  assign page_content_split = page_content_split | replace: '<h2>', '[!ヽ(´ー｀)/!]' |  replace: '</h2>', '[!ヽ(´ー｀)/!]' | split: '[!ヽ(´ー｀)/!]' 
+  for item in page_content_split 
+    comment
+      The zero item is the product description, after that tab headings are odd and contents are even.
+    endcomment
+    assign odd_mod = forloop.index0 | modulo:2 
+    if odd_mod == 0 
+      unless forloop.index0 == 0 
+        assign faq_contents = faq_contents | append: item | append: '[!ヽ(´ー｀)/!]' 
+      endunless 
+    endif 
+    if odd_mod == 1 
+      assign faq_headings = faq_headings | append: item | append: '[!ヽ(´ー｀)/!]' 
+    endif 
+  endfor 
+
+  assign faq_headings = faq_headings | split: '[!ヽ(´ー｀)/!]' 
+  assign faq_contents = faq_contents | split: '[!ヽ(´ー｀)/!]' 
+
+-%}
+
+
+<style>
+  .section-faq .accordion__toggle {
+    font-size: 1.4em;
+    font-weight: normal;
+  }
+  .section-faq .accordion__content {
+    padding: 15px 0 30px 0;
+    background: transparent;
+  }
+  .section-faq .accordion__content p {
+  }
+  .section-faq .faq__group {
+    margin-top: -50px;
+    padding-top: 50px;
+  }
+  .section-faq .faq__group + .faq__group {
+    padding-top: 100px;
+  }
+  @media only screen and (min-width: 769px) {
+    .section-faq .faq__main ,
+    .section-faq .faq__sidebar {    
+      position: sticky;
+      top: 100px;
+    }
+  }
+  .section-faq .faq__nav__link {
+    font-size: 1.2em;
+    text-decoration: none;
+    display: block;
+    padding: 10px 15px;
+    border-top: 1px solid #ddd; 
+    border-bottom: 1px solid #ddd; 
+  }
+  .section-faq .faq__nav__item + .faq__nav__item .faq__nav__link {
+    border-top: 0;
+  }
+</style>
+
+<div class="section-body">
+  <div class="wrapper">
+    <h1>{{ page.title }}</h1>
+    
+      <div class="faq__grid grid">
+        <div class="faq__main grid__item medium--three-quarters large--three-quarters">
+          {%- for faq_heading in faq_headings -%}
+			{%- liquid 
+              assign faq_content = faq_contents[forloop.index0] 
+              assign faq_content_split = faq_content | replace: '<h3></h3>', '' | replace: '<h3>', '[!ヽ(´ー｀)/!]' |  replace: '</h3>', '[!ヽ(´ー｀)/!]' | split: '[!ヽ(´ー｀)/!]'
+              assign faq_content_questions = '' 
+              assign faq_content_answers = '' 
+              for item in faq_content_split 
+                assign odd_mod = forloop.index0 | modulo:2 
+                if odd_mod == 0 
+                  unless forloop.index0 == 0 
+                    assign faq_content_answers = faq_content_answers | append: item | append: '[!ヽ(´ー｀)/!]' 
+                  endunless 
+                endif 
+                if odd_mod == 1 
+                  assign faq_content_questions = faq_content_questions | append: item | append: '[!ヽ(´ー｀)/!]' 
+                endif 
+              endfor 
+
+              assign faq_content_questions = faq_content_questions | split: '[!ヽ(´ー｀)/!]' 
+              assign faq_content_answers = faq_content_answers | split: '[!ヽ(´ー｀)/!]' 
+			-%}
+            <div class="faq__group" id="faq-{{ faq_heading | handle }}">
+              <h3 class="faq__heading">{{ faq_heading }}</h3>
+
+              <div class="accordion" data-section-type="accordion">
+                {%- for question in faq_content_questions -%}
+                  {%- assign content = faq_content_answers[forloop.index0] -%}
+                  <div class="accordion__item" accordion-item>
+                    <h4 class="accordion__toggle text-left h5" accordion-toggle>
+                      {{ question }} <i class="accordion__icon icon icon-plus" accordion-icon></i>
+                    </h4>
+                    <div
+                     class="accordion__content rte"
+                     style="display:none;"
+                     accordion-content>{{ content }}</div>
+                  </div>
+                {%- endfor -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+
+        <aside class="faq__sidebar grid__item medium--one-quarter large--one-quarter text-left small--hide">
+          <nav class="faq__nav">
+            <ul class="faq__nav__list">
+              {%- for faq_heading in faq_headings -%}
+                <li class="faq__nav__item">
+                  <a
+                   class="faq__nav__link uppercase--title{% if forloop.index == 1 %} active{% endif %}"
+                   href="#faq-{{ faq_heading | handle }}">{{ faq_heading | replace: "/", "/ " }}</a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </nav>
+
+          {% comment %}
+          <div class="page-margin">
+            <h4>Need help?</h4>
+
+            <p>
+              {%- unless settings.phone == blank -%}
+                <a href="tel:{{ settings.phone }}">{{ settings.phone }}</a><br />
+              {%- endunless -%}
+              <a href="mailto:{{ settings.email }}">{{ settings.email }}</a>
+            </p>
+          </div>
+          {% endcomment %}
+        </aside>
+      </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "FAQ",
+	"tag": "section",
+	"class": "section-faq",
+    "blocks": [
+      {
+        "type": "faq_item",
+        "name": "FAQ Item",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading"
+          },
+          {
+            "type": "richtext",
+            "id": "richtext",
+            "label": "Richtext"
+          }
+        ]
+      }
+	],
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading"
+      }
+	]
+  }
+{% endschema %}

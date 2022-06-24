@@ -1,0 +1,248 @@
+{%- assign on_sale = false -%}
+{%- if product.compare_at_price > product.price -%}
+  {%- assign on_sale = true -%}
+{%- endif -%}
+
+{%- assign sold_out = true -%}
+{%- if product.available -%}
+  {%- assign sold_out = false -%}
+{%- endif -%}
+
+{%- assign new_product = false -%}
+{%- assign published_date = product.published_at | date: "%s"  -%}
+{%- assign now_date = 'now' | date: "%s" -%}
+{%- assign age_in_days = now_date | minus: published_date | divided_by: 60 | divided_by: 60 | divided_by: 12 -%}
+{%- if age_in_days < settings.tag_new_limit -%}
+  {%- assign new_product = true -%}
+{%- endif -%}
+
+{%- assign sellout_tag = false -%}
+{%- if sold_out and settings.tag_sellout -%}
+  {%- assign sellout_tag = true -%}
+{%- endif -%}
+
+{%- assign preorder_tag = false -%}
+  {%- if product.first_available_variant.inventory_policy == 'continue' and product.first_available_variant.inventory_quantity <= 0 -%}
+  {%- assign preorder_tag = true -%}
+{%- endif -%}
+
+{%- assign new_tag = false -%}
+{%- if new_product and settings.tag_new -%}
+  {%- assign new_tag = true -%}
+{%- endif -%}
+
+{%- assign sale_tag = false -%}
+{%- if on_sale and settings.tag_sale -%}
+  {%- assign sale_tag = true -%}
+{%- endif -%}
+
+{%- assign tagged = false -%}
+{%- if preorder_tag or sellout_tag or new_tag or sale_tag -%}
+  {%- assign tagged = true -%}
+{%- endif -%}
+
+{%- capture sticker -%}
+  {%- if tagged %}
+    {%- if preorder_tag -%}
+      <!-- <div class="sticker sticker--pre-order">Coming Soon</div> -->
+    {%- endif -%}
+    {%- if sellout_tag -%}
+      <div class="sticker sticker--sold">{{ 'products.product.sold_out' | t }}</div>
+    {%- elsif sale_tag -%}
+      <div class="sticker sticker--sale">{{ 'products.product.sale' | t }}</div>
+    {%- elsif new_tag -%}
+      <div class="sticker sticker--new">{{ 'products.product.new' | t }}</div>
+    {%- endif -%}
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- assign product_featured_image = product.featured_image -%}
+{%- unless product.variants[0].image == blank -%}
+  {%- assign product_featured_image = product.variants[0].image -%}
+{%- endunless -%}
+{%- assign product_img = product_featured_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+{%- assign double_img = false -%}
+{% if product.images[1].src and settings.image_hover_enable %}
+  {%- assign double_img = true -%}
+{% endif %}
+
+{%- if settings.image_autoheight_enable -%}
+{%- assign top_offset =  1 | divided_by: product_featured_image.aspect_ratio | times: 100 | divided_by: 2 -%}
+{%- capture auto_height -%}
+  {%- if product_featured_image.aspect_ratio < 1 -%}
+    style="width:{{ product_featured_image.aspect_ratio | times: 100 }}%; margin: 0 auto;"
+  {%- else -%}
+    style="padding:{{ 50 | minus: top_offset }}% 0;"
+  {%- endif -%}
+{%- endcapture -%}
+{%- endif -%}
+
+
+{%- assign product_title = product.title -%}
+{%- assign product_url = product.url -%}
+
+{%- capture topseller_badge -%}
+	{% assign topseller = settings.topseller_products | newline_to_br | split: '<br />' %}
+	{% for item in topseller %} 
+		{% assign item_url = item | remove: '<br />' | strip %}
+		{% assign prod_url = product.handle | strip %}
+        
+        {%- liquid 
+          assign item_url_contains_variant = false
+          if item_url contains '?variant='
+            assign item_url_contains_variant = true
+          endif
+
+          if request.path contains '/collections/all' or request.path contains '/products' or request.path contains '/pages'
+            if item_url_contains_variant 
+              assign item_url = item_url | split: '?variant=' | first
+            endif
+          else
+            assign prod_url = product_url | within: collection | split: '/' | last
+          endif
+        -%}
+		
+		{% if item_url == prod_url %}
+          <div class="sticker--pre-order cf25-badge desktop">TOP SELLER</div>
+          <div class="sticker--pre-order cf25-badge mobile">
+            <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="26px" viewBox="0 0 24 24" width="26px" fill="#FFFFFF" class="cf25-icon"><g><path d="M0,0h24v24H0V0z" fill="none"></path></g><g><path d="M12,2L4,5v6.09c0,5.05,3.41,9.76,8,10.91c4.59-1.15,8-5.86,8-10.91V5L12,2z M18,11.09c0,4-2.55,7.7-6,8.83 c-3.45-1.13-6-4.82-6-8.83V6.31l6-2.12l6,2.12V11.09z M8.82,10.59L7.4,12l3.54,3.54l5.66-5.66l-1.41-1.41l-4.24,4.24L8.82,10.59z"></path></g>
+            </svg>
+            Top Seller
+          </div>	
+		{% endif %}
+	{% endfor %}
+{%- endcapture -%}
+
+<div
+ class="grid__item {{ grid_offset }} {{ grid_width_small }} {{ grid_width_medium }} {{ grid_width_large }}{% if on_sale %} on-sale{% endif %}{% if tagged %} tagged{% endif %} product-grid-item"
+ data-section-type="product-grid-item"
+ data-product-id="{{ product.id }}">
+  <div class="grid__body">
+    <div class="grid__image">
+      <div {{ auto_height }}>
+        <a
+         href="{{ product_url | within: collection }}"
+         class="grid__link">
+          <div class="lazy-image{% if double_img %} double__image{% endif %}" style="padding-top:{{ 1 | divided_by: product_featured_image.aspect_ratio | times: 100}}%;background-image:  url('{{ product_featured_image | img_url: '1x1' }}');{% comment %}{% endcomment %}">
+            <img
+             class="grid__image lazyload fade-in"
+             alt="{{ product_featured_image.alt | default: product_title  }}"
+             data-src="{{ product_img }}"
+             data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048, 2450, 2700, 3000, 3350, 3750, 4100, 4480]"
+             data-aspectratio="{{  product_featured_image.aspect_ratio }}"
+             data-sizes="auto"/>
+            {% if double_img %}
+              <div class="collection__image__bottom lazyload" data-bgset="{% include 'bgset', image: product.images[1] %}"></div>
+            {% endif %}
+            {{ sticker }}
+            {{ topseller_badge }}
+          </div>
+        </a>
+      </div>
+      <noscript>
+        <a href="{{ product_url | within: collection }}">
+          <img src="{{ product_featured_image | img_url: '360x' }}" alt="{{ product_featured_image.alt | default: product_title  }}">
+        </a>
+      </noscript>
+    </div>
+
+    <div class="grid__meta">
+      <div class="text-center">
+        <a
+         class="grid__link"
+         href="{{ product_url | within: collection | capitalize }}">
+          <h4 class="grid__title">
+            {{ product_title }}
+          </h4>
+
+          {%- comment -%}
+            https://solgaard-design.myshopify.com/admin/bulk?resource_name=Product&order=title+asc&edit=metafields.grid.description
+          {%- endcomment -%}
+          {%- assign grid_description = product.metafields.grid.description -%}
+          {%- unless grid_description == blank -%}
+            <p class="grid__description">{{ grid_description }}</p>
+          {%- endunless -%}
+        </a>
+
+        {%- for option in product.options_with_values -%}
+          {%- if option.name == 'Color' -%}
+            <div class="grid__swatch">
+              {% include 'product-swatch' with option: option, section_id: product.id %}
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+
+        {%- comment -%}
+          <p class="grid__price">
+            <span class="price{% if on_sale %} on-sale{% endif %}">
+              {% if product.price_varies %}{{ 'products.general.from' | t }} {% endif %}
+              <span class="money">{{ product.price | money }}</span>
+            </span>
+
+            {%- if sold_out -%}
+              <br /><em>{{ 'products.product.sold_out' | t }}</em>
+            {%- endif -%}
+
+            {%- if on_sale -%}
+              <span class="compare-at">
+                <span class="money">{{ product.compare_at_price | money }}</span>
+              </span>
+            {%- endif -%}
+          </p>
+        {%- endcomment -%}
+
+        
+          {%- comment -%}
+            https://solgaard-design.myshopify.com/admin/bulk?resource_name=Product&edit=metafields.icons.outfits,metafields.icons.days
+          {%- endcomment -%}
+          {%- assign outfits = product.metafields.icons.outfits -%}
+          {%- assign days = product.metafields.icons.days -%}
+          <div class="grid__icons">
+            <div class="grid__icons__wrap">
+              <div class="grid grid--extra-condensed">
+                {%- unless outfits == blank -%}
+                  <div class="grid__icons__item grid__item one-half">
+                    <div class="grid__icons__icon">{% include 'icon-outfits' %}</div>
+                    <p class="grid__icons__label">{{ outfits }}</p>
+                  </div>
+                {%- endunless -%}
+
+                {%- unless days == blank -%}
+                  <div class="grid__icons__item grid__item one-half">
+                    <div class="grid__icons__icon">{% include 'icon-days' %}</div>
+                    <p class="grid__icons__label">{{ days }}</p>
+                  </div>
+                {%- endunless -%}
+              </div>
+            </div>
+          </div>
+       
+          <div class="grid__review-ratings">
+            <span
+             class=" stamped-product-reviews-badge"
+             data-product-sku="{{ product.handle }}"
+             data-id="{{ product.id }}"
+             data-product-type="{{product.type}}"
+             data-product-title="{{product_title}}"
+             style="display:block;">{{ product.metafields.stamped.badge }}</span>
+          </div>
+      
+      </div>
+    </div>
+  </div>
+  {% render 'banana-stand-product-list-container', product: product %}
+</div>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    let ratingStars = document.querySelectorAll('.grid__review-ratings .stamped-product-reviews-badge .stamped-badge .stamped-starrating .stamped-fa-star');
+
+    if (ratingStars.length) {
+      ratingStars.forEach(star => {
+        star.style.color = null;
+      })
+    }
+  })
+</script>

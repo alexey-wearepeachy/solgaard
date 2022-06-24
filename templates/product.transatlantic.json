@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {}
+    },
+    "reviews": {
+      "type": "main-product-reviews",
+      "settings": {
+        "title": "",
+        "subheading": "Don't take our word for it though..."
+      }
+    }
+  },
+  "order": [
+    "main",
+    "reviews"
+  ]
+}

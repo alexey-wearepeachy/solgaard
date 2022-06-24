@@ -1,0 +1,17 @@
+{%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+<div class="image-wrapper">
+  <div
+   class="lazy-image"
+   style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;">
+    <img class="lazyload fade-in"
+      data-src="{{ img_url }}"
+      data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+      data-aspectratio="{{ image.aspect_ratio }}"
+      data-parent-fit="cover"
+      data-sizes="auto"
+      alt="{{ alt_text | default: image.alt }}"/>
+  </div>
+  <noscript>
+    <img src="{{ image | img_url: '1296x' }}" alt="{{ alt_text | default: image.alt }}"/>
+  </noscript>
+</div>

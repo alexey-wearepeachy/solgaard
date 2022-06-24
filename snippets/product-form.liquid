@@ -1,0 +1,140 @@
+{%- assign product_swatches = true -%}
+
+{%- assign sold_out = true -%}
+{%- if current_variant.available -%}
+  {%- assign sold_out = false -%}
+{%- endif -%}
+
+<div
+ id="AddToCartForm-{{ section.id }}"
+ data-section="{{ section.id }}"
+ class="product-form-{{section.id}} product-form">
+  {% form 'product', product, class: "ProductForm" %}
+    {% unless product.has_only_default_variant %}
+      {% for option in product.options_with_values %}
+        {%- if product_swatches -%}
+          {% include 'product-swatch' with option: option, section_id: section.id %}
+        {%- endif -%}
+        <div class="selector-wrapper js">
+          <label for="SingleOptionSelector-{{ section.id }}-{{ forloop.index0 }}">
+            {{ option.name }}
+          </label>
+          <select
+           class="single-option-selector single-option-selector-{{ section.id }}"
+           id="SingleOptionSelector-{{ section.id }}-{{ forloop.index0 }}"
+           data-section="{{ section.id }}"
+           data-index="option{{ forloop.index }}">
+            {% for value in option.values %}
+              {% assign variant_avialable = true %}
+              {% if product.options.size == 1 %}
+                {% unless product.variants[forloop.index0].available  %}
+                  {% assign variant_avialable = false %}
+                {% endunless %}
+              {% endif %}
+              <option
+               value="{{ value | escape }}"
+               {% if option.selected_value == value %} selected="selected"{% endif %}>{{ value }}{% unless variant_avialable %} - {{ 'products.product.sold_out' | t }}{% endunless %}</option>
+            {% endfor %}
+          </select>
+        </div>
+      {% endfor %}
+    {% endunless %}
+
+    <select
+     name="id"
+     id="ProductSelect-{{ section.id }}"
+     data-section="{{ section.id }}"
+     class="product-form__variants no-js">
+      {% for variant in product.variants %}
+        {% if variant.available %}
+          <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}">
+            {{ variant.title }}
+          </option>
+        {% else %}
+          <option disabled="disabled" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}">{{ variant.title }} - {{ 'products.product.sold_out' | t }}</option>
+        {% endif %}
+      {% endfor %}
+    </select>
+
+    {% if settings.product_show_quantity %}
+      <div class="quantity-selector__wrapper" id="Quantity-{{ section.id }}">
+        <label for="Quantity" class="quantity-selector uppercase">{{ 'products.product.quantity' | t }}</label>
+        <input type="number" name="quantity" value="1" min="1" class="QuantityInput">
+      </div>
+    {% endif %}
+
+    <h5 class="product__price h3{% if current_variant.compare_at_price > current_variant.price %} on-sale{% endif %}">
+      <span class="small compare-at" id="ComparePriceWrapper-{{ section.id }}" {% unless current_variant.compare_at_price > current_variant.price %}style="display: none"{% endunless %}>
+      <span class="money"><span id="ComparePrice-{{ section.id }}">{{ product.compare_at_price_max | money }}</span></span>
+      </span>
+
+      <span class="money"><span id="ProductPrice-{{ section.id }}">{{ current_variant.price | money }}</span></span>
+    </h5>
+
+    {% comment %} <!-- Insert QuadPay Widget --> {% endcomment %}
+    <div style="margin: 0 0 10px 0; min-height: 20px;">
+      <quadpay-widget amount={{ current_variant.price | divided_by: 100.00 }} ></quadpay-widget>
+    </div>
+
+    {%- assign btn_text = 'products.product.add_to_cart' | t -%}
+    {%- if sold_out -%}
+      {%- assign btn_text = 'products.product.sold_out' | t -%}
+    {%- endif -%}
+
+    {%- comment -%}
+      {%- if variant.inventory_policy == 'continue' and variant.inventory_quantity <= 0 -%}
+        {%- assign btn_text = 'Pre-Order' -%}
+      {%- endif -%}
+    {%- endcomment -%}
+
+ 	  <input type="hidden" name="return_to" value="/cart/" />
+
+  	<div class="product__banana-stand{% if product.type == 'Watch' %} hide{% endif %}">
+      <p
+         class="product__inventory-message text-center"
+         {% if current_variant.inventory_quantity <= 0 %}
+         style="display:none;"
+         {% endif %}
+         data-product-inventory>
+        <small>🔥limited stock! <span data-variant-inventory>{{ current_variant.inventory_quantity }}</span> left.</small>
+      </p>
+
+      {%- include 'banana-stand-product-page-container' -%}
+  	</div>
+    <div class="add-to-cart-wrapper">
+      <button
+       type="submit"
+       name="add"
+       id="AddToCart-{{ section.id }}"
+       class="product__add-to-cart-button btn btn--large btn--full btn--green {{ btn_class }} addToCart{% if sold_out %} disabled{% endif %}" {% if sold_out %}disabled="true"{% endif %}
+       onclick="obApi('track', 'Add To Cart'); _tfa.push({notify: ‘event’, name: ‘add_to_cart’, id: 1428062});"
+       data-add-to-cart>
+        <span id="AddToCartText-{{ section.id }}">{{ btn_text }}</span>
+      </button>
+
+      {%- assign preorder_message = product.metafields.preorder.message -%}
+      {%- unless preorder_message == blank -%}
+        <div class="product__preorder-message">
+          <p>{{ preorder_message }}</p>
+        </div>
+      {%- endunless -%}
+
+      {%- comment -%}
+      <div class="product__out-of-stock-message" style="display:none;" data-out-of-stock-message>
+        {%- if product.handle == 'solarbank-s2' -%}
+          <p>This Product Is On Back-Order and Will Ship In 8-12 Weeks.</p>
+        {%- else -%}
+          <p>This product is on back-order and will ship in 4-6 weeks.</p>
+        {%- endif -%}
+      </div>
+      {%- endcomment -%}
+    </div>
+
+    {% if settings.product_enable_payment_button %}
+      {{ form | payment_button }}
+    {% endif %}
+
+  {% endform %}
+  {% render 'banana-stand-product-page-container' %}
+</div>
+<!-- GPO installed -->

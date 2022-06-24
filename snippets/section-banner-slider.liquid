@@ -1,0 +1,122 @@
+<div
+ class="section-banner-slider"
+ data-section-id="{{ block.id }}"
+ data-section-type="banner-slider"
+ data-autoplay="true"
+ data-speed="4000">
+
+  <div
+   id="bannerSlider-{{ block.id }}"
+   class="banner__slider">
+    {%- for i in (1..3) -%}
+      {%- capture image_key -%}image_{{ i }}{%- endcapture -%}
+      {%- capture image_mobile_key -%}image_mobile_{{ i }}{%- endcapture -%}
+      {%- capture inverse_key -%}inverse_{{ i }}{%- endcapture -%}
+      {%- capture title_key -%}title_{{ i }}{%- endcapture -%}
+      {%- capture content_key -%}content_{{ i }}{%- endcapture -%}
+
+      {%- assign image = block.settings[image_key] -%}
+      {%- assign image_mobile = block.settings[image_mobile_key] -%}
+      {%- assign inverse = block.settings[inverse_key] -%}
+      {%- assign title = block.settings[title_key] -%}
+      {%- assign content = block.settings[content_key] -%}
+
+      {%- if image -%}
+        {%- assign img_object = image -%}
+        {%- assign img_small = img_object | img_url: '18x' -%}
+        {%- assign img_api = img_object | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+        {%- if image_mobile -%}
+          {%- assign img_object_mobile = image_mobile -%}
+          {%- assign img_small_mobile = img_object_mobile | img_url: '18x' -%}
+          {%- assign img_api_mobile = img_object_mobile | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        {%- else -%}
+          {%- assign img_object_mobile = img_object -%}
+          {%- assign img_small_mobile = img_small -%}
+          {%- assign img_api_mobile = img_api -%}
+        {%- endif -%}
+
+        {%- assign height = 'use_screen_full' -%}
+        {%- assign color = 'homepage--dark' -%}
+        {%- if inverse -%}
+          {%- assign color = 'homepage--white' -%}
+        {%- endif -%}
+        {%- assign overlay_opacity = 10 -%}
+        <div
+         class="banner__slide banner__slide--{{ block.id }}{% unless forloop.first %} banner__slide--additional{% endunless %}"
+         data-color="{{ color }}"
+         data-block-id="{{ block.id }}"
+         aria-label="{{ title }}"
+         aria-labelledby="bannerSlider-{{ block.id }}"
+         {{ block.shopify_attributes }}>
+          <div class="homepage-image fade-in-child preventOverflow {{ height }} {{ color }}">
+            <div class="content--centered">
+              <div class="text-center preventOverflowContent">
+                {% unless title == blank %}
+                  <h1 class="title--flex">{{ title | escape }}</h1>
+                {% endunless %}
+
+                {% unless content == blank %}
+                  <p class="content--flex h4--body">{{ content }}</p>
+                {% endunless %}
+              </div>
+            </div>
+
+            <div class="image-overlay image-overlay-{{ overlay_opacity }}"></div>
+
+            {% if height == 'use_image' %}
+              <div
+               class="small--hide lazy-image"
+               style="padding-top:{{ 1 | divided_by: img_object.aspect_ratio | times: 100}}%; background-image: url('{{ img_object | img_url: '1x1' }}');">
+                <img
+                 class="lazyload fade-in"
+                 alt="{{ img_object.alt | default: shop.name }}"
+                 data-src="{{ img_api }}"
+                 data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048, 2450, 2700, 3000, 3350, 3750, 4100, 4480]"
+                 data-aspectratio="{{ img_object.aspect_ratio }}"
+                 data-parent-fit="cover"
+                 data-sizes="auto"/>
+              </div>
+
+              {%- capture mobile_image -%}
+                <div
+                 class="medium--hide large--hide lazy-image"
+                 style="padding-top:{{ 1 | divided_by: img_object_mobile.aspect_ratio | times: 100}}%; background-image: url('{{ img_object_mobile | img_url: '1x1' }}');">
+                  <img
+                   class="lazyload fade-in"
+                   alt="{{ img_object_mobile.alt | default: shop.name }}"
+                   data-src="{{ img_api_mobile }}"
+                   data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048, 2450, 2700, 3000, 3350, 3750, 4100, 4480]"
+                   data-aspectratio="{{ img_object_mobile.aspect_ratio }}"
+                   data-parent-fit="cover"
+                   data-sizes="auto"/>
+                </div>
+              {%- endcapture -%}
+
+              {{ mobile_image }}
+
+            {% else %}
+              {% if height != 'use_image' %}
+                <div
+                 class="small--hide background-size-cover lazyload"
+                 data-bgset="{% include 'bgset', image: img_object %}"></div>
+                <div
+                 class="medium--hide large--hide background-size-cover lazyload"
+                 data-bgset="{% include 'bgset', image: img_object_mobile %}"></div>
+              {% endif %}
+            {% endif %}
+
+            <noscript>
+              <img
+               src="{{ img_object | img_url: '1440x' }}"
+               alt="{{ img_object.alt | default: block.settings.title }}"
+               class="responsive-wide-image"/>
+            </noscript>
+          </div>
+        </div>
+
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</div>
+

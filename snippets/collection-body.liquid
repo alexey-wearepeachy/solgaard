@@ -1,0 +1,45 @@
+<div class="collection__body">
+  <div class="section-body">
+    <div class="wrapper">
+      <div class="grid-uniform grid--condensed">
+        {% unless display_all_variants %}
+          {% for product in collection.products %}
+            {% include 'product-grid-item' %}
+
+            {%- if show_ads and forloop.index == 4 -%}
+              {%- include 'product-grid-item-ads' -%}
+              {%- assign show_ads = false -%}
+            {%- endif -%}
+          {% else %}
+            <div class="grid__item">
+              <p>{{ 'collections.general.no_matches' | t }}</p>
+            </div>
+          {% endfor %}
+        {% else %}
+          {% for product in collection.products %}
+            {% for variant in product.variants %}
+              {% include 'variant-grid-item' with variant %}
+
+              {%- if show_ads and forloop.index == 4 -%}
+                {%- include 'product-grid-item-ads' -%}
+                {%- assign show_ads = false -%}
+              {%- endif -%}
+            {% endfor %}
+          {% endfor %}
+        {% endunless %}
+
+        {%- if show_ads -%}
+          {%- include 'product-grid-item-ads' -%}
+        {%- endif -%}
+      </div>
+
+      {% if paginate.pages > 1 %}
+        <hr>
+
+        <div class="text-center">
+          {% include 'pagination-custom' %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,95 @@
+
+{%- assign bg_color = block.settings.bg_color -%}
+{%- assign color = block.settings.color -%}
+
+{%- assign icon_count = 0 -%}
+{%- for i in (1..6) -%}
+  {%- capture image_key -%}image_{{ i }}{%- endcapture -%}
+  {%- capture title_key -%}title_{{ i }}{%- endcapture -%}
+  {%- capture text_key -%}text_{{ i }}{%- endcapture -%}
+  {%- assign image = block.settings[image_key] -%}
+  {%- assign title = block.settings[title_key] -%}
+  {%- assign text = block.settings[text_key] -%}
+  {%- unless  image==blank and title==blank and text==blank -%}
+    {%- assign icon_count = icon_count | plus: 1 -%}
+  {%- endunless -%}
+{%- endfor -%}
+
+{%- case icon_count -%}
+  {% when 1 %}
+    {%- assign grid_width = 'large--one-third medium--one-third' -%}
+  {% when 2 %}
+    {%- assign grid_width = 'large--one-quarter push--large--one-quarter' -%}
+  {% when 3 %}
+    {%- assign grid_width = 'large--one-third medium--one-third' -%}
+  {% when 4 %}
+    {%- assign grid_width = 'large--one-quarter medium--one-third' -%}
+  {% when 5 %}
+    {%- assign grid_width = 'large--one-fifth medium--one-third' -%}
+  {% when 6 %}
+    {%- assign grid_width = 'large--one-sixth medium--one-third' -%}
+  {% else %}
+{%- endcase -%}
+
+<div
+ class="section-body"
+ style="
+ {%- unless color == blank -%}
+   color:{{color}};
+ {%- endunless -%}
+ {%- unless bg_color == blank -%}
+   background-color:{{bg_color}};
+ {%- endunless -%}
+ ">
+  <div class="wrapper">
+    {%- unless block.settings.title == blank -%}
+      <h2 class="text-center">{{ block.settings.title | escape }}</h2>
+    {%- endunless -%}
+
+    <div class="grid">
+      {%- for i in (1..icon_count) -%}
+        {%- capture image_key -%}image_{{ i }}{%- endcapture -%}
+        {%- capture title_key -%}title_{{ i }}{%- endcapture -%}
+        {%- capture text_key -%}text_{{ i }}{%- endcapture -%}
+
+        {%- assign image = block.settings[image_key] -%}
+        {%- assign title = block.settings[title_key] -%}
+        {%- assign text = block.settings[text_key] -%}
+
+        <div class="features-with-icons grid__item {{grid_width}} text-center">
+          <div class="features-with-icons__body">
+            {%- unless image == blank -%}
+              {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+              <div class="features-with-icons__image">
+                <div class="lazy-image" style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%; background-image:  url('{{ image.image | img_url: '1x1' }}');">
+                  <img class="lazyload fade-in"
+                    data-src="{{ img_url }}"
+                    data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048, 2450, 2700, 3000, 3350, 3750, 4100, 4480]"
+                    data-aspectratio="{{ image.aspect_ratio }}"
+                    data-parent-fit="cover"
+                    data-sizes="auto"
+                    alt="{{ block.settings[title_key] | default: "Feature image" }}"/>
+                </div>
+                <noscript>
+                  <img src="{{ image.image | img_url: '540x' }}" alt="{{ image.image.alt | default: title }}"/>
+                </noscript>
+              </div>
+            {%- endunless -%}
+
+            {%- if title != blank -%}
+              <h4
+               class="features-with-icons__heading"
+               {% unless color == blank %}
+                 style="color:{{color}};"
+               {% endunless %}>{{ title | escape }}</h4>
+            {%- endif -%}
+
+            {%- if text != blank -%}
+              <div class="features-with-icons__content rte">{{ text }}</div>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>

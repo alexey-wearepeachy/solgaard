@@ -1,0 +1,288 @@
+{% assign section_icon              = section.settings.section_icon %}
+{% assign section_icon_bg_vector    = section.settings.section_icon_bg_vector %}
+{% assign section_title             = section.settings.section_title %}
+{% assign section_text              = section.settings.section_text %}
+{% assign first_slider_title         = section.settings.first_slider_title %}
+{% assign second_slider_title       = section.settings.second_slider_title %}
+{% assign third_slider_title        = section.settings.third_slider_title %}
+{% assign slider_blocks             = section.blocks | where: 'type', 'slider_blocks' %}
+{% assign second_slider_blocks      = section.blocks | where: 'type', 'second_slider_blocks' %}
+{% assign third_slider_blocks       = section.blocks | where: 'type', 'third_slider_blocks' %}
+
+<section id="impact-projects">
+    <div class="impact-projects__container">
+        <div class="impact-projects__inner">
+            <div class="impact-projects__icon-block">
+                {% if section_icon != blank %}
+                    <div class="impact-projects__icon" {% if section_icon_bg_vector != blank %}style="background-image: url('{{ section_icon_bg_vector | img_url: 'master' }}')"{% endif %}>
+                        <img src="{{ section_icon | img_url: 'master' }}" alt="{{ section_icon.alt | escape }}">
+                    </div>
+                {% endif %}
+            </div>
+            <div class="impact-projects__main-block">
+                {% if section_title != blank %}
+                    <h3 class="impact-projects__main-title">{{ section_title }}</h3>
+                {% endif %}
+                {% if section_text != blank %}
+                    <p class="impact-projects__main-text">{{ section_text }}</p>
+                {% endif %}
+                <div class="impact-projects__main-slider">
+                    {% if first_slider_title != blank %}
+                        <p class="main-slider__title">{{ first_slider_title }}</p>
+                    {% endif %}
+                    <div class="swiper projects-main-slider">
+                        <div class="swiper-wrapper projects-main-slider__wrapper">
+                            {% for block in slider_blocks %}
+                                {% assign slide_img      = block.settings.slide_img %}
+                                {% assign slide_title    = block.settings.slide_title %}
+                                {% assign slide_subtitle = block.settings.slide_subtitle %}
+                                {% assign slide_text     = block.settings.slide_text %}
+
+                                <div class="swiper-slide projects-main-slider__slide">
+                                    <div class="slide__img">
+                                        {% if slide_img != blank %}
+                                            <img src="{{ slide_img | img_url: 'master' }}" alt="{{ slide_img.alt | escape }}">
+                                        {% endif %}
+                                    </div>
+                                    <div class="slide__info">
+                                        {% if slide_title != blank %}
+                                            <h4 class="slide__info-title">{{ slide_title }}</h4>
+                                        {% endif %}
+                                        {% if slide_subtitle != blank %}
+                                            <p class="slide__info-subtitle">{{ slide_subtitle }}</p>
+                                        {% endif %}
+
+                                        <button class="slide-more-info-trigger projects-slide-more-info-trigger">
+                                            Learn More
+                                            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M9.66225 6.24014H6.01727V9.98779H4.46002V6.24014H0.832157V4.68289H4.46002V0.918126H6.01727V4.68289H9.66225V6.24014Z" fill="#EE7D30"/>
+                                            </svg>
+                                        </button>
+
+                                        <div class="slide__more-info-block projects-slide__more-info-block">
+                                            {% if slide_title != blank %}
+                                                <h4 class="slide__more-info-block-title">{{ slide_title }}</h4>
+                                            {% endif %}
+                                            {% if slide_text != blank %}
+                                                <div class="slide__more-info-block-text">{{ slide_text }}</div>
+                                            {% endif %}
+
+                                            <button class="slide-more-info-close projects-slide-more-info-close">
+                                                <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M0.234 9H2.502L3.834 6.948C4.032 6.624 4.212 6.318 4.392 5.994H4.446C4.59 6.264 4.752 6.57 4.968 6.93L6.336 9H8.676L5.544 4.572L8.514 0.377999H6.264L5.022 2.358C4.842 2.646 4.68 2.934 4.536 3.222H4.482C4.338 2.97 4.176 2.628 3.96 2.304L2.682 0.377999H0.414L3.384 4.626L0.234 9Z" fill="#EE7D30"/>
+                                                </svg>
+                                                Close
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="projects-main-slider-pagination"></div>
+                    </div>
+                </div>
+
+                <div class="impact-projects__main-second-slider">
+                    {% if second_slider_title != blank %}
+                        <p class="main-slider__title">{{ second_slider_title }}</p>
+                    {% endif %}
+                    <div class="swiper projects-main-second-slider">
+                        <div class="swiper-wrapper projects-main-slider__wrapper">
+                            {% for block in second_slider_blocks %}
+                                {% assign slide_img      = block.settings.slide_img %}
+
+                                <div class="swiper-slide projects-main-slider__slide">
+                                    <div class="slide__img">
+                                        {% if slide_img != blank %}
+                                            <img src="{{ slide_img | img_url: 'master' }}" alt="{{ slide_img.alt | escape }}">
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="impact-projects__main-third-slider">
+                    {% if third_slider_title != blank %}
+                        <p class="main-slider__title">{{ third_slider_title }}</p>
+                    {% endif %}
+                    <div class="swiper projects-main-third-slider">
+                        <div class="swiper-wrapper projects-main-slider__wrapper">
+                            {% for block in third_slider_blocks %}
+                                {% assign slide_text      = block.settings.slide_text %}
+
+                                <div class="swiper-slide projects-main-slider__slide">
+                                    {% if slide_text != blank %}
+                                        <div class="slide__text">{{ slide_text }}</div>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let projectSwiper = new Swiper(".projects-main-slider", {
+            slidesPerView: 1.05,
+            spaceBetween: 16,
+            pagination: {
+                el: ".projects-main-slider-pagination",
+                clickable: true,
+            },
+            breakpoints: {
+                350: {
+                    slidesPerView: 1.2,
+                    spaceBetween: 26,
+                },
+                550: {
+                    slidesPerView: "auto",
+                    spaceBetween: 38,
+                }
+            }
+        });
+
+        let partnershipsSwiper = new Swiper(".projects-main-second-slider", {
+            slidesPerView: 1.05,
+            spaceBetween: 16,
+            breakpoints: {
+                350: {
+                    slidesPerView: 1.2,
+                    spaceBetween: 26,
+                },
+                550: {
+                    slidesPerView: "auto",
+                    spaceBetween: 38,
+                }
+            }
+        });
+
+        let goalsSwiper = new Swiper(".projects-main-third-slider", {
+            slidesPerView: 1.05,
+            spaceBetween: 16,
+            breakpoints: {
+                350: {
+                    slidesPerView: 1.2,
+                    spaceBetween: 26,
+                },
+                550: {
+                    slidesPerView: "auto",
+                    spaceBetween: 38,
+                }
+            }
+        });
+
+        $('.projects-slide-more-info-trigger').click(function () {
+            $(this).next('.projects-slide__more-info-block').fadeIn();
+        })
+
+        $('.projects-slide-more-info-close').click(function () {
+            $(this).closest('.projects-slide__more-info-block').fadeOut();
+        })
+    })
+</script>
+
+{% schema %}
+{
+    "name": "Projects Section",
+    "settings": [
+        {
+            "type": "image_picker",
+            "id": "section_icon",
+            "label": "Section icon"
+        },
+        {
+            "type": "image_picker",
+            "id": "section_icon_bg_vector",
+            "label": "Section icon background vector"
+        },
+        {
+            "type": "text",
+            "id": "section_title",
+            "label": "Section title",
+            "default": "Projects & Partnerships"
+        },
+        {
+            "type": "textarea",
+            "id": "section_text",
+            "label": "Section text"
+        },
+        {
+            "type": "text",
+            "id": "first_slider_title",
+            "label": "The first slider title"
+        },
+        {
+            "type": "text",
+            "id": "second_slider_title",
+            "label": "The second slider title"
+        },
+        {
+            "type": "text",
+            "id": "third_slider_title",
+            "label": "The third slider title"
+        }
+    ],
+    "blocks": [
+        {
+            "type": "slider_blocks",
+            "name": "Slide",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "slide_img",
+                    "label": "Slide image"
+                },
+                {
+                    "type": "text",
+                    "id": "slide_title",
+                    "label": "Slide title"
+                },
+                {
+                    "type": "textarea",
+                    "id": "slide_subtitle",
+                    "label": "Slide subtitle"
+                },
+                {
+                    "type": "textarea",
+                    "id": "slide_text",
+                    "label": "Slide text"
+                }
+            ]
+        },
+        {
+            "type": "second_slider_blocks",
+            "name": "Partnerships slide",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "slide_img",
+                    "label": "Slide image"
+                }
+            ]
+        },
+        {
+            "type": "third_slider_blocks",
+            "name": "Goals slide",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "slide_text",
+                    "label": "Slide text"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "category": "Impact LP Projects",
+            "name": "Impact LP Projects"
+        }
+    ]
+}
+{% endschema %}

@@ -1,0 +1,206 @@
+<!-- /sections/article.liquid -->
+
+{% assign blog_grid = 'large--two-thirds push--large--one-sixth' %}
+
+<section class="section-article">
+  {% if article.image %}
+    <div data-section-id="{{ section.id }}" data-section-type="parallax">
+      {%- assign img_url = article.image.src | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+      <div class="article-image-js homepage-image fade-in-child {{ section.settings.image_height }}" id="FeaturedImage-{{ section.id }}"
+        {% if section.settings.parallax %}
+          data-parallax-src="{{ article.image | img_url: '18x' }}"
+          data-src="{{ img_url }}"
+          data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048, 2450, 2700, 3000, 3350, 3750, 4100, 4480]"
+          data-aspectratio="{{  article.image.aspect_ratio }}"
+          data-sizes="auto"
+          style="background-image: url('{{ section.settings.image | img_url: '1x1' }}');"
+        {% endif %}>
+        {% if section.settings.image_height == 'use_image' %}
+          <div class="lazy-image" style="padding-top:{{ 1 | divided_by: article.image.aspect_ratio | times: 100}}%; background-image: url('{{ article.image | img_url: '1x1' }}');">
+            <img class="lazyload fade-in" {% if section.settings.parallax %} style="opacity: 0;"{% endif %}
+              alt="{{ article.image.alt | default: article.title }}"
+              data-src="{{ img_url }}"
+              data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048, 2450, 2700, 3000, 3350, 3750, 4100, 4480]"
+              data-aspectratio="{{  article.image.aspect_ratio }}"
+              data-parent-fit="cover"
+              data-sizes="auto"/>
+          </div>
+        {% endif %}
+        {% if section.settings.parallax == false and section.settings.image_height != 'use_image' %}
+          <div class="background-size-cover lazyload"  data-bgset="{% include 'bgset', image: article.image %}"></div>
+        {% endif %}
+        <noscript>
+          <img src="{{ article.image | img_url: '720x' }}" alt="{{ article.image.alt | default: article.title }}" class="responsive-wide-image"/>
+        </noscript>
+      </div>
+    </div>
+  {% endif %}
+
+  <div class="section-body">
+    <div class="wrapper">
+      <div class="grid">
+        <div class="grid__item {{ blog_grid }}">
+          <article class="article article--{{ blog.handle }}{% if article.image %} article--over-image{% endif %}" itemscope itemtype="http://schema.org/Article">
+            <div>
+              <header class="article__header">
+                {%- if section.settings.tags and article.tags.size > 0 -%}
+                  <div class="article__tags">
+                    {% include 'tags-article' %}
+                  </div>
+                {%- endif -%}
+
+                <h1 itemprop="headline">{{ article.title }}</h1>
+
+                {% capture author %}<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span class="strong" itemprop="name">{{ article.author }}</span></span>
+                {% endcapture %}
+                {% capture date %}<time itemprop="datePublished" datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: format: 'month_day_year' }}</time>{% endcapture %}
+
+                <p class="article__author">
+                  <span
+                   class="article__author__image{% if article.user.image == blank %} article__author__image--placeholder{% endif %}"
+                   alt="{{ article.author }}"
+                   width="50"
+                   {%- unless article.user.image == blank -%}
+                     style="background-image:url(&quot;{{ article.user.image | img_url: '100x100' }}&quot;);"
+                   {%- endunless -%}>
+                  </span>
+
+                  <span class="article__author__meta">
+                    {{ 'blogs.article.author_on_date_html' | t: author: author, date: date }}
+                  </span>
+                </p>
+              </header>
+
+              <div class="article__content rte" itemprop="articleBody">
+                {{ article.content }}
+              </div>
+
+              <div class="article__newsletter">
+                {%- include 'section-newsletter' with title: 'Love traveling? Us too.', content: 'Get notified when we discover new hidden gems, travel tips, and more.' -%}
+              </div>
+
+
+              {% if section.settings.social %}
+                <hr>
+
+                {% capture link %}{{ shop.url }}{{ article.url }}{% endcapture %}
+                {% capture shareTitle %}{{ article.title | url_param_escape }}{% endcapture %}
+                <div class="share text-center" data-permalink="{{ link }}">
+                  {% if settings.share_enable_facebook %}
+                    <a target="_blank" href="//www.facebook.com/sharer.php?u={{ link }}" class="share__link">
+                      <span class="icon icon-facebook" aria-hidden="true"></span>
+                      <span class="share__text">{{ 'general.share.facebook' | t }}</span>
+                    </a>
+                  {% endif %}
+                  {% if settings.share_enable_twitter %}
+                    <a target="_blank" href="//twitter.com/share?url={{ link }}&amp;text={{ shareTitle }}" class="share__link">
+                      <span class="icon icon-twitter" aria-hidden="true"></span>
+                      <span class="share__text">{{ 'general.share.twitter' | t }}</span>
+                    </a>
+                  {% endif %}
+                  {% if settings.share_enable_pinterest %}
+                    <a target="_blank" href="http://pinterest.com/pin/create/button/?url={{ link }}&amp;media={{ article.image | img_url: '1024x1024' | prepend: 'http:' }}&amp;description={{ shareTitle }}" class="share__link">
+                      <span class="icon icon-pinterest" aria-hidden="true"></span>
+                      <span class="share__text">{{ 'general.share.pinterest' | t }}</span>
+                    </a>
+                  {% endif %}
+                  {% if settings.share_enable_google %}
+                    <a target="_blank" href="//plus.google.com/share?url={{ link }}" class="share__link">
+                      <span class="icon icon-google" aria-hidden="true"></span>
+                      <span class="share__text">{{ 'general.share.google' | t }}</span>
+                    </a>
+                  {% endif %}
+                </div>
+
+                <hr>
+              {% endif %}
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{%- if blog.handle == 'blog' -%}
+  <section class="section-blog section-recent-articles">
+    <div class="blog__recent-articles">
+      <div class="section-body">
+        <div class="wrapper">
+          <div class="grid">
+            <div class="grid__item">
+              <h2 class="text-center">Recent articles</h2>
+
+              {%- assign counter = 0 -%}
+              {%- assign article_limit = 3 -%}
+              {%- assign current_article = article -%}
+              {%- assign blog_grid = 'large--one-third' -%}
+              <div class="grid-uniform">
+                {%- for article in blog.articles -%}
+                  {%- unless article.handle == current_article.handle -%}
+                    {%- include 'article-grid-item' with equal_height_meta: true -%}
+                    {%- assign counter = counter | plus: 1 -%}
+                    {%- if counter == article_limit -%}
+                      {% break %}
+                    {%- endif -%}
+                  {%- endunless -%}
+                {%- endfor -%}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+<script>
+  document.addEventListener("DOMContentLoaded", event => {
+    document.querySelectorAll('div.article-image-js img').forEach(el => el.setAttribute('alt', '{{ article.image.alt | default: article.title }}'))
+  });
+</script>
+
+{% schema %}
+  {
+    "name": "Article",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Article"
+      },
+      {
+        "type": "checkbox",
+        "id": "tags",
+        "label": "Show article tags"
+      },
+      {
+        "type": "checkbox",
+        "id": "social",
+        "label": "Show social sharing"
+      },
+      {
+        "type": "header",
+        "content": "Featured Image"
+      },
+      {
+        "type": "select",
+        "id": "image_height",
+        "label": "Image height",
+        "options": [
+          { "value": "use_image", "label": "Image height"},
+          { "value": "use_screen_two_thirds", "label": "Tall"},
+          { "value": "use_screen_one_half", "label": "Medium"},
+          { "value": "use_screen_one_third", "label": "Short"},
+          { "value": "use_screen_one_fifth", "label": "Tiny"}
+        ],
+        "default": "use_image"
+      },
+      {
+        "type": "checkbox",
+        "id": "parallax",
+        "default": true,
+        "label": "Enable parallax scroll"
+      }
+    ]
+  }
+{% endschema %}

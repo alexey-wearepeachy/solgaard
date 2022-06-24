@@ -1,0 +1,13 @@
+<div class="lp-otw--section-planet__inner">
+    <div class="lp-otw--section-planet__container {% if reverse %}lp-otw--section-planet__container_reverse{% endif %}">
+        <div class="lp-otw--section-planet__content">
+            <h3 class="lp-otw--section-planet__title">{{ title }}</h3>
+            <div class="lp-otw--section-planet__description"><p>{{ description }}</p></div>
+        </div>
+        {% if image != blank  %}
+            <div class="lp-otw--section-planet__image">
+                <img src="{{ image | img_url: 'master' }}" alt="{{ image.alt | default: title }}">
+            </div>
+        {% endif %}
+    </div>
+</div>

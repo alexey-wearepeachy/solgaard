@@ -1,0 +1,102 @@
+{%- liquid
+  assign section_id = block.id
+  assign title = block.settings.title
+-%}
+
+<section
+ class="section-partner-map section-inverse"
+ data-section-type="partner-map"
+ data-section-id="{{ section_id }}">
+  <div class="section-body">
+    <div class="wrapper">
+      {%- unless title == blank -%}
+        <h2 class="section-title">{{ title | escape }}</h2>
+      {%- endunless -%}
+
+
+      <div class="partner-map">
+        <div class="grid large--align-items-center">
+          <div class="grid__item large--two-thirds">
+            <div class="partner-map__canvas">
+              <div
+               class="partner-map__canvas-map"
+               style="background-image:url({{ 'solgaard_world_map.png' | asset_img_url: 'master' }})"></div>
+
+              <div class="partner-map__canvas-markers">
+                {%- for i in (1..6) -%}
+                  {%- capture position_x_key -%}position_x_{{ i }}{%- endcapture -%}
+                  {%- capture position_y_key -%}position_y_{{ i }}{%- endcapture -%}
+                  {%- capture location_key -%}location_{{ i }}{%- endcapture -%}
+                  {%- capture heading_key -%}heading_{{ i }}{%- endcapture -%}
+                  {%- liquid
+                    assign position_x = block.settings[position_x_key]
+                    assign position_y = block.settings[position_y_key]
+                    assign logo = block.settings[logo_key]
+                    assign heading = block.settings[heading_key]
+                    assign location = block.settings[location_key]
+                    assign richtext = block.settings[richtext_key]
+                  -%}
+
+                  {%- unless heading == blank -%}
+                    <span
+                     class="partner-map__canvas-marker"
+                     style="left: {{position_x}}%;top: {{position_y}}%;"
+                     partner-map-marker
+                     data-index="{{ forloop.index }}">
+                      {%- unless location == blank -%}
+                        <span class="partner-map__canvas-marker__location">{{ location | escape }}</span>
+                      {%- endunless -%}
+                    </span>
+                  {%- endunless -%}
+                {%- endfor -%}
+              </div>
+            </div>
+          </div>
+
+          <div class="grid__item large--one-third">
+            <div class="partner-map__info">
+              {%- for i in (1..6) -%}
+                {%- capture position_x_key -%}position_x_{{ i }}{%- endcapture -%}
+                {%- capture position_y_key -%}position_y_{{ i }}{%- endcapture -%}
+                {%- capture logo_key -%}logo_{{ i }}{%- endcapture -%}
+                {%- capture heading_key -%}heading_{{ i }}{%- endcapture -%}
+                {%- capture location_key -%}location_{{ i }}{%- endcapture -%}
+                {%- capture richtext_key -%}richtext_{{ i }}{%- endcapture -%}
+
+                {%- liquid
+                  assign position_x = block.settings[position_x_key]
+                  assign position_y = block.settings[position_y_key]
+                  assign logo = block.settings[logo_key]
+                  assign heading = block.settings[heading_key]
+                  assign location = block.settings[location_key]
+                  assign richtext = block.settings[richtext_key]
+                -%}
+
+                {%- unless heading == blank -%}
+                  <div
+                   class="partner-map__item"
+                   partner-map-item
+                   data-index="{{ forloop.index }}">
+                    <h4 class="partner-map__item__title">{{ heading | escape }}</h4>
+
+                    {%- unless location == blank -%}
+                      <p class="partner-map__item__location hide">{{ location | escape }}</p>
+                    {%- endunless -%}
+
+                    {%- unless logo == blank -%}
+                      <div class="partner-map__item__logo">{% include 'lazy-image' with image: logo %}</div>
+                    {%- endunless -%}
+
+                    {%- unless richtext == blank -%}
+                      <div class="rte">{{ richtext }}</div>
+                    {%- endunless -%}
+                  </div>
+                {%- endunless -%}
+              {%- endfor -%}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

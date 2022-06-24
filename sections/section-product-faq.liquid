@@ -1,0 +1,89 @@
+<div data-section-type="product-faq">
+  <div class="section-body">
+    <div class="wrapper">
+      <div class="grid">
+        <div class="grid__item large--two-thirds push--large--one-sixth">
+          <h2 class="section-title h1">Frequently Asked Questions</h2>
+
+          <div class="faq">
+            {%- for block in section.blocks -%}
+              {%- liquid
+                assign image = block.settings.image
+                assign title = block.settings.title
+                assign richtext = block.settings.richtext
+              -%}
+              <div class="faq__item">
+                <div class="faq__toggle" faq-toggle>
+                  <div class="faq__toggle__image-wrap small--hide">
+                    {% if image != blank %}
+                      <div class="faq__toggle__image lazyload" data-bgset="{% include 'bgset', image: image %}"></div>
+                      <noscript>
+                        <div class="faq__toggle__image" style="background-image: url('{{ img_object | img_url: '300x' }}');"></div>
+                      </noscript>
+                    {% else %}
+                      <div class="faq__toggle__image"></div>
+                    {% endif %}
+                  </div>
+                  <h4 class="faq__toggle__heading">
+                    <strong>{{ title | split: ' - ' | first }}</strong>
+                    <span class="small--hide">{{ title | split: ' - ' | last }}</span>
+                  </h4>
+
+                  <div class="faq__toggle__icon">
+                    {% include 'icon-faq-toggle' %}
+                  </div>
+                </div>
+
+                <div class="faq__content rte" faq-content>{{ richtext }}</div>
+              </div>
+            {%- endfor -%}
+          </div>
+
+          <p class="text-center">Still need help? Send us an email: <a href="mailto:help@solgaard.co">help@solgaard.co</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+{% schema %}
+  {
+    "name": "Product FAQ",
+    "tag": "section",
+    "class": "section-product-faq",
+    "settings": [
+    ],
+    "blocks": [
+      {
+        "type": "faq",
+        "name": "FAQ",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image",
+            "info": "600 x 600px .jpg recommended"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading"
+          },
+          {
+            "type": "richtext",
+            "id": "richtext",
+            "label": "Richtext"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Product FAQ",
+        "category": "Product"
+      }
+    ]
+  }
+{% endschema %}

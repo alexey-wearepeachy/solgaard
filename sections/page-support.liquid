@@ -1,0 +1,92 @@
+
+
+<div data-section-type="product-faq">
+  <div class="section-body">
+    <div class="wrapper">
+      <div class="grid">
+        <div class="grid__item large--two-thirds push--large--one-sixth">
+          {% if section.settings.title != blank %}
+            <h2 class="section-title h1">{{ section.settings.title | escape }}</h2>
+          {% endif %}
+
+          <div class="faq">
+            {%- for block in section.blocks -%}
+              {%- assign image = block.settings.image -%}
+              {%- assign heading = block.settings.heading -%}
+              {%- assign content = block.settings.content -%}
+              <div id="Faq-{{ heading | split: ' - ' | first | camelcase }}" style="margin:50px;"></div>
+              <div class="faq__item" {{ block.shopify_attributes }}>
+                <div class="faq__toggle" faq-toggle>
+                  <div class="faq__toggle__image-wrap small--hide">
+                    {% if image != blank %}
+                      <div class="faq__toggle__image lazyload" data-bgset="{% include 'bgset', image: image %}"></div>
+                      <noscript>
+                        <div class="faq__toggle__image" style="background-image: url('{{ img_object | img_url: '300x' }}');"></div>
+                      </noscript>
+                    {% else %}
+                      <div class="faq__toggle__image"></div>
+                    {% endif %}
+                  </div>
+                  <h4 class="faq__toggle__heading">
+                    <strong>{{ heading | split: ' - ' | first }}</strong>
+                    <span class="small--hide">{{ heading | split: ' - ' | last }}</span>
+                  </h4>
+
+                  <div class="faq__toggle__icon">
+                    {% include 'icon-faq-toggle' %}
+                  </div>
+                </div>
+
+                <div class="faq__content rte" faq-content>
+                  {{ content }}
+                </div>
+              </div>
+            {%- endfor -%}
+          </div>
+
+          <p class="text-center">Still need help? Send us an email: <a href="mailto:help@solgaard.co">help@solgaard.co</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Support",
+    "class": "section-support",
+    "max_blocks": 6,
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Frequently Asked Questions"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "faq",
+        "name": "FAQ",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image",
+            "info": "600 x 600px .jpg recommended"
+          },
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading"
+          },
+          {
+            "type": "richtext",
+            "id": "content",
+            "label": "Content"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

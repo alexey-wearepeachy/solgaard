@@ -1,0 +1,98 @@
+{% assign blocks          = section.blocks %}
+
+<section class="lp-transatlantic--side-by-side-section" data-section-id="{{ section.id }}" {% if section.settings.hide_section %}style="display: none;"{% endif %}>
+    {% for block in blocks %}
+        {% include 'new-lp--side-by-side-section' %}
+    {% endfor %}
+</section>
+
+{% schema %}
+{
+    "name": "Side by side Content",
+    "settings": [
+        {
+            "type": "checkbox",
+            "id": "hide_section",
+            "label": "Hide section?",
+            "default": false
+        }
+    ],
+    "blocks": [
+        {
+            "type": "block",
+            "name": "Section",
+            "settings": [
+                {
+                    "type": "color",
+                    "id": "bg_color",
+                    "label": "Background color of section",
+                    "default": "#FFFFFF"
+                },
+                {
+                    "type": "checkbox",
+                    "id": "reverse_section",
+                    "label": "Reverse section?",
+                    "default": false
+                },
+                {
+                    "type": "checkbox",
+                    "id": "reverse_section_mob",
+                    "label": "Reverse section on mobile?",
+                    "default": false
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Section title"
+                },
+                {
+                    "type": "color",
+                    "id": "title_color",
+                    "label": "Color of title",
+                    "default": "#000000"
+                },
+                {
+                    "type": "text",
+                    "id": "font_url",
+                    "label": "Title font link"
+                },
+                {
+                    "type": "text",
+                    "id": "font_weight",
+                    "label": "Title font weight"
+                },
+                {
+                    "type": "textarea",
+                    "id": "subtitle",
+                    "label": "Section subtitle"
+                },
+                {
+                    "type": "color",
+                    "id": "subtitle_color",
+                    "label": "Color of description",
+                    "default": "#777777"
+                },
+                {
+                    "type": "header",
+                    "content": "Media block"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Section image"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "image_mob",
+                    "label": "Section mobile image"
+                },
+                {
+                    "type": "text",
+                    "id": "video_link",
+                    "label": "Video link"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

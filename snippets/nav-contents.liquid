@@ -1,0 +1,157 @@
+{%- capture logo_html -%}
+  {% if section.settings.logo %}
+    <a href="/" itemprop="url">
+      {% capture image_size %}{{ section.settings.logo_max_limit }}x{% endcapture %}
+      <img src="{{ section.settings.logo | img_url: image_size }}"
+      srcset="{{ section.settings.logo | img_url: image_size }} 1x, {{ section.settings.logo | img_url: image_size, scale: 2 }} 2x"
+      alt="{{ section.settings.logo.alt | default: shop.name }}"
+      class="logo-image"
+      itemprop="logo">
+    </a>
+  {% else %}
+    <a href="/" itemprop="url">{{ shop.name }}</a>
+  {% endif %}
+{%- endcapture -%}
+
+<div class="mobile-wrapper">
+  <div class="header-cart">
+    <a
+     href="/cart"
+     class="CartToggle header-cart__link">
+      <span class="header-cart__icon">
+        {%- include 'icon-cart' -%}
+      </span>
+      <span class="header-cart__count cartCount{% if cart.item_count < 1 %} hidden-count{% endif %}">{{ cart.item_count }}</span>
+    </a>
+  </div>
+
+  <div class="logo-wrapper{% if section.settings.logo %} logo-wrapper--image{% endif %}">
+    {% if template == 'index' %}
+      <h1 class="h4 header-logo" itemscope itemtype="http://schema.org/Organization">
+        {{ logo_html }}
+      </h1>
+    {% else %}
+      <div class="h4 header-logo" itemscope itemtype="http://schema.org/Organization">
+        {{ logo_html }}
+      </div>
+    {% endif %}
+  </div>
+
+  <a href class="menuToggle header-hamburger"{% if nav-contents == 'mobile' %} aria-haspopup="true" aria-expanded="false" aria-controls="ariaHamburger"{% endif %} aria-label="Menu button">
+    <span class="hamburger-bar"></span>
+    <span class="hamburger-bar"></span>
+    <span class="hamburger-bar"></span>
+  </a>
+</div>
+
+
+{%- capture utility_menu_content -%}
+  <li class="nav__item account-link">
+    <a href="/account" class="nav__link">Account</a>
+  </li>
+
+  {%- comment -%}
+    <li class="nav__item account-link">
+      <a href="/pages/rewards" class="nav__link">Rewards</a>
+    </li>
+  {%- endcomment -%}
+
+  <li class="nav__item cart-text-link">
+    <div class="header-cart">
+      <a
+       href="/cart"
+       class="CartToggle header-cart__link">
+        <span class="header-cart__icon">
+          {%- include 'icon-cart' -%}
+        </span>
+        <span class="header-cart__count cartCount{% if cart.item_count < 1 %} hidden-count{% endif %}">{{ cart.item_count }}</span>
+      </a>
+    </div>
+  </li>
+{%- endcapture -%}
+
+<div class="header-menu header-menu--primary nav-wrapper">
+  <ul
+   class="main-menu accessibleNav"
+   role="list"
+   aria-label="primary"
+   {% if nav-contents == 'mobile' %}
+     id="ariaHamburger"
+   {% endif %}>
+
+    {% if section.settings.main_menu_linklist %}
+      {% assign main_menu_linklist = section.settings.main_menu_linklist %}
+    {% else %}
+      {% assign main_menu_linklist = 'main-menu' %}
+    {% endif %}
+
+    {%- for link in linklists[main_menu_linklist].links -%}
+      {%- liquid
+        assign is_block = false
+        if link.levels == 1 and nav-contents != 'mobile'
+          assign is_block = true
+        endif
+        comment
+        if link.title == 'Support'
+          assign is_block = false
+        endif
+        endcomment
+      -%}
+      {%- if is_block -%}
+        {% include 'nav-item--block' %}
+      {%- else -%}
+        {% include 'nav-item' %}
+      {%- endif -%}
+    {%- endfor -%}
+
+    {%- if nav-contents == 'mobile' -%}
+      {{ utility_menu_content }}
+    {%- endif -%}
+  </ul>
+
+  {%- if nav-contents == 'mobile' -%}
+    {% assign most_popular_linklist = section.settings.most_popular_linklist %}
+    {%- unless most_popular_linklist == blank -%}
+      <nav class="nav__most-popular">
+        <h3 class="text-center">Most Popular</h3>
+
+        <div class="grid--condensed">
+          {%- for link in linklists[most_popular_linklist].links -%}
+            {%- assign nav_image_obj = false -%}
+            {%- if link.type == 'product_link' -%}
+              {%- unless link.object.featured_image == blank -%}
+                {%- assign nav_image_obj = link.object.featured_image -%}
+              {%- endunless -%}
+            {%- elsif link.type == 'collection_link' -%}
+              {%- unless link.object.image == blank -%}
+                {%- assign nav_image_obj = link.object.image -%}
+              {%- endunless -%}
+            {%- endif -%}
+
+            {%- unless link.object.metafields.nav.popular-image == blank or images[link.object.metafields.nav.popular-image] == blank -%}
+              {%- assign nav_image_obj = images[link.object.metafields.nav.popular-image] -%}
+            {%- endunless -%}
+
+            <div class="grid__item one-half">
+              <a class="nav__link" href="{{ link.url }}">
+                <span class="nav__link__bg" style="background-image:url(&quot;{{ nav_image_obj | img_url: '600x' }}&quot;);"></span>
+                <span class="nav__link__text">{{ link.title }}</span>
+              </a>
+            </div>
+          {%- endfor -%}
+        </div>
+      </nav>
+    {%- endunless -%}
+  {%- endif -%}
+</div>
+
+{%- if nav-contents != 'mobile' -%}
+  <div class="header-menu header-menu--utility nav-wrapper">
+    <ul
+     class="main-menu accessibleNav"
+     role="list"
+     aria-label="utility">
+      {{ utility_menu_content }}
+    </ul>
+  </div>
+{%- endif -%}

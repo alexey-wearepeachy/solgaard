@@ -1,0 +1,35 @@
+{%- assign collection = collections[block.settings.collection] -%}
+
+{%- if collection.image -%}
+  {%- assign img_object = collection.image -%}
+{%- elsif collection.products.first -%}
+  {%- assign img_object = collection.products.first.featured_image -%}
+{%- endif -%}
+
+{%- if block.settings.image -%}
+  {%- assign img_object = block.settings.image -%}
+{%- endif -%}
+
+<div class="collection-grid-item homepage-image {{ section.settings.color }}">
+  <a href="{% if collection.empty? %}#{% else %}{{ collection.url }}{% endif %}" class="collection-grid-item__link">
+    <div class="collection-grid-item__overlay lazyload" data-bgset="{% include 'bgset', image: img_object %}">
+      {% if collection.empty? and block.settings.image == blank %}
+        {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+        {{ 'collection-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+      {% endif %}
+    </div>
+    <noscript>
+      <div class="collection-grid-item__overlay" style="background-image: url({{ img_object  | img_url: '360x' }})"></div>
+    </noscript>
+
+    <div class="collection-grid-item__content">
+      <p class="collection-grid-item__shop content--flex">Shop</p>
+
+      {% unless block.settings.title == '' %}<h2 class="title--flex home__title">{{ block.settings.title | escape }}</h2>{% endunless %}
+    </div>
+
+    <div class="image-overlay image-overlay-{{ section.settings.overlay_opacity }}"></div>
+  </a>
+  {% render 'banana-stand-product-list-container', product: product %}
+</div>
+

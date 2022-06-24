@@ -1,0 +1,156 @@
+{%- assign section_id = block.id -%}
+{%- assign title = block.settings.title -%}
+{%- assign bg_color = block.settings.bg_color -%}
+
+
+{%- assign product_count = 0 -%}
+{%- for i in (1..6) -%}
+  {%- capture product_key -%}product_{{ i }}{%- endcapture -%}
+  {%- assign related_product = all_products[block.settings[product_key]] -%}
+  {%- unless related_product == blank -%}
+    {%- assign product_count = product_count | plus: 1 -%}
+  {%- endunless -%}
+{%- endfor -%}
+
+{%- case product_count -%}
+  {%- when 1 -%}
+    {%- assign grid_width = 'small--one-full medium--one-half push--medium--one-quarter large--one-third push--large--one-third' -%}
+
+  {%- when 2 -%}
+    {%- assign grid_width = 'small--one-full medium--one-half large--one-third push--large--one-sixth' -%}
+
+  {%- else -%}
+    {%- assign grid_width = 'small--one-full medium--one-half large--one-third' -%}
+{%- endcase -%}
+<section class="section-related-products" {{ block.shopify_attributes }}>
+  <div
+   {% comment %}
+   data-section-type="grid-slider"
+   data-section-id="{{ section_id }}"
+   data-slide-selector=".product-related__item"
+   {% endcomment %}
+   {{ block.shopify_attributes }}>
+    <div
+     class="section-body"
+     {% unless bg_color == blank or bg_color contains 'rgba(0,0,0,0)' %}
+       style="background-color:{{ bg_color }};"
+     {% endunless %}>
+      <div class="wrapper">
+        <div class="product-features">
+          {%- unless title == blank -%}
+            <h2 class="section-title medium-up--text-center">{{ title | escape }}</h2>
+          {%- endunless -%}
+
+          <div
+           data-aos="fade-up"
+           data-aos-easing="linear"
+           data-aos-duration="400"
+           data-aos-delay="0">
+            <div
+             class="grid grid--uniform product-related__itemr"
+             {% comment %}
+             data-slider
+             data-slick='{
+               "arrows": true,
+               "slidesToShow": 3,
+               "slidesToScroll": 3,
+               "swipeToSlide": true,
+               "responsive": [
+                 { "breakpoint": 2000, "settings": { "slidesToShow": 3, "slidesToScroll": 3 } },
+                 { "breakpoint": 992, "settings":  { "slidesToShow": 2, "slidesToScroll": 2 } },
+                 { "breakpoint": 768, "settings":  { "slidesToShow": 2, "slidesToScroll": 2, "arrows": true } },
+                 { "breakpoint": 480, "settings":  { "slidesToShow": 1, "slidesToScroll": 1, "arrows": true } }
+               ]
+             }'
+             {% endcomment %}
+             >
+              {%- for i in (1..6) -%}
+                {%- capture product_key -%}product_{{ i }}{%- endcapture -%}
+                {%- capture variant_id_key -%}variant_id_{{ i }}{%- endcapture -%}
+
+                {%- assign related_product = all_products[block.settings[product_key]] -%}
+                {%- assign variant_id = block.settings[variant_id_key] -%}
+
+                {%- unless related_product == blank -%}
+                  {%- assign related_variant = related_product.first_available_variant -%}
+                  {%- unless variant_id == blank -%}
+                    {%- assign variant_id = variant_id | times: 1 -%}
+                    {%- for v in related_product.variants -%}
+                      {%- if v.id == variant_id -%}
+                        {%- assign variant = v -%}
+                        {%- break -%}
+                      {%- endif -%}
+                    {%- endfor -%}
+                  {%- endunless -%}
+
+                  {%- assign image = related_variant.image | default: related_product.featured_image -%}
+                  {%- assign title = related_product.title -%}
+                  {%- assign content = related_variant.title -%}
+
+                  <div class="grid__item {{ grid_width }} product-related__item">
+                    <div class="product-related__header">
+                      {%- unless image == blank -%}
+                        <div class="product-related__image">{%- include 'lazy-image' with image: image -%}</div>
+                      {%- endunless -%}
+                    </div>
+
+                    <div class="product-related__body text-center">
+                      {%- unless title == blank -%}
+                        <h4 class="product-related__title">{{ title | escape }}</h4>
+                      {%- endunless -%}
+
+                      {%- unless content == blank or content == 'Default Title' -%}
+                        <div class="product-related__content rte">{{ content }}</div>
+                      {%- endunless -%}
+
+                      {% form 'product', related_product, class: "ProductForm" %}
+                        <h5 class="product__price h3{% if related_variant.compare_at_price > related_variant.price %} on-sale{% endif %}">
+                          <span class="small compare-at" {% unless related_variant.compare_at_price > related_variant.price %}style="display: none"{% endunless %}>
+                          <span class="money">{{ related_product.compare_at_price_max | money }}</span>
+                          </span>
+
+                          <span class="money">{{ related_variant.price | money }}</span>
+                        </h5>
+
+                        {%- assign btn_text = 'products.product.add_to_cart' | t -%}
+                        {%- if sold_out -%}
+                          {%- assign btn_text = 'products.product.sold_out' | t -%}
+                        {%- endif -%}
+
+                        <input type="hidden" name="return_to" value="/cart/" />
+                        <input type="hidden" name="id" value="{{ related_variant.id }}" />
+
+                        <div class="add-to-cart-wrapper">
+                          <button
+                           style="display:block!important;
+                                  visibility: visible;
+                                  opacity: 1;
+                                  width: 100%;
+                                  height: auto;
+                                  overflow: visible;"
+                           type="submit"
+                           name="add"
+                           class="product__add-to-cart-button btn btn--large btn--full btn--green addToCart{% if sold_out %} disabled{% endif %}" {% if sold_out %}disabled="true"{% endif %}
+                           onclick="obApi('track', 'Add To Cart');">
+                            <span>{{ btn_text }}</span>
+                          </button>
+
+                          {%- assign preorder_message = related_product.metafields.preorder.message -%}
+                          {%- unless preorder_message == blank -%}
+                            <div class="product__preorder-message">
+                              <p>{{ preorder_message }}</p>
+                            </div>
+                          {%- endunless -%}
+                        </div>
+                      {% endform %}
+                    </div>
+                  </div>
+                {%- endunless -%}
+              {%- endfor -%}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

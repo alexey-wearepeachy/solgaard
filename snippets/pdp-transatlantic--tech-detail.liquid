@@ -1,0 +1,124 @@
+{% assign tech_detail      = product.metafields.product.tech_detail %}
+{% assign desktop_media    = tech_detail.desktop_media %}
+{% assign mobile_media     = tech_detail.mobile_media %}
+{% assign media_label      = tech_detail.media_label %}
+{% assign media_subtitle   = tech_detail.media_subtitle %}
+{% assign tabs             = tech_detail.tabs %}
+
+{% assign section_bg_color     = tech_detail.section_bg_color %}
+{% assign text_color           = tech_detail.text_color %}
+{% assign image_label_bg_color = tech_detail.image_label_bg_color %}
+{% assign strip_bg_color_odd   = tech_detail.strip_bg_color_odd %}
+{% assign strip_bg_color_even  = tech_detail.strip_bg_color_even %}
+
+<style>
+    {% if section_bg_color.size > 0 %}
+        .tech-detail {
+            background-color: {{ section_bg_color }};
+        }
+    {% endif %}
+
+    {% if text_color.size > 0 %}
+        .tech-detail * {
+            color: {{ text_color }} !important;
+        }
+    {% endif %}
+
+    {% if image_label_bg_color.size > 0 %}
+        .tech-detail .tech-detail-media__label {
+            background-color: {{ image_label_bg_color }} !important;
+        }
+    {% endif %}
+
+    {% if strip_bg_color_odd.size > 0 %}
+        .content-item:nth-child(odd) {
+            background-color: {{ strip_bg_color_odd }} !important;
+        }
+    {% endif %}
+
+    {% if strip_bg_color_even.size > 0 %}
+        .content-item:nth-child(even) {
+            background-color: {{ strip_bg_color_even }} !important;
+        }
+    {% endif %}
+</style>
+
+<section
+    class="tech-detail"
+>
+    <div class="tech-detail--wrapper">
+        <div class="tech-detail-media__content">
+            <div class="tech-detail-media__label">
+                {{ media_label }}
+            </div>
+            {% if desktop_media contains '.mp4' %}
+                <video muted autoplay loop>
+                    <source src="{{ desktop_media }}" type="video/mp4">
+                </video>
+            {% else %}
+                <img src="{{ desktop_media }}" alt="">
+            {% endif %}
+            <div class="tech-detail-media__subtitle">
+                {{ media_subtitle }}
+            </div>
+        </div>
+
+
+
+        <div class="tech-detail-tabs">
+            {% for tab in tabs %}
+                {% if tab.tab_title.size > 3 %}
+                    <div class="tab open">
+                        <div class="tab__title"><span>{{ tab.tab_title }}</span></div>
+                        <div class="content">
+                            {% for item in tab['tab_content'] %}
+                                <div class="content-item">
+                                    <div class="content-item__key">{{ item.title }}</div>
+                                    <div class="content-item__value">{{ item.description }}</div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <div class="tech-detail-tabs mobile">
+            {% for tab in tabs %}
+                {% if tab.tab_title.size > 3 %}
+                    <div class="tab {% if forloop.first %}open{% endif %}">
+                        <div class="tab__title"><span>{{ tab.tab_title }}</span> <div class="control"></div></div>
+                        <div class="content">
+                            {% for item in tab['tab_content'] %}
+                                <div class="content-item">
+                                    <div class="content-item__key">{{ item.title }}</div>
+                                    <div class="content-item__value">{{ item.description }}</div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<script>
+    $('.tab').click(function(e) {
+        e.preventDefault();
+        $(this).toggleClass('open')
+    });
+</script>
+
+<style>
+    @media (min-width: 767px) {
+        .tech-detail .tech-detail-tabs .tab.open{
+            margin-bottom: 24px;
+        }
+        .tech-detail .tech-detail-tabs .tab.open:last-of-type {
+            margin-bottom: 0;
+        }
+    }
+</style>
+
+

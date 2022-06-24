@@ -1,0 +1,45 @@
+<style>
+    @font-face {
+        font-family: 'CustomFont';
+        src: url("{{ section.settings.font_url }}");
+        /* IE9 Compat Modes */
+        font-weight: {{ section.settings.font_weight }};
+        font-stretch: normal;
+        font-style: normal;
+    }
+
+    #new-lp--promo-icons {
+        background-color: {{ section.settings.bg_color }};
+    }
+
+    #new-lp--promo-icons .promo-icons__container .promo-icons__subtitle {
+        color: {{ section.settings.subtitle_color }};
+    }
+
+    #new-lp--promo-icons .promo-icons__container .promo-icons__title {
+        color: {{ section.settings.title_color }};
+        font-family: 'CustomFont', 'Eurostile', sans-serif;
+        font-weight: {{ section.settings.font_weight }};
+    }
+</style>
+
+<div id="new-lp--promo-icons">
+    <div class="promo-icons__container">
+        {% if section.settings.subtitle != blank %}
+            <h5 class="promo-icons__subtitle">{{ section.settings.subtitle }}</h5>
+        {% endif %}
+        {% if section.settings.title != blank %}
+            <h3 class="promo-icons__title">{{ section.settings.title }}</h3>
+        {% endif %}
+
+        <div class="promo-icons__items _anim-items _anim-no-hide">
+            {% for block in section.blocks %}
+                <div class="promo-icons__item">
+                    <div class="promo-icons__item-icon">
+                        <img src="{{ block.settings.block_icon | img_url: 'master' }}" alt="{{ image.alt }}">
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

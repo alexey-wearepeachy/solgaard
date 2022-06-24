@@ -1,0 +1,121 @@
+{% assign title          = section.settings.title %}
+{% assign description    = section.settings.description %}
+{% assign bg_img         = section.settings.bg_img %}
+{% assign bg_img_desktop = section.settings.bg_img_desktop %}
+{% assign bg_color       = section.settings.bg_color %}
+{% assign image          = section.settings.image %}
+{% assign reverse        = section.settings.reverse %}
+{% assign hide           = section.settings.hide %}
+{% assign font_url       = section.settings.font_url %}
+{% assign font_weight    = section.settings.font_weight %}
+
+<style>
+    #lp-otw--second-planet {
+        background: url("{{ bg_img | img_url: 'master' }}") center / cover no-repeat;
+    }
+    
+    @media(min-width: 992px) {
+        #lp-otw--second-planet {
+            background: url("{{ bg_img_desktop | img_url: 'master' }}") center / cover no-repeat;
+        }
+    }
+
+    @media(min-width: 992px) {
+        #lp-otw--second-planet {
+            background-position: 50% 0;
+        }
+    }
+    
+    {% if image != blank %}
+        .lp-otw--section-planet__inner .lp-otw--section-planet__container {
+            padding-bottom: 100px;
+        }
+
+        @media (min-width: 992px) {
+            .lp-otw--section-planet__inner .lp-otw--section-planet__container {
+                padding-bottom: 141px;
+            }
+        }
+    {% endif %}
+
+    @font-face {
+        font-family: 'CustomFontSecond';
+        src: url("{{ font_url }}");
+        /* IE9 Compat Modes */
+        font-weight: {{ font_weight }};
+        font-stretch: normal;
+        font-style: normal;
+    }
+
+    #lp-otw--second-planet .lp-otw--section-planet__title {
+        font-family: "CustomFontSecond", "Eurostile";
+        font-weight: {{ font_weight }};
+    }
+</style>
+{% unless hide %}
+    <section id="lp-otw--second-planet" style="background-color: {{ bg_color }};">
+        {% include 'lp-otw--section-planet' title: title, description: description, image: image, reverse: reverse %}
+    </section>
+{% endunless %}
+
+{% schema %}
+{
+    "name": "Second planet",
+    "settings": [
+        {
+            "type": "checkbox",
+            "id": "hide",
+            "label": "Hide section?",
+            "default": false
+        },
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+        },
+        {
+            "type": "textarea",
+            "id": "description",
+            "label": "Description"
+        },
+        {
+            "type": "image_picker",
+            "id": "bg_img",
+            "label": "Background image for mobile"
+        },
+        {
+            "type": "image_picker",
+            "id": "bg_img_desktop",
+            "label": "Background image for desktop"
+        },
+        {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Content image"
+        },
+        {
+            "type": "color",
+            "id": "bg_color",
+            "label": "Background color",
+            "default": "#000"
+        },
+        {
+            "type": "checkbox",
+            "id": "reverse",
+            "label": "Reverse content?",
+            "default": false
+        },
+        {
+            "type": "text",
+            "id": "font_url",
+            "label": "Font link"
+        },
+        {
+            "type": "text",
+            "id": "font_weight",
+            "label": "Font weight",
+            "default": "700"
+        }
+    ]
+}
+{% endschema %}

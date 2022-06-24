@@ -1,0 +1,103 @@
+{% assign title           = section.settings.title %}
+{% assign text            = section.settings.text %}
+{% assign bg_color_first  = section.settings.bg_color_first %}
+{% assign bg_color_second = section.settings.bg_color_second %}
+{% assign blocks          = section.blocks %}
+{% assign font_url        = section.settings.font_url %}
+{% assign font_weight     = section.settings.font_weight %}
+
+<style>
+    @font-face {
+       font-family: 'lp-tr-adv-title';
+       src: url("{{ font_url }}");
+       /* IE9 Compat Modes */
+       font-weight: {{ font_weight }};
+       font-stretch: normal;
+       font-style: normal;
+   }
+
+   #lp-transatlantic--advantages .lp-transatlantic--advantages__title {
+       font-family: "lp-tr-adv-title", "Harmonia Sans";
+       font-weight: {{ font_weight }};
+   }
+</style>
+
+<section id="lp-transatlantic--advantages">
+    <div class="lp-transatlantic--advantages__container">
+        <div class="lp-transatlantic--advantages__column" style="background-color: {{ bg_color_first }}">
+           <div class="lp-transatlantic--advantages__content">
+                <h3 class="lp-transatlantic--advantages__title">{{ title }}</h3>
+                <div class="lp-transatlantic--advantages__text"><p>{{ text }}</p></div>
+           </div>
+        </div>
+        <div class="lp-transatlantic--advantages__column" style="background-color: {{ bg_color_second }}">
+            <div class="lp-transatlantic--advantages__items">
+                {% for block in blocks %}
+                    <div class="lp-transatlantic--advantages__item">
+                        <div class="lp-transatlantic--advantages__icon">{{ block.settings.icon }}</div>
+                        <div class="lp-transatlantic--advantages__description">{{ block.settings.description }}</div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+   </div>
+</section>
+
+{% schema %}
+{
+    "name": "Advantages",
+    "settings": [
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+        },
+        {
+            "type": "textarea",
+            "id": "text",
+            "label": "Text"
+        },
+        {
+            "type": "color",
+            "id": "bg_color_first",
+            "label": "First box background color",
+            "default": "#102234"
+        },
+        {
+            "type": "color",
+            "id": "bg_color_second",
+            "label": "Second box background color",
+            "default": "#102234"
+        },
+        {
+            "type": "text",
+            "id": "font_url",
+            "label": "Font link"
+        },
+        {
+            "type": "text",
+            "id": "font_weight",
+            "label": "Font weight",
+            "default": "600"
+        }
+    ],
+    "blocks": [
+        {
+            "type": "block",
+            "name": "Item",
+            "settings": [
+                {
+                    "type": "textarea",
+                    "id": "icon",
+                    "label": "Icon SVG"
+                },
+                {
+                    "type": "text",
+                    "id": "description",
+                    "label": "Description"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

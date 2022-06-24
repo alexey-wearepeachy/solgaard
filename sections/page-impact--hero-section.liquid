@@ -1,0 +1,79 @@
+{% assign section_bg_img     = section.settings.section_bg_img %}
+{% assign section_bg_img_mob = section.settings.section_bg_img_mob %}
+{% assign section_bg_color   = section.settings.section_bg_color %}
+{% assign section_text_color = section.settings.section_text_color %}
+{% assign section_title      = section.settings.section_title %}
+{% assign section_text       = section.settings.section_text %}
+
+<style>
+    {% if section_bg_img != blank and section_bg_img_mob != blank %}
+        #impact-hero .impact-hero__container {
+            background-image: url("{{ section_bg_img | img_url: 'master' }}");
+        }
+        @media (max-width: 950px) {
+            #impact-hero .impact-hero__container {
+                background-image: url("{{ section_bg_img_mob | img_url: 'master' }}");
+            }
+        }
+    {% endif %}
+</style>
+
+<section id="impact-hero" {% if section_bg_color != blank %}style="background-color: {{ section_bg_color }}"{% endif %}>
+    <div class="impact-hero__container">
+        <div class="impact-hero__content">
+            {% if section_title != blank %}
+                <h2 class="impact-hero__content-title" {% if section_text_color != blank %}style="color: {{ section_text_color }}"{% endif %}>{{ section_title }}</h2>
+            {% endif %}
+            {% if section_text != blank %}
+                <p class="impact-hero__content-text" {% if section_text_color != blank %}style="color: {{ section_text_color }}"{% endif %}>{{ section_text }}</p>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+{% schema %}
+{
+    "name": "Hero Section",
+    "settings": [
+        {
+            "type": "image_picker",
+            "id": "section_bg_img",
+            "label": "Background image"
+        },
+        {
+            "type": "image_picker",
+            "id": "section_bg_img_mob",
+            "label": "Background image (mobile)"
+        },
+        {
+            "type": "color",
+            "id": "section_bg_color",
+            "label": "Background color",
+            "default": "#334155"
+        },
+        {
+            "type": "color",
+            "id": "section_text_color",
+            "label": "Text color",
+            "default": "#FFFFFF"
+        },
+        {
+            "type": "text",
+            "id": "section_title",
+            "label": "Section title",
+            "default": "Our Impact"
+        },
+        {
+            "type": "textarea",
+            "id": "section_text",
+            "label": "Section text"
+        }
+    ],
+    "presets": [
+        {
+            "category": "Impact LP Hero",
+            "name": "Impact LP Hero"
+        }
+    ]
+}
+{% endschema %}

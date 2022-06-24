@@ -1,0 +1,31 @@
+<!-- /snippets/product.gallery.liquid -->
+<div
+ data-section-type="product-gallery">
+  <div class="section-body">
+    <div class="wrapper">
+      <div class="grid grid--extra-condensed" product-gallery-slider>
+        {%- for i in (1..4) -%}
+          {%- capture image_key -%}image_{{ i }}{%- endcapture -%}
+          {%- capture caption_key -%}caption_{{ i }}{%- endcapture -%}
+          {%- assign image = block.settings[image_key] -%}
+          {%- assign caption = block.settings[caption_key] -%}
+
+          {%- unless image -%}
+            {%- assign image = 'blank.svg' | asset_url -%}
+          {%- endunless -%}
+
+          <div class="product-gallery-item grid__item {% cycle 'large--one-third', 'large--two-thirds', 'large--two-thirds', 'large--one-third' %}">
+            <div class="product-gallery-item__image lazyload" data-bgset="{% include 'bgset', image: image %}"></div>
+            <noscript>
+              <div class="product-gallery-item__image" style="background-image: url('{{ img_object | img_url: '1280x' }}');"></div>
+            </noscript>
+
+            {%- unless caption == blank -%}
+              <p class="product-gallery-item__caption">{{ caption }}</p>
+            {%- endunless -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</div>

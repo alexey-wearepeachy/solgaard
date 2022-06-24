@@ -1,0 +1,88 @@
+{% if request.page_type == 'product' %}
+  {% assign product_type = product.type %}
+  {% assign warranty_badge = '' %}
+  {% assign badge_style = '' %}
+
+  {% if product_type == 'backpack' %}
+      {% assign badge_style = 'style="right: 5%;"' %}
+  {% endif %}
+
+  {% if product_type == 'Suitcase' %}
+      {% assign warranty_badge = 'https://cdn.shopify.com/s/files/1/1571/0569/files/10-year-warranty.png?v=1630669832' %}
+  {% elsif product_type == 'backpack' %}
+      {% assign warranty_badge = 'https://cdn.shopify.com/s/files/1/1571/0569/files/24-month-warranty.png?v=1630669832' %}
+  {% elsif product_type == 'watch' %}
+      {% assign warranty_badge = 'https://cdn.shopify.com/s/files/1/1571/0569/files/1-year-warranty.png?v=1630669832' %}
+  {% elsif product_type == 'accessory' %}
+      {% assign warranty_badge = 'https://cdn.shopify.com/s/files/1/1571/0569/files/1-year-warranty.png?v=1630669832' %}
+  {% endif %}
+{% endif %}
+
+<div
+ class="product__slides-wrap"
+ data-thumbs-position="side">
+  
+  {% if warranty_badge != blank and request.page_type == 'product' %}
+    <div class="cf-warrantyBadge" {{badge_style}}>
+      <img style="height: 0px" src="{{warranty_badge}}" alt="warrantyIcon">
+    </div>
+  {% endif %}
+
+  {%- capture product_slide_items -%}
+    <div class="product__slides product-single__photos" id="ProductPhoto-{{ section.id }}">
+      {% for image in product.images %}{%- assign is_video_slide = false -%}
+        {%- if image.alt contains 'youtube.com' or image.alt contains 'vimeo.com' -%}
+          {%- assign is_video_slide = true -%}
+        {%- endif -%}
+        {%- assign img_api = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        {%- assign img_alt = image.alt | escape -%}
+        {%- if image.alt == blank or image.alt == product.title or is_video_slide -%}
+          {%- assign img_alt = 'All'-%}
+        {%- endif -%}
+
+        <div
+         class="product__photo product__photo--additional{% if is_video_slide %} product__photo--video{% endif %}"
+         data-thumb="{{ image.src | img_url: 'small_cropped' }}"
+         data-alt="{{ img_alt }}"
+         data-image-id="{{ image.id }}">
+          <div class="image-wrapper"{% if image.aspect_ratio < 1 %} style="width:{{ image.aspect_ratio | times: 100 }}%; margin: 0 auto;"{% endif %}>
+            <div
+             class="lazy-image"
+             style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;">
+              <img class="ProductImg-{{ section.id }} fade-in lazyload lazypreload"
+                {% if settings.product_zoom_enable %}data-mfp-src="{{  image.src | img_url: 'master' }}"{% endif %}
+                data-image-id="{{ image.id }}"
+                alt="{{ image.alt | escape }}"
+                data-src="{{ img_api }}"
+                data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048, 2450, 2700, 3000, 3350, 3750, 4100, 4480]"
+                data-aspectratio="{{ block.settings.image.aspect_ratio }}"
+                data-sizes="auto"/>
+              {% if is_video_slide %}
+                <a href="{{ image.alt }}" class="product__play icon-fallback-text" data-image-id="{{ image.id }}" data-product-video-trigger>
+                  <span class="btn btn--play"></span>
+                  <span class="fallback-text">&#9658;</span>
+                </a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {%- endcapture -%}
+
+  {{ product_slide_items }}
+
+  <noscript>
+    {% for image in product.images %}
+      <img src="{{ image | img_url: '900x' }}" alt="{{ image.alt | default: product.title  }}">
+    {% endfor %}
+  </noscript>
+
+  <p class="product__zoom"><span class="product__zoom__icon" style='width:12px;'>{% include 'icon-zoom-gallery' %}</span><span class="product__zoom__text">Click to zoom</span> </p>
+
+  <div id="ProductThumbs-{{ section.id }}" class="product__thumbs"></div>
+
+  <script id="productSlideItemsObject--{{ product.id }}" class="product-slide-items-object" type="text/product-slide-items-object">
+    {{ product_slide_items | strip | strip_newlines }}
+  </script>
+</div>

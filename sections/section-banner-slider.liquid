@@ -1,0 +1,309 @@
+{%- if section.blocks.size > 0 -%}
+  <div
+   class="section-banner-slider"
+   data-section-id="{{ section.id }}"
+   data-section-type="banner-slider"
+   data-autoplay="true"
+   data-speed="4000">
+
+    <div
+     id="bannerSlider-{{ section.id }}"
+     class="banner__slider">
+      {%- for block in section.blocks -%}
+        {%- if block.settings.image -%}
+          {%- assign img_object = block.settings.image -%}
+          {%- assign img_small = img_object | img_url: '18x' -%}
+          {%- assign img_api = img_object | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        {%- else -%}
+          {%- assign img_object = 'blank.svg' | asset_url -%}
+          {%- assign img_small =  'blank.svg' | asset_url -%}
+          {%- assign img_api = 'blank.svg' | asset_url -%}
+        {%- endif -%}
+
+        {%- if block.settings.image_mobile -%}
+          {%- assign img_object_mobile = block.settings.image_mobile -%}
+          {%- assign img_small_mobile = img_object_mobile | img_url: '18x' -%}
+          {%- assign img_api_mobile = img_object_mobile | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        {%- else -%}
+          {%- assign img_object_mobile = img_object -%}
+          {%- assign img_small_mobile = img_small -%}
+          {%- assign img_api_mobile = img_api -%}
+        {%- endif -%}
+
+        {%- assign content_position = block.settings.content_position | default: 'content--centered' -%}
+        {%- assign title = block.settings.title -%}
+        {%- assign description = block.settings.description -%}
+        {%- assign btn_text_1 = block.settings.btn_text_1 -%}
+        {%- assign btn_link_1 = block.settings.btn_link_1 -%}
+        {%- assign btn_style_1 = block.settings.btn_style_1 | remove: ' btn--large' -%}
+        {%- assign btn_text_2 = block.settings.btn_text_2 -%}
+        {%- assign btn_link_2 = block.settings.btn_link_2 -%}
+        {%- assign btn_style_2 = block.settings.btn_style_2 | remove: ' btn--large' -%}
+        {%- assign height = section.settings.height | default: 'use_screen_full' -%}
+        {%- assign height_mobile = section.settings.height_mobile | default: height -%}
+        {%- assign color = block.settings.color -%}
+        {%- assign overlay_opacity = block.settings.overlay_opacity -%}
+        {% assign slider_label = "Button image " | append: forloop.index %}
+        <div
+         class="banner__slide banner__slide--{{ block.id }}{% unless forloop.first %} banner__slide--additional{% endunless %}"
+         data-color="{{ color }}"
+         data-block-id="{{ block.id }}"
+         aria-label="{{ title | default: slider_label }}"
+         aria-labelledby="bannerSlider-{{ section.id }}"
+         {{ block.shopify_attributes }}>
+          {%- if btn_link_1 != blank and btn_text_1 == blank -%}
+            <a href="{{ btn_link_1 }}" 
+            style="display:block;"
+            aria-label="{{ title | default: slider_label }}"
+            aria-labelledby="bannerSlider-{{ section.id }}">
+          {%- endif -%}
+
+          <div class="homepage-image fade-in-child preventOverflow {{ height }} {{ color }}">
+            <div class="{{ content_position }}">
+              <div class="text-center preventOverflowContent">
+                {% unless title == blank %}
+                  <h1 class="title--flex">{{ title | escape }}</h1>
+                {% endunless %}
+
+                {% unless description == blank %}
+                  <p class="content--flex h4--body">{{ description }}</p>
+                {% endunless %}
+
+                {% unless btn_text_1 == blank and btn_link_1 == blank and btn_text_2 == blank and btn_link_2 == blank %}
+                  <p class="content--cta">
+                    {% unless btn_text_1 == blank or btn_link_1 == blank %}
+                      <a class="{{ btn_style_1 }}" href="{{ btn_link_1 }}">{{ btn_text_1 | escape }}</a>
+                    {% endunless %}
+                    {% unless btn_text_2 == blank or btn_link_2 == blank %}
+                      <a class="{{ btn_style_2 }}" href="{{ btn_link_2 }}">{{ btn_text_2 | escape }}</a>
+                    {% endunless %}
+                {% endunless %}
+                </p>
+              </div>
+            </div>
+
+            <div class="image-overlay image-overlay-{{ overlay_opacity }} image-overlay--{{ content_position | remove: 'content--' }}"></div>
+
+            {%- capture image_html -%}
+              {% if height == 'use_image' %}
+                <div
+                 class="small--hide lazy-image"
+                 style="padding-top:{{ 1 | divided_by: img_object.aspect_ratio | times: 100}}%; background-image: url('{{ img_object | img_url: '1x1' }}');">
+                  <img
+                   class="lazyload fade-in"
+                   alt="{{ img_object.alt | default: shop.name }}"
+                   data-src="{{ img_api }}"
+                   data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048, 2450, 2700, 3000, 3350, 3750, 4100, 4480]"
+                   data-aspectratio="{{ img_object.aspect_ratio }}"
+                   data-parent-fit="cover"
+                   data-sizes="auto"/>
+                </div>
+              {%- else -%}
+                <div
+                 class="small--hide background-size-cover lazyload"
+                 data-bgset="{% include 'bgset', image: img_object %}"></div>
+              {% endif %}
+
+
+              {% if height_mobile == 'use_image' %}
+                <div
+                 class="medium--hide large--hide lazy-image"
+                 style="padding-top:{{ 1 | divided_by: img_object_mobile.aspect_ratio | times: 100}}%; background-image: url('{{ img_object_mobile | img_url: '1x1' }}');">
+                  <img
+                   class="lazyload fade-in"
+                   alt="{{ img_object_mobile.alt | default: shop.name }}"
+                   data-src="{{ img_api_mobile }}"
+                   data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048, 2450, 2700, 3000, 3350, 3750, 4100, 4480]"
+                   data-aspectratio="{{ img_object_mobile.aspect_ratio }}"
+                   data-parent-fit="cover"
+                   data-sizes="auto"/>
+                </div>
+              {% else %}
+                <div
+                 class="medium--hide large--hide background-size-cover lazyload"
+                 data-bgset="{% include 'bgset', image: img_object_mobile %}"></div>
+              {% endif %}
+            {% endcapture %}
+
+            {{ image_html }}
+
+            <noscript>
+              <img
+               src="{{ img_object | img_url: '1440x' }}"
+               alt="{{ img_object.alt | default: block.settings.title }}"
+               class="responsive-wide-image"/>
+            </noscript>
+          </div>
+
+          {%- if btn_link_1 != blank and btn_text_1 == blank -%}
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}
+
+
+
+{% schema %}
+  {
+    "name": "Banner Slider",
+    "settings": [
+      {
+        "type": "select",
+        "id": "height",
+        "label": "Section height",
+        "default": "use_screen_two_thirds",
+        "options": [
+          { "value": "use_screen_full", "label": "Full screen height"},
+          { "value": "use_screen_two_thirds", "label": "Tall"},
+          { "value": "use_screen_one_half", "label": "Medium"},
+          { "value": "use_screen_one_third", "label": "Short"},
+          { "value": "use_image", "label": "Image height"}
+        ]
+      },
+      {
+        "type": "select",
+        "id": "height_mobile",
+        "label": "Section height (mobile)",
+        "default": "use_image",
+        "options": [
+          { "value": "use_screen_full", "label": "Full screen height"},
+          { "value": "use_screen_two_thirds", "label": "Tall"},
+          { "value": "use_screen_one_half", "label": "Medium"},
+          { "value": "use_screen_one_third", "label": "Short"},
+          { "value": "use_image", "label": "Image height"}
+        ]
+      }
+    ],
+    "blocks": [
+      {
+        "type": "slide",
+        "name": "Banner Slide",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_mobile",
+            "label": "Image (mobile)"
+          },
+          {
+            "type":    "range",
+            "id":      "overlay_opacity",
+            "min":     0,
+            "max":     100,
+            "step":    5,
+            "label":   "Image overlay opacity",
+            "info":    "Increase contrast for legible text.",
+            "default": 15
+          },
+          {
+            "type": "header",
+            "content": "Text"
+          },
+          {
+            "type": "select",
+            "id": "content_position",
+            "label": "Content position",
+            "default": "content--bottomed",
+            "options": [
+              { "value": "content--topped", "label": "Top"},
+              { "value": "content--centered", "label": "Center"},
+              { "value": "content--bottomed", "label": "Bottom"}
+            ]
+          },
+          {
+            "type": "select",
+            "id": "color",
+            "label": "Text color",
+            "default": "homepage--white",
+            "options": [
+              { "value": "homepage--white", "label": "White"},
+              { "value": "homepage--light", "label": "Light"},
+              { "value": "homepage--splash", "label": "Accent"},
+              { "value": "homepage--dark", "label": "Dark"}
+            ]
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Headline",
+            "default": "Headline"
+          },
+          {
+            "type": "textarea",
+            "id": "description",
+            "label": "Description"
+          },
+          {
+            "type": "header",
+            "content": "Button #1"
+          },
+          {
+            "type": "text",
+            "id": "btn_text_1",
+            "label": "Button Text",
+            "default": "View products",
+            "info": "Leave blank to link entire image"
+          },
+          {
+            "type": "url",
+            "id": "btn_link_1",
+            "label": "Button Link"
+          },
+          {
+            "type": "select",
+            "id": "btn_style_1",
+            "label": "Button style",
+            "default": "btn btn--large btn--green-border",
+            "options": [
+              { "value": "btn btn--large btn--black", "label": "Black"},
+              { "value": "btn btn--large btn--blue", "label": "Blue"},
+              { "value": "btn btn--large btn--green", "label": "Green"},
+              { "value": "btn btn--large btn--white-border", "label": "White Border"},
+              { "value": "btn btn--large btn--green-border", "label": "Green Border"}
+            ]
+          },
+          {
+            "type": "header",
+            "content": "Button #2"
+          },
+          {
+            "type": "text",
+            "id": "btn_text_2",
+            "label": "Button Text"
+          },
+          {
+            "type": "url",
+            "id": "btn_link_2",
+            "label": "Button Link"
+          },
+          {
+            "type": "select",
+            "id": "btn_style_2",
+            "label": "Button style",
+            "default": "btn btn--large btn--green-border",
+            "options": [
+              { "value": "btn btn--large btn--black", "label": "Black"},
+              { "value": "btn btn--large btn--blue", "label": "Blue"},
+              { "value": "btn btn--large btn--green", "label": "Green"},
+              { "value": "btn btn--large btn--white-border", "label": "White Border"},
+              { "value": "btn btn--large btn--green-border", "label": "Green Border"}
+            ]
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Banner Slider",
+        "category": "Image"
+      }
+    ]
+  }
+{% endschema %}

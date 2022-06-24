@@ -1,0 +1,90 @@
+{%- liquid
+  assign inverse = section.settings.inverse
+  assign title = section.settings.title
+  assign richtext = section.settings.richtext
+-%}
+
+<div class="social-proof{% if inverse %} section-inverse{% endif %}" data-section-type="social-proof">
+  <div class="section-body">
+    <div class="wrapper">
+      {%- unless title == blank -%}
+        <h2 class="section-title text-center h1">{{ title | escape }}</h2>
+      {%- endunless -%}
+
+      <div class="social-proof__slider">
+        {%- for block in section.blocks -%}
+          {%- assign link = block.settings.link -%}
+          {%- assign image = block.settings.image -%}
+          <div
+           class="social-proof__slide social-proof__slide--{{ block.id }} grid__item medium--one-third large--one-quarter{% if forloop.index > 4 %} social-proof__slide--additional{% endif %}" {{ block.shopify_attributes }}>
+
+            <div class="social-proof__box">
+              <div class="social-proof__image-wrap">
+                {% if image != blank %}
+                  <div class="social-proof__image lazyload" data-bgset="{% include 'bgset', image: image %}"></div>
+                  <noscript>
+                    <div class="social-proof__image" style="background-image: url('{{ img_object | img_url: '300x' }}');"></div>
+                  </noscript>
+                {% else %}
+                  <div class="social-proof__image"></div>
+                {% endif %}
+              </div>
+
+              <span class="social-proof__icon icon icon-instagram" aria-hidden="true"></span>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+
+      {%- unless richtext == blank -%}
+        <div class="social-proof__footer rte text-center">{{ richtext }}</div>
+      {%- endunless -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Social Proof",
+    "tag": "section",
+    "class": "section-social-proof",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "inverse",
+        "label": "Inverse?"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "See our bestsellers in action"
+      },
+      {
+        "type": "richtext",
+        "id": "richtext",
+        "label": "Richtext",
+        "default": "<p>Already part of the squad? Tag us, and use <a href=\"#\">#solaardsquad<\/a> to be featured.<\/p>"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "card",
+        "name": "Card",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Socal Proof",
+        "category": "Social"
+      }
+    ]
+  }
+{% endschema %}

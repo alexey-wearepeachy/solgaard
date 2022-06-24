@@ -1,0 +1,15 @@
+<div
+ class="progress-bar-wrapper"
+ data-aos=""
+ data-aos-easing="linear"
+ data-aos-duration="400"
+ data-aos-delay="200">
+  {%- unless label == blank -%}
+    <p class="progress-bar__label">{{ label }}</p>
+  {%- endunless -%}
+
+  <div class="progress-bar">
+    <div class="progress-bar__background"></div>
+    <div class="progress-bar__foreground" style="width:{{ value | default: 100 }}%"></div>
+   </div>
+</div>

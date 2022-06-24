@@ -1,0 +1,85 @@
+<style>
+    @font-face {
+        font-family: 'CustomFontThree';
+        src: url("{{ block.settings.font_url }}");
+        /* IE9 Compat Modes */
+        font-weight: {{ block.settings.font_weight }};
+        font-stretch: normal;
+        font-style: normal;
+    }
+
+    #new-lp--side-by-side-section {
+        background-color: {{ block.settings.bg_color }};
+    }
+
+    #new-lp--side-by-side-section .side-by-side-section__container .side-by-side-section__wrapper .side-by-side__info-block .info-block__title {
+        color: {{ block.settings.title_color }};
+        font-family: 'CustomFontThree', 'Harmonia Sans', sans-serif;
+        font-weight: {{ block.settings.font_weight }};
+    }
+
+    #new-lp--side-by-side-section .side-by-side-section__container .side-by-side-section__wrapper .side-by-side__info-block .info-block__text {
+        color: {{ block.settings.subtitle_color }};
+    }
+
+    #new-lp--side-by-side-section .side-by-side-section__container .side-by-side-section__wrapper .side-by-side__info-block .info-block__button.info-block__button--{{ block.id }} {
+        margin: 44px 0 0;
+        max-width: 100%;
+        width: 100%;
+    }
+
+    @media (min-width: 768px) {
+        #new-lp--side-by-side-section .side-by-side-section__container .side-by-side-section__wrapper .side-by-side__info-block .info-block__button.info-block__button--{{ block.id }} {
+            margin: 33px 0 0;
+        }
+    }
+
+    #new-lp--side-by-side-section .side-by-side-section__container .side-by-side-section__wrapper .side-by-side__info-block .info-block__button.info-block__button--{{ block.id }} a {
+        display: block;
+        width: 100%;
+        padding: 16px 10px;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 26px;
+        text-align: center;
+        letter-spacing: 0.1em;
+        text-decoration: none;
+        border: none;
+        border-radius: 2px;
+        transition: all .2s ease-in-out;
+        color: {{ block.settings.btn_text_color }};
+        background-color: {{ block.settings.btn_bg_color }};
+    }
+</style>
+
+<div id="new-lp--side-by-side-section">
+    <div class="side-by-side-section__container">
+        <div class="side-by-side-section__wrapper {% if block.settings.reverse_section %}reverse{% endif %} {% if block.settings.reverse_section_mob %}reverse-mob{% endif %}">
+            <div class="side-by-side__info-block">
+                <h3 class="info-block__title">{{ block.settings.title }}</h3>
+                <div class="info-block__text">{{ block.settings.subtitle }}</div>
+                {% if block.settings.btn_text != blank %}
+                    <div class="info-block__button info-block__button--{{ block.id }}">
+                        <a href="{{ block.settings.btn_url }}">{{ block.settings.btn_text }}</a>
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="side-by-side__media-block">
+                {% if block.settings.video_link != blank %}
+                    <div class="side-by-side__video-box">
+                        <video autoplay loop muted playsinline src="{{ block.settings.video_link }}"></video>
+                    </div>
+                {% else %}
+                    {% if block.settings.image != blank %}
+                        <picture>
+                            <source srcset="{{ block.settings.image | img_url: 'master' }}" media="(min-width: 768px)">
+                            <source srcset="{{ block.settings.image_mob | img_url: 'master' }}" media="(max-width: 767px)">
+                            <img src="{{ block.settings.image | img_url: 'master' }}" alt="{{ image.alt }}">
+                        </picture>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>

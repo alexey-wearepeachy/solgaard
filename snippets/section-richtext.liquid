@@ -1,0 +1,20 @@
+{%- assign title = block.settings.title -%}
+{%- assign content = block.settings.content -%}
+
+<div class="section-body text-center">
+  <div class="wrapper">
+    <div class="grid">
+      <div class="grid__item large--one-half push--large--one-quarter">
+        {%- unless title == blank -%}
+          <h2 class="section-title">{{ title | escape }}</h2>
+        {%- endunless -%}
+
+        {%- if content != blank -%}
+          <div class="rte">
+            {{ content }}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>

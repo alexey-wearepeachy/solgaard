@@ -1,0 +1,574 @@
+{% include 'page-landing' %}
+
+{% schema %}
+  {
+    "name": "Landing page",
+    "settings": [
+    ],
+    "blocks": [
+      {
+        "type": "section-our-first-mission",
+        "name": "Our First Mission",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Our First Mission"
+          },
+          {
+            "type": "textarea",
+            "id": "content",
+            "label": "Content",
+            "default": " Our goal is to pull 1 million pounds of ocean plastic by 2010. For every item sold, we pull 5lbs of plastic from the ocean."
+          }
+        ]
+      },
+
+      {
+        "type": "section-the-ocean-cleanup",
+        "name": "The Ocean Cleanup",
+        "settings": [
+          {
+            "type": "checkbox",
+            "id": "parallax",
+            "label": "Parallax",
+            "default": false
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image",
+            "info": "2048 x 2048px .jpg recommended"
+          },
+          {
+            "type": "image_picker",
+            "id": "logo",
+            "label": "Logo",
+            "info": "600x600 .png recommended"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Our ocean cleanup partnership"
+          },
+          {
+            "type": "richtext",
+            "id": "content",
+            "label": "Content",
+            "default": " <p>We've partnered up with The Ocean Cleanup Maldevies project. Their team of 190 people specialise with ocean cleanups. We donate 15% of your purchase to pull your 5lbs.<\/p>"
+          },
+          {
+            "type": "text",
+            "id": "youtube_video_link",
+            "label": "Youtube Video link",
+            "default": "https://youtu.be/JDjOEzLmNGw",
+            "info": "Share video link: https://youtu.be/JDjOEzLmNGw"
+          }
+        ]
+      },
+
+      {
+        "type": "section-shore-tex-banner",
+        "name": "Shore tex banner",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image",
+            "info": "2048 x 2048px .jpg recommended"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_mobile",
+            "label": "Image (mobile)",
+            "info": "800 x 800px .jpg recommended"
+          },
+          {
+            "type": "image_picker",
+            "id": "logo",
+            "label": "Logo"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "text",
+            "id": "subtitle",
+            "label": "Subtitle"
+          },
+          {
+            "type": "richtext",
+            "id": "content",
+            "label": "Content"
+          },
+          {
+            "type": "text",
+            "id": "btn_text",
+            "label": "Button Text"
+          },
+          {
+            "type": "url",
+            "id": "btn_link",
+            "label": "Button Link"
+          },
+          {
+            "type": "select",
+            "id": "btn_style",
+            "label": "Button style",
+            "default": "btn btn--large btn--black",
+            "options": [
+              { "value": "btn btn--large btn--black", "label": "Black"},
+              { "value": "btn btn--large btn--blue", "label": "Blue"},
+              { "value": "btn btn--large btn--green", "label": "Green"},
+              { "value": "btn btn--large btn--white-border", "label": "White Border"},
+              { "value": "btn btn--large btn--green-border", "label": "Green Border"}
+            ]
+          }
+        ]
+      },
+
+      {
+        "type": "section-banner",
+        "name": "Banner",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image",
+            "info": "2048 x 2048px .jpg recommended"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_mobile",
+            "label": "Image (mobile)",
+            "info": "1000 x 1000px .jpg recommended"
+          },
+          {
+            "type": "checkbox",
+            "id": "inverse",
+            "label": "White text",
+            "default": true
+          },
+          {
+            "type": "text",
+            "id": "subtitle",
+            "label": "Subtitle"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "richtext",
+            "id": "content",
+            "label": "Content"
+          },
+          {
+            "type": "text",
+            "id": "btn_text",
+            "label": "Button Text"
+          },
+          {
+            "type": "url",
+            "id": "btn_link",
+            "label": "Button Link"
+          },
+          {
+            "type": "select",
+            "id": "btn_style",
+            "label": "Button style",
+            "default": "btn btn--large btn--black",
+            "options": [
+              { "value": "btn btn--large btn--black", "label": "Black"},
+              { "value": "btn btn--large btn--blue", "label": "Blue"},
+              { "value": "btn btn--large btn--green", "label": "Green"},
+              { "value": "btn btn--large btn--white-border", "label": "White Border"},
+              { "value": "btn btn--large btn--green-border", "label": "Green Border"}
+            ]
+          }
+        ]
+      },
+
+      {
+        "type": "section-feature-icons",
+        "name": "Features with Icons",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Feature #1"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "How is Shore-Tex™ made?"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_1",
+            "label": "Image Icon",
+            "info": "200 x 200px .png recommended"
+          },
+          {
+            "type": "text",
+            "id": "title_1",
+            "label": "Heading"
+          },
+          {
+            "type": "richtext",
+            "id": "text_1",
+            "label": "Text"
+          },
+
+          {
+            "type": "header",
+            "content": "Feature #2"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_2",
+            "label": "Image Icon",
+            "info": "200 x 200px .png recommended"
+          },
+          {
+            "type": "text",
+            "id": "title_2",
+            "label": "Heading"
+          },
+          {
+            "type": "richtext",
+            "id": "text_2",
+            "label": "Text"
+          },
+
+          {
+            "type": "header",
+            "content": "Feature #3"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_3",
+            "label": "Image Icon",
+            "info": "200 x 200px .png recommended"
+          },
+          {
+            "type": "text",
+            "id": "title_3",
+            "label": "Heading"
+          },
+          {
+            "type": "richtext",
+            "id": "text_3",
+            "label": "Text"
+          },
+
+          {
+            "type": "header",
+            "content": "Feature #4"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_4",
+            "label": "Image Icon",
+            "info": "200 x 200px .png recommended"
+          },
+          {
+            "type": "text",
+            "id": "title_4",
+            "label": "Heading"
+          },
+          {
+            "type": "richtext",
+            "id": "text_4",
+            "label": "Text"
+          },
+
+          {
+            "type": "header",
+            "content": "Feature #5"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_5",
+            "label": "Image Icon",
+            "info": "200 x 200px .png recommended"
+          },
+          {
+            "type": "text",
+            "id": "title_5",
+            "label": "Heading"
+          },
+          {
+            "type": "richtext",
+            "id": "text_5",
+            "label": "Text"
+          },
+          {
+            "type": "header",
+            "content": "Feature #6"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_6",
+            "label": "Image Icon",
+            "info": "200 x 200px .png recommended"
+          },
+          {
+            "type": "text",
+            "id": "title_6",
+            "label": "Heading"
+          },
+          {
+            "type": "richtext",
+            "id": "text_6",
+            "label": "Text"
+          }
+        ]
+      },
+
+      {
+        "type": "section-image",
+        "name": "Image",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image",
+            "info": "2048 x 2048px .jpg recommended"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_mobile",
+            "label": "Image (mobile)",
+            "info": "800 x 800px .jpg recommended"
+          }
+        ]
+      },
+
+      {
+        "type": "section-collection-slider",
+        "name": "Collection slider",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "collection",
+            "id": "collection",
+            "label": "Collection"
+          }
+        ]
+      },
+
+      {
+        "type": "section-product-slider",
+        "name": "Product slider",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "product",
+            "id": "product_1",
+            "label": "Product #1"
+          },
+          {
+            "type": "text",
+            "id": "variant_id_1",
+            "label": "Variant ID #1",
+            "info": "Optional"
+          },
+          {
+            "type": "product",
+            "id": "product_2",
+            "label": "Product #2"
+          },
+          {
+            "type": "text",
+            "id": "variant_id_2",
+            "label": "Variant ID #2",
+            "info": "Optional"
+          },
+          {
+            "type": "product",
+            "id": "product_3",
+            "label": "Product #3"
+          },
+          {
+            "type": "text",
+            "id": "variant_id_3",
+            "label": "Variant ID #3",
+            "info": "Optional"
+          },
+          {
+            "type": "product",
+            "id": "product_4",
+            "label": "Product #4"
+          },
+          {
+            "type": "text",
+            "id": "variant_id_4",
+            "label": "Variant ID #4",
+            "info": "Optional"
+          },
+          {
+            "type": "product",
+            "id": "product_5",
+            "label": "Product #5"
+          },
+          {
+            "type": "text",
+            "id": "variant_id_5",
+            "label": "Variant ID #5",
+            "info": "Optional"
+          },
+          {
+            "type": "product",
+            "id": "product_6",
+            "label": "Product #6"
+          },
+          {
+            "type": "text",
+            "id": "variant_id_6",
+            "label": "Variant ID #6",
+            "info": "Optional"
+          }
+        ]
+      },
+
+      {
+        "type": "product-gallery",
+        "name": "Product Gallery",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image_1",
+            "label": "Image #1",
+            "info": "1024 x 1024px .jpg recommended"
+          },
+          {
+            "type": "text",
+            "id": "caption_1",
+            "label": "Caption #1"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_2",
+            "label": "Image #2",
+            "info": "1024 x 1024px .jpg recommended"
+          },
+          {
+            "type": "text",
+            "id": "caption_2",
+            "label": "Caption #2"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_3",
+            "label": "Image #3",
+            "info": "1024 x 1024px .jpg recommended"
+          },
+          {
+            "type": "text",
+            "id": "caption_3",
+            "label": "Caption #3"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_4",
+            "label": "Image #4",
+            "info": "1024 x 1024px .jpg recommended"
+          },
+          {
+            "type": "text",
+            "id": "caption_4",
+            "label": "Caption #4"
+          }
+        ]
+      },
+
+      {
+        "type": "section-double",
+        "name": "Image + Text",
+        "settings": [
+          {
+            "type": "checkbox",
+            "id": "text_block_first",
+            "label": "Text block first",
+            "default": false
+          },
+          {
+            "type": "header",
+            "content": "Image Block"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image",
+            "info": "1024 x 1024px .jpg recommended"
+          },
+          {
+            "type": "header",
+            "content": "Video Block"
+          },
+          {
+            "type": "video_url",
+            "id": "video_link",
+            "label": "Video link",
+            "accept": ["youtube", "vimeo"],
+            "default": "https://www.youtube.com/watch?v=GcVugm11x64",
+            "info": "https://www.youtube.com/watch?v=GcVugm11x64"
+          },
+          {
+            "type": "header",
+            "content": "Text Block"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Heading"
+          },
+          {
+            "type": "richtext",
+            "id": "content",
+            "label": "Text",
+            "default": "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, natus dolores eligendi assumenda repudiandae consectetur provident autem vitae harum quod. Praesentium qui incidunt facilis eum delectus sunt amet voluptatum officiis.</p>"
+          }
+        ]
+      },
+
+      {
+        "type": "section-newsletter",
+        "name": "Newsletter",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Text Block"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Love doing good and looking good?"
+          },
+          {
+            "type": "textarea",
+            "id": "content",
+            "label": "Text",
+            "default": "We send the best travel tips, travel stories, and new product releases. Sign up now to join the #solgaardsquad"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

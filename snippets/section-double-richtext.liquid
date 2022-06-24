@@ -1,0 +1,34 @@
+{%- assign title_1 = block.settings.title_1 -%}
+{%- assign content_1 = block.settings.content_1 -%}
+{%- assign title_2 = block.settings.title_2 -%}
+{%- assign content_2 = block.settings.content_2 -%}
+
+<div class="section-body bg--light">
+  <div class="wrapper">
+    <div class="grid">
+      <div class="grid__item large--one-half">
+        {%- unless title_1 == blank -%}
+          <h2 class="section-title text-left">{{ title_1 | escape }}</h2>
+        {%- endunless -%}
+
+        {%- if content_1 != blank -%}
+          <div class="rte">
+            {{ content_1 }}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="grid__item large--one-half">
+        {%- unless title_2 == blank -%}
+          <h2 class="section-title text-left">{{ title_2 | escape }}</h2>
+        {%- endunless -%}
+
+        {%- if content_2 != blank -%}
+          <div class="rte">
+            {{ content_2 }}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,425 @@
+{%- assign hide_section      = section.settings.hide_section -%}
+{%- assign img               = section.settings.img -%}
+{%- assign title             = section.settings.title -%}
+{%- assign descr             = section.settings.descr -%}
+{%- assign btn_text          = section.settings.btn_text -%}
+
+{%- assign bg_color     = section.settings.bg_color -%}
+{%- assign header_color = section.settings.header_color -%}
+{%- assign text_color   = section.settings.text_color -%}
+{%- assign btn_color    = section.settings.btn_color -%}
+
+{%- assign font_url     = section.settings.font_url -%}
+{%- assign font_weight  = section.settings.font_weight -%}
+
+{%- assign discount         = settings.otw_bundle_discount_value -%}
+{%- assign discount_code    = settings.otw_bundle_discount -%}
+
+{%- assign blocks   = section.blocks -%}
+
+{% if hide_section == false %}
+
+<style>
+
+    {% if font_url != blank %}
+    @font-face {
+        font-family: 'CustomFontTwo';
+        src: url("{{ font_url }}");
+        /* IE9 Compat Modes */
+        font-weight: {{ font_weight }};
+        font-stretch: normal;
+        font-style: normal;
+    }
+
+    .lp-otw--product-bundle.product-bundle .product-bundle__head .product-bundle__title {
+        font-family: 'CustomFontTwo', 'Harmonia Sans', sans-serif;
+    }
+    {% endif %}
+
+    .lp-otw--product-bundle.product-bundle .product-bundle__head .product-bundle__title {
+        font-weight: {{ font_weight }};
+    }
+
+    .lp-otw--product-bundle.product-bundle .product-bundle__main .product-bundle__form .product-bundle__push .product-bundle__add-to-cart:hover {
+        background: lighten({{ btn_color }}, 10%);
+    }
+
+    .header-color {
+        color: {{ header_color }};
+    }
+
+    .product-bundle-item .product-bundle-item__checkbox {
+
+    }
+</style>
+
+<section class="lp-otw--product-bundle product-bundle" style="background-color: {{ bg_color }}">
+
+    <div class="product-bundle__head">
+        <h2 class="product-bundle__title" style="color: {{ header_color }}">{{ title }}</h2>
+        <p class="product-bundle__descr" style="color: {{ text_color }}">{{ descr }}</p>
+    </div>
+
+    <div class="product-bundle__main">
+        <div class="product-bundle__img">
+            <img src="{{ img | img_url: 'master' }}" alt="{{ img.alt }}">
+        </div>
+        <div class="product-bundle__form">
+            <div class="product-bundle__overlay-selects">
+                {%- assign list_of_variants = settings.otw_bundle_variants -%}
+                {%- assign counter = 1 -%}
+                {% for block in blocks %}
+                    {%- assign product_obj = all_products[block.settings.product] -%}
+                    {% if product_obj.available %}
+                        <div class="product-bundle-item {% if counter <= 2 %}active{% endif %}">
+                            <div style="display: flex; align-items: center; margin: 0 0 10px; cursor: pointer" class="js-product-bundle-title">
+                                <div class="product-bundle-item__checkbox"></div>
+                                <span class="product-bundle__select-title" class="header-color" style="color: {{ header_color }};">Product {{ counter }}</span>
+                            </div>
+                            <select>
+                                {% if product_obj.has_only_default_variant %}
+                                    {% assign default_variant = product_obj.selected_or_first_available_variant %}
+                                    {% if list_of_variants contains default_variant.id  %}
+                                        <option
+                                            value="{{ default_variant.id }}"
+                                            data-img="{{ product_obj.featured_image.src | img_url: 'master' }}"
+                                            data-id="{{ default_variant.id }}"
+                                            data-price="{{ default_variant.price }}"
+                                            data-tag="{% unless product_obj.has_only_default_variant %}{{ product_obj.options[0] }} {% if product_obj.options[1] != blank %} | {{ product_obj.options[1] }}{% endif %}{% endunless %}"
+                                        >
+                                            {{ product_obj.title }}
+                                        </option>
+                                    {% endif %}
+                                    {%- assign counter = counter | plus: 1 -%}
+                                {% else %}
+                                    {% for variant in product_obj.variants %}
+                                        {% if list_of_variants contains variant.id  %}
+                                            <option
+                                                value="{{ variant.id }}"
+                                                data-img="{{ variant.featured_image.src | img_url: 'master' }}"
+                                                data-id="{{ variant.id }}"
+                                                data-price="{{ variant.price }}"
+                                                data-tag="{{ variant.options[0] }} {% if variant.options[1] != blank %} | {{ variant.options[1] }}{% endif %}"
+                                            >
+                                                {{ product_obj.title }}
+                                            </option>
+                                        {% endif %}
+                                    {% endfor %}
+                                    {%- assign counter = counter | plus: 1 -%}
+                                {% endif %}
+                            </select>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <!-- <div class="product-bundle__buttons noselect">
+                <button class="product-bundle__remove-one noselect" style="display: none; color: {{ header_color }}">-</button>
+                <button class="product-bundle__add-more noselect" style="color: {{ header_color }}">+</button>
+            </div> -->
+            <div class="product-bundle__push">
+                <button class="product-bundle__add-to-cart" id="addCustomBundle"><span>{{ btn_text }}</span>
+                    <div id="animaa" style="display: none;">
+                        <div class="containeraa"><div class="borderaa"><div class="contentaa"></div></div></div>
+                    </div>
+                </button>
+                <div class="product-bundle__prices">
+                    <span class="product-bundle__disc-price"></span>
+                    <span class="product-bundle__old-price" style="color: {{ header_color }}"></span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const discountCode = '{{ discount_code }}';
+        const selectors = {
+            bundleItem: '.product-bundle-item',
+            bundleTitle: '.js-product-bundle-title',
+            atcButton: '#addCustomBundle'
+        }
+
+        document.querySelectorAll(selectors.bundleTitle).forEach(item => {
+           item.addEventListener('click', () => {
+               const parent = item.closest(selectors.bundleItem);
+
+               parent.classList.toggle('active');
+               totalPrice();
+               if ($(`${selectors.bundleItem}.active`).length < 2) {
+                   $(selectors.atcButton).addClass('disabled')
+               } else {
+                   $(selectors.atcButton).removeClass('disabled');
+               }
+           });
+        });
+
+        function submitCustomBundle(e) {
+            e.preventDefault();
+            const data = {
+                items: []
+            };
+            let bundleUniqHash = '';
+
+            const parent = $(this.closest('.product-bundle__form'));
+            const options = parent.find(`${selectors.bundleItem}.active option:selected`);
+
+            options.each(function () {
+                bundleUniqHash += $(this).val() + '-'
+            });
+
+            options.each(function () {
+                const item = {
+                    quantity: 1,
+                    id: $(this).data('id'),
+                    properties: {
+                        bundle: 'Item in the OTW bundle',
+                        hash: bundleUniqHash
+                    }
+                }
+                data.items.push(item);
+            });
+
+            $.ajax({
+                type: "POST",
+                url: "/cart/add.js",
+                dataType: "json",
+                data: data,
+                success: function () {
+                    $("#addCustomBundle span").css('display', 'none');
+                    $("#animaa").css('display', 'flex');
+
+                    window.location.href = `/cart`
+                }
+            });
+        }
+
+        $("#addCustomBundle").click(submitCustomBundle);
+
+        function totalPrice() {
+            let totalPriceWithoutDiscount = 0;
+            let totalDiscountPrice = 0;
+            let discount = 1 - {{ discount }} / 100;
+
+            $( `.product-bundle__form ${selectors.bundleItem}.active option:selected` ).each(function() {
+                let thisPrice = $(this).data('price') / 100;
+                totalPriceWithoutDiscount = thisPrice + totalPriceWithoutDiscount;
+
+                let thisDiscountPrice = $(this).data('price') / 100 * discount;
+                totalDiscountPrice = thisDiscountPrice + totalDiscountPrice;
+            });
+
+            $('.product-bundle__old-price').text(`$` + totalPriceWithoutDiscount.toFixed(2));
+            $('.product-bundle__disc-price').text(`$` + totalDiscountPrice.toFixed(2));
+        }
+
+        totalPrice();
+
+        function styledSelects(selectThis) {
+            // Cache the number of options
+            var $this = selectThis,
+                numberOfOptions = selectThis.children('option').length;
+
+            // Hides the select element
+            $this.addClass('s-hidden');
+
+            // Wrap the select element in a div
+            $this.wrap('<div class="select"></div>');
+
+            // Insert a styled div to sit over the top of the hidden select element
+            $this.after('<div class="styledSelect noselect"></div>');
+
+            // Cache the styled div
+            const $styledSelect = $this.next('div.styledSelect');
+
+            // Show the first select option in the styled div
+            let insertableOption = $this.children('option').eq(0);
+
+            $styledSelect.html(`<div class="li__img"><img src="${$this.children('option').eq(0).data('img')}">
+                </div><div class="li__content"><h5 class="product__title">${$this.children('option').eq(0).text()}<h5>
+                <span>${$this.children('option').eq(0).data('tag')}</span>`)
+            $styledSelect[0].dataset.id = insertableOption[0].dataset.id;
+
+            // Insert an unordered list after the styled div and also cache the list
+            var $list = $('<ul />', {
+                'class': 'options',
+            }).insertAfter($styledSelect);
+
+            $list.hide();
+
+            // Insert a list item into the unordered list for each select option
+            for (var i = 0; i < numberOfOptions; i++) {
+                let currentOption = $this.children('option').eq(i);
+
+                $('<li />', {
+                    html: `<div class="li__img"><img src="${$this.children('option').eq(i).data('img')}">
+                </div><div class="li__content"><h5 class="product__title">${$this.children('option').eq(i).text()}<h5>
+                <span>${$this.children('option').eq(i).data('tag')}</span>`,
+                    rel: $this.children('option').eq(i).val(),
+                    'data-id': $this.children('option').eq(i).data('id')
+                }).appendTo($list);
+            }
+
+            // Cache the list items
+            var $listItems = $list.children('li');
+            $listItems.first().addClass('activeLi');
+
+            // Show the unordered list when the styled div is clicked (also hides it if the div is clicked again)
+            $styledSelect.click(function(e) {
+                e.stopPropagation();
+                if ($(this).hasClass('activeOption')) {
+                    $(this).removeClass('opened');
+                    $(this).removeClass('activeOption').next('ul.options').hide();
+                }
+                else {
+                    $(this).toggleClass('activeOption').next('ul.options').toggle();
+                    $(this).addClass('opened');
+                }
+            });
+
+            // Hides the unordered list when a list item is clicked and updates the styled div to show the selected list item
+            // Updates the select element to have the value of the equivalent option
+            $listItems.click(function(e) {
+                e.stopPropagation();
+                $styledSelect.html($(this).html()).removeClass('activeOption');
+                $styledSelect.html($(this).html()).removeClass('opened');
+                $styledSelect[0].dataset.id = $(this).attr('rel');
+                $this.val($(this).attr('rel'));
+                const eventForEmit = new Event("change");
+                $listItems.removeClass('activeLi');
+                $(this).addClass('activeLi');
+                $this[0].dispatchEvent(eventForEmit);
+                $list.hide();
+                totalPrice();
+            });
+
+            // Hides the unordered list when clicking outside of it
+            $(document).click(function() {
+                $styledSelect.removeClass('activeOption');
+                $list.hide();
+                $styledSelect.removeClass('opened');
+            });
+        }
+
+        $('.product-bundle__overlay-selects > .product-bundle-item > select').each(function() {
+            styledSelects($(this));
+        });
+
+
+        $('.product-bundle__overlay-selects .options').each(function () {
+            if ($(this)[0].children.length === 1) {
+                $(this).closest('.select').find('.styledSelect').addClass('notclickable');
+            }
+        })
+
+        setTimeout( () => {
+            const parentLoad = $('.product-bundle__form');
+            const optionsLoad = parentLoad.find('option');
+            $('select option')
+                .removeAttr('selected')
+                .filter(`[value=${optionsLoad.first().val()}]`)
+                .attr('selected', true)
+        }, 100)
+
+    });
+</script>
+
+{% endif %}
+
+{% schema %}
+{
+    "name": "OTW product bundle",
+    "settings": [
+        {
+        "type": "checkbox",
+        "id": "hide_section",
+        "label": "Hide section ?",
+        "default": false
+        },
+        {
+            "type": "header",
+            "content": "Section content"
+        },
+        {
+            "type": "image_picker",
+            "id": "img",
+            "label": "Seclect image"
+        },
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Section title"
+        },
+        {
+            "type": "textarea",
+            "id": "descr",
+            "label": "Section text"
+        },
+        {
+            "type": "text",
+            "id": "btn_text",
+            "label": "Button text"
+        },
+        {
+            "type": "header",
+            "content": "Section settings"
+        },
+        {
+            "type": "color",
+            "id": "bg_color",
+            "label": "Background color",
+            "default": "#FBFBFB"
+        },
+        {
+            "type": "text",
+            "id": "font_url",
+            "label": "Title font link"
+        },
+        {
+            "type": "range",
+            "id": "font_weight",
+            "label": "Title font weight",
+            "unit": "un",
+            "min": 100,
+            "max": 800,
+            "step": 100,
+            "default": 700
+        },
+        {
+            "type": "color",
+            "id": "header_color",
+            "label": "Header color",
+            "default": "#000"
+        },
+        {
+            "type": "color",
+            "id": "text_color",
+            "label": "Text color",
+            "default": "#646464"
+        },
+        {
+            "type": "color",
+            "id": "btn_color",
+            "label": "Button color",
+            "default": "#FF6E05"
+        }
+    ],
+    "blocks": [{
+        "type": "product",
+        "name": "product",
+        "settings": [
+            {
+                "type": "header",
+                "content": "Select product"
+            },
+            {
+                "type": "product",
+                "id": "product",
+                "label": "Product"
+            }
+        ]
+    }]
+}
+{% endschema %}

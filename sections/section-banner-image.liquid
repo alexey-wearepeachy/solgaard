@@ -1,0 +1,205 @@
+
+{%- liquid
+  assign height = section.settings.height
+  assign parallax = section.settings.parallax
+  assign color = section.settings.color
+  assign text_align = section.settings.text_align
+  assign overlay_opacity = section.settings.overlay_opacity
+
+  assign image = section.settings.image
+  assign title = section.settings.title
+  assign content = section.settings.content
+  assign title = section.settings.title
+  assign btn_text = section.settings.btn_text
+  assign btn_style = section.settings.btn_style
+  assign btn_link = section.settings.btn_link
+
+  if image
+    assign img_object = image
+    assign img_small = image | img_url: '18x'
+    assign img_api = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.'
+  else
+    assign img_object = 'blank.svg' | asset_url
+    assign img_small =  'blank.svg' | asset_url
+    assign img_api = 'blank.svg' | asset_url
+  endif
+-%}
+
+<div
+ class="homepage-image fade-in-child preventOverflow {{ height }} {{ color }}"
+ data-section-id="{{ section.id }}"
+ data-section-type="parallax"
+ id="FeaturedImage-{{ section.id }}"
+  {% if parallax %}
+    data-parallax-src="{{ img_small }}"
+    data-src="{{ img_api }}"
+    data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048, 2450, 2700, 3000, 3350, 3750, 4100, 4480]"
+    data-aspectratio="{{  image.aspect_ratio }}"
+    data-sizes="auto"
+    style="background-image: url('{{ image | img_url: '1x1' }}');"
+  {% endif %}>
+  {% if btn_text == '' and btn_link %}
+    <a href="{{ btn_link }}">
+  {% endif %}
+  <div class="content--centered">
+    <div class="{{ text_align }} preventOverflowContent">
+      {% unless title == blank %}
+        <h1 class="title--flex">{{ title | escape }}</h1>
+      {% endunless %}
+
+      {% unless content == blank %}
+        <p class="content--flex h4--body">{{ content }}</p>
+      {% endunless %}
+
+      {% unless btn_text == '' %}
+        <a class="{{ btn_style }}" href="{{ btn_link }}">{{ btn_text | escape }}</a>
+      {% endunless %}
+    </div>
+  </div>
+  <div class="image-overlay image-overlay-{{ overlay_opacity }}"></div>
+
+  {% if height == 'use_image' %}
+    <div class="lazy-image" style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%; background-image: url('{{ image | img_url: '1x1' }}');">
+      <img class="lazyload fade-in" {% if parallax %} style="opacity: 0;"{% endif %}
+        alt="{{ image.alt | default: shop.name }}"
+        data-src="{{ img_api }}"
+        data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048, 2450, 2700, 3000, 3350, 3750, 4100, 4480]"
+        data-aspectratio="{{  image.aspect_ratio }}"
+        data-parent-fit="cover"
+        data-sizes="auto"/>
+    </div>
+  {% endif %}
+
+  {% if parallax == false and height != 'use_image' %}
+    <div class="background-size-cover lazyload" data-bgset="{% include 'bgset', image: img_object %}"></div>
+  {% endif %}
+
+  {% if btn_text == '' and btn_link %}
+    </a>
+  {% endif %}
+
+  {% if height == 'use_screen_full' %}
+    <div class="scroll_icon_wrap">
+      <a href="#scroll-{{ section.id }}" class="scroll_link bloop">
+        <span class="scroll_icon">{% include 'svg-down' %}</span>
+      </a>
+    </div>
+    <div class="scroll__link" id="scroll-{{ section.id }}"></div>
+  {% endif %}
+
+  <noscript>
+    <img src="{{ img_object | img_url: '1440x' }}" alt="{{ img_object.alt | default: title }}" class="responsive-wide-image"/>
+  </noscript>
+</div>
+
+{% schema %}
+  {
+    "name": "Banner Image",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "select",
+        "id": "height",
+        "label": "Section height",
+        "default": "use_screen_two_thirds",
+        "options": [
+          { "value": "use_screen_full", "label": "Full screen height"},
+          { "value": "use_screen_two_thirds", "label": "Tall"},
+          { "value": "use_screen_one_half", "label": "Medium"},
+          { "value": "use_screen_one_third", "label": "Short"},
+          { "value": "use_image", "label": "Image height"}
+        ]
+      },
+      {
+        "type":    "range",
+        "id":      "overlay_opacity",
+        "min":     0,
+        "max":     100,
+        "step":    5,
+        "label":   "Image overlay opacity",
+        "info":    "Increase contrast for legible text.",
+        "default": 15
+      },
+      {
+        "type": "checkbox",
+        "id": "parallax",
+        "default": false,
+        "label": "Enable parallax scroll"
+      },
+      {
+        "type": "header",
+        "content": "Text"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Headline"
+      },
+      {
+        "type": "textarea",
+        "id": "content",
+        "label": "Content"
+      },
+      {
+        "type": "select",
+        "id": "text_align",
+        "label": "Alignment",
+        "default": "text-center",
+        "options": [
+          { "value": "text-left", "label": "Align Left"},
+          { "value": "text-center", "label": "Align Center"},
+          { "value": "text-right", "label": "Align Right"}
+        ]
+      },
+      {
+        "type": "select",
+        "id": "color",
+        "label": "Text color",
+        "default": "homepage--white",
+        "options": [
+          { "value": "homepage--white", "label": "White"},
+          { "value": "homepage--light", "label": "Light"},
+          { "value": "homepage--splash", "label": "Accent"},
+          { "value": "homepage--dark", "label": "Dark"}
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Button"
+      },
+      {
+        "type": "text",
+        "id": "btn_text",
+        "label": "Text",
+        "info": "Leave blank to link entire image"
+      },
+      {
+        "type": "url",
+        "id": "btn_link",
+        "label": "Link"
+      },
+      {
+        "type": "select",
+        "id": "btn_style",
+        "label": "Button style",
+        "default": "btn btn--large btn--black",
+        "options": [
+          { "value": "btn btn--large btn--black", "label": "Black"},
+          { "value": "btn btn--large btn--green", "label": "Green"},
+          { "value": "btn btn--large btn--white-border", "label": "White Border"},
+          { "value": "btn btn--large btn--green-border", "label": "Green Border"}
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Banner Image",
+        "category": "Image"
+      }
+    ]
+  }
+{% endschema %}

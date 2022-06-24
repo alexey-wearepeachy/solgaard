@@ -1,0 +1,52 @@
+<style>
+    {% if bg_img_hb != blank %}
+        #new-lp--product-listing .product-listing__container .product-listing__items #card-product--{{ product_handle }}{{ forloop.index }} .high-box {
+            background-image: url("{{ bg_img_hb }}");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    {% else %}
+        #new-lp--product-listing .product-listing__container .product-listing__items #card-product--{{ product_handle }}{{ forloop.index }} .high-box {
+            background-color: {{ bg_color_hb }};
+        }
+    {% endif %}
+
+    #new-lp--product-listing .product-listing__container .product-listing__items #card-product--{{ product_handle }}{{ forloop.index }}  .low-box {
+        background-color: {{ low_box_bg }};
+    }
+
+    #new-lp--product-listing .product-listing__container .product-listing__items #card-product--{{ product_handle }}{{ forloop.index }} .low-box .product-title__link .product-title {
+        color: {{ product_title_color }};
+    }
+
+    #new-lp--product-listing .product-listing__container .product-listing__items #card-product--{{ product_handle }}{{ forloop.index }}  .low-box .product-subtitle {
+        color: {{ product_subtitle_color }};
+    }
+</style>
+
+<div id="card-product--{{ product_handle }}{{ forloop.index }}" class="product-listing__item">
+    <div class="high-box">
+        {% if label_text != blank %}
+            <div class="label">{{ label_text }}</div>
+        {% endif %}
+        <a href="{{ product_url }}" class="product-listing__item-img-link">
+            <div class="product-listing__item-img">
+                <img src="{{ product_img }}" class="first-image" alt="{{ image.alt }}">
+                <img src="{{ product_img_hover }}" class="second-image" alt="{{ image.alt }}">
+            </div>
+        </a>
+    </div>
+
+    <div class="low-box">
+        <a href="{{ product_url }}" class="product-title__link">
+            <h5 class="product-title">
+                {{ product_title }}
+            </h5>
+        </a>
+
+        <div class="product-subtitle">
+            {{ product_subtitle }}
+        </div>
+    </div>
+</div>

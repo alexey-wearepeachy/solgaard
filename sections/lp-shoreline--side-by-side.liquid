@@ -1,0 +1,164 @@
+{% assign blocks          = section.blocks %}
+
+<section class="lp-transatlantic--side-by-side-section" data-section-id="{{ section.id }}" {% if section.settings.hide_section %}style="display: none;"{% endif %}>
+    {% for block in blocks %}
+        {% if block.type == 'main_block' %}
+            {% include 'new-lp--side-by-side-section' %}
+        {% elsif block.type == 'btn_block' %}
+            {% include 'only-btn-section-block' %}
+        {% endif %}
+    {% endfor %}
+</section>
+
+{% schema %}
+{
+    "name": "Side by side Content",
+    "settings": [
+        {
+            "type": "checkbox",
+            "id": "hide_section",
+            "label": "Hide section?",
+            "default": false
+        }
+    ],
+    "blocks": [
+        {
+            "type": "main_block",
+            "name": "Section",
+            "settings": [
+                {
+                    "type": "color",
+                    "id": "bg_color",
+                    "label": "Background color of section",
+                    "default": "#FFFFFF"
+                },
+                {
+                    "type": "checkbox",
+                    "id": "reverse_section",
+                    "label": "Reverse section?",
+                    "default": false
+                },
+                {
+                    "type": "checkbox",
+                    "id": "reverse_section_mob",
+                    "label": "Reverse section on mobile?",
+                    "default": false
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Section title"
+                },
+                {
+                    "type": "color",
+                    "id": "title_color",
+                    "label": "Color of title",
+                    "default": "#000000"
+                },
+                {
+                    "type": "text",
+                    "id": "font_url",
+                    "label": "Title font link"
+                },
+                {
+                    "type": "text",
+                    "id": "font_weight",
+                    "label": "Title font weight"
+                },
+                {
+                    "type": "textarea",
+                    "id": "subtitle",
+                    "label": "Section subtitle"
+                },
+                {
+                    "type": "color",
+                    "id": "subtitle_color",
+                    "label": "Color of description",
+                    "default": "#777777"
+                },
+                {
+                    "type": "text",
+                    "id": "btn_text",
+                    "label": "Button text"
+                },
+                {
+                    "type": "url",
+                    "id": "btn_url",
+                    "label": "Button link"
+                },
+                {
+                    "type": "color",
+                    "id": "btn_bg_color",
+                    "label": "Background color of button",
+                    "default": "#ff7d1f"
+                },
+                {
+                    "type": "color",
+                    "id": "btn_text_color",
+                    "label": "text color of button",
+                    "default": "#ffffff"
+                },
+                {
+                    "type": "header",
+                    "content": "Media block"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Section image"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "image_mob",
+                    "label": "Section mobile image"
+                },
+                {
+                    "type": "text",
+                    "id": "video_link",
+                    "label": "Video link"
+                }
+            ]
+        },
+        {
+            "type": "btn_block",
+            "name": "Section with button",
+            "settings": [
+                {
+                    "type": "color",
+                    "id": "bg_color",
+                    "label": "Background color of section",
+                    "default": "#FFFFFF"
+                },
+                {
+                    "type": "text",
+                    "id": "btn_text",
+                    "label": "Button text"
+                },
+                {
+                    "type": "url",
+                    "id": "btn_url",
+                    "label": "Button link"
+                },
+                {
+                    "type": "color",
+                    "id": "btn_bg_color",
+                    "label": "Background color of button",
+                    "default": "#ff7d1f"
+                },
+                {
+                    "type": "color",
+                    "id": "btn_text_color",
+                    "label": "text color of button",
+                    "default": "#ffffff"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "category": "Shoreline LP Side by side",
+            "name": "Shoreline LP Side by side"
+        }
+    ]
+}
+{% endschema %}

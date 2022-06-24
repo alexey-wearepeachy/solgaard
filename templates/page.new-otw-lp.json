@@ -1,0 +1,658 @@
+{
+  "sections": {
+    "banner-slider-1": {
+      "type": "section-banner-slider",
+      "blocks": {
+        "8f47d4b1-9b25-45c6-869b-ec17ae25071d": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/HOMEPAGE_Banner_Desktop_SoCal_1.gif",
+            "image_mobile": "shopify:\/\/shop_images\/MASTER_Homepage_Mobile_Banner_2.gif",
+            "overlay_opacity": 0,
+            "content_position": "content--bottomed",
+            "color": "homepage--white",
+            "title": "",
+            "description": "",
+            "btn_text_1": "",
+            "btn_link_1": "shopify:\/\/products\/carry-on-closet",
+            "btn_style_1": "btn btn--large btn--green-border",
+            "btn_text_2": "",
+            "btn_link_2": "",
+            "btn_style_2": "btn btn--large btn--green-border"
+          }
+        },
+        "index-banner-slider-5": {
+          "type": "slide",
+          "disabled": true,
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Banner-Full-Width-Endevaor-Sideshot2.jpg",
+            "image_mobile": "shopify:\/\/shop_images\/Banner-Mobile-endeavor-sideshot_copy.jpg",
+            "overlay_opacity": 15,
+            "content_position": "content--centered",
+            "color": "homepage--white",
+            "title": "ENDEAVOR WITH CLOSET",
+            "description": "BACKPACK WITH REMOVABLE CLOSET - EVERYDAY USE TO TRAVEL MODE IN SECONDS",
+            "btn_text_1": "SHOP NOW",
+            "btn_link_1": "shopify:\/\/products\/lifepack-endeavor-backpack-with-closet",
+            "btn_style_1": "btn btn--large btn--green",
+            "btn_text_2": "View products",
+            "btn_link_2": "",
+            "btn_style_2": "btn btn--large btn--green-border"
+          }
+        },
+        "index-banner-slider-4": {
+          "type": "slide",
+          "disabled": true,
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Full-Width-Banner-2048px-CiC-Blue.jpg",
+            "image_mobile": "shopify:\/\/shop_images\/Banner-Mobile-CiC-Blue.jpg",
+            "overlay_opacity": 15,
+            "content_position": "content--centered",
+            "color": "homepage--white",
+            "title": "CHECK-IN CLOSET",
+            "description": "PACK FOR WEEKS, UNPACK IN SECONDS",
+            "btn_text_1": "Shop Now",
+            "btn_link_1": "shopify:\/\/products\/trunk-check-in-closet",
+            "btn_style_1": "btn btn--large btn--green",
+            "btn_text_2": "View products",
+            "btn_link_2": "",
+            "btn_style_2": "btn btn--large btn--green-border"
+          }
+        },
+        "index-banner-slider-3": {
+          "type": "slide",
+          "disabled": true,
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Full-Width-Banner-2048px-6.jpg",
+            "image_mobile": "shopify:\/\/shop_images\/Full-Width-Banner-2048px-6.jpg",
+            "overlay_opacity": 15,
+            "content_position": "content--centered",
+            "color": "homepage--white",
+            "title": "LIFEPACK",
+            "description": "THE LAPTOP BAG WITH SOLAR-POWER",
+            "btn_text_1": "SHOP NOW",
+            "btn_link_1": "shopify:\/\/products\/lifepack-backpack",
+            "btn_style_1": "btn btn--large btn--green",
+            "btn_text_2": "View products",
+            "btn_link_2": "",
+            "btn_style_2": "btn btn--large btn--green-border"
+          }
+        },
+        "index-banner-slider-6": {
+          "type": "slide",
+          "disabled": true,
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Full-Width-Banner-2048px-Template-Boombox.jpg",
+            "image_mobile": "shopify:\/\/shop_images\/Banner-Mobile-Template-boombox.jpg",
+            "overlay_opacity": 15,
+            "content_position": "content--centered",
+            "color": "homepage--white",
+            "title": "SUSTAINABLE GEAR FOR ANYONE",
+            "description": "EVERY SOLGAARD PRODUCT REMOVES 5 LBS OF PLASTIC FROM OUR OCEANS",
+            "btn_text_1": "Shop now",
+            "btn_link_1": "shopify:\/\/collections\/sustainable-travel-gear",
+            "btn_style_1": "btn btn--large btn--green",
+            "btn_text_2": "View products",
+            "btn_link_2": "",
+            "btn_style_2": "btn btn--large btn--green-border"
+          }
+        }
+      },
+      "block_order": [
+        "8f47d4b1-9b25-45c6-869b-ec17ae25071d",
+        "index-banner-slider-5",
+        "index-banner-slider-4",
+        "index-banner-slider-3",
+        "index-banner-slider-6"
+      ],
+      "settings": {
+        "height": "use_screen_two_thirds",
+        "height_mobile": "use_screen_two_thirds"
+      }
+    },
+    "collection-grid": {
+      "type": "section-collection-grid",
+      "blocks": {
+        "index-collection-grid-0": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "luggage",
+            "image": "shopify:\/\/shop_images\/categogies-Luggage-2020.jpg",
+            "title": "Luggage"
+          }
+        },
+        "index-collection-grid-1": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "bags",
+            "image": "shopify:\/\/shop_images\/categogies-BP.jpg",
+            "title": "Backpacks"
+          }
+        },
+        "index-collection-grid-2": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "accessories",
+            "image": "shopify:\/\/shop_images\/categogies-watches.jpg",
+            "title": "Accessories"
+          }
+        }
+      },
+      "block_order": [
+        "index-collection-grid-0",
+        "index-collection-grid-1",
+        "index-collection-grid-2"
+      ],
+      "settings": {
+        "title": "Shop By Category",
+        "homepage_collection_grid_color": "homepage--white",
+        "color": "homepage--white",
+        "overlay_opacity": 15
+      }
+    },
+    "logos-2": {
+      "type": "section-logos",
+      "disabled": true,
+      "blocks": {
+        "163056628054077df6-0": {
+          "type": "logo_image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/2CNET.png",
+            "content": "The Best Laptop Bags and Backpacks for 2020"
+          }
+        },
+        "163056628054077df6-1": {
+          "type": "logo_image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/2time.png",
+            "content": "Best Inventions"
+          }
+        },
+        "163056628054077df6-2": {
+          "type": "logo_image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/2forbes.png",
+            "content": "\"One of the first forward-thinking backpack brands to look at street style.\""
+          }
+        },
+        "163056628054077df6-3": {
+          "type": "logo_image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/2fastcologo.png",
+            "content": "2020 World Changing Ideas Awards"
+          }
+        },
+        "163056628054077df6-4": {
+          "type": "logo_image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/2esquire.png",
+            "content": "Top 10 Best Inventions"
+          }
+        }
+      },
+      "block_order": [
+        "163056628054077df6-0",
+        "163056628054077df6-1",
+        "163056628054077df6-2",
+        "163056628054077df6-3",
+        "163056628054077df6-4"
+      ],
+      "settings": {
+        "title": "",
+        "homepage_logos_bg_color": "homepage--white",
+        "display": "mobile_only"
+      }
+    },
+    "cf-index-tab-slider": {
+      "type": "cf-index-tab-slider",
+      "blocks": {
+        "4ac15c45-5b87-49c4-bd79-ab9847c056b0": {
+          "type": "collection",
+          "settings": {
+            "name": "Suitcases",
+            "title": "Carry-On Closet",
+            "quote": "I love this suitcase. It is so easy to pack…Great materials. Smooth wheels and movement. I even love the color - I ordered red. Would recommend without reservation.",
+            "f1_title": "Organized",
+            "f1_subtitle": "Built-in Shelving System\nAccessible USB Port",
+            "f2_title": "Secure",
+            "f2_subtitle": "Indestructible Shell\nTSA Approved Lock",
+            "f3_title": "Effortless",
+            "f3_subtitle": "Frictionless Wheels\nOne-pinch Opening",
+            "link": "shopify:\/\/products\/carry-on-closet",
+            "image": "shopify:\/\/shop_images\/1615324340suitcase-mobile.jpg"
+          }
+        },
+        "df09f9b9-cc67-4d62-b2bc-641071cc25a3": {
+          "type": "collection",
+          "settings": {
+            "name": "Backpacks",
+            "title": "Lifepack Endeavor <br>(with closet)",
+            "quote": "This is the perfect backpack for my chaotic life!",
+            "f1_title": "Organized",
+            "f1_subtitle": "Removable Hanging Closet\nExpandable Zipper",
+            "f2_title": "Secure",
+            "f2_subtitle": "Drop-proof Laptop Storage\nWrinkle Free Paper Storage",
+            "f3_title": "Effortless",
+            "f3_subtitle": "Plush Shoulder Strap\nWater Resistant Bottom",
+            "link": "shopify:\/\/products\/lifepack-endeavor-backpack-with-closet",
+            "image": "shopify:\/\/shop_images\/1619721452Gallery-Endevour-Front-green-wcloset_720x_c0b0def8-a676-4e3f-9548-bdc39c60c5b7.png"
+          }
+        },
+        "5d56acbb-c692-4155-b27a-224c0deadb0b": {
+          "type": "collection",
+          "settings": {
+            "name": "Accessories",
+            "title": "Accessories",
+            "quote": "This is a must have for anyone that travels or likes the peace of mind to know they will never be with a dead phone battery.",
+            "f1_title": "Organized",
+            "f1_subtitle": "Compact\nHolds Up To 5 Charges",
+            "f2_title": "Versatile",
+            "f2_subtitle": "Charge In The Sun\nUSB-C Connection",
+            "f3_title": "Effortless",
+            "f3_subtitle": "Seamless Integration\nLightweight",
+            "link": "shopify:\/\/collections\/accessories",
+            "image": "shopify:\/\/shop_images\/acces.png"
+          }
+        }
+      },
+      "block_order": [
+        "4ac15c45-5b87-49c4-bd79-ab9847c056b0",
+        "df09f9b9-cc67-4d62-b2bc-641071cc25a3",
+        "5d56acbb-c692-4155-b27a-224c0deadb0b"
+      ],
+      "settings": {
+        "title": "TRAVEL MUST HAVES",
+        "display": "mobile_only"
+      }
+    },
+    "collection-cards-1": {
+      "type": "section-collection-cards",
+      "blocks": {
+        "index-collection-cards-1": {
+          "type": "collection",
+          "settings": {
+            "link": "shopify:\/\/products\/carry-on-closet",
+            "image": "shopify:\/\/shop_images\/CoC_3.0_-_blu_-_Front.png",
+            "bg_image": "shopify:\/\/shop_images\/placeholder-homepage-product-bg.jpg",
+            "title": "Carry-On Closet"
+          }
+        },
+        "index-collection-cards-0": {
+          "type": "collection",
+          "settings": {
+            "link": "shopify:\/\/products\/lifepack-backpack",
+            "image": "shopify:\/\/shop_images\/Lifepack---grey---Front-New.png",
+            "bg_image": "shopify:\/\/shop_images\/Lifepack---grey---Front_b7941fb6-5264-4836-89cc-2de56561d587.jpg",
+            "title": "Lifepack"
+          }
+        }
+      },
+      "block_order": [
+        "index-collection-cards-1",
+        "index-collection-cards-0"
+      ],
+      "settings": {
+        "title": "The Award Winning Duo",
+        "grid": 2,
+        "display": "desktop_only"
+      }
+    },
+    "logos-1": {
+      "type": "section-logos",
+      "blocks": {
+        "index-logos-0": {
+          "type": "logo_image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/CNET.png",
+            "content": "The Best Laptop Bags and Backpacks for 2020"
+          }
+        },
+        "index-logos-1": {
+          "type": "logo_image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/TIME_26408f78-cfe0-47fc-b8d3-be23b790a751.png",
+            "content": "Best Inventions"
+          }
+        },
+        "index-logos-2": {
+          "type": "logo_image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/forbes.png",
+            "content": "\"One of the first forward-thinking backpack brands to look at street style.\""
+          }
+        },
+        "index-logos-4": {
+          "type": "logo_image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/fastcologo.png",
+            "content": "2020 World Changing Ideas Awards"
+          }
+        },
+        "index-logos-3": {
+          "type": "logo_image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/esquire.png",
+            "content": "Top 10 Best Inventions"
+          }
+        }
+      },
+      "block_order": [
+        "index-logos-0",
+        "index-logos-1",
+        "index-logos-2",
+        "index-logos-4",
+        "index-logos-3"
+      ],
+      "settings": {
+        "title": "",
+        "homepage_logos_bg_color": "homepage--white",
+        "display": "desktop_only"
+      }
+    },
+    "banner-slider-3": {
+      "type": "section-banner-slider",
+      "blocks": {
+        "e84a6d77-6aa8-4827-a9e9-2314c30adf69": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Full-Width-Banner-Endeavor_38968e47-ffb6-4c5e-9d4d-6d7fd50f662f.jpg",
+            "image_mobile": "shopify:\/\/shop_images\/Banner-Mobile-Endeavor.jpg",
+            "overlay_opacity": 0,
+            "content_position": "content--centered",
+            "color": "homepage--white",
+            "title": "",
+            "description": "",
+            "btn_text_1": "",
+            "btn_link_1": "shopify:\/\/products\/lifepack-endeavor-backpack-with-closet",
+            "btn_style_1": "btn btn--large btn--green",
+            "btn_text_2": "",
+            "btn_link_2": "",
+            "btn_style_2": "btn btn--large btn--green-border"
+          }
+        }
+      },
+      "block_order": [
+        "e84a6d77-6aa8-4827-a9e9-2314c30adf69"
+      ],
+      "settings": {
+        "height": "use_image",
+        "height_mobile": "use_image"
+      }
+    },
+    "collection-cards-2": {
+      "type": "section-collection-cards",
+      "blocks": {
+        "16305687277c8b517a-0": {
+          "type": "collection",
+          "settings": {
+            "link": "shopify:\/\/products\/carry-on-closet",
+            "image": "shopify:\/\/shop_images\/2CoC_3.0_-_blu_-_Front.png",
+            "bg_image": "shopify:\/\/shop_images\/2placeholder-homepage-product-bg.jpg",
+            "title": "Carry-On Closet"
+          }
+        },
+        "16305687277c8b517a-1": {
+          "type": "collection",
+          "settings": {
+            "link": "shopify:\/\/products\/lifepack-backpack",
+            "image": "shopify:\/\/shop_images\/2Lifepack---grey---Front-New.png",
+            "bg_image": "shopify:\/\/shop_images\/2Lifepack---grey---Front_b7941fb6-5264-4836-89cc-2de56561d587.jpg",
+            "title": "Lifepack"
+          }
+        }
+      },
+      "block_order": [
+        "16305687277c8b517a-0",
+        "16305687277c8b517a-1"
+      ],
+      "settings": {
+        "title": "The Award Winning Duo",
+        "grid": 2,
+        "display": "mobile_only"
+      }
+    },
+    "banner-slider-2": {
+      "type": "section-banner-slider",
+      "blocks": {
+        "index-banner-slider-2-1": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Full-Width-Banner-2048px-6-Fast-Company-Lifepack.jpg",
+            "image_mobile": "shopify:\/\/shop_images\/fastcomobile2_copy.jpg",
+            "overlay_opacity": 20,
+            "content_position": "content--bottomed",
+            "color": "homepage--white",
+            "title": "Meet Shore-Tex™",
+            "description": "We developed a textile fabric made entirely from ocean-bound plastic. Shore-Tex™️ was a finalist in Fast Company's World Changing Ideas.",
+            "btn_text_1": "Shop Now",
+            "btn_link_1": "https:\/\/solgaard.co\/pages\/shore-tex",
+            "btn_style_1": "btn btn--large btn--green",
+            "btn_text_2": "View products",
+            "btn_link_2": "",
+            "btn_style_2": "btn btn--large btn--green-border"
+          }
+        }
+      },
+      "block_order": [
+        "index-banner-slider-2-1"
+      ],
+      "settings": {
+        "height": "use_screen_full",
+        "height_mobile": "use_image"
+      }
+    },
+    "collection-cards-3": {
+      "type": "section-collection-cards",
+      "blocks": {
+        "index-collection-cards-2-0": {
+          "type": "collection",
+          "settings": {
+            "link": "",
+            "image": "shopify:\/\/shop_images\/Sustainable-2.0-1.jpg",
+            "title": ""
+          }
+        },
+        "index-collection-cards-2-1": {
+          "type": "collection",
+          "settings": {
+            "link": "",
+            "image": "shopify:\/\/shop_images\/Sustainable-2.0-2-a.jpg",
+            "title": ""
+          }
+        },
+        "index-collection-cards-2-2": {
+          "type": "collection",
+          "settings": {
+            "link": "",
+            "image": "shopify:\/\/shop_images\/Sustainable-2.0-3_f3a33a17-ffcc-44d3-97df-1aea8124783a.jpg",
+            "title": ""
+          }
+        }
+      },
+      "block_order": [
+        "index-collection-cards-2-0",
+        "index-collection-cards-2-1",
+        "index-collection-cards-2-2"
+      ],
+      "settings": {
+        "title": "Great Things That Do Good",
+        "grid": 3,
+        "display": "both"
+      }
+    },
+    "columns": {
+      "type": "section-columns",
+      "disabled": true,
+      "blocks": {
+        "index-columns-0": {
+          "type": "text_block",
+          "settings": {
+            "enable_image": true,
+            "image": "shopify:\/\/shop_images\/Sustainable-icons-720px-Ocean-Plastics.png",
+            "title": "Ocean Plastics",
+            "text": "<p>Upcycling ocean waste into great products.<\/p>"
+          }
+        },
+        "index-columns-1": {
+          "type": "text_block",
+          "settings": {
+            "enable_image": true,
+            "image": "shopify:\/\/shop_images\/Sustainable-icons-720px-No-Single-Use-Plastics.png",
+            "title": "Intentional Sustainability",
+            "text": "<p>For every product sold, we remove 5lbs of plastic from ocean.<\/p>"
+          }
+        },
+        "index-columns-2": {
+          "type": "text_block",
+          "settings": {
+            "enable_image": true,
+            "image": "shopify:\/\/shop_images\/Sustainable-icons-720px-Intentional-Sustainability.png",
+            "title": "No Single Use Plastics",
+            "text": "<p>We&#x27;re removing all single use plastics from our supply chain during 2019.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "index-columns-0",
+        "index-columns-1",
+        "index-columns-2"
+      ],
+      "settings": {
+        "title": "Great things that do good.",
+        "homepage_columns_color": "homepage--white",
+        "align_text": "text-center"
+      }
+    },
+    "social-proof": {
+      "type": "section-social-proof",
+      "blocks": {
+        "1545124614954": {
+          "type": "card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Social-1024px-Lifepack-1_f8b7271c-690d-431c-9284-9a7c86b42377.jpg"
+          }
+        },
+        "1545124731685": {
+          "type": "card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Social-1024px-Carry-On-Closet-1.jpg"
+          }
+        },
+        "1545124504848": {
+          "type": "card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Social-1024px-Lifepack-3_4d0182d8-cf2a-475c-8aab-e3aaa57f6352.jpg"
+          }
+        },
+        "1545124316204": {
+          "type": "card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Social-1024px-Hex-3.jpg"
+          }
+        },
+        "1545124187413": {
+          "type": "card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Social-1024px-Carry-On-Closet-2.jpg"
+          }
+        },
+        "1554952785434": {
+          "type": "card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Social-1024px-Lite-1.jpg"
+          }
+        },
+        "1565202975398": {
+          "type": "card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Social-1024px-Carry-On-Closet-3.jpg"
+          }
+        },
+        "1565203682207": {
+          "type": "card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Social-1024px-Sling-1.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "1545124614954",
+        "1545124731685",
+        "1545124504848",
+        "1545124316204",
+        "1545124187413",
+        "1554952785434",
+        "1565202975398",
+        "1565203682207"
+      ],
+      "settings": {}
+    },
+    "newsletter": {
+      "type": "section-newsletter",
+      "disabled": true,
+      "settings": {
+        "title": "Get 10% off your first purchase",
+        "richtext": "<p>Plus, be the first to know about new product launches, travel tips, and more.<\/p>",
+        "text_align": "text-center",
+        "homepage_bg_color": "homepage--light"
+      }
+    },
+    "features-with-icons": {
+      "type": "features-with-icons",
+      "blocks": {
+        "features-with-icons-0": {
+          "type": "text_block",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/icon-footer-shipping.png",
+            "icon": "",
+            "title": "Free US Shipping",
+            "text": "<p>Orders processed in 1-2 working days. Available on orders over $100. Applies to Continental US.<\/p>"
+          }
+        },
+        "features-with-icons-1": {
+          "type": "text_block",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/icon-footer-Extended-Warranty.png",
+            "icon": "",
+            "title": "Extended Warranty",
+            "text": "<p>24 month warranty on all bags. 10 years on suitcases. 1 year on electronics.<\/p>"
+          }
+        },
+        "features-with-icons-2": {
+          "type": "text_block",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/icon-footer-Plastic-Recycled_63007549-488e-4a72-9601-1cdb52e9cb60.png",
+            "icon": "",
+            "title": "5lbs of Ocean Plastic",
+            "text": "<p>Every purchase removes 229 plastic bottles from the ocean.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "features-with-icons-0",
+        "features-with-icons-1",
+        "features-with-icons-2"
+      ],
+      "settings": {
+        "title": "",
+        "align_text": "text-center"
+      }
+    }
+  },
+  "order": [
+    "banner-slider-1",
+    "collection-grid",
+    "logos-2",
+    "cf-index-tab-slider",
+    "collection-cards-1",
+    "logos-1",
+    "banner-slider-3",
+    "collection-cards-2",
+    "banner-slider-2",
+    "collection-cards-3",
+    "columns",
+    "social-proof",
+    "newsletter",
+    "features-with-icons"
+  ]
+}

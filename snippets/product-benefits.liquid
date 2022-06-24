@@ -1,0 +1,44 @@
+<ul class="product__benefits">
+  {%- unless product.handle == 'solarbank-boombox' -%}
+  <li class="product__benefits__item" data-title="Ships">
+    {%- assign ships_text = 'Free US Shipping<br >On Orders Over $100' -%}
+    {%- for tag in product.tags -%}
+      {%- if tag contains 'Ships: ' -%}
+        {%- assign ships_text = tag | remove: 'Ships: ' -%}
+      {%- endif -%}
+    {%- endfor -%}
+    <span class="product__benefits__icon">{% include 'icon-shipping' %}</span>
+    <span class="product__benefits__text">{{ ships_text }}</span>
+  </li>
+  {%- endunless -%}
+
+  {%- assign preoder_ships_text = false -%}
+  {%- for tag in product.tags -%}
+    {%- if tag contains 'Preorder ships: ' -%}
+      {%- assign preoder_ships_text = tag | remove: 'Preorder ships: ' -%}
+    {%- endif -%}
+  {%- endfor -%}
+  {%- if preoder_ships_text -%}
+    <li class="product__benefits__item" data-title="Preorder Ships" style="display:none;">
+      <span class="product__benefits__icon">{% include 'icon-shipping' %}</span>
+      <span class="product__benefits__text">{{ preoder_ships_text }}</span>
+    </li>
+  {%- endif -%}
+
+    {%- assign warranty_text = '12 month warranty' -%}
+    {%- for tag in product.tags -%}
+      {%- if tag contains 'Warranty: ' -%}
+        {%- assign warranty_text = tag | remove: 'Warranty: ' -%}
+      {%- endif -%}
+    {%- endfor -%}
+
+  <li class="product__benefits__item" data-title="Warranty">
+    <span class="product__benefits__icon">{% include 'icon-warranty' %}</span>
+    <span class="product__benefits__text">{{ warranty_text }}</span>
+  </li>
+
+  <li class="product__benefits__item" data-title="Easy Checkout">
+    <span class="product__benefits__icon">{% include 'icon-plastic-pulled' %}</span>
+    <span class="product__benefits__text">Saves 229 Ocean Bound Plastic Bottles</span>
+  </li>
+</ul>

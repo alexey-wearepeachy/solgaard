@@ -1,0 +1,84 @@
+<style>
+
+  {% if request.page_type == 'collection' or request.path == '/products' or request.path == '/products/' %}
+	{% comment %} CF 06 {% endcomment %}
+	html body .sticker {
+      display: none !important;
+    }
+  {% endif %}
+  
+  {% if request.page_type == 'cart' %}
+	{% comment %} CF 10 {% endcomment %}
+  
+	html body .btn.uppercase.btn--large.checkout__button {
+      background: #40c1ac !important;
+    }
+    html body .btn.uppercase.btn--large.checkout__button:hover {
+      background: #329c8a !important;
+    }
+    html body .btn--secondary.update-cart.btn--large.uppercase:hover {
+      color: white !important;
+    }
+  	{% comment %} CF 03 {% endcomment %}
+  	@media screen and (min-width: 768px) {
+        html body .js-qty {
+          visibility: hidden;
+        }
+        html body .cart__body .cart__header-labels .grid__item.text-center {
+          visibility: hidden;
+        }
+
+        /* Move the price column over a bit */
+        html body .cart__body .cart__header-labels .grid--full .grid--full div:first-child {
+          text-align: right;
+        }
+
+        html body .cart__body .cart__row .cart__row--table-large .grid__item.large--one-half:nth-child(2) .grid__item.text-left {
+          text-align: right !important;
+        }
+
+        /* Hide quantity on side cart */
+        html body #slidecarthq .main-bottom .quantity-selector button,
+        #slidecarthq .main-bottom .quantity-selector input {
+          display: none !important;
+        }
+      	html body .bm-quantity-label {
+          display: none;
+        }
+      }
+
+    @media screen and (max-width: 767px) {
+        html body .cart__body .cart__row .grid__item.large--one-half:nth-child(2) .cart__row--table-large .grid__item.text-center {
+          visibility: hidden;
+        }
+
+        /* Hide quantity on side cart */
+        html body #slidecarthq .main-bottom .quantity-selector button,
+        #slidecarthq .main-bottom .quantity-selector input {
+          display: none !important;
+        }
+      }
+  	{% comment %} CF 07 {% endcomment %}
+
+        html body input[type="submit"].update-cart {
+          display: none; 
+        }
+        html body .checkout__button {
+          max-width: 100%;
+          width: 300px;
+        }
+  {% endif %}
+  
+  {% if request.page_type == 'index' %}
+    {% comment %} CF 01 {% endcomment %}
+  	@media screen and (max-width: 766px) {
+        html body #shopify-section-index-logos{
+            display: none !important;
+        }
+      }
+  
+  {% endif %}
+  
+</style>
+
+
