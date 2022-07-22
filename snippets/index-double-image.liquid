@@ -31,7 +31,7 @@
     </div>
   </div>
   <div class="image-overlay image-overlay-{{ block.settings.overlay_opacity }}"></div>
-  <div class="background-size-cover lazyload" data-bgset="{% include 'bgset', image: img_object %}"></div>
+  <div class="background-size-cover lazyload" data-alt="{{ img_object.alt | default: shop.name }}" data-bgset="{% include 'bgset', image: img_object %}"></div>
   <noscript>
     <div class="background-size-cover" style="background-image: url('{{ img_object | img_url: '540x' }}');"></div>
   </noscript>

@@ -50,11 +50,10 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="{{ page_title | escape }}">
 {% endif %}
-{% if page_description %}
-  <meta property="og:description" content="{{ page_description | escape }}">
-{% endif %}
-  <meta property="og:url" content="{{ canonical_url }}">
-  <meta property="og:site_name" content="{{ shop.name }}">
+
+<meta property="og:description" content="{{ page_description | default: shop.description | default: shop.name }}">
+<meta property="og:url" content="{{ canonical_url }}">
+<meta property="og:site_name" content="{{ shop.name }}">
 
 
 {% comment %}

@@ -49,11 +49,13 @@
             <div class="cta-item">
               <div
                class="section-bg lazyload medium--hide large--hide"
+               data-alt="{{ bg_image_mobile.alt | default: shop.name }}"
                data-bgset="{% include 'bgset', image: bg_image_mobile %}">
               </div>
 
               <div
                class="section-bg lazyload small--hide"
+               data-alt="{{ bg_image.alt | default: shop.name }}"
                data-bgset="{% include 'bgset', image: bg_image %}">
               </div>
 

@@ -42,16 +42,16 @@
                aria-label="{{ title | default: card_label }}">
 
                 {%- if bg_image -%}
-                  <div class="collection-card__bg lazyload" data-bgset="{% include 'bgset', image: bg_image %}"></div>
+                  <div class="collection-card__bg lazyload" data-alt="{{ bg_image.alt | default: title }}" data-bgset="{% include 'bgset', image: bg_image %}"></div>
                 {%- endif -%}
 
-                <div class="collection-card__image lazyload" data-bgset="{% include 'bgset', image: img_object %}"></div>
+                <div class="collection-card__image lazyload" data-alt="{{ img_object.alt | default: title }}" data-bgset="{% include 'bgset', image: img_object %}"></div>
                 <noscript>
                   <div class="collection-card__image" style="background-image: url({{ img_object  | img_url: '360x' }})"></div>
                 </noscript>
 
                 <div class="collection-card__content">
-                  {% unless title == '' %}<h2 class="collection-card__title h1">{{ title | escape }}</h2>{% endunless %}
+                  {% unless title == '' %}<h2 class="collection-card__title h1">{% if display == 'mobile_only' %}<i style="display: none;">mobile</i>{% endif %}{{ title | escape }}</h2>{% endunless %}
 
                   {% unless link == blank %}<span class="collection-card__shop">Shop now</span>{% endunless %}
                 </div>

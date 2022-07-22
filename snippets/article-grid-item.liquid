@@ -18,7 +18,7 @@
       <div class="grid__header">
         {%- if article.image -%}
           {%- assign img_object = article.image -%}
-          <div class="grid__image lazyload" data-bgset="{% include 'bgset', image: img_object %}"></div>
+          <div class="grid__image lazyload" data-alt="{{ article.title | truncatewords: 6 }}" data-bgset="{% include 'bgset', image: img_object %}"></div>
         {%- else -%}
           <div class="grid__image grid__image--placeholder"></div>
         {%- endif -%}

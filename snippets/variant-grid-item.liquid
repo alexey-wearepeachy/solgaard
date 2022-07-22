@@ -77,6 +77,7 @@
          style="padding-top:{{ 1 | divided_by: variant.featured_image.aspect_ratio | times: 100}}%; background-image:  url('{{ variant.featured_image | img_url: '1x1' }}');">
           <img class="lazyload fade-in"
             alt="{{ variant.featured_image.alt | default: variant.title  }}"
+            src="{{ variant.featured_image | img_url: '1x1' }}"
             data-src="{{ product_img }}"
             data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048, 2450, 2700, 3000, 3350, 3750, 4100, 4480]"
             data-aspectratio="{{  variant.featured_image.aspect_ratio }}"

@@ -10091,6 +10091,30 @@ button.mfp-close {
       padding: 10px 14px;
     }
   }
+  .btn--green {
+    color: #1a1e22;
+  }
+  .content--bottomed:not(.content--without_text) {
+    background: rgba(0,0,0,.2);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-bottom: 45px;
+    max-width: none;
+
+    .preventOverflowContent {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+  }
   @include at-query ($max, $medium) {
     .slick-prev,
     .slick-next {
@@ -10715,6 +10739,7 @@ Collection grid section
   background-repeat: no-repeat;
   background-position: center center;
   @include transition(transform .1s ease-out);
+  background-color: back;
 }
 
 .collection-grid-item__content {
@@ -10744,9 +10769,23 @@ Collection grid section
 
   @include at-query($max, $small+1) {
     @include transform( none );
-    top: auto;
-    bottom: 30px;
+    // top: auto;
+    // bottom: 30px;
+    justify-content: flex-end;
+    padding-bottom: 30px;
   }
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  transform: none;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: rgba(0,0,0,.35);
 }
 
 .collection-grid-item__shop {
@@ -10754,6 +10793,7 @@ Collection grid section
   text-transform: uppercase;
   font-size: 1em;
   letter-spacing: .05em;
+  color: white;
 }
 
 .collection-grid-item__link {

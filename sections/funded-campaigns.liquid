@@ -20,11 +20,13 @@
               {%- unless image == blank -%}
                 <div
                  class="background-size-cover small--hide lazyload"
+                 data-alt="{{ image.alt | default: title }}"
                  data-bgset="{% include 'bgset', image: image %}"
                  style="z-index: 0;"></div>
 
                 <div
                  class="background-size-cover medium--hide large--hide lazyload"
+                 data-alt="{{ image.alt | default: title }}"
                  data-bgset="{% include 'bgset', image: image_mobile %}"
                  style="z-index: 0;"></div>
               {%- endunless -%}

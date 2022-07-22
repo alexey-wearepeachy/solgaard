@@ -29,7 +29,7 @@
               <div class="social-proof__box">
                 <div class="social-proof__image-wrap">
                   {% if image != blank %}
-                    <div class="social-proof__image lazyload" data-bgset="{% include 'bgset', image: image %}"></div>
+                    <div class="social-proof__image lazyload" data-alt="{{ image.alt | default: shop.name }}" data-bgset="{% include 'bgset', image: image %}"></div>
                     <noscript>
                       <div class="social-proof__image" style="background-image: url('{{ img_object | img_url: '300x' }}');"></div>
                     </noscript>

@@ -71,6 +71,7 @@
                 <img
                  class="lazyload fade-in"
                  alt="{{ img_object.alt | default: shop.name }}"
+                 src="{{ img_object | img_url: '1x1' }}" 
                  data-src="{{ img_api }}"
                  data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048, 2450, 2700, 3000, 3350, 3750, 4100, 4480]"
                  data-aspectratio="{{ img_object.aspect_ratio }}"
@@ -85,6 +86,7 @@
                   <img
                    class="lazyload fade-in"
                    alt="{{ img_object_mobile.alt | default: shop.name }}"
+                   src="{{ img_object_mobile | img_url: '1x1' }}" 
                    data-src="{{ img_api_mobile }}"
                    data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048, 2450, 2700, 3000, 3350, 3750, 4100, 4480]"
                    data-aspectratio="{{ img_object_mobile.aspect_ratio }}"
@@ -99,9 +101,11 @@
               {% if height != 'use_image' %}
                 <div
                  class="small--hide background-size-cover lazyload"
+                 data-alt="{{ img_object.alt | default: title }}"
                  data-bgset="{% include 'bgset', image: img_object %}"></div>
                 <div
                  class="medium--hide large--hide background-size-cover lazyload"
+                 data-alt="{{ img_object_mobile.alt | default: title }}"
                  data-bgset="{% include 'bgset', image: img_object_mobile %}"></div>
               {% endif %}
             {% endif %}

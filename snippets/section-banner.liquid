@@ -45,6 +45,7 @@
      data-sizes="auto"
      style="background-image: url('{{ image | img_url: '1x1' }}');"
    {% else %}
+    data-alt="{{ image.alt | default: shop.name }}"
     data-bgset="{% include 'bgset', image: image %}"
    {% endif %}>
   </div>
@@ -52,6 +53,7 @@
   {%- unless parallax -%}
     <div
      class="section-bg lazyload medium--hide large--hide"
+     data-alt="{{ image_mobile.alt | default: shop.name }}"
      data-bgset="{% include 'bgset', image: image_mobile %}">
     </div>
     <noscript>

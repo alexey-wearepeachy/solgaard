@@ -31,6 +31,7 @@
         <div class="lazy-image" style="padding-top:{{ 1 | divided_by: collection.image.aspect_ratio | times: 100}}%; background-image: url('{{ collection.image | img_url: '1x1' }}');">
           <img class="lazyload fade-in" {% if section.settings.parallax %} style="opacity: 0;"{% endif %}
             alt="{{ collection.image.alt | default: collection.title }}"
+            src="{{ collection.image | img_url: '1x1' }}" 
             data-src="{{ img_url }}"
             data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048, 2450, 2700, 3000, 3350, 3750, 4100, 4480]"
             data-aspectratio="{{  collection.image.aspect_ratio }}"
@@ -39,7 +40,7 @@
         </div>
       {% endif %}
       {% if section.settings.parallax == false and section.settings.image_height != 'use_image' %}
-        <div class="background-size-cover lazyload"  data-bgset="{% include 'bgset', image: collection.image %}"></div>
+        <div class="background-size-cover lazyload" data-alt="{{ collection.image.alt | default: collection.title }}"  data-bgset="{% include 'bgset', image: collection.image %}"></div>
       {% endif %}
       <noscript>
         <img src="{{ collection.image | img_url: '1440x' }}" alt="{{ collection.image.alt | default: collection.title }}" class="responsive-wide-image"/>

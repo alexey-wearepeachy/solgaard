@@ -127,13 +127,14 @@
           <div class="lazy-image{% if double_img %} double__image{% endif %}" style="padding-top:{{ 1 | divided_by: product_featured_image.aspect_ratio | times: 100}}%;background-image:  url('{{ product_featured_image | img_url: '1x1' }}');{% comment %}{% endcomment %}">
             <img
              class="grid__image lazyload fade-in"
+             src="{{ product_featured_image | img_url: '1x1' }}" 
              alt="{{ product_featured_image.alt | default: product_title  }}"
              data-src="{{ product_img }}"
              data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048, 2450, 2700, 3000, 3350, 3750, 4100, 4480]"
              data-aspectratio="{{  product_featured_image.aspect_ratio }}"
              data-sizes="auto"/>
             {% if double_img %}
-              <div class="collection__image__bottom lazyload" data-bgset="{% include 'bgset', image: product.images[1] %}"></div>
+              <div class="collection__image__bottom lazyload" data-alt="{{ product.images[1].alt | default: product.title }}" data-bgset="{% include 'bgset', image: product.images[1] %}"></div>
             {% endif %}
             {{ sticker }}
             {{ topseller_badge }}
@@ -235,7 +236,7 @@
 </div>
 
 
-<script>
+<script style="display:none;">
   document.addEventListener('DOMContentLoaded', function () {
     let ratingStars = document.querySelectorAll('.grid__review-ratings .stamped-product-reviews-badge .stamped-badge .stamped-starrating .stamped-fa-star');
 

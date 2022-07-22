@@ -110,7 +110,7 @@
         <div class="Globo-form-subscribe">
             {% unless config.hiddenLogoBis %}<div class="Globo-form-header">
               <div class="Globo-header-background">
-                <img src="https://cdn.shopify.com/s/files/1/0286/0892/1660/products/globo-logo-center.png?v=1618467872" >
+                <img src="https://cdn.shopify.com/s/files/1/0286/0892/1660/products/globo-logo-center.png?v=1618467872" alt="globo-logo">
               </div>
               <div class="Globo-header-img-left" style="background-image: url(https://cdn.shopify.com/s/files/1/0286/0892/1660/products/globo-logo-left.png?v=1618468454)"></div>
               <div class="Globo-header-img-right" style="background-image: url(https://cdn.shopify.com/s/files/1/0286/0892/1660/products/globo-logo-right.png?v=1618468450)"></div>
@@ -123,7 +123,7 @@
               </div>{% endif %}
               <div class="Globo-body-content">
                   <div class="Globo-content-product">
-                      <div class="Globo-product-img"><img src="{{variant.img}}" alt="" ></div>
+                      <div class="Globo-product-img"><img src="{{variant.img}}" alt="{{ variant.img.alt | default: variant.title }}" ></div>
                       <div class="Globo-product-infor">
                           <p class="Globo-product-title">{{product.title}}{% unless variant.title contains 'Default Title' %} ( <span class="Globo-variant-title">{{variant.title}}</span> ) {% endunless %}</p>
                           <p class="Globo-product-price">{{variant.price | money_without_trailing_zeros}}</p>
@@ -192,7 +192,7 @@
                 <div class="Globo-form-subscribe">
                   {% unless config.hiddenLogoBis %}<div class="Globo-form-header">
                     <div class="Globo-header-background">
-                      <img src="https://cdn.shopify.com/s/files/1/0286/0892/1660/products/globo-logo-center.png?v=1618467872" >
+                      <img src="https://cdn.shopify.com/s/files/1/0286/0892/1660/products/globo-logo-center.png?v=1618467872" alt="globo-logo">
                     </div>
                     <div class="Globo-header-img-left" style="background-image: url(https://cdn.shopify.com/s/files/1/0286/0892/1660/products/globo-logo-left.png?v=1618468454)"></div>
                     <div class="Globo-header-img-right" style="background-image: url(https://cdn.shopify.com/s/files/1/0286/0892/1660/products/globo-logo-right.png?v=1618468450)"></div>
@@ -201,13 +201,13 @@
                   
                   <div class="Globo-form-body {% if config.hiddenLogoBis %}Form-hidden-logo{% endif %}">
                     {% if config.hiddenLogoBis %}<p class="Globo-header-close"><svg viewBox="0 0 20 20" focusable="false" aria-hidden="true"><path d="M11.414 10l4.293-4.293a.999.999 0 1 0-1.414-1.414L10 8.586 5.707 4.293a.999.999 0 1 0-1.414 1.414L8.586 10l-4.293 4.293a.999.999 0 1 0 1.414 1.414L10 11.414l4.293 4.293a.997.997 0 0 0 1.414 0 .999.999 0 0 0 0-1.414L11.414 10z" fillRule="evenodd"></path></svg></p>{% endif %}
-                    {% if translation.bisTitleForm or translation.bisHeaderContent %}<div class="Globo-body-header">
-                      {% if translation.bisTitleForm %}<h2>{{translation.bisTitleForm}}</h2>{% endif %}
+                    {% if translation.bisTitleFormDuble or translation.bisHeaderContent %}<div class="Globo-body-header">
+                      {% if translation.bisTitleFormDuble %}<h2>{{translation.bisTitleFormDuble}}</h2>{% endif %}
                       {% if translation.bisHeaderContent %}<p>{{translation.bisHeaderContent}}</p>{% endif %}
                     </div>{% endif %}
                     <div class="Globo-body-content">
                         <div class="Globo-content-product">
-                            <div class="Globo-product-img"><img src="{{variant.img}}" alt="" /></div>
+                            <div class="Globo-product-img"><img src="{{variant.img}}" alt="{{ variant.img.alt | default: variant.title }}" /></div>
                             <div class="Globo-product-infor">
                               <p class="Globo-product-title">{{product.title}}{% unless variant.title contains 'Default Title' %} ( <span class="Globo-variant-title">{{variant.title}}</span> ) {% endunless %}</p>
                               <p class="Globo-product-price">{{variant.price | money_without_trailing_zeros}}</p>

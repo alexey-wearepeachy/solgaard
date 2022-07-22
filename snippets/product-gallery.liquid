@@ -15,7 +15,7 @@
           {%- endunless -%}
 
           <div class="product-gallery-item grid__item {% cycle 'large--one-third', 'large--two-thirds', 'large--two-thirds', 'large--one-third' %}">
-            <div class="product-gallery-item__image lazyload" data-bgset="{% include 'bgset', image: image %}"></div>
+            <div class="product-gallery-item__image lazyload" data-alt="{{ image.alt | default: shop.name }}" data-bgset="{% include 'bgset', image: image %}"></div>
             <noscript>
               <div class="product-gallery-item__image" style="background-image: url('{{ img_object | img_url: '1280x' }}');"></div>
             </noscript>

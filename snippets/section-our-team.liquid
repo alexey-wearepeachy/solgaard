@@ -1,4 +1,4 @@
-<h2 class="section-title h1">Our Team</h2>
+<h1 class="section-title h1">Our Team</h1>
 
 <div class="section-double section-double-our-team">
   {% include 'section-double' %}
@@ -79,7 +79,7 @@
                 {%- assign image = 'blank.svg' | asset_url -%}
               {%- endif -%}
               <div class="team-member__box">
-                <div class="team-member__image lazyload" data-bgset="{% include 'bgset', image: image %}">
+                <div class="team-member__image lazyload" data-alt="{{ image.alt | default: name }}" data-bgset="{% include 'bgset', image: image %}">
                 </div>
                 <noscript>
                   <div class="team-member__image" style="background-image: url('{{ image | img_url: '300x' }}');">

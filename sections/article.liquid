@@ -19,6 +19,7 @@
           <div class="lazy-image" style="padding-top:{{ 1 | divided_by: article.image.aspect_ratio | times: 100}}%; background-image: url('{{ article.image | img_url: '1x1' }}');">
             <img class="lazyload fade-in" {% if section.settings.parallax %} style="opacity: 0;"{% endif %}
               alt="{{ article.image.alt | default: article.title }}"
+              src="{{ article.image | img_url: '1x1' }}" 
               data-src="{{ img_url }}"
               data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048, 2450, 2700, 3000, 3350, 3750, 4100, 4480]"
               data-aspectratio="{{  article.image.aspect_ratio }}"

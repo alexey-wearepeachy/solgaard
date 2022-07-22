@@ -47,6 +47,7 @@
     <div class="lazy-image" style="padding-top:{{ 1 | divided_by: section.settings.image.aspect_ratio | times: 100}}%; background-image: url('{{ section.settings.image | img_url: '1x1' }}');">
       <img class="lazyload fade-in" {% if section.settings.parallax %} style="opacity: 0;"{% endif %}
         alt="{{ section.settings.image.alt | default: shop.name }}"
+        src="{{ section.settings.image | img_url: '1x1' }}" 
         data-src="{{ img_api }}"
         data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048, 2450, 2700, 3000, 3350, 3750, 4100, 4480]"
         data-aspectratio="{{  section.settings.image.aspect_ratio }}"
@@ -55,7 +56,7 @@
     </div>
   {% endif %}
   {% if section.settings.parallax == false and section.settings.height != 'use_image' %}
-    <div class="background-size-cover lazyload" data-bgset="{% include 'bgset', image: img_object %}"></div>
+    <div class="background-size-cover lazyload" data-alt="{{ section.settings.image.alt | default: shop.name }}" data-bgset="{% include 'bgset', image: img_object %}"></div>
   {% endif %}
   {% if section.settings.link_text == '' and section.settings.link and section.settings.button_image == nil %}
     </a>

@@ -17,7 +17,7 @@
                 <div class="faq__toggle" faq-toggle>
                   <div class="faq__toggle__image-wrap small--hide">
                     {% if image != blank %}
-                      <div class="faq__toggle__image lazyload" data-bgset="{% include 'bgset', image: image %}"></div>
+                      <div class="faq__toggle__image lazyload" data-alt="{{ image.alt | default: heading }}" data-bgset="{% include 'bgset', image: image %}"></div>
                       <noscript>
                         <div class="faq__toggle__image" style="background-image: url('{{ img_object | img_url: '300x' }}');"></div>
                       </noscript>

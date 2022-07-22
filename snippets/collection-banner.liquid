@@ -49,6 +49,7 @@
       <div class="homepage-image-js lazy-image" style="padding-top:{{ 1 | divided_by: collection_image.aspect_ratio | times: 100}}%; background-image: url('{{ collection_image | img_url: '1x1' }}');">
         <img class="lazyload fade-in" {% if parallax %} style="opacity: 0;"{% endif %}
           alt="{{ collection_image.alt | default: collection_title }}"
+          src="{{ collection_image | img_url: '1x1' }}"
           data-src="{{ img_url }}"
           data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048, 2450, 2700, 3000, 3350, 3750, 4100, 4480]"
           data-aspectratio="{{ collection_image.aspect_ratio }}"
@@ -58,7 +59,7 @@
     {% endif %}
 
     {% if parallax == false and image_height != 'use_image' %}
-      <div class="background-size-cover lazyload" data-bgset="{% include 'bgset', image: collection_image %}"></div>
+      <div class="background-size-cover lazyload" data-alt="{{ collection_image.alt | default: collection_title }}"  data-bgset="{% include 'bgset', image: collection_image %}"></div>
     {% endif %}
 
     <noscript>

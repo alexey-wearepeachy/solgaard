@@ -53,6 +53,7 @@
                 {% if settings.product_zoom_enable %}data-mfp-src="{{  image.src | img_url: 'master' }}"{% endif %}
                 data-image-id="{{ image.id }}"
                 alt="{{ image.alt | escape }}"
+                src="{{ image | img_url: '1x1' }}"
                 data-src="{{ img_api }}"
                 data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048, 2450, 2700, 3000, 3350, 3750, 4100, 4480]"
                 data-aspectratio="{{ block.settings.image.aspect_ratio }}"

@@ -1,3 +1,4 @@
+<h1 style="display:none;">Our Story</h1>
 {%- for block in section.blocks -%}
   <section class="{{ block.type }} {{ block.type }}-{{ block.id }}" {{ block.shopify_attributes }}>
     {%- case block.type -%}
@@ -9,7 +10,7 @@
           {%- assign image = 'blank.svg' | asset_url -%}
         {%- endunless -%}
         <section class="section-banner ks-compaign__banner">
-          <div class="section-bg lazyload" data-bgset="{% include 'bgset', image: image %}"></div>
+          <div class="section-bg lazyload" data-alt="{{ img_object.alt | default: title }}" data-bgset="{% include 'bgset', image: image %}"></div>
           <noscript>
             <div class="section-bg" style="background-image: url('{{ img_object | img_url: '1280x' }}');"></div>
           </noscript>
